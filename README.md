@@ -1,90 +1,144 @@
-# PixelsShope
+# Pixels Shope Monorepo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Welcome to the **Pixels Shope Monorepo**. This repository contains multiple projects and apps for our e-commerce platform, managed together using **Nx** and a monorepo structure.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Finish your remote caching setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/XBn7c7SmYX)
-
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
-
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
-```
-
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
+## Monorepo Structure
 
 ```
-npx nx release
+pixels-shope/
+├─ apps/
+│  ├─ account/        # Customer-facing Vite React app
+│  ├─ frontend/       # Main Vite React storefront
+│  ├─ admin/          # Admin dashboard (Next.js)
+│  └─ node-api/       # Node.js API (Express + GraphQL)
+├─ packages/          # Shared packages/libraries
+├─ nx.json            # Nx workspace configuration
+├─ package.json       # Root package.json with scripts
+├─ tsconfig.json      # Root TypeScript config
+└─ README.md
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+---
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Installation
 
-## Keep TypeScript project references up to date
+1. Clone the repository:
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
+```bash
+git clone https://github.com/gotesgan/pixels-shope.git
+cd pixels-shope
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+2. Install dependencies:
 
-```sh
-npx nx sync:check
+```bash
+npm install
 ```
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+3. Install dependencies for apps (if needed):
 
+```bash
+npm install --prefix apps/account
+npm install --prefix apps/frontend
+npm install --prefix apps/admin
+npm install --prefix apps/node-api
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Install Nx Console
+## Available Scripts
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+From the root of the monorepo, you can run scripts for each app individually or all together.
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Run all apps concurrently
 
-## Useful links
+```bash
+npm run dev:all
+```
 
-Learn more:
+This will start:
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+* **Account (Vite React)**
+* **Frontend (Vite React)**
+* **Admin (Next.js)**
+* **Node API (Express + GraphQL)**
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Run individual apps
+
+```bash
+npm run dev:account      # Customer account app
+npm run dev:frontend     # Storefront frontend
+npm run dev:admin        # Admin dashboard
+npm run dev:node-api     # Backend API
+```
+
+---
+
+## Nx Monorepo Features
+
+* Centralized management for multiple apps and packages.
+* Shared configurations and libraries.
+* Ability to run and build apps independently or together.
+* Easy dependency tracking across apps.
+
+---
+
+## Node API (apps/node-api)
+
+* **Server**: Express + GraphQL
+* **Database**: MongoDB (and optional Prisma for SQL)
+* **Scripts**:
+
+```bash
+npm run dev    # Start API with nodemon
+```
+
+---
+
+## Admin App (apps/admin)
+
+* **Framework**: Next.js
+* **TailwindCSS** integrated
+* **Scripts**:
+
+```bash
+npm run dev    # Start Next.js dev server
+```
+
+---
+
+## Frontend Apps (apps/account & apps/frontend)
+
+* **Framework**: React + Vite
+* **TailwindCSS** integrated
+* **Scripts**:
+
+```bash
+npm run dev    # Start Vite dev server
+```
+
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/my-feature`).
+3. Commit changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Create a Pull Request.
+
+---
+
+## License
+
+**Pixels-Perfect License**
+
+* Non-commercial use only.
+* All code can be copied, shared, or modified for non-commercial purposes.
+* Any commercial use without permission will be considered a breach of contract.
+
+---
+
+**Happy coding!**
