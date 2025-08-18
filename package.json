@@ -1,0 +1,30 @@
+{
+  "name": "@pixels-shope/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev:all": "concurrently -k -n ACCOUNT,FRONTEND,ADMIN,NODE-API -c cyan,green,magenta,yellow \"npm run dev --prefix apps/account\" \"npm run dev --prefix apps/frontend\" \"npm run dev --prefix apps/admin\" \"npm run dev --prefix apps/node-api\"",
+    "dev:account": "npm run dev --prefix apps/account",
+    "dev:frontend": "npm run dev --prefix apps/frontend",
+    "dev:admin": "npm run dev --prefix apps/admin",
+    "dev:node-api": "npm run dev --prefix apps/node-api"
+  },
+  "private": true,
+  "devDependencies": {
+    "@nrwl/workspace": "^19.8.4",
+    "@nx/js": "21.4.0",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
+    "chalk": "^5.6.0",
+    "concurrently": "^9.2.0",
+    "cross-env": "^10.0.0",
+    "nx": "^21.4.0",
+    "prettier": "^2.6.2",
+    "tslib": "^2.3.0",
+    "typescript": "~5.8.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

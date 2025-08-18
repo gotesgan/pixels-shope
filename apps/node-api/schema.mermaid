@@ -1,0 +1,113 @@
+‘’’erDiagram
+    User ||--o{ Store : owns
+    Store ||--o{ Category : has
+    Store ||--o{ Product : sells
+    Store ||--o{ Customer : serves
+    Store ||--o{ Review : receives
+    Store ||--|| PhonePePayment : has
+    Store ||--o{ Order : processes
+    Store ||--o{ Inquiry : receives
+
+    Category }o--|o Category : "parent of" %% Corrected self-referencing relationship
+    Category ||--o{ Product : contains
+    Category |o--o{ Inquiry : categorizes
+
+    Product ||--o{ Review : receives
+
+    Order ||--o{ OrderProduct : contains
+    Product ||--o{ OrderProduct : "included in"
+
+    Customer ||--o{ Order : places
+    Customer ||--o{ Inquiry : submits
+
+    User {
+        id
+        name
+        email
+        password
+        phone
+        address
+        city
+        state
+        country
+        zipCode
+        createdAt
+        updatedAt
+    }
+
+    Store {
+        id
+        name
+        domain
+        ownerId
+    }
+
+    Category {
+        id
+        name
+        storeId
+        parentId
+    }
+
+    Product {
+        id
+        name
+        description
+        originalPrice
+        price
+        categoryId
+        storeId
+        stockQuantity
+    }
+
+    Review {
+        id
+        content
+        rating
+        productId
+        storeId
+    }
+
+    Customer {
+        id
+        name
+        email
+        password
+        phone
+        address
+        city
+        state
+        country
+        zipCode
+        createdAt
+        updatedAt
+        storeId
+    }
+
+    PhonePePayment {
+        id
+        storeId
+        merchantId
+        saltKey
+        saltIndex
+        active
+    }
+
+    Order {
+        id
+        orderDate
+        shippingName
+        shippingAddress
+        shippingCity
+        shippingState
+        shippingZipCode
+        customerId
+        %% status (uses OrderStatus Enum)
+    }
+
+    OrderProduct {
+        id
+        orderId
+        productId
+        quantity
+    }’’’

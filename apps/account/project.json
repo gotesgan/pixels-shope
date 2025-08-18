@@ -1,0 +1,23 @@
+{
+  "name": "account",
+  "root": "apps/account",
+  "sourceRoot": "apps/account/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm run build"],
+        "cwd": "apps/account"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm run dev"],
+        "cwd": "apps/account"
+      }
+    }
+  },
+  "tags": ["type:react"]
+}

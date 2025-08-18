@@ -1,0 +1,490 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// ---
+/// Prisma Schema for Multi-Tenant E-commerce Platform
+/// ---
+
+// CORE ENTITIES
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String
+  address   String
+  city      String
+  state     String
+  country   String
+  zipCode   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  stores    Store[]
+}
+
+model Store {
+  id            String          @id @default(cuid())
+  domain        String          @unique
+  userId        String
+  owner         User            @relation(fields: [userId], references: [id])
+  media         Media[]
+  HeroSection   HeroSection?
+  storeInfo     StoreInfo?
+  phonePe       PhonePe?
+  AboutPage     AboutPage?
+  ContactPage   ContactPage?
+  LegalDocument LegalDocument[]
+  phonePeId     String?
+  faq           Faq[]
+  blog          Blog[]
+  Customer      Customer[]
+  Order         Order[]
+
+  @@index([domain])
+}
+
+model Customer {
+  id                String            @id @default(cuid())
+  name              String
+  email             String            @unique
+  password          String
+  phone             String
+  shippingAddresses ShippingAddress[]
+  store             Store             @relation(fields: [storeId], references: [id])
+  storeId           String
+  orders            Order[]
+
+  @@unique([email, storeId])
+  @@unique([phone, storeId])
+  @@index([storeId])
+}
+
+// STORE SETUP
+model StoreInfo {
+  id            String   @id @default(cuid())
+  storeId       String   @unique
+  store         Store    @relation(fields: [storeId], references: [id])
+  name          String
+  media         Media?   @relation("StoreInfoToMedia")
+  displayMode   Show     @default(both)
+  colour        String?
+  businessTypes String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Show {
+  logo
+  name
+  both
+}
+
+model HeroSection {
+  id      String  @id @default(cuid())
+  storeId String  @unique
+  store   Store   @relation(fields: [storeId], references: [id])
+  media   Media[]
+}
+
+model Media {
+  id             String        @id @default(cuid())
+  image          String
+  Store          Store?        @relation(fields: [storeId], references: [id])
+  storeId        String?
+  HeroSection    HeroSection?  @relation(fields: [heroSectionId], references: [id])
+  heroSectionId  String?
+  storeInfo      StoreInfo?    @relation("StoreInfoToMedia", fields: [storeInfoId], references: [id])
+  storeInfoId    String?       @unique
+  AboutCompany   AboutCompany? @relation(fields: [aboutCompanyId], references: [id])
+  aboutCompanyId String?
+  AboutSection   AboutSection? @relation(fields: [aboutSectionId], references: [id])
+  aboutSectionId String?
+  OurBrand       OurBrand?     @relation(fields: [ourBrandId], references: [id])
+  ourBrandId     String?
+  CompanyFact    CompanyFact?  @relation(fields: [companyFactId], references: [id])
+  companyFactId  String?
+  SectionItem    SectionItem?  @relation(fields: [sectionItemId], references: [id])
+  sectionItemId  String?
+  blog           Blog?         @relation(fields: [blogId], references: [id])
+  blogId         String?
+}
+
+// ABOUT PAGE & CONTENT SECTIONS
+model AboutPage {
+  id            String         @id @default(cuid())
+  storeId       String         @unique
+  store         Store          @relation(fields: [storeId], references: [id])
+  aboutCompany  AboutCompany?
+  ourBrand      OurBrand?
+  companyFact   CompanyFact?
+  aboutSections AboutSection[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model AboutCompany {
+  id              String    @id @default(cuid())
+  aboutPageId     String    @unique
+  aboutPage       AboutPage @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+  title           String
+  description     String
+  media           Media[]
+  storyParagraphs Json
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model AboutSection {
+  id           String        @id @default(cuid())
+  aboutPageId  String
+  aboutPage    AboutPage     @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+  title        String
+  description  String
+  sortOrder    Int           @default(0)
+  bgColor      String?
+  media        Media[]
+  sectionType  String        @default("DEFAULT")
+  sectionItems SectionItem[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model SectionItem {
+  id          String       @id @default(cuid())
+  sectionId   String
+  section     AboutSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  title       String?
+  description String?
+  iconName    String?
+  value       String?
+  label       String?
+  media       Media[]
+  sortOrder   Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model OurBrand {
+  id          String      @id @default(cuid())
+  aboutPageId String      @unique
+  aboutPage   AboutPage   @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+  title       String?
+  description String?
+  media       Media[]
+  brandItems  BrandItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model BrandItem {
+  id         String   @id @default(cuid())
+  ourBrandId String
+  ourBrand   OurBrand @relation(fields: [ourBrandId], references: [id], onDelete: Cascade)
+  name       String
+  logoUrl    String
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model CompanyFact {
+  id          String     @id @default(cuid())
+  aboutPageId String     @unique
+  aboutPage   AboutPage  @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  media       Media[]
+  factItems   FactItem[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model FactItem {
+  id            String      @id @default(cuid())
+  companyFactId String
+  companyFact   CompanyFact @relation(fields: [companyFactId], references: [id], onDelete: Cascade)
+  value         String
+  label         String
+  iconName      String
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+// CONTACT PAGE
+model ContactPage {
+  id          Int                 @id @default(autoincrement())
+  storeId     String              @unique
+  store       Store               @relation(fields: [storeId], references: [id])
+  submissions ContactSubmission[]
+  information ContactInfo[]
+  hours       BusinessHours[]
+  socialLinks SocialLink[]
+  locations   Location[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model ContactSubmission {
+  id        Int              @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  message   String
+  page      ContactPage      @relation(fields: [pageId], references: [id])
+  pageId    Int
+  createdAt DateTime         @default(now())
+  status    SubmissionStatus @default(PENDING)
+
+  @@index([email])
+  @@index([status])
+}
+
+model ContactInfo {
+  id        Int         @id @default(autoincrement())
+  type      ContactType
+  value     String
+  label     String?
+  icon      String?
+  isPrimary Boolean     @default(false)
+  page      ContactPage @relation(fields: [pageId], references: [id])
+  pageId    Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@unique([type, pageId])
+  @@index([isPrimary])
+}
+
+model BusinessHours {
+  id        Int         @id @default(autoincrement())
+  days      String
+  hours     String
+  isActive  Boolean     @default(true)
+  sortOrder Int         @default(0)
+  page      ContactPage @relation(fields: [pageId], references: [id])
+  pageId    Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([sortOrder])
+}
+
+model SocialLink {
+  id        Int            @id @default(autoincrement())
+  platform  SocialPlatform
+  url       String
+  icon      String?
+  isActive  Boolean        @default(true)
+  page      ContactPage    @relation(fields: [pageId], references: [id])
+  pageId    Int
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@unique([platform, pageId])
+}
+
+model Location {
+  id          Int         @id @default(autoincrement())
+  name        String?
+  address     String
+  city        String
+  state       String
+  country     String      @default("India")
+  postalCode  String?
+  mapEmbedUrl String?
+  isPrimary   Boolean     @default(false)
+  page        ContactPage @relation(fields: [pageId], references: [id])
+  pageId      Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([isPrimary])
+}
+
+enum SubmissionStatus {
+  PENDING
+  REVIEWED
+  RESPONDED
+  SPAM
+}
+
+enum ContactType {
+  PHONE
+  EMAIL
+  ADDRESS
+  WHATSAPP
+  FAX
+  OTHER
+}
+
+enum SocialPlatform {
+  FACEBOOK
+  INSTAGRAM
+  TWITTER
+  LINKEDIN
+  YOUTUBE
+  WHATSAPP
+  TELEGRAM
+  OTHER
+}
+
+// LEGAL
+model LegalDocument {
+  id          String       @id @default(cuid())
+  type        DocumentType
+  storeId     String
+  store       Store        @relation(fields: [storeId], references: [id])
+  title       String
+  lastUpdated DateTime
+  sections    Section[]    @relation("DocumentSections")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Section {
+  id         String        @id @default(cuid())
+  heading    String
+  content    String
+  isOrdered  Boolean       @default(false)
+  listItems  Json
+  documentId String
+  document   LegalDocument @relation("DocumentSections", fields: [documentId], references: [id])
+}
+
+enum DocumentType {
+  PRIVACY
+  TERMS
+  RETURN
+}
+
+// STORE TRANSACTIONS
+model Faq {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id])
+  question  String
+  answer    String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  media       Media[]
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model Order {
+  id                String          @id @default(cuid())
+  customer          Customer        @relation(fields: [customerId], references: [id])
+  customerId        String
+  store             Store           @relation(fields: [storeId], references: [id])
+  storeId           String
+  shippingAddress   ShippingAddress @relation(fields: [shippingAddressId], references: [id])
+  shippingAddressId String
+  items             OrderItem[]
+  totalAmount       Float
+  currency          String          @default("INR")
+  status            OrderStatus     @default(PENDING)
+  payment           Payment?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([customerId])
+  @@index([storeId])
+  @@index([status])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  productId String
+  sku       String
+  quantity  Int
+  price     Float
+  variant   String?
+
+  @@index([productId])
+}
+
+model ShippingAddress {
+  id         String   @id @default(cuid())
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  name       String
+  address    String
+  city       String
+  state      String
+  country    String   @default("India")
+  zipCode    String
+  orders     Order[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([customerId])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  order         Order         @relation(fields: [orderId], references: [id])
+  orderId       String        @unique
+  amount        Float
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  timestamp     DateTime      @default(now())
+}
+
+model PhonePe {
+  id            String   @id @default(cuid())
+  isActive      Boolean  @default(false)
+  storeId       String   @unique
+  store         Store    @relation(fields: [storeId], references: [id])
+  clientId      String?
+  clientSecret  String?
+  clientVersion String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+enum PaymentMethod {
+  PHONEPE
+  CARD
+  NETBANKING
+  COD
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
