@@ -3,7 +3,7 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": ["default"],
-    "sharedGlobals": []
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/pixles.yml"]
   },
   "nxCloudId": "68a2ed3a4af7ec0b548f1854",
   "plugins": [
