@@ -1,155 +1,82 @@
-# Pixels Shop Full Documentation
+# Pixels Shope Monorepo
 
-## Overview
-
-Pixels Shop is a multi-tenant e-commerce platform that enables merchants to create online stores, manage products, and sell to customers. This document provides a comprehensive guide covering account creation, store setup, admin dashboard, frontend application, backend architecture, databases, APIs, Nx monorepo, deployment, and scaling.
-
----
-
-## Table of Contents
-
-1. [Monorepo Structure](#monorepo-structure)
-2. [Account Management](#account-management)
-3. [Store Setup & Domain Management](#store-setup--domain-management)
-4. [Admin Dashboard](#admin-dashboard)
-5. [Frontend Application](#frontend-application)
-6. [Backend Architecture](#backend-architecture)
-7. [Database Models](#database-models)
-8. [Middleware & Security](#middleware--security)
-9. [API Endpoints](#api-endpoints)
-10. [GraphQL & REST Integration](#graphql--rest-integration)
-11. [State Management](#state-management)
-12. [Routing & Navigation](#routing--navigation)
-13. [Styling & UI](#styling--ui)
-14. [Deployment & Scaling](#deployment--scaling)
+Welcome to the **Pixels Shope Monorepo**. This repository contains multiple projects and apps for our e-commerce platform, managed together using **Nx** and a monorepo structure.
 
 ---
 
 ## Monorepo Structure
 
-Nx workspace is used to manage multiple applications (account, admin, frontend, backend) and shared libraries.
-
 ```
-apps/
-  account/        # Account creation & user flows
-  admin/          # Admin dashboard
-  frontend/       # Main e-commerce frontend
-  backend/        # API server
-libs/             # Shared libraries
-  ui/             # Reusable components
-  utils/          # Utility functions
-package.json
-nx.json
-```
-
-### Nx Diagram
-
-```mermaid
-graph TD
-  A[Nx Workspace] --> B[Apps]
-  B --> C[Account App]
-  B --> D[Admin App]
-  B --> E[Frontend App]
-  B --> F[Backend App]
-  A --> G[Shared Libraries]
-  G --> H[UI Components]
-  G --> I[Utilities]
+pixels-shope/
+├─ apps/
+│  ├─ account/        # Customer-facing Vite React app
+│  ├─ frontend/       # Main Vite React storefront
+│  ├─ admin/          # Admin dashboard (Next.js)
+│  └─ node-api/       # Node.js API (Express + GraphQL)
+├─ packages/          # Shared packages/libraries
+├─ nx.json            # Nx workspace configuration
+├─ package.json       # Root package.json with scripts
+├─ tsconfig.json      # Root TypeScript config
+└─ README.md
 ```
 
 ---
 
-## Account Management
+## Installation
 
-### User Registration (`Create.jsx`)
+1. Clone the repository:
 
-* Fields: Name, Email, Phone, Address, Password
-* Validation: Password match, min length, phone validation
-* API: `POST /api/v1/user/register`
+```bash
+git clone https://github.com/gotesgan/pixels-shope.git
+cd pixels-shope
+```
 
-### Login (`SignIn.jsx`)
+2. Install dependencies:
 
-* Fields: Email, Password
-* API: `POST /api/v1/user/login`
-* Stores token & user data in `localStorage`
+```bash
+npm install
+```
 
-### Account Flow Diagram
+3. Install dependencies for apps (if needed):
 
-```mermaid
-sequenceDiagram
-  User->>Account App: Fill Registration Form
-  Account App->>Backend API: POST /register
-  Backend API->>DB: Store User Data
-  DB-->>Backend API: Success
-  Backend API-->>Account App: Success + Token
-  Account App->>User: Redirect to Store Creation
+```bash
+npm install --prefix apps/account
+npm install --prefix apps/frontend
+npm install --prefix apps/admin
+npm install --prefix apps/node-api
 ```
 
 ---
 
-## Store Setup & Domain Management
+## Available Scripts
 
-### Store Creation (`Create-Store.jsx`)
+From the root of the monorepo, you can run scripts for each app individually or all together.
 
-* Fields: Store name, Business type, Brand color, Logo
-* API: `POST /api/v1/user/create-store`
+### Run all apps concurrently
 
-### Domain Setup (`DomainSetup.jsx` & `DomainVerify.jsx`)
+```bash
+npm run dev:all
+```
 
-* DNS A record and CNAME configuration
-* Domain verification and redirection
+This will start:
 
-### Store Setup Diagram
+* **Account (Vite React)**
+* **Frontend (Vite React)**
+* **Admin (Next.js)**
+* **Node API (Express + GraphQL)**
 
-```mermaid
-sequenceDiagram
-  User->>Store App: Create Store
-  Store App->>Backend API: POST /create-store
-  Backend API->>DB: Save Store Info
-  User->>DomainSetup: Enter Domain Info
-  DomainSetup->>Backend API: Verify Domain
-  Backend API->>DNS Service: Verify Records
-  DNS Service-->>Backend API: Success
-  User->>Store App: Redirect to Admin/Login
+### Run individual apps
+
+```bash
+npm run dev:account      # Customer account app
+npm run dev:frontend     # Storefront frontend
+npm run dev:admin        # Admin dashboard
+npm run dev:node-api     # Backend API
 ```
 
 ---
 
-## Admin Dashboard
-
-### Features
-
-* About page management
-* Product management
-* User management
-* Store settings configuration
-* API integration for CRUD operations
-
-### Folder Structure
-
-```
-apps/admin/
-  app/
-    about/page.jsx
-    products/page.jsx
-    users/page.jsx
-    settings/page.jsx
-    components/Sidebar.jsx
-    components/Navbar.jsx
-    api/index.js
-    styles/
-```
-
-### Admin Workflow Diagram
-
-```mermaid
-graph TD
-  A[Admin UI] --> B[API Calls]
-  B --> C[Backend Controllers]
-  C --> D[Database]
-```
-
----
-
+<<<<<<< HEAD
 ## Frontend Application
 
 * Core components: Header, Navbar, Footer, HeroSection, ProductSection, CartIcon
@@ -166,10 +93,30 @@ graph TD
   Homepage --> HeroSection
   Homepage --> ProductSection
   Footer --> Links
+=======
+## Nx Monorepo Features
+
+* Centralized management for multiple apps and packages.
+* Shared configurations and libraries.
+* Ability to run and build apps independently or together.
+* Easy dependency tracking across apps.
+
+---
+
+## Node API (apps/node-api)
+
+* **Server**: Express + GraphQL
+* **Database**: MongoDB (and optional Prisma for SQL)
+* **Scripts**:
+
+```bash
+npm run dev    # Start API with nodemon
+>>>>>>> 11b0e956e098e35fe43f2a3d8ddd7652ecf42da7
 ```
 
 ---
 
+<<<<<<< HEAD
 ## Backend Architecture
 
 * Node.js with Express
@@ -186,10 +133,21 @@ graph TD
   C --> D[Controllers]
   D --> E[MongoDB/PostgreSQL]
   D --> F[External Services]
+=======
+## Admin App (apps/admin)
+
+* **Framework**: Next.js
+* **TailwindCSS** integrated
+* **Scripts**:
+
+```bash
+npm run dev    # Start Next.js dev server
+>>>>>>> 11b0e956e098e35fe43f2a3d8ddd7652ecf42da7
 ```
 
 ---
 
+<<<<<<< HEAD
 ## Database Models
 
 ### Product Model
@@ -220,10 +178,21 @@ erDiagram
   CUSTOMER ||--o{ ORDER : places
   ORDER ||--o{ ORDER_ITEM : contains
   ORDER_ITEM }|--|| PRODUCT : references
+=======
+## Frontend Apps (apps/account & apps/frontend)
+
+* **Framework**: React + Vite
+* **TailwindCSS** integrated
+* **Scripts**:
+
+```bash
+npm run dev    # Start Vite dev server
+>>>>>>> 11b0e956e098e35fe43f2a3d8ddd7652ecf42da7
 ```
 
 ---
 
+<<<<<<< HEAD
 ## Middleware & Security
 
 * JWT Authentication
@@ -277,3 +246,26 @@ graph TD
 ---
 
 This comprehensive documentation provides diagrams, flowcharts, and step-by-step explanations for the Pixels Shop monorepo, ensuring clarity for developers, admins, and stakeholders.
+=======
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/my-feature`).
+3. Commit changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Create a Pull Request.
+
+---
+
+## License
+
+**Pixels-Perfect License**
+
+* Non-commercial use only.
+* All code can be copied, shared, or modified for non-commercial purposes.
+* Any commercial use without permission will be considered a breach of contract.
+
+---
+
+**Happy coding!**
+>>>>>>> 11b0e956e098e35fe43f2a3d8ddd7652ecf42da7
