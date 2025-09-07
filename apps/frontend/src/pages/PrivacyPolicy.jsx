@@ -1,7 +1,7 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import PolicyLayout from "../components/PolicyLayout";
-import { fetchGraphQL } from "../lib/fetchGrap";
+'use client';
+import React, { useState, useEffect } from 'react';
+import PolicyLayout from '../components/PolicyLayout';
+import { fetchGraphQL } from '../lib/fetchGrap';
 
 const PrivacyPolicy = () => {
   const [policyData, setPolicyData] = useState(null);
@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
         setPolicyData(data.legalDocument);
       } catch (err) {
         console.error(err);
-        setError(err.message || "Something went wrong");
+        setError(err.message || 'Something went wrong');
       } finally {
         setLoading(false);
       }
@@ -72,7 +72,9 @@ const PrivacyPolicy = () => {
   return (
     <PolicyLayout
       title={policyData.title}
-      lastUpdated={new Date(Number(policyData.lastUpdated)).toLocaleDateString()}
+      lastUpdated={new Date(
+        Number(policyData.lastUpdated),
+      ).toLocaleDateString()}
     >
       {policyData.sections.map((section) => (
         <div key={section.id} className="mb-6">
@@ -83,21 +85,25 @@ const PrivacyPolicy = () => {
             className="mb-4"
             dangerouslySetInnerHTML={{ __html: section.content }}
           />
-          {section.listItems && section.listItems.length > 0 && (
-            section.isOrdered ? (
+          {section.listItems &&
+            section.listItems.length > 0 &&
+            (section.isOrdered ? (
               <ol className="list-decimal pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ol>
             ) : (
               <ul className="list-disc pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ul>
-            )
-          )}
+            ))}
         </div>
       ))}
     </PolicyLayout>

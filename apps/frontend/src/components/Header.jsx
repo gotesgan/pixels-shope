@@ -1,34 +1,34 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { FiSearch, FiUser } from "react-icons/fi"
-import { fetchGraphQL } from "../lib/fetchGrap"
-import CartIcon from "./CartIcon" // Import the CartIcon component
-import { Link } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { FiSearch, FiUser } from 'react-icons/fi';
+import { fetchGraphQL } from '../lib/fetchGrap';
+import CartIcon from './CartIcon'; // Import the CartIcon component
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [storeInfo, setStoreInfo] = useState(null)
-  const [isPhonepeActive, setIsPhonepeActive] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [customerInfo, setCustomerInfo] = useState(null)
-  const [authToken, setAuthToken] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('');
+  const [storeInfo, setStoreInfo] = useState(null);
+  const [isPhonepeActive, setIsPhonepeActive] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [customerInfo, setCustomerInfo] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
 
   useEffect(() => {
     // Check if user is logged in
-    const authToken = localStorage.getItem("authToken")
-    setAuthToken(authToken)
-    const storedCustomerInfo = localStorage.getItem("customerInfo")
+    const authToken = localStorage.getItem('authToken');
+    setAuthToken(authToken);
+    const storedCustomerInfo = localStorage.getItem('customerInfo');
 
     if (authToken && storedCustomerInfo) {
-      setIsLoggedIn(true)
-      setCustomerInfo(JSON.parse(storedCustomerInfo))
+      setIsLoggedIn(true);
+      setCustomerInfo(JSON.parse(storedCustomerInfo));
     }
 
     const loadStoreInfo = async () => {
       try {
-        const host = window.location.hostname
+        const host = window.location.hostname;
         const query = `
           query StoreData {
             phonepeStatus {
@@ -49,74 +49,84 @@ const Header = () => {
               }
             }
           }
-        `
+        `;
 
-        const data = await fetchGraphQL(host, query)
+        const data = await fetchGraphQL(host, query);
 
         if (data?.storeInfo) {
-          setStoreInfo(data.storeInfo)
+          setStoreInfo(data.storeInfo);
         }
 
         if (data?.phonepeStatus?.isActive) {
-          setIsPhonepeActive(true)
+          setIsPhonepeActive(true);
         }
       } catch (error) {
-        console.error("Failed to load store info:", error)
+        console.error('Failed to load store info:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadStoreInfo()
-  }, [isLoggedIn, authToken])
+    loadStoreInfo();
+  }, [isLoggedIn, authToken]);
 
-  const storeName = storeInfo?.name || "pixel"
-  const storeColor = storeInfo?.colour || "#F4E7E1"
-  const displayMode = storeInfo?.displayMode || "both"
+  const storeName = storeInfo?.name || 'pixel';
+  const storeColor = storeInfo?.colour || '#F4E7E1';
+  const displayMode = storeInfo?.displayMode || 'both';
   // const logoImage = storeInfo?.media?.image || null
 
-  const [logoImage, setLogoImage] = useState(null)
+  const [logoImage, setLogoImage] = useState(null);
   useEffect(() => {
     if (storeInfo?.media?.image) {
-      setLogoImage(buildImageUrl(storeInfo.media.image))
+      setLogoImage(buildImageUrl(storeInfo.media.image));
     } else {
-      setLogoImage(null)
+      setLogoImage(null);
     }
-  }, [storeInfo])
+  }, [storeInfo]);
 
   const buildImageUrl = (imagePath) => {
-  if (!imagePath) return "/placeholder.svg"
-  return `https://media.pixelperfects.in/${imagePath}`
-}
+    if (!imagePath) return '/placeholder.svg';
+    return `https://media.pixelperfects.in/${imagePath}`;
+  };
 
   const renderStoreBranding = () => {
     switch (displayMode) {
-      case "name":
+      case 'name':
         return (
           <span className="text-2xl font-bold" style={{ color: storeColor }}>
             {storeName}
           </span>
-        )
-      case "logo":
+        );
+      case 'logo':
         return logoImage ? (
-          <img src={logoImage || "/placeholder.svg"} alt={storeName} className="h-10 w-auto" />
+          <img
+            src={logoImage || '/placeholder.svg'}
+            alt={storeName}
+            className="h-10 w-auto"
+          />
         ) : (
           <span className="text-2xl font-bold" style={{ color: storeColor }}>
             {storeName}
           </span>
-        )
-      case "both":
+        );
+      case 'both':
       default:
         return (
           <div className="flex items-center gap-2">
-            {logoImage && <img src={logoImage || "/placeholder.svg"} alt={storeName} className="h-10 w-auto" />}
+            {logoImage && (
+              <img
+                src={logoImage || '/placeholder.svg'}
+                alt={storeName}
+                className="h-10 w-auto"
+              />
+            )}
             <span className="text-2xl font-bold" style={{ color: storeColor }}>
               {storeName}
             </span>
           </div>
-        )
+        );
     }
-  }
+  };
 
   return (
     <header className="bg-white shadow-sm py-4 w-full">
@@ -125,9 +135,13 @@ const Header = () => {
           {/* Branding */}
           <div className="flex-shrink-0">
             <a href="/" className="flex ">
-              {loading ? ( <div className=" flex ">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                      </div> ) : renderStoreBranding()}
+              {loading ? (
+                <div className=" flex ">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+              ) : (
+                renderStoreBranding()
+              )}
             </a>
           </div>
 
@@ -150,14 +164,23 @@ const Header = () => {
             {/* Conditional Login + Cart */}
             {isPhonepeActive && (
               <div className="flex items-center gap-4 md:gap-6">
-                <CartIcon /> {/* Replace the cart link with CartIcon component */}
+                <CartIcon />{' '}
+                {/* Replace the cart link with CartIcon component */}
                 {isLoggedIn ? (
-                  <Link to="/account" className="flex items-center gap-1 text-gray-700 hover:text-blue-500">
+                  <Link
+                    to="/account"
+                    className="flex items-center gap-1 text-gray-700 hover:text-blue-500"
+                  >
                     <FiUser className="text-xl" />
-                    <span className="hidden md:inline">{customerInfo.name}</span>
+                    <span className="hidden md:inline">
+                      {customerInfo.name}
+                    </span>
                   </Link>
                 ) : (
-                  <Link to="/login" className="flex items-center gap-1 text-gray-700 hover:text-blue-500">
+                  <Link
+                    to="/login"
+                    className="flex items-center gap-1 text-gray-700 hover:text-blue-500"
+                  >
                     <FiUser className="text-xl" />
                     <span className="hidden md:inline">Login</span>
                   </Link>
@@ -168,7 +191,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

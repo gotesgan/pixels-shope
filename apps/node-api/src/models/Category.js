@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const categorySchema = new mongoose.Schema(
   {
@@ -7,11 +7,11 @@ const categorySchema = new mongoose.Schema(
     slug: { type: String, required: true },
     parent: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: 'Category',
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Store-scoped unique slugs
@@ -19,5 +19,5 @@ categorySchema.index({ slug: 1, storeId: 1 }, { unique: true });
 // Index for hierarchical queries
 categorySchema.index({ storeId: 1, parent: 1 });
 
-const Category = mongoose.model("Category", categorySchema);
+const Category = mongoose.model('Category', categorySchema);
 export default Category;

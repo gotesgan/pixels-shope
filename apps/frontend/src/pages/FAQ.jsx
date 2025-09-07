@@ -19,9 +19,8 @@ const FAQ_QUERY = `
 // Direct GraphQL fetch function specifically for the pixel endpoint
 const fetchFaqs = async () => {
   try {
-
-    const hostname = window.location.hostname
-    const response = await fetchGraphQL(hostname, FAQ_QUERY)
+    const hostname = window.location.hostname;
+    const response = await fetchGraphQL(hostname, FAQ_QUERY);
 
     if (response.errors) {
       console.error('GraphQL errors:', result.errors);
@@ -32,17 +31,16 @@ const fetchFaqs = async () => {
     console.log('Fetched FAQs:', data);
 
     return data;
-
   } catch (error) {
     console.error('Error fetching FAQs:', error);
     throw error;
   }
 };
 
-const FAQ = ({ 
+const FAQ = ({
   initialFaqs = null,
   customCategories = null,
-  storeId = null 
+  storeId = null,
 }) => {
   const [faqs, setFaqs] = useState(initialFaqs || []);
   const [loading, setLoading] = useState(!initialFaqs);
@@ -62,14 +60,14 @@ const FAQ = ({
   // Parse timestamp to date format
   const formatDate = (timestamp) => {
     if (!timestamp) return 'Unknown date';
-    
+
     // Check if timestamp is in milliseconds (13 digits as string)
     const date = /^\d{13}$/.test(timestamp)
       ? new Date(parseInt(timestamp))
       : new Date(timestamp);
-    
-    return isNaN(date.getTime()) 
-      ? 'Unknown date' 
+
+    return isNaN(date.getTime())
+      ? 'Unknown date'
       : date.toLocaleDateString('en-IN');
   };
 
@@ -78,7 +76,9 @@ const FAQ = ({
     if (customCategories) {
       setCategories(customCategories);
     } else if (faqs.length > 0) {
-      const uniqueCategories = [...new Set(faqs.map(faq => faq.category))].filter(Boolean);
+      const uniqueCategories = [
+        ...new Set(faqs.map((faq) => faq.category)),
+      ].filter(Boolean);
       setCategories(uniqueCategories);
     }
   }, [faqs, customCategories]);
@@ -87,17 +87,17 @@ const FAQ = ({
     try {
       setLoading(true);
       setError(null);
-      
+
       const data = await fetchFaqs();
-      
+
       if (Array.isArray(data)) {
         let faqData = data;
-        
+
         // Filter by storeId if provided
         if (storeId) {
-          faqData = faqData.filter(faq => faq.storeId === storeId);
+          faqData = faqData.filter((faq) => faq.storeId === storeId);
         }
-        
+
         setFaqs(faqData);
       } else {
         throw new Error('Invalid FAQ data structure');
@@ -112,22 +112,21 @@ const FAQ = ({
 
   // Toggle FAQ item open/closed state
   const toggleItem = (id) => {
-    setOpenItems(prev => ({
+    setOpenItems((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
 
   // Filter FAQs based on search query and active category
-  const filteredFaqs = faqs.filter(faq => {
-    const matchesSearch = 
+  const filteredFaqs = faqs.filter((faq) => {
+    const matchesSearch =
       faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
       faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = 
-      activeCategory === 'all' || 
-      faq.category === activeCategory;
-    
+
+    const matchesCategory =
+      activeCategory === 'all' || faq.category === activeCategory;
+
     return matchesSearch && matchesCategory;
   });
 
@@ -159,8 +158,10 @@ const FAQ = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 md:p-8">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Frequently Asked Questions</h2>
-      
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
+        Frequently Asked Questions
+      </h2>
+
       {/* Search */}
       <div className="mb-6">
         <div className="relative">
@@ -171,14 +172,19 @@ const FAQ = ({
             value={searchQuery}
             onChange={handleSearchChange}
           />
-          <svg 
-            className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
+          <svg
+            className="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
         </div>
       </div>
@@ -188,20 +194,20 @@ const FAQ = ({
         <div className="flex flex-wrap gap-2 mb-6">
           <button
             className={`px-4 py-2 rounded-full text-sm font-medium ${
-              activeCategory === 'all' 
-                ? 'bg-blue-600 text-white' 
+              activeCategory === 'all'
+                ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
             onClick={() => handleCategoryChange('all')}
           >
             All
           </button>
-          {categories.map(category => (
+          {categories.map((category) => (
             <button
               key={category}
               className={`px-4 py-2 rounded-full text-sm font-medium ${
-                activeCategory === category 
-                  ? 'bg-blue-600 text-white' 
+                activeCategory === category
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
               onClick={() => handleCategoryChange(category)}
@@ -216,8 +222,8 @@ const FAQ = ({
       {filteredFaqs.length > 0 ? (
         <div className="space-y-4">
           {filteredFaqs.map((faq) => (
-            <div 
-              key={faq.id} 
+            <div
+              key={faq.id}
               className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
             >
               <button
@@ -233,17 +239,22 @@ const FAQ = ({
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
                 </svg>
               </button>
-              
+
               {openItems[faq.id] && (
                 <div className="p-4 bg-gray-50 border-t border-gray-200">
-                  <div 
+                  <div
                     className="prose max-w-none text-gray-700"
                     dangerouslySetInnerHTML={{ __html: faq.answer }}
                   />
-                  
+
                   {/* Additional metadata */}
                   {faq.updatedAt && (
                     <p className="mt-2 text-sm text-gray-500">
@@ -257,9 +268,11 @@ const FAQ = ({
         </div>
       ) : (
         <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-600">No FAQs found matching your search criteria.</p>
+          <p className="text-gray-600">
+            No FAQs found matching your search criteria.
+          </p>
           {searchQuery && (
-            <button 
+            <button
               className="mt-2 text-blue-600 hover:text-blue-800"
               onClick={() => setSearchQuery('')}
             >

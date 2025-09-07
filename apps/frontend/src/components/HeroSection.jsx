@@ -1,8 +1,8 @@
-    "use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
-import { fetchGraphQL } from "../lib/fetchGrap"
+import { useState, useEffect } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { fetchGraphQL } from '../lib/fetchGrap';
 
 const HERO_QUERY = `
   query {
@@ -19,30 +19,30 @@ const HERO_QUERY = `
       }
     }
   }
-`
+`;
 
 const buildImageUrl = (imagePath) => {
-  if (!imagePath) return "/placeholder.svg"
-  return `https://media.pixelperfects.in/${imagePath}`
-}
+  if (!imagePath) return '/placeholder.svg';
+  return `https://media.pixelperfects.in/${imagePath}`;
+};
 
 const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [slides, setSlides] = useState([])
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [slides, setSlides] = useState([]);
 
   useEffect(() => {
     const loadHero = async () => {
-      const hostname = window.location.hostname
+      const hostname = window.location.hostname;
       try {
-        const res = await fetchGraphQL(hostname, HERO_QUERY)
-        console.log("Hero Section Response:", res)
+        const res = await fetchGraphQL(hostname, HERO_QUERY);
+        console.log('Hero Section Response:', res);
 
-        const heroSections = res?.heroSections || []
+        const heroSections = res?.heroSections || [];
 
         // Flatten media from all hero sections into slides
         const allSlides = heroSections
           .map((hero) => {
-            if (!hero.media) return null
+            if (!hero.media) return null;
             return {
               id: hero.media.id,
               image: hero.media.image,
@@ -50,36 +50,36 @@ const HeroSection = () => {
               subtitle: hero.subtitle,
               ctaText: hero.ctaText,
               ctaLink: hero.ctaLink,
-            }
+            };
           })
-          .filter(Boolean)
+          .filter(Boolean);
 
-        setSlides(allSlides)
+        setSlides(allSlides);
       } catch (err) {
-        console.error("Failed to fetch hero data", err)
+        console.error('Failed to fetch hero data', err);
       }
-    }
+    };
 
-    loadHero()
+    loadHero();
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-    }, 5000)
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [slides.length])
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-  }
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-  }
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
 
-  if (slides.length === 0) return null
+  if (slides.length === 0) return null;
 
-  const current = slides[currentSlide]
+  const current = slides[currentSlide];
 
   return (
     <div className="w-full">
@@ -113,12 +113,12 @@ const HeroSection = () => {
               <div
                 key={slide.id}
                 className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-                  index === currentSlide ? "opacity-100 z-0" : "opacity-0 -z-10"
+                  index === currentSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'
                 }`}
               >
                 <img
                   src={buildImageUrl(slide.image)}
-                  alt={slide.title || "Hero image"}
+                  alt={slide.title || 'Hero image'}
                   className="w-full h-full object-cover object-center"
                 />
 
@@ -151,8 +151,7 @@ const HeroSection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroSection
- 
+export default HeroSection;

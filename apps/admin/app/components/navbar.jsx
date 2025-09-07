@@ -1,20 +1,20 @@
-"use client"
+'use client';
 
-import { Menu, Store, LogOut, Bell, Search, User } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Menu, Store, LogOut, Bell, Search, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar({ toggleSidebar, storeName, sidebarOpen }) {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleLogout = () => {
-    console.log("Logging out...")
-    router.push("/login")
-  }
+    console.log('Logging out...');
+    router.push('/login');
+  };
 
   return (
     <nav
       className={`bg-white shadow-lg border-b border-gray-200 fixed top-0 z-50 transition-all duration-300 ${
-        sidebarOpen ? "left-64" : "left-16"
+        sidebarOpen ? 'left-64' : 'left-16'
       } right-0`}
     >
       <div className="px-4 sm:px-6 lg:px-8">
@@ -76,11 +76,13 @@ export default function Navbar({ toggleSidebar, storeName, sidebarOpen }) {
               className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-600 hover:text-red-600 hover:bg-red-50 transition-all duration-200"
             >
               <LogOut className="h-5 w-5" />
-              <span className="hidden sm:inline text-sm font-medium">Logout</span>
+              <span className="hidden sm:inline text-sm font-medium">
+                Logout
+              </span>
             </button>
           </div>
         </div>
       </div>
     </nav>
-  )
+  );
 }

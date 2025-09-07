@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import SignIn from "./components/SignIn"
-import Create from "./components/Create"
-import CreateStore from "./components/Create-Store"
-import DomainQuestion from "./components/DomainQestion"
-import DomainSetup from "./components/DomainSetup"
-import DomainVerify from "./components/DomainVerify"
-import "./App.css"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignIn from './components/SignIn';
+import Create from './components/Create';
+import CreateStore from './components/Create-Store';
+import DomainQuestion from './components/DomainQestion';
+import DomainSetup from './components/DomainSetup';
+import DomainVerify from './components/DomainVerify';
+import './App.css';
 
 export default function App() {
   return (
@@ -20,5 +20,5 @@ export default function App() {
         <Route path="/" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }

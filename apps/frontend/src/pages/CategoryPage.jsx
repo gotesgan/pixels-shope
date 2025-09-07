@@ -1,47 +1,55 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { Star, StarHalf } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Star, StarHalf } from 'lucide-react';
 
 // Base URL for images
-const IMAGE_BASE_URL = "https://media.pixelperfects.in/"
+const IMAGE_BASE_URL = 'https://media.pixelperfects.in/';
 
 // Helper function to properly format image URLs
 const formatImageUrl = (imagePath) => {
   // If the image path is already a full URL or starts with a slash, use it as is
-  if (imagePath && (imagePath.startsWith('http') || imagePath.startsWith('/'))) {
-    return imagePath
+  if (
+    imagePath &&
+    (imagePath.startsWith('http') || imagePath.startsWith('/'))
+  ) {
+    return imagePath;
   }
-  
+
   // Otherwise, append it to the base URL
-  return `${IMAGE_BASE_URL}${imagePath}`
-}
+  return `${IMAGE_BASE_URL}${imagePath}`;
+};
 
 // Star Rating Component
 const StarRating = ({ rating }) => {
-  const fullStars = Math.floor(rating)
-  const hasHalfStar = rating % 1 !== 0
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
 
   return (
     <div className="flex items-center">
       {[...Array(fullStars)].map((_, i) => (
         <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
       ))}
-      {hasHalfStar && <StarHalf className="w-4 h-4 fill-amber-400 text-amber-400" />}
+      {hasHalfStar && (
+        <StarHalf className="w-4 h-4 fill-amber-400 text-amber-400" />
+      )}
       {[...Array(5 - fullStars - (hasHalfStar ? 1 : 0))].map((_, i) => (
-        <Star key={i + fullStars + (hasHalfStar ? 1 : 0)} className="w-4 h-4 text-gray-300" />
+        <Star
+          key={i + fullStars + (hasHalfStar ? 1 : 0)}
+          className="w-4 h-4 text-gray-300"
+        />
       ))}
       <span className="ml-1 text-sm text-gray-500">({rating})</span>
     </div>
-  )
-}
+  );
+};
 
 // Helper function to calculate discount percentage
 const getDiscountPercentage = (originalPrice, currentPrice) => {
-  const discount = ((originalPrice - currentPrice) / originalPrice) * 100
-  return Math.round(discount)
-}
+  const discount = ((originalPrice - currentPrice) / originalPrice) * 100;
+  return Math.round(discount);
+};
 
 // Product Card Component
 function ProductCard({ product, onViewDetails }) {
@@ -59,7 +67,7 @@ function ProductCard({ product, onViewDetails }) {
         {/* Image Section */}
         <div className="aspect-square relative overflow-hidden">
           <img
-            src={formatImageUrl(product.image) || "/placeholder.svg"}
+            src={formatImageUrl(product.image) || '/placeholder.svg'}
             alt={product.name}
             className="w-full h-full object-cover transition-transform hover:scale-105"
           />
@@ -73,7 +81,9 @@ function ProductCard({ product, onViewDetails }) {
         {/* Content Section */}
         <div className="flex flex-col flex-1">
           <div className="px-3 pt-3 pb-1">
-            <h3 className="text-base font-semibold line-clamp-2">{product.name}</h3>
+            <h3 className="text-base font-semibold line-clamp-2">
+              {product.name}
+            </h3>
           </div>
 
           <div className="px-3 pt-0 pb-1">
@@ -82,78 +92,82 @@ function ProductCard({ product, onViewDetails }) {
 
           <div className="px-3 pb-3 pt-1 mt-auto flex flex-col">
             <div className="flex items-center justify-start mb-2 w-full">
-              <p className="font-medium text-green-600 text-base">₹{product.price.toFixed(2)}</p>
+              <p className="font-medium text-green-600 text-base">
+                ₹{product.price.toFixed(2)}
+              </p>
               {product.originalPrice > product.price && (
-                <p className="text-sm text-gray-500 line-through ml-2">₹{product.originalPrice.toFixed(2)}</p>
+                <p className="text-sm text-gray-500 line-through ml-2">
+                  ₹{product.originalPrice.toFixed(2)}
+                </p>
               )}
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function CategoryPage() {
+  const navigate = useNavigate();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  console.log('Fetching products for category:');
 
-  const navigate = useNavigate()
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  console.log("Fetching products for category:")
-
-const slug = window.location.pathname.split("/").pop()
-
+  const slug = window.location.pathname.split('/').pop();
 
   useEffect(() => {
-console.log("hit")
+    console.log('hit');
     const fetchProductsByCategory = async () => {
-     console.log("hit")
-      
+      console.log('hit');
 
       try {
-        const hostname = window.location.hostname
-        console.log("Hostname:", hostname)
-        const url = `http://${hostname}:3001/api/v1/products/category/${slug}`
+        const hostname = window.location.hostname;
+        console.log('Hostname:', hostname);
+        const url = `http://${hostname}:3001/api/v1/products/category/${slug}`;
 
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log("Fetched products:", data)
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log('Fetched products:', data);
 
         if (data.success) {
-          setFilteredProducts(data.data)
+          setFilteredProducts(data.data);
         } else {
-          setFilteredProducts([])
+          setFilteredProducts([]);
         }
       } catch (err) {
-        console.error("Error fetching products:", err)
-        setFilteredProducts([])
+        console.error('Error fetching products:', err);
+        setFilteredProducts([]);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     if (slug) {
-      fetchProductsByCategory()
+      fetchProductsByCategory();
     }
-  }, [slug])
+  }, [slug]);
 
   if (loading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
         <div className="animate-spin h-8 w-8 border-4 border-green-500 border-t-transparent rounded-full"></div>
       </div>
-    )
+    );
   }
 
-  const displayCategory = slug ? slug.toUpperCase() : ""
+  const displayCategory = slug ? slug.toUpperCase() : '';
 
   return (
     <section className="py-10 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">{displayCategory}</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            {displayCategory}
+          </h1>
           <p className="text-gray-500 mt-2">
-            Discover our range of {displayCategory.toLowerCase()} products designed for your needs
+            Discover our range of {displayCategory.toLowerCase()} products
+            designed for your needs
           </p>
         </div>
 
@@ -170,9 +184,11 @@ console.log("hit")
         ) : (
           <div className="text-center py-12">
             <h2 className="text-xl font-medium mb-2">No products found</h2>
-            <p className="text-gray-500 mb-6">We couldn't find any products in this category.</p>
+            <p className="text-gray-500 mb-6">
+              We couldn't find any products in this category.
+            </p>
             <button
-              onClick={() => navigate("/")}
+              onClick={() => navigate('/')}
               className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
             >
               Back to Home
@@ -181,5 +197,5 @@ console.log("hit")
         )}
       </div>
     </section>
-  )
+  );
 }

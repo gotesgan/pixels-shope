@@ -1,5 +1,5 @@
 // db.js
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 import mongoose from 'mongoose';
 
 const prisma = new PrismaClient();

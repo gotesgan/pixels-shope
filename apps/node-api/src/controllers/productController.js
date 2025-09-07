@@ -16,6 +16,7 @@ export const createProduct = async (req, res) => {
       rating,
       features,
       specifications,
+      featuresStrip,
     } = req.body;
 
     const storeId = req.user?.storeId;
@@ -55,6 +56,7 @@ export const createProduct = async (req, res) => {
     // Safely parse features and specifications
     let parsedFeatures = [];
     let parsedSpecifications = {};
+    let parsedfeaturesStrip = [];
 
     try {
       parsedFeatures =
@@ -65,7 +67,17 @@ export const createProduct = async (req, res) => {
         error: 'Invalid JSON format for features',
       });
     }
-
+    try {
+      parsedfeaturesStrip =
+        typeof features === 'string'
+          ? JSON.parse(featuresStrip)
+          : featuresStrip;
+    } catch (err) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid JSON format for features',
+      });
+    }
     try {
       const parsed =
         typeof specifications === 'string'
@@ -109,7 +121,7 @@ export const getAllProducts = async (req, res) => {
     const storeId = req.store?.id || req.user?.storeId;
     const products = await Product.find({ storeId }).populate(
       'category',
-      'name slug'
+      'name slug',
     );
     res.status(200).json({ success: true, data: products });
   } catch (error) {
@@ -153,7 +165,7 @@ export const updateProduct = async (req, res) => {
     const product = await Product.findOneAndUpdate(
       { _id: req.params.id, storeId },
       updates,
-      { new: true }
+      { new: true },
     );
     if (!product)
       return res
@@ -221,7 +233,7 @@ export const createCategory = async (req, res) => {
     const upsertedCategory = await Category.findOneAndUpdate(
       { name, storeId, parent: parentId },
       { name, slug, storeId, parent: parentId },
-      { upsert: true, new: true, setDefaultsOnInsert: true }
+      { upsert: true, new: true, setDefaultsOnInsert: true },
     );
 
     return res.status(201).json({ success: true, data: upsertedCategory });
@@ -264,7 +276,7 @@ export const getAllCategories = async (req, res) => {
     const storeId = req.store?.id || req.user?.storeId;
     const categories = await Category.find({ storeId }).populate(
       'parent',
-      'name slug'
+      'name slug',
     );
     console.log('Fetched categories:', req.user?.storeId);
     res.status(200).json({ success: true, data: categories });

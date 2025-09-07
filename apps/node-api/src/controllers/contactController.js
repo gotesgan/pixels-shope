@@ -24,7 +24,9 @@ export const createContactPage = async (req, res) => {
     });
 
     if (!user?.stores.some((store) => store.id === storeId)) {
-      return res.status(400).json({ message: 'Invalid store access', success: false });
+      return res
+        .status(400)
+        .json({ message: 'Invalid store access', success: false });
     }
 
     // Upsert contact page

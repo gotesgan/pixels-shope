@@ -4,6 +4,7 @@ export default router;
 import {
   createProduct,
   deleteCategory,
+  deleteProduct,
   getAllProducts,
   getProductBySlug,
   createCategory,
@@ -23,7 +24,7 @@ router.delete(
   '/category/:id',
   authenticate,
   authorizeStoreAccess,
-  deleteCategory
+  deleteCategory,
 ); // create category or subcategory
 router.get('/category', storeIdentifctionMiddleware, getAllCategories);
 
@@ -33,14 +34,15 @@ router.post(
   authenticate,
   authorizeStoreAccess,
   upload.array('image'),
-  createProduct
+  createProduct,
 ); // Create Product
 router.get('/', storeIdentifctionMiddleware, getAllProducts);
+router.delete('/:id', authenticate, authorizeStoreAccess, deleteProduct);
 router.get('/admin', authenticate, authorizeStoreAccess, getAllProducts); // List All
 router.get('/:slug', storeIdentifctionMiddleware, getProductBySlug); // Get by slug
 router.get(
   '/category/:slug',
   storeIdentifctionMiddleware,
-  getProductsByCategory
+  getProductsByCategory,
 );
 router.get('/id/:id', storeIdentifctionMiddleware, getProductById);

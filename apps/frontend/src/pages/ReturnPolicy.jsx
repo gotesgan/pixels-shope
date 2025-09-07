@@ -1,8 +1,8 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import PolicyLayout from "../components/PolicyLayout";
-import { returnPolicyData } from "./PolicyData";
-import { fetchGraphQL } from "../lib/fetchGrap";
+'use client';
+import React, { useState, useEffect } from 'react';
+import PolicyLayout from '../components/PolicyLayout';
+import { returnPolicyData } from './PolicyData';
+import { fetchGraphQL } from '../lib/fetchGrap';
 
 const ReturnPolicy = () => {
   const [policyData, setPolicyData] = useState(returnPolicyData);
@@ -37,12 +37,12 @@ const ReturnPolicy = () => {
         if (data?.legalDocument) {
           setPolicyData(data.legalDocument);
         } else {
-          throw new Error("Return policy not found");
+          throw new Error('Return policy not found');
         }
 
         setLoading(false);
       } catch (err) {
-        setError(err.message || "An error occurred");
+        setError(err.message || 'An error occurred');
         setLoading(false);
       }
     };
@@ -85,21 +85,24 @@ const ReturnPolicy = () => {
             className="mb-4"
             dangerouslySetInnerHTML={{ __html: section.content }}
           />
-          {section.listItems && (
-            section.isOrdered ? (
+          {section.listItems &&
+            (section.isOrdered ? (
               <ol className="list-decimal pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ol>
             ) : (
               <ul className="list-disc pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ul>
-            )
-          )}
+            ))}
         </div>
       ))}
     </PolicyLayout>

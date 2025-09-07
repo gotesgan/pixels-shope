@@ -1,6 +1,6 @@
-import { prisma } from "../db/db.js";
-import mediaHandler from "../utils/mediahandler.js";
-import fs from "fs";
+import { prisma } from '../db/db.js';
+import mediaHandler from '../utils/mediahandler.js';
+import fs from 'fs';
 
 // Create Blog with Media
 export const createBlog = async (req, res) => {
@@ -31,15 +31,15 @@ export const createBlog = async (req, res) => {
     if (files) await cleanupTempFiles(files);
 
     res.status(201).json({
-      message: "Blog created successfully",
+      message: 'Blog created successfully',
       success: true,
       data: blog,
     });
   } catch (error) {
-    console.error("Error creating blog:", error);
+    console.error('Error creating blog:', error);
     if (files) await cleanupTempFiles(files).catch(console.error);
     res.status(500).json({
-      message: "Failed to create blog",
+      message: 'Failed to create blog',
       success: false,
       error: error.message,
     });
@@ -58,20 +58,20 @@ export const getBlog = async (req, res) => {
 
     if (!blog) {
       return res.status(404).json({
-        message: "Blog not found for this store",
+        message: 'Blog not found for this store',
         success: false,
       });
     }
 
     res.status(200).json({
-      message: "Blog fetched successfully",
+      message: 'Blog fetched successfully',
       success: true,
       data: blog,
     });
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    console.error('Error fetching blog:', error);
     res.status(500).json({
-      message: "Failed to fetch blog",
+      message: 'Failed to fetch blog',
       success: false,
       error: error.message,
     });
@@ -109,15 +109,15 @@ export const updateBlog = async (req, res) => {
     if (files) await cleanupTempFiles(files);
 
     res.status(200).json({
-      message: "Blog updated successfully",
+      message: 'Blog updated successfully',
       success: true,
       data: updatedBlog,
     });
   } catch (error) {
-    console.error("Error updating blog:", error);
+    console.error('Error updating blog:', error);
     if (files) await cleanupTempFiles(files).catch(console.error);
     res.status(500).json({
-      message: "Failed to update blog",
+      message: 'Failed to update blog',
       success: false,
       error: error.message,
     });
@@ -137,7 +137,7 @@ export const deleteBlog = async (req, res) => {
 
     if (!blog) {
       return res.status(404).json({
-        message: "Blog not found",
+        message: 'Blog not found',
         success: false,
       });
     }
@@ -151,13 +151,13 @@ export const deleteBlog = async (req, res) => {
     // from storage, but that would depend on your setup
 
     res.status(200).json({
-      message: "Blog deleted successfully",
+      message: 'Blog deleted successfully',
       success: true,
     });
   } catch (error) {
-    console.error("Error deleting blog:", error);
+    console.error('Error deleting blog:', error);
     res.status(500).json({
-      message: "Failed to delete blog",
+      message: 'Failed to delete blog',
       success: false,
       error: error.message,
     });
@@ -181,7 +181,7 @@ async function processBlogMedia(files, storeId) {
         });
       }
     } catch (error) {
-      console.error("Error processing media file:", error);
+      console.error('Error processing media file:', error);
     }
   }
 
@@ -197,7 +197,7 @@ async function cleanupTempFiles(files) {
       try {
         await fs.promises.unlink(file.path);
       } catch (error) {
-        console.error("Error deleting temp file:", error);
+        console.error('Error deleting temp file:', error);
       }
     }
   }
@@ -218,20 +218,20 @@ export const getBlogById = async (req, res) => {
 
     if (!blog) {
       return res.status(404).json({
-        message: "Blog not found",
+        message: 'Blog not found',
         success: false,
       });
     }
 
     res.status(200).json({
-      message: "Blog fetched successfully",
+      message: 'Blog fetched successfully',
       success: true,
       data: blog,
     });
   } catch (error) {
-    console.error("Error fetching blog by ID:", error);
+    console.error('Error fetching blog by ID:', error);
     res.status(500).json({
-      message: "Failed to fetch blog",
+      message: 'Failed to fetch blog',
       success: false,
       error: error.message,
     });

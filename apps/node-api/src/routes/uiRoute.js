@@ -43,31 +43,31 @@ router.post(
   '/legal-documents',
   authenticate,
   authorizeStoreAccess,
-  createLegalDocument
+  createLegalDocument,
 );
 router.get(
   '/legal-documents/:type',
   authenticate,
   authorizeStoreAccess,
-  getLegalDocument
+  getLegalDocument,
 );
 router.put(
   '/legal-documents/:id',
   authenticate,
   authorizeStoreAccess,
-  updateLegalDocument
+  updateLegalDocument,
 );
 router.delete(
   '/legal-documents/:id',
   authenticate,
   authorizeStoreAccess,
-  deleteLegalDocument
+  deleteLegalDocument,
 );
 router.get(
   '/legal-documents',
   authenticate,
   authorizeStoreAccess,
-  listLegalDocuments
+  listLegalDocuments,
 );
 
 // About Page Routes
@@ -77,7 +77,7 @@ router.post(
   upload.any(),
   authenticate,
   authorizeStoreAccess,
-  upsertAboutPage
+  upsertAboutPage,
 );
 router.get('/about-page', authenticate, authorizeStoreAccess, fetchAboutPage);
 
@@ -86,14 +86,14 @@ router.post(
   '/contact-page',
   authenticate,
   authorizeStoreAccess,
-  createContactPage
+  createContactPage,
 );
 router.get('/contact-page', storeIdentifctionMiddleware, fetchContactPage);
 router.put(
   '/contact-page',
   authenticate,
   authorizeStoreAccess,
-  updateContactPage
+  updateContactPage,
 );
 
 // Contact form Submission Routes
@@ -102,13 +102,13 @@ router.put(
   '/contact-submissions/:id/status',
   authenticate,
   authorizeStoreAccess,
-  updateSubmissionStatus
+  updateSubmissionStatus,
 );
 router.get(
   '/contact-submissions',
   authenticate,
   authorizeStoreAccess,
-  fetchSubmissions
+  fetchSubmissions,
 );
 
 // hero section routes
@@ -117,21 +117,21 @@ router.post(
   authenticate,
   authorizeStoreAccess,
   upload.single('file'),
-  CreateHeroSection
+  CreateHeroSection,
 );
 router.get(
   '/create-hero-section',
   authenticate,
   authorizeStoreAccess,
 
-  fetchHerosection
+  fetchHerosection,
 );
 router.delete(
   '/create-hero-section/:id',
   authenticate,
   authorizeStoreAccess,
 
-  deleteHeroSection
+  deleteHeroSection,
 );
 // Blog Routes
 router.post('/blogs', authenticate, authorizeStoreAccess, createBlog);

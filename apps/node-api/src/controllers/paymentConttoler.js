@@ -1,21 +1,21 @@
-import { prisma } from "../db/db.js";
-import uniqid from "uniqid";
-import createOrderItemFromProduct from "../utils/createOrderItemFromProduct.js";
+import { prisma } from '../db/db.js';
+import uniqid from 'uniqid';
+import createOrderItemFromProduct from '../utils/createOrderItemFromProduct.js';
 import {
   StandardCheckoutClient,
   Env,
   StandardCheckoutPayRequest,
-} from "pg-sdk-node";
-import { fileURLToPath } from "url";
-import path from "path";
+} from 'pg-sdk-node';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 // Setup __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Constants for success/failure pages
-const successPath = path.join(__dirname, "../../public/success.html");
-const failedPath = path.join(__dirname, "../../public/failed.html");
+const successPath = path.join(__dirname, '../../public/success.html');
+const failedPath = path.join(__dirname, '../../public/failed.html');
 
 // Use sandbox environment
 const env = Env.SANDBOX;
@@ -28,7 +28,7 @@ function getPhonePeClient(clientId, clientSecret, clientVersion, env) {
       clientId,
       clientSecret,
       clientVersion,
-      env
+      env,
     );
   }
   return phonePeClient;
@@ -39,7 +39,7 @@ const sendData = async (req, res) => {
   const storeId = req.store.id;
   const customerId = req.customer.id;
 
-  console.log("simplifiedItems", simplifiedItems);
+  console.log('simplifiedItems', simplifiedItems);
 
   try {
     const [store, phonePe] = await Promise.all([
@@ -50,7 +50,7 @@ const sendData = async (req, res) => {
     if (!store || !phonePe) {
       return res
         .status(404)
-        .json({ message: "Store or PhonePe config not found" });
+        .json({ message: 'Store or PhonePe config not found' });
     }
 
     const { clientId, clientSecret, clientVersion } = phonePe;
@@ -60,7 +60,7 @@ const sendData = async (req, res) => {
       clientId,
       clientSecret,
       clientVersion,
-      process.env.NODE_ENV
+      process.env.NODE_ENV,
     );
 
     const merchantTransactionId = `TX-${uniqid()}`;
@@ -82,8 +82,8 @@ const sendData = async (req, res) => {
     // ✅ Generate and create OrderItems array
     const orderItems = await Promise.all(
       simplifiedItems.map(({ _id, quantity }) =>
-        createOrderItemFromProduct(_id, quantity)
-      )
+        createOrderItemFromProduct(_id, quantity),
+      ),
     );
 
     // ✅ Create order + payment
@@ -93,8 +93,8 @@ const sendData = async (req, res) => {
           connect: { id: shippingAddressId },
         },
         totalAmount: Number(amount),
-        currency: "INR",
-        status: "PENDING",
+        currency: 'INR',
+        status: 'PENDING',
         store: {
           connect: { id: storeId },
         },
@@ -107,21 +107,21 @@ const sendData = async (req, res) => {
         payment: {
           create: {
             amount: Number(amount),
-            method: "PHONEPE",
-            status: "PENDING",
+            method: 'PHONEPE',
+            status: 'PENDING',
             transactionId: merchantTransactionId,
           },
         },
       },
     });
 
-    console.log("Order and payment initialized:", merchantTransactionId);
+    console.log('Order and payment initialized:', merchantTransactionId);
   } catch (error) {
-    console.error("Payment/Order setup failed:", error);
+    console.error('Payment/Order setup failed:', error);
     if (!res.headersSent) {
       res
         .status(500)
-        .json({ message: "Internal error during order/payment setup." });
+        .json({ message: 'Internal error during order/payment setup.' });
     }
   }
 };
@@ -145,7 +145,7 @@ const CheckData = async (req, res) => {
     });
 
     if (!payment || !payment.order) {
-      return res.status(404).json({ message: "Payment or order not found." });
+      return res.status(404).json({ message: 'Payment or order not found.' });
     }
 
     const phonePe = await prisma.phonePe.findUnique({
@@ -155,7 +155,7 @@ const CheckData = async (req, res) => {
     if (!phonePe) {
       return res
         .status(404)
-        .json({ message: "PhonePe config not found for store." });
+        .json({ message: 'PhonePe config not found for store.' });
     }
 
     // ✅ Use singleton client
@@ -163,7 +163,7 @@ const CheckData = async (req, res) => {
       phonePe.clientId,
       phonePe.clientSecret,
       phonePe.clientVersion,
-      env
+      env,
     );
 
     const statusResponse = await client.getOrderStatus(merchantTransactionId);
@@ -173,25 +173,25 @@ const CheckData = async (req, res) => {
     if (!paymentDetails) {
       return res
         .status(400)
-        .json({ message: "Payment details not found from PhonePe." });
+        .json({ message: 'Payment details not found from PhonePe.' });
     }
 
-    const paymentStatus = state === "COMPLETED" ? "COMPLETED" : "FAILED";
+    const paymentStatus = state === 'COMPLETED' ? 'COMPLETED' : 'FAILED';
 
     await prisma.payment.update({
       where: { id: payment.id },
       data: {
         status: paymentStatus,
         transactionId: paymentDetails.transactionId,
-        method: "PHONEPE",
+        method: 'PHONEPE',
         timestamp: new Date(paymentDetails.timestamp),
       },
     });
 
-    const filePath = paymentStatus === "COMPLETED" ? successPath : failedPath;
+    const filePath = paymentStatus === 'COMPLETED' ? successPath : failedPath;
     return res.sendFile(filePath);
   } catch (error) {
-    console.error("Error checking payment status:", error.message);
+    console.error('Error checking payment status:', error.message);
     return res.status(500).sendFile(failedPath);
   }
 };

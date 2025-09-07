@@ -1,143 +1,154 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Star, StarHalf } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Star, StarHalf } from 'lucide-react';
 
 // Star Rating Component
 const StarRating = ({ rating }) => {
-  const rating_value = parseFloat(rating) || 0
-  const fullStars = Math.floor(rating_value)
-  const hasHalfStar = rating_value % 1 !== 0
+  const rating_value = parseFloat(rating) || 0;
+  const fullStars = Math.floor(rating_value);
+  const hasHalfStar = rating_value % 1 !== 0;
 
   return (
     <div className="flex items-center">
       {[...Array(fullStars)].map((_, i) => (
         <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
       ))}
-      {hasHalfStar && <StarHalf className="w-4 h-4 fill-amber-400 text-amber-400" />}
+      {hasHalfStar && (
+        <StarHalf className="w-4 h-4 fill-amber-400 text-amber-400" />
+      )}
       {[...Array(5 - fullStars - (hasHalfStar ? 1 : 0))].map((_, i) => (
-        <Star key={i + fullStars + (hasHalfStar ? 1 : 0)} className="w-4 h-4 text-gray-300" />
+        <Star
+          key={i + fullStars + (hasHalfStar ? 1 : 0)}
+          className="w-4 h-4 text-gray-300"
+        />
       ))}
-      <span className="ml-1 text-sm text-gray-500">({rating_value.toFixed(1)})</span>
+      <span className="ml-1 text-sm text-gray-500">
+        ({rating_value.toFixed(1)})
+      </span>
     </div>
-  )
-}
+  );
+};
 
 // Helper function to calculate discount percentage
 const getDiscountPercentage = (originalPrice, currentPrice) => {
-  const discount = ((originalPrice - currentPrice) / originalPrice) * 100
-  return Math.round(discount)
-}
+  const discount = ((originalPrice - currentPrice) / originalPrice) * 100;
+  return Math.round(discount);
+};
 
 // Group products by category
 const groupProductsByCategory = (products) => {
   return products.reduce((acc, product) => {
-    const categoryName = product.category?.name || "Uncategorized"
+    const categoryName = product.category?.name || 'Uncategorized';
     if (!acc[categoryName]) {
-      acc[categoryName] = []
+      acc[categoryName] = [];
     }
-    acc[categoryName].push(product)
-    return acc
-  }, {})
-}
+    acc[categoryName].push(product);
+    return acc;
+  }, {});
+};
 
 export default function DynamicProductsSection() {
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Extract category from URL if present
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search)
-    const categoryParam = searchParams.get("category")
+    const searchParams = new URLSearchParams(window.location.search);
+    const categoryParam = searchParams.get('category');
     if (categoryParam) {
-      setSelectedCategory(categoryParam)
+      setSelectedCategory(categoryParam);
     }
-  }, [])
+  }, []);
 
   // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
-        const host = window.location.hostname
-        const response = await fetch(`http://${host}:3001/api/v1/products/`)
+        const host = window.location.hostname;
+        const response = await fetch(`http://${host}:3001/api/v1/products/`);
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json()
+        const data = await response.json();
         if (data.success && Array.isArray(data.data)) {
-          setProducts(data.data)
+          setProducts(data.data);
         } else {
-          throw new Error("Invalid data format")
+          throw new Error('Invalid data format');
         }
       } catch (err) {
-        console.error("Error fetching products:", err)
-        setError(err.message)
+        console.error('Error fetching products:', err);
+        setError(err.message);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
 
   // Handle category selection
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category)
+    setSelectedCategory(category);
     // Update URL without page reload
-    const url = new URL(window.location)
-    if (category === "All") {
-      url.searchParams.delete("category")
+    const url = new URL(window.location);
+    if (category === 'All') {
+      url.searchParams.delete('category');
     } else {
-      url.searchParams.set("category", category)
+      url.searchParams.set('category', category);
     }
-    window.history.pushState({}, "", url)
-  }
+    window.history.pushState({}, '', url);
+  };
 
   // Handle product click
   const handleProductClick = (slug) => {
-    window.location.href = `/product/${slug}`
-  }
+    window.location.href = `/product/${slug}`;
+  };
 
   if (loading) {
     return (
       <div className="py-10 px-4 flex justify-center items-center min-h-[300px]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
       </div>
-    )
+    );
   }
 
   if (error) {
     return (
       <div className="py-10 px-4 text-center">
         <div className="max-w-6xl mx-auto bg-red-50 p-4 rounded-lg border border-red-200">
-          <h2 className="text-xl font-semibold text-red-700">Error loading products</h2>
+          <h2 className="text-xl font-semibold text-red-700">
+            Error loading products
+          </h2>
           <p className="text-red-600 mt-2">{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
           >
             Try Again
           </button>
         </div>
       </div>
-    )
+    );
   }
 
-  const groupedProducts = groupProductsByCategory(products)
-  const categories = Object.keys(groupedProducts)
+  const groupedProducts = groupProductsByCategory(products);
+  const categories = Object.keys(groupedProducts);
 
   if (products.length === 0) {
     return (
       <div className="py-10 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-xl font-semibold">No products found</h2>
-          <p className="text-gray-600 mt-2">Please check back later for new products.</p>
+          <p className="text-gray-600 mt-2">
+            Please check back later for new products.
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -173,9 +184,13 @@ export default function DynamicProductsSection() {
         </div> */}
 
         {/* Display products by category */}
-        {selectedCategory === "All" ? (
+        {selectedCategory === 'All' ? (
           categories.map((category) => (
-            <div key={category} id={category.toLowerCase().replace(/\s+/g, "-")} className="mb-12">
+            <div
+              key={category}
+              id={category.toLowerCase().replace(/\s+/g, '-')}
+              className="mb-12"
+            >
               <h3 className="text-2xl font-semibold mb-4">{category}</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center sm:justify-items-stretch">
                 {groupedProducts[category].map((product) => (
@@ -204,14 +219,14 @@ export default function DynamicProductsSection() {
         )}
       </div>
     </section>
-  )
+  );
 }
 
 // Product Card Component
 function ProductCard({ product, onViewDetails }) {
   const imageUrl = product?.image
     ? `https://media.pixelperfects.in/${product.image}`
-    : "/placeholder.svg";
+    : '/placeholder.svg';
 
   return (
     <div onClick={onViewDetails} className="cursor-pointer w-full">
@@ -241,7 +256,9 @@ function ProductCard({ product, onViewDetails }) {
         {/* Content Section */}
         <div className="flex flex-col flex-1">
           <div className="px-3 pt-3 pb-1">
-            <h3 className="text-base font-semibold line-clamp-2">{product.name}</h3>
+            <h3 className="text-base font-semibold line-clamp-2">
+              {product.name}
+            </h3>
           </div>
 
           <div className="px-3 pt-0 pb-1">
@@ -250,13 +267,19 @@ function ProductCard({ product, onViewDetails }) {
 
           <div className="px-3 pb-3 pt-1 mt-auto flex flex-col">
             <div className="flex items-center justify-start mb-2 w-full">
-              <p className="font-medium text-green-600 text-base">₹{product.price?.toFixed(2)}</p>
+              <p className="font-medium text-green-600 text-base">
+                ₹{product.price?.toFixed(2)}
+              </p>
               {product.originalPrice > product.price && (
-                <p className="text-sm text-gray-500 line-through ml-2">₹{product.originalPrice?.toFixed(2)}</p>
+                <p className="text-sm text-gray-500 line-through ml-2">
+                  ₹{product.originalPrice?.toFixed(2)}
+                </p>
               )}
             </div>
             {product.stock <= 5 && product.stock > 0 && (
-              <p className="text-xs text-orange-500">Only {product.stock} left in stock</p>
+              <p className="text-xs text-orange-500">
+                Only {product.stock} left in stock
+              </p>
             )}
             {product.stock === 0 && (
               <p className="text-xs text-red-500">Out of stock</p>
@@ -265,5 +288,5 @@ function ProductCard({ product, onViewDetails }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

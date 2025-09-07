@@ -1,87 +1,95 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Search, Filter, Eye, Package, Truck } from "lucide-react"
-import Navbar from "../components/navbar"
-import Sidebar from "../components/sidebar"
+import { useState } from 'react';
+import { Search, Filter, Eye, Package, Truck } from 'lucide-react';
+import Navbar from '../components/navbar';
+import Sidebar from '../components/sidebar';
 
 export default function OrdersPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const [orders] = useState([
     {
-      id: "ORD-001",
-      customer: "John Doe",
-      email: "john@example.com",
+      id: 'ORD-001',
+      customer: 'John Doe',
+      email: 'john@example.com',
       total: 2999,
-      status: "Pending",
-      date: "2024-01-15",
+      status: 'Pending',
+      date: '2024-01-15',
       items: 2,
     },
     {
-      id: "ORD-002",
-      customer: "Jane Smith",
-      email: "jane@example.com",
+      id: 'ORD-002',
+      customer: 'Jane Smith',
+      email: 'jane@example.com',
       total: 1599,
-      status: "Processing",
-      date: "2024-01-14",
+      status: 'Processing',
+      date: '2024-01-14',
       items: 1,
     },
     {
-      id: "ORD-003",
-      customer: "Mike Johnson",
-      email: "mike@example.com",
+      id: 'ORD-003',
+      customer: 'Mike Johnson',
+      email: 'mike@example.com',
       total: 4299,
-      status: "Shipped",
-      date: "2024-01-13",
+      status: 'Shipped',
+      date: '2024-01-13',
       items: 3,
     },
     {
-      id: "ORD-004",
-      customer: "Sarah Wilson",
-      email: "sarah@example.com",
+      id: 'ORD-004',
+      customer: 'Sarah Wilson',
+      email: 'sarah@example.com',
       total: 899,
-      status: "Delivered",
-      date: "2024-01-12",
+      status: 'Delivered',
+      date: '2024-01-12',
       items: 1,
     },
-  ])
+  ]);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Pending":
-        return "bg-yellow-100 text-yellow-800"
-      case "Processing":
-        return "bg-blue-100 text-blue-800"
-      case "Shipped":
-        return "bg-purple-100 text-purple-800"
-      case "Delivered":
-        return "bg-green-100 text-green-800"
+      case 'Pending':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'Processing':
+        return 'bg-blue-100 text-blue-800';
+      case 'Shipped':
+        return 'bg-purple-100 text-purple-800';
+      case 'Delivered':
+        return 'bg-green-100 text-green-800';
       default:
-        return "bg-gray-100 text-gray-800"
+        return 'bg-gray-100 text-gray-800';
     }
-  }
+  };
 
   const filteredOrders = orders.filter(
     (order) =>
       order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.customer.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.email.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Sidebar isOpen={sidebarOpen} />
-      <Navbar toggleSidebar={toggleSidebar} storeName="My Store" sidebarOpen={sidebarOpen} />
-      <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-16"} pt-16`}>
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        storeName="My Store"
+        sidebarOpen={sidebarOpen}
+      />
+      <main
+        className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'} pt-16`}
+      >
         <div className="p-6">
           <div className="max-w-7xl mx-auto">
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-8">Orders Management</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                Orders Management
+              </h1>
               <p className="text-gray-600">Track and manage customer orders</p>
             </div>
             <div className="space-y-6 mt-8">
@@ -156,16 +164,28 @@ export default function OrdersPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredOrders.map((order) => (
                       <tr key={order.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {order.id}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div>
-                            <div className="text-sm font-medium text-gray-900">{order.customer}</div>
-                            <div className="text-sm text-gray-500">{order.email}</div>
+                            <div className="text-sm font-medium text-gray-900">
+                              {order.customer}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {order.email}
+                            </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.date}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.items}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{order.total}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {order.date}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {order.items}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          ₹{order.total}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
                             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}
@@ -196,5 +216,5 @@ export default function OrdersPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

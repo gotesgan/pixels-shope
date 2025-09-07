@@ -1,30 +1,30 @@
 // storeIdentificationMiddleware.js
-import { prisma } from "../db/db.js";
+import { prisma } from '../db/db.js';
 
 // Allowed subdomains (without typo)
 const allowedSubdomains = [
-  "admin.bizonance.com",
-  "account.bizonance.com",
-  "http://souled-store.localtest.me",
+  'admin.bizonance.com',
+  'account.bizonance.com',
+  'http://souled-store.localtest.me',
 ];
 
 const storeIdentificationMiddleware = async (req, res, next) => {
   const host = req.headers.host
-    ? req.headers.host.split(":")[0].toLowerCase()
+    ? req.headers.host.split(':')[0].toLowerCase()
     : null;
 
   // Allow localhost (dev mode)
   if (
-    host === "localhost" ||
-    host === "localhost:3000" ||
-    host === "souled-store.localtest.me:5174"
+    host === 'localhost' ||
+    host === 'localhost:3000' ||
+    host === 'souled-store.localtest.me:5174'
   ) {
     return next();
   }
 
   try {
     if (!host) {
-      return res.status(400).json({ error: "Host header missing" });
+      return res.status(400).json({ error: 'Host header missing' });
     }
 
     // Allow specific subdomains
@@ -38,14 +38,14 @@ const storeIdentificationMiddleware = async (req, res, next) => {
     });
 
     if (!store) {
-      return res.status(404).json({ error: "Store not found for this domain" });
+      return res.status(404).json({ error: 'Store not found for this domain' });
     }
-    console.log("Store found:", store);
+    console.log('Store found:', store);
     req.store = store;
     next();
   } catch (error) {
-    console.error("Error in storeIdentificationMiddleware:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Error in storeIdentificationMiddleware:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 

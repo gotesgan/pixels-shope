@@ -1,4 +1,4 @@
-import { prisma } from "../db/db.js";
+import { prisma } from '../db/db.js';
 // Create Legal Document with sections
 export const createLegalDocument = async (req, res) => {
   const userId = req.user.userid;
@@ -7,9 +7,9 @@ export const createLegalDocument = async (req, res) => {
 
   try {
     // 1. Validate document type
-    if (!["PRIVACY", "TERMS", "RETURN"].includes(type)) {
+    if (!['PRIVACY', 'TERMS', 'RETURN'].includes(type)) {
       return res.status(400).json({
-        message: "Invalid document type",
+        message: 'Invalid document type',
         success: false,
       });
     }
@@ -22,21 +22,21 @@ export const createLegalDocument = async (req, res) => {
 
     if (!user?.stores.some((store) => store.id === storeId)) {
       return res.status(403).json({
-        message: "Invalid store access",
+        message: 'Invalid store access',
         success: false,
       });
     }
 
     // 3. Filter and validate sections
     const validSections = (sections || []).filter(
-      (section) => section.heading && section.content
+      (section) => section.heading && section.content,
     );
 
     // Optional: Return an error if no valid sections provided
     if (validSections.length === 0) {
       return res.status(400).json({
         message:
-          "At least one valid section with heading and content is required",
+          'At least one valid section with heading and content is required',
         success: false,
       });
     }
@@ -72,14 +72,14 @@ export const createLegalDocument = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: "Legal document created successfully",
+      message: 'Legal document created successfully',
       success: true,
       data: createdDocument,
     });
   } catch (error) {
-    console.error("Error in createLegalDocument:", error);
+    console.error('Error in createLegalDocument:', error);
     return res.status(500).json({
-      message: "Failed to create legal document",
+      message: 'Failed to create legal document',
       success: false,
     });
   }
@@ -103,20 +103,20 @@ export const getLegalDocument = async (req, res) => {
 
     if (!document) {
       return res.status(404).json({
-        message: "Document not found",
+        message: 'Document not found',
         success: false,
       });
     }
 
     res.status(200).json({
-      message: "Document fetched successfully",
+      message: 'Document fetched successfully',
       success: true,
       data: document,
     });
   } catch (error) {
-    console.error("Error in getLegalDocument:", error);
+    console.error('Error in getLegalDocument:', error);
     res.status(500).json({
-      message: "Failed to fetch document",
+      message: 'Failed to fetch document',
       success: false,
     });
   }
@@ -140,7 +140,7 @@ export const updateLegalDocument = async (req, res) => {
 
     if (!existingDoc) {
       return res.status(404).json({
-        message: "Document not found",
+        message: 'Document not found',
         success: false,
       });
     }
@@ -181,14 +181,14 @@ export const updateLegalDocument = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Document updated successfully",
+      message: 'Document updated successfully',
       success: true,
       data: updatedDocument,
     });
   } catch (error) {
-    console.error("Error in updateLegalDocument:", error);
+    console.error('Error in updateLegalDocument:', error);
     res.status(500).json({
-      message: "Failed to update document",
+      message: 'Failed to update document',
       success: false,
     });
   }
@@ -211,7 +211,7 @@ export const deleteLegalDocument = async (req, res) => {
 
     if (!document) {
       return res.status(404).json({
-        message: "Document not found",
+        message: 'Document not found',
         success: false,
       });
     }
@@ -222,13 +222,13 @@ export const deleteLegalDocument = async (req, res) => {
     ]);
 
     res.status(200).json({
-      message: "Document deleted successfully",
+      message: 'Document deleted successfully',
       success: true,
     });
   } catch (error) {
-    console.error("Error in deleteLegalDocument:", error);
+    console.error('Error in deleteLegalDocument:', error);
     res.status(500).json({
-      message: "Failed to delete document",
+      message: 'Failed to delete document',
       success: false,
     });
   }
@@ -242,22 +242,20 @@ export const listLegalDocuments = async (req, res) => {
     const documents = await prisma.legalDocument.findMany({
       where: { storeId },
       include: {
-        sections: {
-        
-        },
+        sections: {},
       },
-      orderBy: { type: "asc" },
+      orderBy: { type: 'asc' },
     });
 
     res.status(200).json({
-      message: "Documents fetched successfully",
+      message: 'Documents fetched successfully',
       success: true,
       data: documents,
     });
   } catch (error) {
-    console.error("Error in listLegalDocuments:", error);
+    console.error('Error in listLegalDocuments:', error);
     res.status(500).json({
-      message: "Failed to fetch documents",
+      message: 'Failed to fetch documents',
       success: false,
     });
   }

@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import Product from "../models/Product.js"; // adjust the path accordingly
+import mongoose from 'mongoose';
+import Product from '../models/Product.js'; // adjust the path accordingly
 
 /**
  * Creates an OrderItem-like object from a product ID and quantity.
@@ -11,16 +11,16 @@ import Product from "../models/Product.js"; // adjust the path accordingly
 const createOrderItemFromProduct = async (
   productId,
   quantity,
-  variant = null
+  variant = null,
 ) => {
   if (!mongoose.Types.ObjectId.isValid(productId)) {
-    throw new Error("Invalid productId");
+    throw new Error('Invalid productId');
   }
 
   const product = await Product.findById(productId).lean();
 
   if (!product) {
-    throw new Error("Product not found");
+    throw new Error('Product not found');
   }
 
   return {

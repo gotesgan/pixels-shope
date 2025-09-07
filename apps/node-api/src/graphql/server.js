@@ -1,10 +1,10 @@
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import express from "express";
-import resolvers from "./resolvers/index.js";
-import storeIdentifctionMiddleware from "../middleware/storeIdentifctionMiddleware.js";
-import { schema as typeDefs } from "./schema.js";
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import express from 'express';
+import resolvers from './resolvers/index.js';
+import storeIdentifctionMiddleware from '../middleware/storeIdentifctionMiddleware.js';
+import { schema as typeDefs } from './schema.js';
 
 export async function setupGraphQL(app) {
   const executableSchema = makeExecutableSchema({
@@ -16,11 +16,11 @@ export async function setupGraphQL(app) {
   await server.start();
 
   app.use(
-    "/graphql",
+    '/graphql',
     express.json(),
     storeIdentifctionMiddleware, // This must set req.storeId
     expressMiddleware(server, {
-    context: async ({ req }) => ({ req }) // Pass to resolvers
-    })
+      context: async ({ req }) => ({ req }), // Pass to resolvers
+    }),
   );
 }

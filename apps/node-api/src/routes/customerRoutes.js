@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import {
   registerCustomer,
   loginCustomer,
@@ -6,10 +6,10 @@ import {
   createShippingAddress,
   updateShippingAddress,
   deleteShippingAddress,
-} from "../controllers/customerAuthController.js";
-import fetchOrder from "../controllers/orderController.js";
-import storeIdentifctionMiddleware from "../middleware/storeIdentifctionMiddleware.js";
-import { verifyCustomer } from "../middleware/authtenicateCustomer.js";
+} from '../controllers/customerAuthController.js';
+import fetchOrder from '../controllers/orderController.js';
+import storeIdentifctionMiddleware from '../middleware/storeIdentifctionMiddleware.js';
+import { verifyCustomer } from '../middleware/authtenicateCustomer.js';
 
 const router = express.Router();
 
@@ -17,15 +17,15 @@ const router = express.Router();
 router.use(storeIdentifctionMiddleware);
 
 // Public Routes
-router.post("/register", registerCustomer);
-router.post("/login", loginCustomer);
+router.post('/register', registerCustomer);
+router.post('/login', loginCustomer);
 
 // ✅ Protected routes (customer must be authenticated)
-router.post("/Shipping", verifyCustomer, createShippingAddress);
-router.get("/Shipping", verifyCustomer, getShippingAddresses);
-router.put("/Shipping/:id", verifyCustomer, updateShippingAddress);
-router.delete("/Shipping/:id", verifyCustomer, deleteShippingAddress);
+router.post('/Shipping', verifyCustomer, createShippingAddress);
+router.get('/Shipping', verifyCustomer, getShippingAddresses);
+router.put('/Shipping/:id', verifyCustomer, updateShippingAddress);
+router.delete('/Shipping/:id', verifyCustomer, deleteShippingAddress);
 
-router.get("/order", verifyCustomer, fetchOrder);
+router.get('/order', verifyCustomer, fetchOrder);
 
 export default router;

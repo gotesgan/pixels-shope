@@ -1,53 +1,52 @@
-
 /**
  * Client
-**/
+ **/
 
 import * as runtime from './runtime/library.js';
-import $Types = runtime.Types // general types
-import $Public = runtime.Types.Public
-import $Utils = runtime.Types.Utils
-import $Extensions = runtime.Types.Extensions
-import $Result = runtime.Types.Result
+import $Types = runtime.Types; // general types
+import $Public = runtime.Types.Public;
+import $Utils = runtime.Types.Utils;
+import $Extensions = runtime.Types.Extensions;
+import $Result = runtime.Types.Result;
 
-export type PrismaPromise<T> = $Public.PrismaPromise<T>
-
+export type PrismaPromise<T> = $Public.PrismaPromise<T>;
 
 /**
  * Model User
- * 
+ *
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>;
 /**
  * Model Store
- * 
+ *
  */
-export type Store = $Result.DefaultSelection<Prisma.$StorePayload>
+export type Store = $Result.DefaultSelection<Prisma.$StorePayload>;
 /**
  * Model Category
- * 
+ *
  */
-export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
+export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>;
 /**
  * Model Product
- * 
+ *
  */
-export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
+export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>;
 /**
  * Model Review
- * 
+ *
  */
-export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
+export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>;
 /**
  * Model Customer
- * 
+ *
  */
-export type Customer = $Result.DefaultSelection<Prisma.$CustomerPayload>
+export type Customer = $Result.DefaultSelection<Prisma.$CustomerPayload>;
 /**
  * Model PhonePePayment
- * 
+ *
  */
-export type PhonePePayment = $Result.DefaultSelection<Prisma.$PhonePePaymentPayload>
+export type PhonePePayment =
+  $Result.DefaultSelection<Prisma.$PhonePePaymentPayload>;
 
 /**
  * ##  Prisma Client ʲˢ
@@ -65,12 +64,16 @@ export type PhonePePayment = $Result.DefaultSelection<Prisma.$PhonePePaymentPayl
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
-  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
+  U = 'log' extends keyof ClientOptions
+    ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
+      ? Prisma.GetEvents<ClientOptions['log']>
+      : never
+    : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
 > {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] };
 
-    /**
+  /**
    * ##  Prisma Client ʲˢ
    *
    * Type-safe database client for TypeScript & Node.js
@@ -85,8 +88,15 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+  constructor(
+    optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>,
+  );
+  $on<V extends U>(
+    eventType: V,
+    callback: (
+      event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent,
+    ) => void,
+  ): PrismaClient;
 
   /**
    * Connect with the database
@@ -103,9 +113,9 @@ export class PrismaClient<
    * @deprecated since 4.16.0. For new code, prefer client extensions instead.
    * @see https://pris.ly/d/extensions
    */
-  $use(cb: Prisma.Middleware): void
+  $use(cb: Prisma.Middleware): void;
 
-/**
+  /**
    * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
@@ -114,7 +124,10 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+  $executeRaw<T = unknown>(
+    query: TemplateStringsArray | Prisma.Sql,
+    ...values: any[]
+  ): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -126,7 +139,10 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(
+    query: string,
+    ...values: any[]
+  ): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -137,7 +153,10 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+  $queryRaw<T = unknown>(
+    query: TemplateStringsArray | Prisma.Sql,
+    ...values: any[]
+  ): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -149,8 +168,10 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
-
+  $queryRawUnsafe<T = unknown>(
+    query: string,
+    ...values: any[]
+  ): Prisma.PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -162,165 +183,181 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(
+    arg: [...P],
+    options?: { isolationLevel?: Prisma.TransactionIsolationLevel },
+  ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>;
 
-  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+  $transaction<R>(
+    fn: (
+      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>,
+    ) => $Utils.JsPromise<R>,
+    options?: {
+      maxWait?: number;
+      timeout?: number;
+      isolationLevel?: Prisma.TransactionIsolationLevel;
+    },
+  ): $Utils.JsPromise<R>;
 
+  $extends: $Extensions.ExtendsHook<
+    'extends',
+    Prisma.TypeMapCb<ClientOptions>,
+    ExtArgs,
+    $Utils.Call<
+      Prisma.TypeMapCb<ClientOptions>,
+      {
+        extArgs: ExtArgs;
+      }
+    >
+  >;
 
-  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
-    extArgs: ExtArgs
-  }>>
-
-      /**
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
+   * ```
+   */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.store`: Exposes CRUD operations for the **Store** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Stores
-    * const stores = await prisma.store.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Stores
+   * const stores = await prisma.store.findMany()
+   * ```
+   */
   get store(): Prisma.StoreDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Categories
-    * const categories = await prisma.category.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Categories
+   * const categories = await prisma.category.findMany()
+   * ```
+   */
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.product`: Exposes CRUD operations for the **Product** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Products
-    * const products = await prisma.product.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Products
+   * const products = await prisma.product.findMany()
+   * ```
+   */
   get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.review`: Exposes CRUD operations for the **Review** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Reviews
-    * const reviews = await prisma.review.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Reviews
+   * const reviews = await prisma.review.findMany()
+   * ```
+   */
   get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.customer`: Exposes CRUD operations for the **Customer** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Customers
-    * const customers = await prisma.customer.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Customers
+   * const customers = await prisma.customer.findMany()
+   * ```
+   */
   get customer(): Prisma.CustomerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.phonePePayment`: Exposes CRUD operations for the **PhonePePayment** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PhonePePayments
-    * const phonePePayments = await prisma.phonePePayment.findMany()
-    * ```
-    */
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more PhonePePayments
+   * const phonePePayments = await prisma.phonePePayment.findMany()
+   * ```
+   */
   get phonePePayment(): Prisma.PhonePePaymentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
-  export import DMMF = runtime.DMMF
+  export import DMMF = runtime.DMMF;
 
-  export type PrismaPromise<T> = $Public.PrismaPromise<T>
+  export type PrismaPromise<T> = $Public.PrismaPromise<T>;
 
   /**
    * Validator
    */
-  export import validator = runtime.Public.validator
+  export import validator = runtime.Public.validator;
 
   /**
    * Prisma Errors
    */
-  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
-  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
-  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
-  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
-  export import PrismaClientValidationError = runtime.PrismaClientValidationError
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError;
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError;
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError;
 
   /**
    * Re-export of sql-template-tag
    */
-  export import sql = runtime.sqltag
-  export import empty = runtime.empty
-  export import join = runtime.join
-  export import raw = runtime.raw
-  export import Sql = runtime.Sql
-
-
+  export import sql = runtime.sqltag;
+  export import empty = runtime.empty;
+  export import join = runtime.join;
+  export import raw = runtime.raw;
+  export import Sql = runtime.Sql;
 
   /**
    * Decimal.js
    */
-  export import Decimal = runtime.Decimal
+  export import Decimal = runtime.Decimal;
 
-  export type DecimalJsLike = runtime.DecimalJsLike
+  export type DecimalJsLike = runtime.DecimalJsLike;
 
   /**
    * Metrics
    */
-  export type Metrics = runtime.Metrics
-  export type Metric<T> = runtime.Metric<T>
-  export type MetricHistogram = runtime.MetricHistogram
-  export type MetricHistogramBucket = runtime.MetricHistogramBucket
+  export type Metrics = runtime.Metrics;
+  export type Metric<T> = runtime.Metric<T>;
+  export type MetricHistogram = runtime.MetricHistogram;
+  export type MetricHistogramBucket = runtime.MetricHistogramBucket;
 
   /**
-  * Extensions
-  */
-  export import Extension = $Extensions.UserArgs
-  export import getExtensionContext = runtime.Extensions.getExtensionContext
-  export import Args = $Public.Args
-  export import Payload = $Public.Payload
-  export import Result = $Public.Result
-  export import Exact = $Public.Exact
+   * Extensions
+   */
+  export import Extension = $Extensions.UserArgs;
+  export import getExtensionContext = runtime.Extensions.getExtensionContext;
+  export import Args = $Public.Args;
+  export import Payload = $Public.Payload;
+  export import Result = $Public.Result;
+  export import Exact = $Public.Exact;
 
   /**
    * Prisma Client JS version: 6.7.0
    * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
-    client: string
-  }
+    client: string;
+  };
 
-  export const prismaVersion: PrismaVersion
+  export const prismaVersion: PrismaVersion;
 
   /**
    * Utility Types
    */
 
-
-  export import JsonObject = runtime.JsonObject
-  export import JsonArray = runtime.JsonArray
-  export import JsonValue = runtime.JsonValue
-  export import InputJsonObject = runtime.InputJsonObject
-  export import InputJsonArray = runtime.InputJsonArray
-  export import InputJsonValue = runtime.InputJsonValue
+  export import JsonObject = runtime.JsonObject;
+  export import JsonArray = runtime.JsonArray;
+  export import JsonValue = runtime.JsonValue;
+  export import InputJsonObject = runtime.InputJsonObject;
+  export import InputJsonArray = runtime.InputJsonArray;
+  export import InputJsonValue = runtime.InputJsonValue;
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -329,39 +366,39 @@ export namespace Prisma {
    */
   namespace NullTypes {
     /**
-    * Type of `Prisma.DbNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.DbNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class DbNull {
-      private DbNull: never
-      private constructor()
+      private DbNull: never;
+      private constructor();
     }
 
     /**
-    * Type of `Prisma.JsonNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.JsonNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class JsonNull {
-      private JsonNull: never
-      private constructor()
+      private JsonNull: never;
+      private constructor();
     }
 
     /**
-    * Type of `Prisma.AnyNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.AnyNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class AnyNull {
-      private AnyNull: never
-      private constructor()
+      private AnyNull: never;
+      private constructor();
     }
   }
 
@@ -370,61 +407,63 @@ export namespace Prisma {
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const DbNull: NullTypes.DbNull
+  export const DbNull: NullTypes.DbNull;
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const JsonNull: NullTypes.JsonNull
+  export const JsonNull: NullTypes.JsonNull;
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const AnyNull: NullTypes.AnyNull
+  export const AnyNull: NullTypes.AnyNull;
 
   type SelectAndInclude = {
-    select: any
-    include: any
-  }
+    select: any;
+    include: any;
+  };
 
   type SelectAndOmit = {
-    select: any
-    omit: any
-  }
+    select: any;
+    omit: any;
+  };
 
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+  export type PromiseType<T extends PromiseLike<any>> =
+    T extends PromiseLike<infer U> ? U : T;
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+  export type PromiseReturnType<
+    T extends (...args: any) => $Utils.JsPromise<any>,
+  > = PromiseType<ReturnType<T>>;
 
   /**
    * From T, pick a set of properties whose keys are in the union K
    */
   type Prisma__Pick<T, K extends keyof T> = {
-      [P in K]: T[P];
+    [P in K]: T[P];
   };
-
 
   export type Enumerable<T> = T | Array<T>;
 
   export type RequiredKeys<T> = {
-    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
-  }[keyof T]
+    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K;
+  }[keyof T];
 
   export type TruthyKeys<T> = keyof {
-    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
-  }
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K;
+  };
 
-  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
+  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>;
 
   /**
    * Subset
@@ -440,22 +479,20 @@ export namespace Prisma {
    * Additionally, it validates, if both select and include are present. If the case, it errors.
    */
   export type SelectSubset<T, U> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    (T extends SelectAndInclude
-      ? 'Please either choose `select` or `include`.'
-      : T extends SelectAndOmit
-        ? 'Please either choose `select` or `omit`.'
-        : {})
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  } & (T extends SelectAndInclude
+    ? 'Please either choose `select` or `include`.'
+    : T extends SelectAndOmit
+      ? 'Please either choose `select` or `omit`.'
+      : {});
 
   /**
    * Subset + Intersection
    * @desc From `T` pick properties that exist in `U` and intersect `K`
    */
   export type SubsetIntersection<T, U, K> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    K
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  } & K;
 
   type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
@@ -463,33 +500,32 @@ export namespace Prisma {
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> =
-    T extends object ?
-    U extends object ?
-      (Without<T, U> & U) | (Without<U, T> & T)
-    : U : T
-
+  type XOR<T, U> = T extends object
+    ? U extends object
+      ? (Without<T, U> & U) | (Without<U, T> & T)
+      : U
+    : T;
 
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> = T extends Array<any>
-  ? False
-  : T extends Date
-  ? False
-  : T extends Uint8Array
-  ? False
-  : T extends BigInt
-  ? False
-  : T extends object
-  ? True
-  : False
-
+  type IsObject<T extends any> =
+    T extends Array<any>
+      ? False
+      : T extends Date
+        ? False
+        : T extends Uint8Array
+          ? False
+          : T extends BigInt
+            ? False
+            : T extends object
+              ? True
+              : False;
 
   /**
    * If it's T[], return T
    */
-  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T;
 
   /**
    * From ts-toolbelt
@@ -498,61 +534,74 @@ export namespace Prisma {
   type __Either<O extends object, K extends Key> = Omit<O, K> &
     {
       // Merge all but K
-      [P in K]: Prisma__Pick<O, P & keyof O> // With K possibilities
-    }[K]
+      [P in K]: Prisma__Pick<O, P & keyof O>; // With K possibilities
+    }[K];
 
-  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>
+  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>;
 
-  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<
+    __Either<O, K>
+  >;
 
-  type _Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean
-  > = {
-    1: EitherStrict<O, K>
-    0: EitherLoose<O, K>
-  }[strict]
+  type _Either<O extends object, K extends Key, strict extends Boolean> = {
+    1: EitherStrict<O, K>;
+    0: EitherLoose<O, K>;
+  }[strict];
 
   type Either<
     O extends object,
     K extends Key,
-    strict extends Boolean = 1
-  > = O extends unknown ? _Either<O, K, strict> : never
+    strict extends Boolean = 1,
+  > = O extends unknown ? _Either<O, K, strict> : never;
 
-  export type Union = any
+  export type Union = any;
 
   type PatchUndefined<O extends object, O1 extends object> = {
-    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K]
-  } & {}
+    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K];
+  } & {};
 
   /** Helper Types for "Merge" **/
   export type IntersectOf<U extends Union> = (
     U extends unknown ? (k: U) => void : never
   ) extends (k: infer I) => void
     ? I
-    : never
+    : never;
 
   export type Overwrite<O extends object, O1 extends object> = {
-      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
   } & {};
 
-  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
-      [K in keyof U]-?: At<U, K>;
-  }>>;
+  type _Merge<U extends object> = IntersectOf<
+    Overwrite<
+      U,
+      {
+        [K in keyof U]-?: At<U, K>;
+      }
+    >
+  >;
 
   type Key = string | number | symbol;
-  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O
+    ? O[K]
+    : never;
   type AtStrict<O extends object, K extends Key> = O[K & keyof O];
-  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
-  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
-      1: AtStrict<O, K>;
-      0: AtLoose<O, K>;
+  type AtLoose<O extends object, K extends Key> = O extends unknown
+    ? AtStrict<O, K>
+    : never;
+  export type At<
+    O extends object,
+    K extends Key,
+    strict extends Boolean = 1,
+  > = {
+    1: AtStrict<O, K>;
+    0: AtLoose<O, K>;
   }[strict];
 
-  export type ComputeRaw<A extends any> = A extends Function ? A : {
-    [K in keyof A]: A[K];
-  } & {};
+  export type ComputeRaw<A extends any> = A extends Function
+    ? A
+    : {
+        [K in keyof A]: A[K];
+      } & {};
 
   export type OptionalFlat<O> = {
     [K in keyof O]?: O[K];
@@ -568,11 +617,15 @@ export namespace Prisma {
   // this type assumes the passed object is entirely optional
   type AtLeast<O extends object, K extends string> = NoExpand<
     O extends unknown
-    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
-    : never>;
+      ?
+          | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+          | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
+      : never
+  >;
 
-  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+  type _Strict<U, _U = U> = U extends unknown
+    ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
+    : never;
 
   export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
   /** End Helper Types for "Merge" **/
@@ -582,66 +635,64 @@ export namespace Prisma {
   /**
   A [[Boolean]]
   */
-  export type Boolean = True | False
+  export type Boolean = True | False;
 
   // /**
   // 1
   // */
-  export type True = 1
+  export type True = 1;
 
   /**
   0
   */
-  export type False = 0
+  export type False = 0;
 
   export type Not<B extends Boolean> = {
-    0: 1
-    1: 0
-  }[B]
+    0: 1;
+    1: 0;
+  }[B];
 
   export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
     ? 0 // anything `never` is false
     : A1 extends A2
-    ? 1
-    : 0
+      ? 1
+      : 0;
 
   export type Has<U extends Union, U1 extends Union> = Not<
     Extends<Exclude<U1, U>, U1>
-  >
+  >;
 
   export type Or<B1 extends Boolean, B2 extends Boolean> = {
     0: {
-      0: 0
-      1: 1
-    }
+      0: 0;
+      1: 1;
+    };
     1: {
-      0: 1
-      1: 1
-    }
-  }[B1][B2]
+      0: 1;
+      1: 1;
+    };
+  }[B1][B2];
 
-  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never;
 
   type Cast<A, B> = A extends B ? A : B;
 
   export const type: unique symbol;
 
-
-
   /**
    * Used by group by
    */
 
-  export type GetScalarType<T, O> = O extends object ? {
-    [P in keyof T]: P extends keyof O
-      ? O[P]
-      : never
-  } : never
+  export type GetScalarType<T, O> = O extends object
+    ? {
+        [P in keyof T]: P extends keyof O ? O[P] : never;
+      }
+    : never;
 
   type FieldPaths<
     T,
-    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
-  > = IsObject<T> extends True ? U : T
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>,
+  > = IsObject<T> extends True ? U : T;
 
   type GetHavingFields<T> = {
     [K in keyof T]: Or<
@@ -652,630 +703,659 @@ export namespace Prisma {
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
         T[K] extends infer TK
-        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        ? GetHavingFields<
+            UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never
+          >
         : never
       : {} extends FieldPaths<T[K]>
-      ? never
-      : K
-  }[keyof T]
+        ? never
+        : K;
+  }[keyof T];
 
   /**
    * Convert tuple to union
    */
-  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
-  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
-  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never;
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>;
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T;
 
   /**
    * Like `Pick`, but additionally can also accept an array of keys
    */
-  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+  type PickEnumerable<
+    T,
+    K extends Enumerable<keyof T> | keyof T,
+  > = Prisma__Pick<T, MaybeTupleToUnion<K>>;
 
   /**
    * Exclude all keys with underscores
    */
-  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}`
+    ? never
+    : T;
 
+  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>;
 
-  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
-
-  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
-
+  type FieldRefInputType<Model, FieldType> = Model extends never
+    ? never
+    : FieldRef<Model, FieldType>;
 
   export const ModelName: {
-    User: 'User',
-    Store: 'Store',
-    Category: 'Category',
-    Product: 'Product',
-    Review: 'Review',
-    Customer: 'Customer',
-    PhonePePayment: 'PhonePePayment'
+    User: 'User';
+    Store: 'Store';
+    Category: 'Category';
+    Product: 'Product';
+    Review: 'Review';
+    Customer: 'Customer';
+    PhonePePayment: 'PhonePePayment';
   };
 
-  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
-
+  export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 
   export type Datasources = {
-    db?: Datasource
+    db?: Datasource;
+  };
+
+  interface TypeMapCb<ClientOptions = {}>
+    extends $Utils.Fn<
+      { extArgs: $Extensions.InternalArgs },
+      $Utils.Record<string, any>
+    > {
+    returns: Prisma.TypeMap<
+      this['params']['extArgs'],
+      ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}
+    >;
   }
 
-  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
-  }
-
-  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+  export type TypeMap<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > = {
     globalOmitOptions: {
-      omit: GlobalOmitOptions
-    }
+      omit: GlobalOmitOptions;
+    };
     meta: {
-      modelProps: "user" | "store" | "category" | "product" | "review" | "customer" | "phonePePayment"
-      txIsolationLevel: Prisma.TransactionIsolationLevel
-    }
+      modelProps:
+        | 'user'
+        | 'store'
+        | 'category'
+        | 'product'
+        | 'review'
+        | 'customer'
+        | 'phonePePayment';
+      txIsolationLevel: Prisma.TransactionIsolationLevel;
+    };
     model: {
       User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+        payload: Prisma.$UserPayload<ExtArgs>;
+        fields: Prisma.UserFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
+            args: Prisma.UserFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
+            args: Prisma.UserFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
+            args: Prisma.UserFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[];
+          };
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.UserCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[];
+          };
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.UserDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.UserUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[];
+          };
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
+            args: Prisma.UserUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>;
+          };
           aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser>
-          }
+            args: Prisma.UserAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateUser>;
+          };
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserGroupByOutputType>[]
-          }
+            args: Prisma.UserGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<UserGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.UserCountArgs<ExtArgs>;
+            result: $Utils.Optional<UserCountAggregateOutputType> | number;
+          };
+        };
+      };
       Store: {
-        payload: Prisma.$StorePayload<ExtArgs>
-        fields: Prisma.StoreFieldRefs
+        payload: Prisma.$StorePayload<ExtArgs>;
+        fields: Prisma.StoreFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.StoreFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload> | null
-          }
+            args: Prisma.StoreFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.StoreFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           findFirst: {
-            args: Prisma.StoreFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload> | null
-          }
+            args: Prisma.StoreFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.StoreFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           findMany: {
-            args: Prisma.StoreFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>[]
-          }
+            args: Prisma.StoreFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>[];
+          };
           create: {
-            args: Prisma.StoreCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           createMany: {
-            args: Prisma.StoreCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.StoreCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.StoreCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>[]
-          }
+            args: Prisma.StoreCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>[];
+          };
           delete: {
-            args: Prisma.StoreDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           update: {
-            args: Prisma.StoreUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           deleteMany: {
-            args: Prisma.StoreDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.StoreDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.StoreUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.StoreUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.StoreUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>[]
-          }
+            args: Prisma.StoreUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>[];
+          };
           upsert: {
-            args: Prisma.StoreUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>
-          }
+            args: Prisma.StoreUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$StorePayload>;
+          };
           aggregate: {
-            args: Prisma.StoreAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStore>
-          }
+            args: Prisma.StoreAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateStore>;
+          };
           groupBy: {
-            args: Prisma.StoreGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StoreGroupByOutputType>[]
-          }
+            args: Prisma.StoreGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<StoreGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.StoreCountArgs<ExtArgs>
-            result: $Utils.Optional<StoreCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.StoreCountArgs<ExtArgs>;
+            result: $Utils.Optional<StoreCountAggregateOutputType> | number;
+          };
+        };
+      };
       Category: {
-        payload: Prisma.$CategoryPayload<ExtArgs>
-        fields: Prisma.CategoryFieldRefs
+        payload: Prisma.$CategoryPayload<ExtArgs>;
+        fields: Prisma.CategoryFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.CategoryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
-          }
+            args: Prisma.CategoryFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           findFirst: {
-            args: Prisma.CategoryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
-          }
+            args: Prisma.CategoryFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           findMany: {
-            args: Prisma.CategoryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
-          }
+            args: Prisma.CategoryFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[];
+          };
           create: {
-            args: Prisma.CategoryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           createMany: {
-            args: Prisma.CategoryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CategoryCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
-          }
+            args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[];
+          };
           delete: {
-            args: Prisma.CategoryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           update: {
-            args: Prisma.CategoryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           deleteMany: {
-            args: Prisma.CategoryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CategoryDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.CategoryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CategoryUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.CategoryUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
-          }
+            args: Prisma.CategoryUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[];
+          };
           upsert: {
-            args: Prisma.CategoryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
-          }
+            args: Prisma.CategoryUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>;
+          };
           aggregate: {
-            args: Prisma.CategoryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCategory>
-          }
+            args: Prisma.CategoryAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateCategory>;
+          };
           groupBy: {
-            args: Prisma.CategoryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CategoryGroupByOutputType>[]
-          }
+            args: Prisma.CategoryGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<CategoryGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.CategoryCountArgs<ExtArgs>
-            result: $Utils.Optional<CategoryCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.CategoryCountArgs<ExtArgs>;
+            result: $Utils.Optional<CategoryCountAggregateOutputType> | number;
+          };
+        };
+      };
       Product: {
-        payload: Prisma.$ProductPayload<ExtArgs>
-        fields: Prisma.ProductFieldRefs
+        payload: Prisma.$ProductPayload<ExtArgs>;
+        fields: Prisma.ProductFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.ProductFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
-          }
+            args: Prisma.ProductFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.ProductFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           findFirst: {
-            args: Prisma.ProductFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
-          }
+            args: Prisma.ProductFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.ProductFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           findMany: {
-            args: Prisma.ProductFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
-          }
+            args: Prisma.ProductFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[];
+          };
           create: {
-            args: Prisma.ProductCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           createMany: {
-            args: Prisma.ProductCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ProductCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.ProductCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
-          }
+            args: Prisma.ProductCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[];
+          };
           delete: {
-            args: Prisma.ProductDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           update: {
-            args: Prisma.ProductUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           deleteMany: {
-            args: Prisma.ProductDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ProductDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.ProductUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ProductUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.ProductUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
-          }
+            args: Prisma.ProductUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[];
+          };
           upsert: {
-            args: Prisma.ProductUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
-          }
+            args: Prisma.ProductUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>;
+          };
           aggregate: {
-            args: Prisma.ProductAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProduct>
-          }
+            args: Prisma.ProductAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateProduct>;
+          };
           groupBy: {
-            args: Prisma.ProductGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProductGroupByOutputType>[]
-          }
+            args: Prisma.ProductGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<ProductGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.ProductCountArgs<ExtArgs>
-            result: $Utils.Optional<ProductCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.ProductCountArgs<ExtArgs>;
+            result: $Utils.Optional<ProductCountAggregateOutputType> | number;
+          };
+        };
+      };
       Review: {
-        payload: Prisma.$ReviewPayload<ExtArgs>
-        fields: Prisma.ReviewFieldRefs
+        payload: Prisma.$ReviewPayload<ExtArgs>;
+        fields: Prisma.ReviewFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.ReviewFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
-          }
+            args: Prisma.ReviewFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           findFirst: {
-            args: Prisma.ReviewFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
-          }
+            args: Prisma.ReviewFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           findMany: {
-            args: Prisma.ReviewFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
+            args: Prisma.ReviewFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[];
+          };
           create: {
-            args: Prisma.ReviewCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           createMany: {
-            args: Prisma.ReviewCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ReviewCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
+            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[];
+          };
           delete: {
-            args: Prisma.ReviewDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           update: {
-            args: Prisma.ReviewUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           deleteMany: {
-            args: Prisma.ReviewDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ReviewDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.ReviewUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.ReviewUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
+            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[];
+          };
           upsert: {
-            args: Prisma.ReviewUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
+            args: Prisma.ReviewUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>;
+          };
           aggregate: {
-            args: Prisma.ReviewAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReview>
-          }
+            args: Prisma.ReviewAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateReview>;
+          };
           groupBy: {
-            args: Prisma.ReviewGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReviewGroupByOutputType>[]
-          }
+            args: Prisma.ReviewGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<ReviewGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.ReviewCountArgs<ExtArgs>
-            result: $Utils.Optional<ReviewCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.ReviewCountArgs<ExtArgs>;
+            result: $Utils.Optional<ReviewCountAggregateOutputType> | number;
+          };
+        };
+      };
       Customer: {
-        payload: Prisma.$CustomerPayload<ExtArgs>
-        fields: Prisma.CustomerFieldRefs
+        payload: Prisma.$CustomerPayload<ExtArgs>;
+        fields: Prisma.CustomerFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.CustomerFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload> | null
-          }
+            args: Prisma.CustomerFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.CustomerFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           findFirst: {
-            args: Prisma.CustomerFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload> | null
-          }
+            args: Prisma.CustomerFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.CustomerFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           findMany: {
-            args: Prisma.CustomerFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[]
-          }
+            args: Prisma.CustomerFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[];
+          };
           create: {
-            args: Prisma.CustomerCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           createMany: {
-            args: Prisma.CustomerCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CustomerCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.CustomerCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[]
-          }
+            args: Prisma.CustomerCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[];
+          };
           delete: {
-            args: Prisma.CustomerDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           update: {
-            args: Prisma.CustomerUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           deleteMany: {
-            args: Prisma.CustomerDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CustomerDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.CustomerUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.CustomerUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.CustomerUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[]
-          }
+            args: Prisma.CustomerUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>[];
+          };
           upsert: {
-            args: Prisma.CustomerUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>
-          }
+            args: Prisma.CustomerUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$CustomerPayload>;
+          };
           aggregate: {
-            args: Prisma.CustomerAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCustomer>
-          }
+            args: Prisma.CustomerAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateCustomer>;
+          };
           groupBy: {
-            args: Prisma.CustomerGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CustomerGroupByOutputType>[]
-          }
+            args: Prisma.CustomerGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<CustomerGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.CustomerCountArgs<ExtArgs>
-            result: $Utils.Optional<CustomerCountAggregateOutputType> | number
-          }
-        }
-      }
+            args: Prisma.CustomerCountArgs<ExtArgs>;
+            result: $Utils.Optional<CustomerCountAggregateOutputType> | number;
+          };
+        };
+      };
       PhonePePayment: {
-        payload: Prisma.$PhonePePaymentPayload<ExtArgs>
-        fields: Prisma.PhonePePaymentFieldRefs
+        payload: Prisma.$PhonePePaymentPayload<ExtArgs>;
+        fields: Prisma.PhonePePaymentFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.PhonePePaymentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload> | null
-          }
+            args: Prisma.PhonePePaymentFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload> | null;
+          };
           findUniqueOrThrow: {
-            args: Prisma.PhonePePaymentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           findFirst: {
-            args: Prisma.PhonePePaymentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload> | null
-          }
+            args: Prisma.PhonePePaymentFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload> | null;
+          };
           findFirstOrThrow: {
-            args: Prisma.PhonePePaymentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           findMany: {
-            args: Prisma.PhonePePaymentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[]
-          }
+            args: Prisma.PhonePePaymentFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[];
+          };
           create: {
-            args: Prisma.PhonePePaymentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           createMany: {
-            args: Prisma.PhonePePaymentCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.PhonePePaymentCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           createManyAndReturn: {
-            args: Prisma.PhonePePaymentCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[]
-          }
+            args: Prisma.PhonePePaymentCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[];
+          };
           delete: {
-            args: Prisma.PhonePePaymentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           update: {
-            args: Prisma.PhonePePaymentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           deleteMany: {
-            args: Prisma.PhonePePaymentDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.PhonePePaymentDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateMany: {
-            args: Prisma.PhonePePaymentUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
+            args: Prisma.PhonePePaymentUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
           updateManyAndReturn: {
-            args: Prisma.PhonePePaymentUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[]
-          }
+            args: Prisma.PhonePePaymentUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>[];
+          };
           upsert: {
-            args: Prisma.PhonePePaymentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>
-          }
+            args: Prisma.PhonePePaymentUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$PhonePePaymentPayload>;
+          };
           aggregate: {
-            args: Prisma.PhonePePaymentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePhonePePayment>
-          }
+            args: Prisma.PhonePePaymentAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregatePhonePePayment>;
+          };
           groupBy: {
-            args: Prisma.PhonePePaymentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PhonePePaymentGroupByOutputType>[]
-          }
+            args: Prisma.PhonePePaymentGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<PhonePePaymentGroupByOutputType>[];
+          };
           count: {
-            args: Prisma.PhonePePaymentCountArgs<ExtArgs>
-            result: $Utils.Optional<PhonePePaymentCountAggregateOutputType> | number
-          }
-        }
-      }
-    }
+            args: Prisma.PhonePePaymentCountArgs<ExtArgs>;
+            result:
+              | $Utils.Optional<PhonePePaymentCountAggregateOutputType>
+              | number;
+          };
+        };
+      };
+    };
   } & {
     other: {
-      payload: any
+      payload: any;
       operations: {
         $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
-          result: any
-        }
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]];
+          result: any;
+        };
         $executeRawUnsafe: {
-          args: [query: string, ...values: any[]],
-          result: any
-        }
+          args: [query: string, ...values: any[]];
+          result: any;
+        };
         $queryRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
-          result: any
-        }
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]];
+          result: any;
+        };
         $queryRawUnsafe: {
-          args: [query: string, ...values: any[]],
-          result: any
-        }
-      }
-    }
-  }
-  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
-  export type DefaultPrismaClient = PrismaClient
-  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+          args: [query: string, ...values: any[]];
+          result: any;
+        };
+      };
+    };
+  };
+  export const defineExtension: $Extensions.ExtendsHook<
+    'define',
+    Prisma.TypeMapCb,
+    $Extensions.DefaultArgs
+  >;
+  export type DefaultPrismaClient = PrismaClient;
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal';
   export interface PrismaClientOptions {
     /**
      * Overwrites the datasource url from your schema.prisma file
      */
-    datasources?: Datasources
+    datasources?: Datasources;
     /**
      * Overwrites the datasource url from your schema.prisma file
      */
-    datasourceUrl?: string
+    datasourceUrl?: string;
     /**
      * @default "colorless"
      */
-    errorFormat?: ErrorFormat
+    errorFormat?: ErrorFormat;
     /**
      * @example
      * ```
      * // Defaults to stdout
      * log: ['query', 'info', 'warn', 'error']
-     * 
+     *
      * // Emit as events
      * log: [
      *   { emit: 'stdout', level: 'query' },
@@ -1286,20 +1366,20 @@ export namespace Prisma {
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
-    log?: (LogLevel | LogDefinition)[]
+    log?: (LogLevel | LogDefinition)[];
     /**
      * The default values for transactionOptions
      * maxWait ?= 2000
      * timeout ?= 5000
      */
     transactionOptions?: {
-      maxWait?: number
-      timeout?: number
-      isolationLevel?: Prisma.TransactionIsolationLevel
-    }
+      maxWait?: number;
+      timeout?: number;
+      isolationLevel?: Prisma.TransactionIsolationLevel;
+    };
     /**
      * Global configuration for omitting model fields by default.
-     * 
+     *
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -1311,45 +1391,54 @@ export namespace Prisma {
      * })
      * ```
      */
-    omit?: Prisma.GlobalOmitConfig
+    omit?: Prisma.GlobalOmitConfig;
   }
   export type GlobalOmitConfig = {
-    user?: UserOmit
-    store?: StoreOmit
-    category?: CategoryOmit
-    product?: ProductOmit
-    review?: ReviewOmit
-    customer?: CustomerOmit
-    phonePePayment?: PhonePePaymentOmit
-  }
+    user?: UserOmit;
+    store?: StoreOmit;
+    category?: CategoryOmit;
+    product?: ProductOmit;
+    review?: ReviewOmit;
+    customer?: CustomerOmit;
+    phonePePayment?: PhonePePaymentOmit;
+  };
 
   /* Types for Logging */
-  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error';
   export type LogDefinition = {
-    level: LogLevel
-    emit: 'stdout' | 'event'
-  }
+    level: LogLevel;
+    emit: 'stdout' | 'event';
+  };
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never
+  export type GetLogType<T extends LogLevel | LogDefinition> =
+    T extends LogDefinition
+      ? T['emit'] extends 'event'
+        ? T['level']
+        : never
+      : never;
+  export type GetEvents<T extends any> =
+    T extends Array<LogLevel | LogDefinition>
+      ?
+          | GetLogType<T[0]>
+          | GetLogType<T[1]>
+          | GetLogType<T[2]>
+          | GetLogType<T[3]>
+      : never;
 
   export type QueryEvent = {
-    timestamp: Date
-    query: string
-    params: string
-    duration: number
-    target: string
-  }
+    timestamp: Date;
+    query: string;
+    params: string;
+    duration: number;
+    target: string;
+  };
 
   export type LogEvent = {
-    timestamp: Date
-    message: string
-    target: string
-  }
+    timestamp: Date;
+    message: string;
+    target: string;
+  };
   /* End Types for Logging */
-
 
   export type PrismaAction =
     | 'findUnique'
@@ -1372,18 +1461,18 @@ export namespace Prisma {
     | 'count'
     | 'runCommandRaw'
     | 'findRaw'
-    | 'groupBy'
+    | 'groupBy';
 
   /**
    * These options are being passed into the middleware as "params"
    */
   export type MiddlewareParams = {
-    model?: ModelName
-    action: PrismaAction
-    args: any
-    dataPath: string[]
-    runInTransaction: boolean
-  }
+    model?: ModelName;
+    action: PrismaAction;
+    args: any;
+    dataPath: string[];
+    runInTransaction: boolean;
+  };
 
   /**
    * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
@@ -1391,184 +1480,216 @@ export namespace Prisma {
   export type Middleware<T = any> = (
     params: MiddlewareParams,
     next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
+  ) => $Utils.JsPromise<T>;
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+  export function getLogLevel(
+    log: Array<LogLevel | LogDefinition>,
+  ): LogLevel | undefined;
 
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
+  export type TransactionClient = Omit<
+    Prisma.DefaultPrismaClient,
+    runtime.ITXClientDenyList
+  >;
 
   export type Datasource = {
-    url?: string
-  }
+    url?: string;
+  };
 
   /**
    * Count Types
    */
-
 
   /**
    * Count Type UserCountOutputType
    */
 
   export type UserCountOutputType = {
-    stores: number
-  }
+    stores: number;
+  };
 
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    stores?: boolean | UserCountOutputTypeCountStoresArgs
-  }
+  export type UserCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    stores?: boolean | UserCountOutputTypeCountStoresArgs;
+  };
 
   // Custom InputTypes
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
      */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
+    select?: UserCountOutputTypeSelect<ExtArgs> | null;
+  };
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountStoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StoreWhereInput
-  }
-
+  export type UserCountOutputTypeCountStoresArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: StoreWhereInput;
+  };
 
   /**
    * Count Type StoreCountOutputType
    */
 
   export type StoreCountOutputType = {
-    categories: number
-    products: number
-    customers: number
-    reviews: number
-  }
+    categories: number;
+    products: number;
+    customers: number;
+    reviews: number;
+  };
 
-  export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    categories?: boolean | StoreCountOutputTypeCountCategoriesArgs
-    products?: boolean | StoreCountOutputTypeCountProductsArgs
-    customers?: boolean | StoreCountOutputTypeCountCustomersArgs
-    reviews?: boolean | StoreCountOutputTypeCountReviewsArgs
-  }
+  export type StoreCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    categories?: boolean | StoreCountOutputTypeCountCategoriesArgs;
+    products?: boolean | StoreCountOutputTypeCountProductsArgs;
+    customers?: boolean | StoreCountOutputTypeCountCustomersArgs;
+    reviews?: boolean | StoreCountOutputTypeCountReviewsArgs;
+  };
 
   // Custom InputTypes
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the StoreCountOutputType
      */
-    select?: StoreCountOutputTypeSelect<ExtArgs> | null
-  }
+    select?: StoreCountOutputTypeSelect<ExtArgs> | null;
+  };
 
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CategoryWhereInput
-  }
+  export type StoreCountOutputTypeCountCategoriesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: CategoryWhereInput;
+  };
 
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductWhereInput
-  }
+  export type StoreCountOutputTypeCountProductsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ProductWhereInput;
+  };
 
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountCustomersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CustomerWhereInput
-  }
+  export type StoreCountOutputTypeCountCustomersArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: CustomerWhereInput;
+  };
 
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewWhereInput
-  }
-
+  export type StoreCountOutputTypeCountReviewsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ReviewWhereInput;
+  };
 
   /**
    * Count Type CategoryCountOutputType
    */
 
   export type CategoryCountOutputType = {
-    subCategories: number
-    products: number
-  }
+    subCategories: number;
+    products: number;
+  };
 
-  export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategories?: boolean | CategoryCountOutputTypeCountSubCategoriesArgs
-    products?: boolean | CategoryCountOutputTypeCountProductsArgs
-  }
+  export type CategoryCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    subCategories?: boolean | CategoryCountOutputTypeCountSubCategoriesArgs;
+    products?: boolean | CategoryCountOutputTypeCountProductsArgs;
+  };
 
   // Custom InputTypes
   /**
    * CategoryCountOutputType without action
    */
-  export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the CategoryCountOutputType
      */
-    select?: CategoryCountOutputTypeSelect<ExtArgs> | null
-  }
+    select?: CategoryCountOutputTypeSelect<ExtArgs> | null;
+  };
 
   /**
    * CategoryCountOutputType without action
    */
-  export type CategoryCountOutputTypeCountSubCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CategoryWhereInput
-  }
+  export type CategoryCountOutputTypeCountSubCategoriesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: CategoryWhereInput;
+  };
 
   /**
    * CategoryCountOutputType without action
    */
-  export type CategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductWhereInput
-  }
-
+  export type CategoryCountOutputTypeCountProductsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ProductWhereInput;
+  };
 
   /**
    * Count Type ProductCountOutputType
    */
 
   export type ProductCountOutputType = {
-    reviews: number
-  }
+    reviews: number;
+  };
 
-  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reviews?: boolean | ProductCountOutputTypeCountReviewsArgs
-  }
+  export type ProductCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    reviews?: boolean | ProductCountOutputTypeCountReviewsArgs;
+  };
 
   // Custom InputTypes
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the ProductCountOutputType
      */
-    select?: ProductCountOutputTypeSelect<ExtArgs> | null
-  }
+    select?: ProductCountOutputTypeSelect<ExtArgs> | null;
+  };
 
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewWhereInput
-  }
-
+  export type ProductCountOutputTypeCountReviewsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ReviewWhereInput;
+  };
 
   /**
    * Models
@@ -1579,309 +1700,359 @@ export namespace Prisma {
    */
 
   export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
+    _count: UserCountAggregateOutputType | null;
+    _min: UserMinAggregateOutputType | null;
+    _max: UserMaxAggregateOutputType | null;
+  };
 
   export type UserMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    password: string | null
-    phone: string | null
-    address: string | null
-    city: string | null
-    state: string | null
-    country: string | null
-    zipCode: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
+    id: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    phone: string | null;
+    address: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zipCode: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
 
   export type UserMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    password: string | null
-    phone: string | null
-    address: string | null
-    city: string | null
-    state: string | null
-    country: string | null
-    zipCode: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
+    id: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    phone: string | null;
+    address: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zipCode: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
 
   export type UserCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    password: number
-    phone: number
-    address: number
-    city: number
-    state: number
-    country: number
-    zipCode: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
+    id: number;
+    name: number;
+    email: number;
+    password: number;
+    phone: number;
+    address: number;
+    city: number;
+    state: number;
+    country: number;
+    zipCode: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+  };
 
   export type UserMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
 
   export type UserMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
 
   export type UserCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+  };
 
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which User to aggregate.
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Users
-    **/
-    _count?: true | UserCountAggregateInputType
+     **/
+    _count?: true | UserCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: UserMinAggregateInputType
+     **/
+    _min?: UserMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: UserMaxAggregateInputType
-  }
+     **/
+    _max?: UserMaxAggregateInputType;
+  };
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
-  }
+      : GetScalarType<T[P], AggregateUser[P]>;
+  };
 
-
-
-
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserCountAggregateInputType | true
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
-  }
+  export type UserGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserWhereInput;
+    orderBy?:
+      | UserOrderByWithAggregationInput
+      | UserOrderByWithAggregationInput[];
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum;
+    having?: UserScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: UserCountAggregateInputType | true;
+    _min?: UserMinAggregateInputType;
+    _max?: UserMaxAggregateInputType;
+  };
 
   export type UserGroupByOutputType = {
-    id: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt: Date
-    updatedAt: Date
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: UserCountAggregateOutputType | null;
+    _min: UserMinAggregateOutputType | null;
+    _max: UserMaxAggregateOutputType | null;
+  };
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
+      PickEnumerable<UserGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], UserGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], UserGroupByOutputType[P]>;
+      }
     >
+  >;
 
+  export type UserSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      stores?: boolean | User$storesArgs<ExtArgs>;
+      _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['user']
+  >;
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    stores?: boolean | User$storesArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+  export type UserSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+    },
+    ExtArgs['result']['user']
+  >;
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["user"]>
-
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["user"]>
+  export type UserSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+    },
+    ExtArgs['result']['user']
+  >;
 
   export type UserSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
+    id?: boolean;
+    name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    phone?: boolean;
+    address?: boolean;
+    city?: boolean;
+    state?: boolean;
+    country?: boolean;
+    zipCode?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+  };
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "address" | "city" | "state" | "country" | "zipCode" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    stores?: boolean | User$storesArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    | 'id'
+    | 'name'
+    | 'email'
+    | 'password'
+    | 'phone'
+    | 'address'
+    | 'city'
+    | 'state'
+    | 'country'
+    | 'zipCode'
+    | 'createdAt'
+    | 'updatedAt',
+    ExtArgs['result']['user']
+  >;
+  export type UserInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    stores?: boolean | User$storesArgs<ExtArgs>;
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type UserIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
+  export type UserIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
 
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
+  export type $UserPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'User';
     objects: {
-      stores: Prisma.$StorePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string
-      password: string
-      phone: string
-      address: string
-      city: string
-      state: string
-      country: string
-      zipCode: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["user"]>
-    composites: {}
-  }
+      stores: Prisma.$StorePayload<ExtArgs>[];
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        email: string;
+        password: string;
+        phone: string;
+        address: string;
+        city: string;
+        state: string;
+        country: string;
+        zipCode: string;
+        createdAt: Date;
+        updatedAt: Date;
+      },
+      ExtArgs['result']['user']
+    >;
+    composites: {};
+  };
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> =
+    $Result.GetResult<Prisma.$UserPayload, S>;
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserCountAggregateInputType | true
-    }
+  type UserCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: UserCountAggregateInputType | true;
+  };
 
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+  export interface UserDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['User'];
+      meta: { name: 'User' };
+    };
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -1893,7 +2064,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UserFindUniqueArgs>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one User that matches the filter or throw an error with `error.code='P2025'`
@@ -1907,7 +2090,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first User that matches the filter.
@@ -1922,7 +2117,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UserFindFirstArgs>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first User that matches the filter or
@@ -1938,7 +2145,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Users that matches the filter.
@@ -1948,15 +2167,24 @@ export namespace Prisma {
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
-     * 
+     *
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UserFindManyArgs>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a User.
@@ -1968,9 +2196,21 @@ export namespace Prisma {
      *     // ... data to create a User
      *   }
      * })
-     * 
+     *
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UserCreateArgs>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Users.
@@ -1982,9 +2222,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UserCreateManyArgs>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Users and returns the data saved in the database.
@@ -1996,7 +2238,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Users and only return the `id`
      * const userWithIdOnly = await prisma.user.createManyAndReturn({
      *   select: { id: true },
@@ -2006,9 +2248,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a User.
@@ -2020,9 +2271,21 @@ export namespace Prisma {
      *     // ... filter to delete one User
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UserDeleteArgs>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one User.
@@ -2037,9 +2300,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UserUpdateArgs>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Users.
@@ -2051,9 +2326,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UserDeleteManyArgs>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Users.
@@ -2070,9 +2347,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UserUpdateManyArgs>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Users and returns the data updated in the database.
@@ -2087,7 +2366,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Users and only return the `id`
      * const userWithIdOnly = await prisma.user.updateManyAndReturn({
      *   select: { id: true },
@@ -2100,9 +2379,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one User.
@@ -2121,8 +2409,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends UserUpsertArgs>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Users.
@@ -2136,7 +2435,7 @@ export namespace Prisma {
      *     // ... the filter for the Users we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
@@ -2145,7 +2444,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a User.
@@ -2170,8 +2469,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+     **/
+    aggregate<T extends UserAggregateArgs>(
+      args: Subset<T, UserAggregateArgs>,
+    ): Prisma.PrismaPromise<GetUserAggregateType<T>>;
 
     /**
      * Group by User.
@@ -2189,8 +2490,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
@@ -2200,59 +2501,65 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserGroupByArgs['orderBy'] }
         : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the User model
-   */
-  readonly fields: UserFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors,
+    ): {} extends InputErrors
+      ? GetUserGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the User model
+     */
+    readonly fields: UserFieldRefs;
   }
 
   /**
@@ -2261,713 +2568,810 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    stores<T extends User$storesArgs<ExtArgs> = {}>(args?: Subset<T, User$storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  export interface Prisma__UserClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    stores<T extends User$storesArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$storesArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
-    readonly phone: FieldRef<"User", 'String'>
-    readonly address: FieldRef<"User", 'String'>
-    readonly city: FieldRef<"User", 'String'>
-    readonly state: FieldRef<"User", 'String'>
-    readonly country: FieldRef<"User", 'String'>
-    readonly zipCode: FieldRef<"User", 'String'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly id: FieldRef<'User', 'String'>;
+    readonly name: FieldRef<'User', 'String'>;
+    readonly email: FieldRef<'User', 'String'>;
+    readonly password: FieldRef<'User', 'String'>;
+    readonly phone: FieldRef<'User', 'String'>;
+    readonly address: FieldRef<'User', 'String'>;
+    readonly city: FieldRef<'User', 'String'>;
+    readonly state: FieldRef<'User', 'String'>;
+    readonly country: FieldRef<'User', 'String'>;
+    readonly zipCode: FieldRef<'User', 'String'>;
+    readonly createdAt: FieldRef<'User', 'DateTime'>;
+    readonly updatedAt: FieldRef<'User', 'DateTime'>;
   }
-    
 
   // Custom InputTypes
   /**
    * User findUnique
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
-    where: UserWhereUniqueInput
-  }
+    where: UserWhereUniqueInput;
+  };
 
   /**
    * User findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
-    where: UserWhereUniqueInput
-  }
+    where: UserWhereUniqueInput;
+  };
 
   /**
    * User findFirst
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[];
+  };
 
   /**
    * User findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[];
+  };
 
   /**
    * User findMany
    */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which Users to fetch.
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[];
+  };
 
   /**
    * User create
    */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * The data needed to create a User.
      */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
-  }
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>;
+  };
 
   /**
    * User createMany
    */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Users.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: UserCreateManyInput | UserCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * User createManyAndReturn
    */
-  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * The data used to create many Users.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: UserCreateManyInput | UserCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * User update
    */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * The data needed to update a User.
      */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>;
     /**
      * Choose, which User to update.
      */
-    where: UserWhereUniqueInput
-  }
+    where: UserWhereUniqueInput;
+  };
 
   /**
    * User updateMany
    */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Users.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>;
     /**
      * Filter which Users to update
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * Limit how many Users to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * User updateManyAndReturn
    */
-  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * The data used to update Users.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>;
     /**
      * Filter which Users to update
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * Limit how many Users to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * User upsert
    */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * The filter to search for the User to update in case it exists.
      */
-    where: UserWhereUniqueInput
+    where: UserWhereUniqueInput;
     /**
      * In case the User found by the `where` argument doesn't exist, create a new User with this data.
      */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>;
     /**
      * In case the User was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-  }
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>;
+  };
 
   /**
    * User delete
    */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter which User to delete.
      */
-    where: UserWhereUniqueInput
-  }
+    where: UserWhereUniqueInput;
+  };
 
   /**
    * User deleteMany
    */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Users to delete
      */
-    where?: UserWhereInput
+    where?: UserWhereInput;
     /**
      * Limit how many Users to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * User.stores
    */
-  export type User$storesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$storesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
-    where?: StoreWhereInput
-    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[]
-    cursor?: StoreWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[]
-  }
+    include?: StoreInclude<ExtArgs> | null;
+    where?: StoreWhereInput;
+    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[];
+    cursor?: StoreWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[];
+  };
 
   /**
    * User without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the User
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-  }
-
+    include?: UserInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Store
    */
 
   export type AggregateStore = {
-    _count: StoreCountAggregateOutputType | null
-    _min: StoreMinAggregateOutputType | null
-    _max: StoreMaxAggregateOutputType | null
-  }
+    _count: StoreCountAggregateOutputType | null;
+    _min: StoreMinAggregateOutputType | null;
+    _max: StoreMaxAggregateOutputType | null;
+  };
 
   export type StoreMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    domain: string | null
-    ownerId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    domain: string | null;
+    ownerId: string | null;
+  };
 
   export type StoreMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    domain: string | null
-    ownerId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    domain: string | null;
+    ownerId: string | null;
+  };
 
   export type StoreCountAggregateOutputType = {
-    id: number
-    name: number
-    domain: number
-    ownerId: number
-    _all: number
-  }
-
+    id: number;
+    name: number;
+    domain: number;
+    ownerId: number;
+    _all: number;
+  };
 
   export type StoreMinAggregateInputType = {
-    id?: true
-    name?: true
-    domain?: true
-    ownerId?: true
-  }
+    id?: true;
+    name?: true;
+    domain?: true;
+    ownerId?: true;
+  };
 
   export type StoreMaxAggregateInputType = {
-    id?: true
-    name?: true
-    domain?: true
-    ownerId?: true
-  }
+    id?: true;
+    name?: true;
+    domain?: true;
+    ownerId?: true;
+  };
 
   export type StoreCountAggregateInputType = {
-    id?: true
-    name?: true
-    domain?: true
-    ownerId?: true
-    _all?: true
-  }
+    id?: true;
+    name?: true;
+    domain?: true;
+    ownerId?: true;
+    _all?: true;
+  };
 
-  export type StoreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Store to aggregate.
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Stores to fetch.
      */
-    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[]
+    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: StoreWhereUniqueInput
+    cursor?: StoreWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Stores from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Stores.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Stores
-    **/
-    _count?: true | StoreCountAggregateInputType
+     **/
+    _count?: true | StoreCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: StoreMinAggregateInputType
+     **/
+    _min?: StoreMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: StoreMaxAggregateInputType
-  }
+     **/
+    _max?: StoreMaxAggregateInputType;
+  };
 
   export type GetStoreAggregateType<T extends StoreAggregateArgs> = {
-        [P in keyof T & keyof AggregateStore]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateStore]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateStore[P]>
-      : GetScalarType<T[P], AggregateStore[P]>
-  }
+      : GetScalarType<T[P], AggregateStore[P]>;
+  };
 
-
-
-
-  export type StoreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StoreWhereInput
-    orderBy?: StoreOrderByWithAggregationInput | StoreOrderByWithAggregationInput[]
-    by: StoreScalarFieldEnum[] | StoreScalarFieldEnum
-    having?: StoreScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: StoreCountAggregateInputType | true
-    _min?: StoreMinAggregateInputType
-    _max?: StoreMaxAggregateInputType
-  }
+  export type StoreGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: StoreWhereInput;
+    orderBy?:
+      | StoreOrderByWithAggregationInput
+      | StoreOrderByWithAggregationInput[];
+    by: StoreScalarFieldEnum[] | StoreScalarFieldEnum;
+    having?: StoreScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: StoreCountAggregateInputType | true;
+    _min?: StoreMinAggregateInputType;
+    _max?: StoreMaxAggregateInputType;
+  };
 
   export type StoreGroupByOutputType = {
-    id: string
-    name: string
-    domain: string
-    ownerId: string
-    _count: StoreCountAggregateOutputType | null
-    _min: StoreMinAggregateOutputType | null
-    _max: StoreMaxAggregateOutputType | null
-  }
+    id: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    _count: StoreCountAggregateOutputType | null;
+    _min: StoreMinAggregateOutputType | null;
+    _max: StoreMaxAggregateOutputType | null;
+  };
 
-  type GetStoreGroupByPayload<T extends StoreGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<StoreGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof StoreGroupByOutputType))]: P extends '_count'
+  type GetStoreGroupByPayload<T extends StoreGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<StoreGroupByOutputType, T['by']> & {
+          [P in keyof T & keyof StoreGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], StoreGroupByOutputType[P]>
-            : GetScalarType<T[P], StoreGroupByOutputType[P]>
+            : GetScalarType<T[P], StoreGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type StoreSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      domain?: boolean;
+      ownerId?: boolean;
+      owner?: boolean | UserDefaultArgs<ExtArgs>;
+      categories?: boolean | Store$categoriesArgs<ExtArgs>;
+      products?: boolean | Store$productsArgs<ExtArgs>;
+      customers?: boolean | Store$customersArgs<ExtArgs>;
+      reviews?: boolean | Store$reviewsArgs<ExtArgs>;
+      phonePePayment?: boolean | Store$phonePePaymentArgs<ExtArgs>;
+      _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['store']
+  >;
 
-  export type StoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    domain?: boolean
-    ownerId?: boolean
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-    categories?: boolean | Store$categoriesArgs<ExtArgs>
-    products?: boolean | Store$productsArgs<ExtArgs>
-    customers?: boolean | Store$customersArgs<ExtArgs>
-    reviews?: boolean | Store$reviewsArgs<ExtArgs>
-    phonePePayment?: boolean | Store$phonePePaymentArgs<ExtArgs>
-    _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["store"]>
+  export type StoreSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      domain?: boolean;
+      ownerId?: boolean;
+      owner?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['store']
+  >;
 
-  export type StoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    domain?: boolean
-    ownerId?: boolean
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["store"]>
-
-  export type StoreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    domain?: boolean
-    ownerId?: boolean
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["store"]>
+  export type StoreSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      domain?: boolean;
+      ownerId?: boolean;
+      owner?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['store']
+  >;
 
   export type StoreSelectScalar = {
-    id?: boolean
-    name?: boolean
-    domain?: boolean
-    ownerId?: boolean
-  }
+    id?: boolean;
+    name?: boolean;
+    domain?: boolean;
+    ownerId?: boolean;
+  };
 
-  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "domain" | "ownerId", ExtArgs["result"]["store"]>
-  export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-    categories?: boolean | Store$categoriesArgs<ExtArgs>
-    products?: boolean | Store$productsArgs<ExtArgs>
-    customers?: boolean | Store$customersArgs<ExtArgs>
-    reviews?: boolean | Store$reviewsArgs<ExtArgs>
-    phonePePayment?: boolean | Store$phonePePaymentArgs<ExtArgs>
-    _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type StoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type StoreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    owner?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type StoreOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    'id' | 'name' | 'domain' | 'ownerId',
+    ExtArgs['result']['store']
+  >;
+  export type StoreInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>;
+    categories?: boolean | Store$categoriesArgs<ExtArgs>;
+    products?: boolean | Store$productsArgs<ExtArgs>;
+    customers?: boolean | Store$customersArgs<ExtArgs>;
+    reviews?: boolean | Store$reviewsArgs<ExtArgs>;
+    phonePePayment?: boolean | Store$phonePePaymentArgs<ExtArgs>;
+    _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type StoreIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type StoreIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>;
+  };
 
-  export type $StorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Store"
+  export type $StorePayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Store';
     objects: {
-      owner: Prisma.$UserPayload<ExtArgs>
-      categories: Prisma.$CategoryPayload<ExtArgs>[]
-      products: Prisma.$ProductPayload<ExtArgs>[]
-      customers: Prisma.$CustomerPayload<ExtArgs>[]
-      reviews: Prisma.$ReviewPayload<ExtArgs>[]
-      phonePePayment: Prisma.$PhonePePaymentPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      domain: string
-      ownerId: string
-    }, ExtArgs["result"]["store"]>
-    composites: {}
-  }
+      owner: Prisma.$UserPayload<ExtArgs>;
+      categories: Prisma.$CategoryPayload<ExtArgs>[];
+      products: Prisma.$ProductPayload<ExtArgs>[];
+      customers: Prisma.$CustomerPayload<ExtArgs>[];
+      reviews: Prisma.$ReviewPayload<ExtArgs>[];
+      phonePePayment: Prisma.$PhonePePaymentPayload<ExtArgs> | null;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        domain: string;
+        ownerId: string;
+      },
+      ExtArgs['result']['store']
+    >;
+    composites: {};
+  };
 
-  type StoreGetPayload<S extends boolean | null | undefined | StoreDefaultArgs> = $Result.GetResult<Prisma.$StorePayload, S>
+  type StoreGetPayload<
+    S extends boolean | null | undefined | StoreDefaultArgs,
+  > = $Result.GetResult<Prisma.$StorePayload, S>;
 
-  type StoreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StoreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StoreCountAggregateInputType | true
-    }
+  type StoreCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<StoreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: StoreCountAggregateInputType | true;
+  };
 
-  export interface StoreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Store'], meta: { name: 'Store' } }
+  export interface StoreDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Store'];
+      meta: { name: 'Store' };
+    };
     /**
      * Find zero or one Store that matches the filter.
      * @param {StoreFindUniqueArgs} args - Arguments to find a Store
@@ -2979,7 +3383,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends StoreFindUniqueArgs>(args: SelectSubset<T, StoreFindUniqueArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends StoreFindUniqueArgs>(
+      args: SelectSubset<T, StoreFindUniqueArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one Store that matches the filter or throw an error with `error.code='P2025'`
@@ -2993,7 +3409,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StoreFindUniqueOrThrowArgs>(args: SelectSubset<T, StoreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends StoreFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, StoreFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Store that matches the filter.
@@ -3008,7 +3436,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends StoreFindFirstArgs>(args?: SelectSubset<T, StoreFindFirstArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends StoreFindFirstArgs>(
+      args?: SelectSubset<T, StoreFindFirstArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Store that matches the filter or
@@ -3024,7 +3464,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends StoreFindFirstOrThrowArgs>(args?: SelectSubset<T, StoreFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends StoreFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, StoreFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Stores that matches the filter.
@@ -3034,15 +3486,24 @@ export namespace Prisma {
      * @example
      * // Get all Stores
      * const stores = await prisma.store.findMany()
-     * 
+     *
      * // Get first 10 Stores
      * const stores = await prisma.store.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const storeWithIdOnly = await prisma.store.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends StoreFindManyArgs>(args?: SelectSubset<T, StoreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends StoreFindManyArgs>(
+      args?: SelectSubset<T, StoreFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a Store.
@@ -3054,9 +3515,21 @@ export namespace Prisma {
      *     // ... data to create a Store
      *   }
      * })
-     * 
+     *
      */
-    create<T extends StoreCreateArgs>(args: SelectSubset<T, StoreCreateArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends StoreCreateArgs>(
+      args: SelectSubset<T, StoreCreateArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Stores.
@@ -3068,9 +3541,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends StoreCreateManyArgs>(args?: SelectSubset<T, StoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends StoreCreateManyArgs>(
+      args?: SelectSubset<T, StoreCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Stores and returns the data saved in the database.
@@ -3082,7 +3557,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Stores and only return the `id`
      * const storeWithIdOnly = await prisma.store.createManyAndReturn({
      *   select: { id: true },
@@ -3092,9 +3567,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends StoreCreateManyAndReturnArgs>(args?: SelectSubset<T, StoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends StoreCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, StoreCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a Store.
@@ -3106,9 +3590,21 @@ export namespace Prisma {
      *     // ... filter to delete one Store
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends StoreDeleteArgs>(args: SelectSubset<T, StoreDeleteArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends StoreDeleteArgs>(
+      args: SelectSubset<T, StoreDeleteArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one Store.
@@ -3123,9 +3619,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends StoreUpdateArgs>(args: SelectSubset<T, StoreUpdateArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends StoreUpdateArgs>(
+      args: SelectSubset<T, StoreUpdateArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Stores.
@@ -3137,9 +3645,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends StoreDeleteManyArgs>(args?: SelectSubset<T, StoreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends StoreDeleteManyArgs>(
+      args?: SelectSubset<T, StoreDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Stores.
@@ -3156,9 +3666,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends StoreUpdateManyArgs>(args: SelectSubset<T, StoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends StoreUpdateManyArgs>(
+      args: SelectSubset<T, StoreUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Stores and returns the data updated in the database.
@@ -3173,7 +3685,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Stores and only return the `id`
      * const storeWithIdOnly = await prisma.store.updateManyAndReturn({
      *   select: { id: true },
@@ -3186,9 +3698,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends StoreUpdateManyAndReturnArgs>(args: SelectSubset<T, StoreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends StoreUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, StoreUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one Store.
@@ -3207,8 +3728,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends StoreUpsertArgs>(args: SelectSubset<T, StoreUpsertArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends StoreUpsertArgs>(
+      args: SelectSubset<T, StoreUpsertArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      $Result.GetResult<
+        Prisma.$StorePayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Stores.
@@ -3222,7 +3754,7 @@ export namespace Prisma {
      *     // ... the filter for the Stores we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends StoreCountArgs>(
       args?: Subset<T, StoreCountArgs>,
     ): Prisma.PrismaPromise<
@@ -3231,7 +3763,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], StoreCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a Store.
@@ -3256,8 +3788,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends StoreAggregateArgs>(args: Subset<T, StoreAggregateArgs>): Prisma.PrismaPromise<GetStoreAggregateType<T>>
+     **/
+    aggregate<T extends StoreAggregateArgs>(
+      args: Subset<T, StoreAggregateArgs>,
+    ): Prisma.PrismaPromise<GetStoreAggregateType<T>>;
 
     /**
      * Group by Store.
@@ -3275,8 +3809,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends StoreGroupByArgs,
       HasSelectOrTake extends Or<
@@ -3286,59 +3820,65 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: StoreGroupByArgs['orderBy'] }
         : { orderBy?: StoreGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, StoreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Store model
-   */
-  readonly fields: StoreFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, StoreGroupByArgs, OrderByArg> & InputErrors,
+    ): {} extends InputErrors
+      ? GetStoreGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Store model
+     */
+    readonly fields: StoreFieldRefs;
   }
 
   /**
@@ -3347,807 +3887,975 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    categories<T extends Store$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Store$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    products<T extends Store$productsArgs<ExtArgs> = {}>(args?: Subset<T, Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    customers<T extends Store$customersArgs<ExtArgs> = {}>(args?: Subset<T, Store$customersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    reviews<T extends Store$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Store$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    phonePePayment<T extends Store$phonePePaymentArgs<ExtArgs> = {}>(args?: Subset<T, Store$phonePePaymentArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__StoreClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    owner<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      | $Result.GetResult<
+          Prisma.$UserPayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    categories<T extends Store$categoriesArgs<ExtArgs> = {}>(
+      args?: Subset<T, Store$categoriesArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$CategoryPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
+    products<T extends Store$productsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Store$productsArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$ProductPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
+    customers<T extends Store$customersArgs<ExtArgs> = {}>(
+      args?: Subset<T, Store$customersArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$CustomerPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
+    reviews<T extends Store$reviewsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Store$reviewsArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$ReviewPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
+    phonePePayment<T extends Store$phonePePaymentArgs<ExtArgs> = {}>(
+      args?: Subset<T, Store$phonePePaymentArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the Store model
    */
   interface StoreFieldRefs {
-    readonly id: FieldRef<"Store", 'String'>
-    readonly name: FieldRef<"Store", 'String'>
-    readonly domain: FieldRef<"Store", 'String'>
-    readonly ownerId: FieldRef<"Store", 'String'>
+    readonly id: FieldRef<'Store', 'String'>;
+    readonly name: FieldRef<'Store', 'String'>;
+    readonly domain: FieldRef<'Store', 'String'>;
+    readonly ownerId: FieldRef<'Store', 'String'>;
   }
-    
 
   // Custom InputTypes
   /**
    * Store findUnique
    */
-  export type StoreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter, which Store to fetch.
      */
-    where: StoreWhereUniqueInput
-  }
+    where: StoreWhereUniqueInput;
+  };
 
   /**
    * Store findUniqueOrThrow
    */
-  export type StoreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter, which Store to fetch.
      */
-    where: StoreWhereUniqueInput
-  }
+    where: StoreWhereUniqueInput;
+  };
 
   /**
    * Store findFirst
    */
-  export type StoreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter, which Store to fetch.
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Stores to fetch.
      */
-    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[]
+    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Stores.
      */
-    cursor?: StoreWhereUniqueInput
+    cursor?: StoreWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Stores from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Stores.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Stores.
      */
-    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[]
-  }
+    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[];
+  };
 
   /**
    * Store findFirstOrThrow
    */
-  export type StoreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter, which Store to fetch.
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Stores to fetch.
      */
-    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[]
+    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Stores.
      */
-    cursor?: StoreWhereUniqueInput
+    cursor?: StoreWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Stores from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Stores.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Stores.
      */
-    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[]
-  }
+    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[];
+  };
 
   /**
    * Store findMany
    */
-  export type StoreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter, which Stores to fetch.
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Stores to fetch.
      */
-    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[]
+    orderBy?: StoreOrderByWithRelationInput | StoreOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Stores.
      */
-    cursor?: StoreWhereUniqueInput
+    cursor?: StoreWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Stores from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Stores.
      */
-    skip?: number
-    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: StoreScalarFieldEnum | StoreScalarFieldEnum[];
+  };
 
   /**
    * Store create
    */
-  export type StoreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * The data needed to create a Store.
      */
-    data: XOR<StoreCreateInput, StoreUncheckedCreateInput>
-  }
+    data: XOR<StoreCreateInput, StoreUncheckedCreateInput>;
+  };
 
   /**
    * Store createMany
    */
-  export type StoreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Stores.
      */
-    data: StoreCreateManyInput | StoreCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: StoreCreateManyInput | StoreCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * Store createManyAndReturn
    */
-  export type StoreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelectCreateManyAndReturn<ExtArgs> | null
+    select?: StoreSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * The data used to create many Stores.
      */
-    data: StoreCreateManyInput | StoreCreateManyInput[]
-    skipDuplicates?: boolean
+    data: StoreCreateManyInput | StoreCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: StoreIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Store update
    */
-  export type StoreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * The data needed to update a Store.
      */
-    data: XOR<StoreUpdateInput, StoreUncheckedUpdateInput>
+    data: XOR<StoreUpdateInput, StoreUncheckedUpdateInput>;
     /**
      * Choose, which Store to update.
      */
-    where: StoreWhereUniqueInput
-  }
+    where: StoreWhereUniqueInput;
+  };
 
   /**
    * Store updateMany
    */
-  export type StoreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Stores.
      */
-    data: XOR<StoreUpdateManyMutationInput, StoreUncheckedUpdateManyInput>
+    data: XOR<StoreUpdateManyMutationInput, StoreUncheckedUpdateManyInput>;
     /**
      * Filter which Stores to update
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * Limit how many Stores to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Store updateManyAndReturn
    */
-  export type StoreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: StoreSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * The data used to update Stores.
      */
-    data: XOR<StoreUpdateManyMutationInput, StoreUncheckedUpdateManyInput>
+    data: XOR<StoreUpdateManyMutationInput, StoreUncheckedUpdateManyInput>;
     /**
      * Filter which Stores to update
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * Limit how many Stores to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: StoreIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Store upsert
    */
-  export type StoreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * The filter to search for the Store to update in case it exists.
      */
-    where: StoreWhereUniqueInput
+    where: StoreWhereUniqueInput;
     /**
      * In case the Store found by the `where` argument doesn't exist, create a new Store with this data.
      */
-    create: XOR<StoreCreateInput, StoreUncheckedCreateInput>
+    create: XOR<StoreCreateInput, StoreUncheckedCreateInput>;
     /**
      * In case the Store was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StoreUpdateInput, StoreUncheckedUpdateInput>
-  }
+    update: XOR<StoreUpdateInput, StoreUncheckedUpdateInput>;
+  };
 
   /**
    * Store delete
    */
-  export type StoreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
+    include?: StoreInclude<ExtArgs> | null;
     /**
      * Filter which Store to delete.
      */
-    where: StoreWhereUniqueInput
-  }
+    where: StoreWhereUniqueInput;
+  };
 
   /**
    * Store deleteMany
    */
-  export type StoreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Stores to delete
      */
-    where?: StoreWhereInput
+    where?: StoreWhereInput;
     /**
      * Limit how many Stores to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Store.categories
    */
-  export type Store$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$categoriesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
-    where?: CategoryWhereInput
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
-    cursor?: CategoryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
-  }
+    include?: CategoryInclude<ExtArgs> | null;
+    where?: CategoryWhereInput;
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
+    cursor?: CategoryWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[];
+  };
 
   /**
    * Store.products
    */
-  export type Store$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$productsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
-    where?: ProductWhereInput
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
-    cursor?: ProductWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
+    include?: ProductInclude<ExtArgs> | null;
+    where?: ProductWhereInput;
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
+    cursor?: ProductWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[];
+  };
 
   /**
    * Store.customers
    */
-  export type Store$customersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$customersArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
-    where?: CustomerWhereInput
-    orderBy?: CustomerOrderByWithRelationInput | CustomerOrderByWithRelationInput[]
-    cursor?: CustomerWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[]
-  }
+    include?: CustomerInclude<ExtArgs> | null;
+    where?: CustomerWhereInput;
+    orderBy?:
+      | CustomerOrderByWithRelationInput
+      | CustomerOrderByWithRelationInput[];
+    cursor?: CustomerWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[];
+  };
 
   /**
    * Store.reviews
    */
-  export type Store$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$reviewsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
-    where?: ReviewWhereInput
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
-    cursor?: ReviewWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
+    include?: ReviewInclude<ExtArgs> | null;
+    where?: ReviewWhereInput;
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
+    cursor?: ReviewWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[];
+  };
 
   /**
    * Store.phonePePayment
    */
-  export type Store$phonePePaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$phonePePaymentArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
-    where?: PhonePePaymentWhereInput
-  }
+    include?: PhonePePaymentInclude<ExtArgs> | null;
+    where?: PhonePePaymentWhereInput;
+  };
 
   /**
    * Store without action
    */
-  export type StoreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoreDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Store
      */
-    select?: StoreSelect<ExtArgs> | null
+    select?: StoreSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Store
      */
-    omit?: StoreOmit<ExtArgs> | null
+    omit?: StoreOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoreInclude<ExtArgs> | null
-  }
-
+    include?: StoreInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Category
    */
 
   export type AggregateCategory = {
-    _count: CategoryCountAggregateOutputType | null
-    _min: CategoryMinAggregateOutputType | null
-    _max: CategoryMaxAggregateOutputType | null
-  }
+    _count: CategoryCountAggregateOutputType | null;
+    _min: CategoryMinAggregateOutputType | null;
+    _max: CategoryMaxAggregateOutputType | null;
+  };
 
   export type CategoryMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    storeId: string | null
-    parentId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    storeId: string | null;
+    parentId: string | null;
+  };
 
   export type CategoryMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    storeId: string | null
-    parentId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    storeId: string | null;
+    parentId: string | null;
+  };
 
   export type CategoryCountAggregateOutputType = {
-    id: number
-    name: number
-    storeId: number
-    parentId: number
-    _all: number
-  }
-
+    id: number;
+    name: number;
+    storeId: number;
+    parentId: number;
+    _all: number;
+  };
 
   export type CategoryMinAggregateInputType = {
-    id?: true
-    name?: true
-    storeId?: true
-    parentId?: true
-  }
+    id?: true;
+    name?: true;
+    storeId?: true;
+    parentId?: true;
+  };
 
   export type CategoryMaxAggregateInputType = {
-    id?: true
-    name?: true
-    storeId?: true
-    parentId?: true
-  }
+    id?: true;
+    name?: true;
+    storeId?: true;
+    parentId?: true;
+  };
 
   export type CategoryCountAggregateInputType = {
-    id?: true
-    name?: true
-    storeId?: true
-    parentId?: true
-    _all?: true
-  }
+    id?: true;
+    name?: true;
+    storeId?: true;
+    parentId?: true;
+    _all?: true;
+  };
 
-  export type CategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Category to aggregate.
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Categories to fetch.
      */
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: CategoryWhereUniqueInput
+    cursor?: CategoryWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Categories from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Categories.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Categories
-    **/
-    _count?: true | CategoryCountAggregateInputType
+     **/
+    _count?: true | CategoryCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: CategoryMinAggregateInputType
+     **/
+    _min?: CategoryMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: CategoryMaxAggregateInputType
-  }
+     **/
+    _max?: CategoryMaxAggregateInputType;
+  };
 
   export type GetCategoryAggregateType<T extends CategoryAggregateArgs> = {
-        [P in keyof T & keyof AggregateCategory]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateCategory]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateCategory[P]>
-      : GetScalarType<T[P], AggregateCategory[P]>
-  }
+      : GetScalarType<T[P], AggregateCategory[P]>;
+  };
 
-
-
-
-  export type CategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CategoryWhereInput
-    orderBy?: CategoryOrderByWithAggregationInput | CategoryOrderByWithAggregationInput[]
-    by: CategoryScalarFieldEnum[] | CategoryScalarFieldEnum
-    having?: CategoryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CategoryCountAggregateInputType | true
-    _min?: CategoryMinAggregateInputType
-    _max?: CategoryMaxAggregateInputType
-  }
+  export type CategoryGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: CategoryWhereInput;
+    orderBy?:
+      | CategoryOrderByWithAggregationInput
+      | CategoryOrderByWithAggregationInput[];
+    by: CategoryScalarFieldEnum[] | CategoryScalarFieldEnum;
+    having?: CategoryScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: CategoryCountAggregateInputType | true;
+    _min?: CategoryMinAggregateInputType;
+    _max?: CategoryMaxAggregateInputType;
+  };
 
   export type CategoryGroupByOutputType = {
-    id: string
-    name: string
-    storeId: string
-    parentId: string | null
-    _count: CategoryCountAggregateOutputType | null
-    _min: CategoryMinAggregateOutputType | null
-    _max: CategoryMaxAggregateOutputType | null
-  }
+    id: string;
+    name: string;
+    storeId: string;
+    parentId: string | null;
+    _count: CategoryCountAggregateOutputType | null;
+    _min: CategoryMinAggregateOutputType | null;
+    _max: CategoryMaxAggregateOutputType | null;
+  };
 
-  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CategoryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count'
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<CategoryGroupByOutputType, T['by']> & {
+          [P in keyof T & keyof CategoryGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], CategoryGroupByOutputType[P]>
-            : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], CategoryGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type CategorySelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      storeId?: boolean;
+      parentId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+      parent?: boolean | Category$parentArgs<ExtArgs>;
+      subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>;
+      products?: boolean | Category$productsArgs<ExtArgs>;
+      _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['category']
+  >;
 
-  export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    storeId?: boolean
-    parentId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
-    products?: boolean | Category$productsArgs<ExtArgs>
-    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["category"]>
+  export type CategorySelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      storeId?: boolean;
+      parentId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+      parent?: boolean | Category$parentArgs<ExtArgs>;
+    },
+    ExtArgs['result']['category']
+  >;
 
-  export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    storeId?: boolean
-    parentId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-  }, ExtArgs["result"]["category"]>
-
-  export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    storeId?: boolean
-    parentId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-  }, ExtArgs["result"]["category"]>
+  export type CategorySelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      storeId?: boolean;
+      parentId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+      parent?: boolean | Category$parentArgs<ExtArgs>;
+    },
+    ExtArgs['result']['category']
+  >;
 
   export type CategorySelectScalar = {
-    id?: boolean
-    name?: boolean
-    storeId?: boolean
-    parentId?: boolean
-  }
+    id?: boolean;
+    name?: boolean;
+    storeId?: boolean;
+    parentId?: boolean;
+  };
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "storeId" | "parentId", ExtArgs["result"]["category"]>
-  export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
-    products?: boolean | Category$productsArgs<ExtArgs>
-    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-  }
-  export type CategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    parent?: boolean | Category$parentArgs<ExtArgs>
-  }
+  export type CategoryOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    'id' | 'name' | 'storeId' | 'parentId',
+    ExtArgs['result']['category']
+  >;
+  export type CategoryInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+    parent?: boolean | Category$parentArgs<ExtArgs>;
+    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>;
+    products?: boolean | Category$productsArgs<ExtArgs>;
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type CategoryIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+    parent?: boolean | Category$parentArgs<ExtArgs>;
+  };
+  export type CategoryIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+    parent?: boolean | Category$parentArgs<ExtArgs>;
+  };
 
-  export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Category"
+  export type $CategoryPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Category';
     objects: {
-      store: Prisma.$StorePayload<ExtArgs>
-      parent: Prisma.$CategoryPayload<ExtArgs> | null
-      subCategories: Prisma.$CategoryPayload<ExtArgs>[]
-      products: Prisma.$ProductPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      storeId: string
-      parentId: string | null
-    }, ExtArgs["result"]["category"]>
-    composites: {}
-  }
+      store: Prisma.$StorePayload<ExtArgs>;
+      parent: Prisma.$CategoryPayload<ExtArgs> | null;
+      subCategories: Prisma.$CategoryPayload<ExtArgs>[];
+      products: Prisma.$ProductPayload<ExtArgs>[];
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        storeId: string;
+        parentId: string | null;
+      },
+      ExtArgs['result']['category']
+    >;
+    composites: {};
+  };
 
-  type CategoryGetPayload<S extends boolean | null | undefined | CategoryDefaultArgs> = $Result.GetResult<Prisma.$CategoryPayload, S>
+  type CategoryGetPayload<
+    S extends boolean | null | undefined | CategoryDefaultArgs,
+  > = $Result.GetResult<Prisma.$CategoryPayload, S>;
 
-  type CategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CategoryCountAggregateInputType | true
-    }
+  type CategoryCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<CategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: CategoryCountAggregateInputType | true;
+  };
 
-  export interface CategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Category'], meta: { name: 'Category' } }
+  export interface CategoryDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Category'];
+      meta: { name: 'Category' };
+    };
     /**
      * Find zero or one Category that matches the filter.
      * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
@@ -4159,7 +4867,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CategoryFindUniqueArgs>(args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CategoryFindUniqueArgs>(
+      args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one Category that matches the filter or throw an error with `error.code='P2025'`
@@ -4173,7 +4893,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Category that matches the filter.
@@ -4188,7 +4920,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CategoryFindFirstArgs>(args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CategoryFindFirstArgs>(
+      args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Category that matches the filter or
@@ -4204,7 +4948,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Categories that matches the filter.
@@ -4214,15 +4970,24 @@ export namespace Prisma {
      * @example
      * // Get all Categories
      * const categories = await prisma.category.findMany()
-     * 
+     *
      * // Get first 10 Categories
      * const categories = await prisma.category.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const categoryWithIdOnly = await prisma.category.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends CategoryFindManyArgs>(args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CategoryFindManyArgs>(
+      args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a Category.
@@ -4234,9 +4999,21 @@ export namespace Prisma {
      *     // ... data to create a Category
      *   }
      * })
-     * 
+     *
      */
-    create<T extends CategoryCreateArgs>(args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CategoryCreateArgs>(
+      args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Categories.
@@ -4248,9 +5025,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends CategoryCreateManyArgs>(args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CategoryCreateManyArgs>(
+      args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Categories and returns the data saved in the database.
@@ -4262,7 +5041,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Categories and only return the `id`
      * const categoryWithIdOnly = await prisma.category.createManyAndReturn({
      *   select: { id: true },
@@ -4272,9 +5051,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a Category.
@@ -4286,9 +5074,21 @@ export namespace Prisma {
      *     // ... filter to delete one Category
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends CategoryDeleteArgs>(args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CategoryDeleteArgs>(
+      args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one Category.
@@ -4303,9 +5103,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends CategoryUpdateArgs>(args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CategoryUpdateArgs>(
+      args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Categories.
@@ -4317,9 +5129,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends CategoryDeleteManyArgs>(args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CategoryDeleteManyArgs>(
+      args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Categories.
@@ -4336,9 +5150,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends CategoryUpdateManyArgs>(args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CategoryUpdateManyArgs>(
+      args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Categories and returns the data updated in the database.
@@ -4353,7 +5169,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Categories and only return the `id`
      * const categoryWithIdOnly = await prisma.category.updateManyAndReturn({
      *   select: { id: true },
@@ -4366,9 +5182,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends CategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, CategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends CategoryUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, CategoryUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one Category.
@@ -4387,8 +5212,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CategoryUpsertArgs>(args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends CategoryUpsertArgs>(
+      args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Categories.
@@ -4402,7 +5238,7 @@ export namespace Prisma {
      *     // ... the filter for the Categories we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends CategoryCountArgs>(
       args?: Subset<T, CategoryCountArgs>,
     ): Prisma.PrismaPromise<
@@ -4411,7 +5247,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], CategoryCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a Category.
@@ -4436,8 +5272,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Prisma.PrismaPromise<GetCategoryAggregateType<T>>
+     **/
+    aggregate<T extends CategoryAggregateArgs>(
+      args: Subset<T, CategoryAggregateArgs>,
+    ): Prisma.PrismaPromise<GetCategoryAggregateType<T>>;
 
     /**
      * Group by Category.
@@ -4455,8 +5293,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends CategoryGroupByArgs,
       HasSelectOrTake extends Or<
@@ -4466,59 +5304,66 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: CategoryGroupByArgs['orderBy'] }
         : { orderBy?: CategoryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Category model
-   */
-  readonly fields: CategoryFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> &
+        InputErrors,
+    ): {} extends InputErrors
+      ? GetCategoryGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Category model
+     */
+    readonly fields: CategoryFieldRefs;
   }
 
   /**
@@ -4527,828 +5372,988 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    parent<T extends Category$parentArgs<ExtArgs> = {}>(args?: Subset<T, Category$parentArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    subCategories<T extends Category$subCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Category$subCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    products<T extends Category$productsArgs<ExtArgs> = {}>(args?: Subset<T, Category$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  export interface Prisma__CategoryClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, StoreDefaultArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    parent<T extends Category$parentArgs<ExtArgs> = {}>(
+      args?: Subset<T, Category$parentArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      $Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    subCategories<T extends Category$subCategoriesArgs<ExtArgs> = {}>(
+      args?: Subset<T, Category$subCategoriesArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$CategoryPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
+    products<T extends Category$productsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Category$productsArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$ProductPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the Category model
    */
   interface CategoryFieldRefs {
-    readonly id: FieldRef<"Category", 'String'>
-    readonly name: FieldRef<"Category", 'String'>
-    readonly storeId: FieldRef<"Category", 'String'>
-    readonly parentId: FieldRef<"Category", 'String'>
+    readonly id: FieldRef<'Category', 'String'>;
+    readonly name: FieldRef<'Category', 'String'>;
+    readonly storeId: FieldRef<'Category', 'String'>;
+    readonly parentId: FieldRef<'Category', 'String'>;
   }
-    
 
   // Custom InputTypes
   /**
    * Category findUnique
    */
-  export type CategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter, which Category to fetch.
      */
-    where: CategoryWhereUniqueInput
-  }
+    where: CategoryWhereUniqueInput;
+  };
 
   /**
    * Category findUniqueOrThrow
    */
-  export type CategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter, which Category to fetch.
      */
-    where: CategoryWhereUniqueInput
-  }
+    where: CategoryWhereUniqueInput;
+  };
 
   /**
    * Category findFirst
    */
-  export type CategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter, which Category to fetch.
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Categories to fetch.
      */
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Categories.
      */
-    cursor?: CategoryWhereUniqueInput
+    cursor?: CategoryWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Categories from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Categories.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Categories.
      */
-    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
-  }
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[];
+  };
 
   /**
    * Category findFirstOrThrow
    */
-  export type CategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter, which Category to fetch.
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Categories to fetch.
      */
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Categories.
      */
-    cursor?: CategoryWhereUniqueInput
+    cursor?: CategoryWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Categories from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Categories.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Categories.
      */
-    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
-  }
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[];
+  };
 
   /**
    * Category findMany
    */
-  export type CategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter, which Categories to fetch.
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Categories to fetch.
      */
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Categories.
      */
-    cursor?: CategoryWhereUniqueInput
+    cursor?: CategoryWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Categories from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Categories.
      */
-    skip?: number
-    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[];
+  };
 
   /**
    * Category create
    */
-  export type CategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * The data needed to create a Category.
      */
-    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
-  }
+    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>;
+  };
 
   /**
    * Category createMany
    */
-  export type CategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Categories.
      */
-    data: CategoryCreateManyInput | CategoryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: CategoryCreateManyInput | CategoryCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * Category createManyAndReturn
    */
-  export type CategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelectCreateManyAndReturn<ExtArgs> | null
+    select?: CategorySelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * The data used to create many Categories.
      */
-    data: CategoryCreateManyInput | CategoryCreateManyInput[]
-    skipDuplicates?: boolean
+    data: CategoryCreateManyInput | CategoryCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: CategoryIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Category update
    */
-  export type CategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * The data needed to update a Category.
      */
-    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>;
     /**
      * Choose, which Category to update.
      */
-    where: CategoryWhereUniqueInput
-  }
+    where: CategoryWhereUniqueInput;
+  };
 
   /**
    * Category updateMany
    */
-  export type CategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Categories.
      */
-    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    data: XOR<
+      CategoryUpdateManyMutationInput,
+      CategoryUncheckedUpdateManyInput
+    >;
     /**
      * Filter which Categories to update
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * Limit how many Categories to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Category updateManyAndReturn
    */
-  export type CategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelectUpdateManyAndReturn<ExtArgs> | null
+    select?: CategorySelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * The data used to update Categories.
      */
-    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    data: XOR<
+      CategoryUpdateManyMutationInput,
+      CategoryUncheckedUpdateManyInput
+    >;
     /**
      * Filter which Categories to update
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * Limit how many Categories to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: CategoryIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Category upsert
    */
-  export type CategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * The filter to search for the Category to update in case it exists.
      */
-    where: CategoryWhereUniqueInput
+    where: CategoryWhereUniqueInput;
     /**
      * In case the Category found by the `where` argument doesn't exist, create a new Category with this data.
      */
-    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>;
     /**
      * In case the Category was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
-  }
+    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>;
+  };
 
   /**
    * Category delete
    */
-  export type CategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
+    include?: CategoryInclude<ExtArgs> | null;
     /**
      * Filter which Category to delete.
      */
-    where: CategoryWhereUniqueInput
-  }
+    where: CategoryWhereUniqueInput;
+  };
 
   /**
    * Category deleteMany
    */
-  export type CategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Categories to delete
      */
-    where?: CategoryWhereInput
+    where?: CategoryWhereInput;
     /**
      * Limit how many Categories to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Category.parent
    */
-  export type Category$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Category$parentArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
-    where?: CategoryWhereInput
-  }
+    include?: CategoryInclude<ExtArgs> | null;
+    where?: CategoryWhereInput;
+  };
 
   /**
    * Category.subCategories
    */
-  export type Category$subCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Category$subCategoriesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
-    where?: CategoryWhereInput
-    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
-    cursor?: CategoryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
-  }
+    include?: CategoryInclude<ExtArgs> | null;
+    where?: CategoryWhereInput;
+    orderBy?:
+      | CategoryOrderByWithRelationInput
+      | CategoryOrderByWithRelationInput[];
+    cursor?: CategoryWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[];
+  };
 
   /**
    * Category.products
    */
-  export type Category$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Category$productsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
-    where?: ProductWhereInput
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
-    cursor?: ProductWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
+    include?: ProductInclude<ExtArgs> | null;
+    where?: ProductWhereInput;
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
+    cursor?: ProductWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[];
+  };
 
   /**
    * Category without action
    */
-  export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CategoryDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Category
      */
-    select?: CategorySelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Category
      */
-    omit?: CategoryOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CategoryInclude<ExtArgs> | null
-  }
-
+    include?: CategoryInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Product
    */
 
   export type AggregateProduct = {
-    _count: ProductCountAggregateOutputType | null
-    _avg: ProductAvgAggregateOutputType | null
-    _sum: ProductSumAggregateOutputType | null
-    _min: ProductMinAggregateOutputType | null
-    _max: ProductMaxAggregateOutputType | null
-  }
+    _count: ProductCountAggregateOutputType | null;
+    _avg: ProductAvgAggregateOutputType | null;
+    _sum: ProductSumAggregateOutputType | null;
+    _min: ProductMinAggregateOutputType | null;
+    _max: ProductMaxAggregateOutputType | null;
+  };
 
   export type ProductAvgAggregateOutputType = {
-    originalPrice: number | null
-    price: number | null
-  }
+    originalPrice: number | null;
+    price: number | null;
+  };
 
   export type ProductSumAggregateOutputType = {
-    originalPrice: number | null
-    price: number | null
-  }
+    originalPrice: number | null;
+    price: number | null;
+  };
 
   export type ProductMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    originalPrice: number | null
-    price: number | null
-    categoryId: string | null
-    storeId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    description: string | null;
+    originalPrice: number | null;
+    price: number | null;
+    categoryId: string | null;
+    storeId: string | null;
+  };
 
   export type ProductMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    originalPrice: number | null
-    price: number | null
-    categoryId: string | null
-    storeId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    description: string | null;
+    originalPrice: number | null;
+    price: number | null;
+    categoryId: string | null;
+    storeId: string | null;
+  };
 
   export type ProductCountAggregateOutputType = {
-    id: number
-    name: number
-    description: number
-    originalPrice: number
-    price: number
-    categoryId: number
-    storeId: number
-    _all: number
-  }
-
+    id: number;
+    name: number;
+    description: number;
+    originalPrice: number;
+    price: number;
+    categoryId: number;
+    storeId: number;
+    _all: number;
+  };
 
   export type ProductAvgAggregateInputType = {
-    originalPrice?: true
-    price?: true
-  }
+    originalPrice?: true;
+    price?: true;
+  };
 
   export type ProductSumAggregateInputType = {
-    originalPrice?: true
-    price?: true
-  }
+    originalPrice?: true;
+    price?: true;
+  };
 
   export type ProductMinAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    originalPrice?: true
-    price?: true
-    categoryId?: true
-    storeId?: true
-  }
+    id?: true;
+    name?: true;
+    description?: true;
+    originalPrice?: true;
+    price?: true;
+    categoryId?: true;
+    storeId?: true;
+  };
 
   export type ProductMaxAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    originalPrice?: true
-    price?: true
-    categoryId?: true
-    storeId?: true
-  }
+    id?: true;
+    name?: true;
+    description?: true;
+    originalPrice?: true;
+    price?: true;
+    categoryId?: true;
+    storeId?: true;
+  };
 
   export type ProductCountAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    originalPrice?: true
-    price?: true
-    categoryId?: true
-    storeId?: true
-    _all?: true
-  }
+    id?: true;
+    name?: true;
+    description?: true;
+    originalPrice?: true;
+    price?: true;
+    categoryId?: true;
+    storeId?: true;
+    _all?: true;
+  };
 
-  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Product to aggregate.
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Products to fetch.
      */
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: ProductWhereUniqueInput
+    cursor?: ProductWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Products from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Products.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Products
-    **/
-    _count?: true | ProductCountAggregateInputType
+     **/
+    _count?: true | ProductCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
-    _avg?: ProductAvgAggregateInputType
+     **/
+    _avg?: ProductAvgAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
-    _sum?: ProductSumAggregateInputType
+     **/
+    _sum?: ProductSumAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: ProductMinAggregateInputType
+     **/
+    _min?: ProductMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: ProductMaxAggregateInputType
-  }
+     **/
+    _max?: ProductMaxAggregateInputType;
+  };
 
   export type GetProductAggregateType<T extends ProductAggregateArgs> = {
-        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateProduct[P]>
-      : GetScalarType<T[P], AggregateProduct[P]>
-  }
+      : GetScalarType<T[P], AggregateProduct[P]>;
+  };
 
-
-
-
-  export type ProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductWhereInput
-    orderBy?: ProductOrderByWithAggregationInput | ProductOrderByWithAggregationInput[]
-    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
-    having?: ProductScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProductCountAggregateInputType | true
-    _avg?: ProductAvgAggregateInputType
-    _sum?: ProductSumAggregateInputType
-    _min?: ProductMinAggregateInputType
-    _max?: ProductMaxAggregateInputType
-  }
+  export type ProductGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ProductWhereInput;
+    orderBy?:
+      | ProductOrderByWithAggregationInput
+      | ProductOrderByWithAggregationInput[];
+    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum;
+    having?: ProductScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: ProductCountAggregateInputType | true;
+    _avg?: ProductAvgAggregateInputType;
+    _sum?: ProductSumAggregateInputType;
+    _min?: ProductMinAggregateInputType;
+    _max?: ProductMaxAggregateInputType;
+  };
 
   export type ProductGroupByOutputType = {
-    id: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-    storeId: string
-    _count: ProductCountAggregateOutputType | null
-    _avg: ProductAvgAggregateOutputType | null
-    _sum: ProductSumAggregateOutputType | null
-    _min: ProductMinAggregateOutputType | null
-    _max: ProductMaxAggregateOutputType | null
-  }
+    id: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+    storeId: string;
+    _count: ProductCountAggregateOutputType | null;
+    _avg: ProductAvgAggregateOutputType | null;
+    _sum: ProductSumAggregateOutputType | null;
+    _min: ProductMinAggregateOutputType | null;
+    _max: ProductMaxAggregateOutputType | null;
+  };
 
-  type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProductGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
+  type GetProductGroupByPayload<T extends ProductGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<ProductGroupByOutputType, T['by']> & {
+          [P in keyof T & keyof ProductGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ProductGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type ProductSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      description?: boolean;
+      originalPrice?: boolean;
+      price?: boolean;
+      categoryId?: boolean;
+      storeId?: boolean;
+      category?: boolean | CategoryDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+      reviews?: boolean | Product$reviewsArgs<ExtArgs>;
+      _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['product']
+  >;
 
-  export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    originalPrice?: boolean
-    price?: boolean
-    categoryId?: boolean
-    storeId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    reviews?: boolean | Product$reviewsArgs<ExtArgs>
-    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["product"]>
+  export type ProductSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      description?: boolean;
+      originalPrice?: boolean;
+      price?: boolean;
+      categoryId?: boolean;
+      storeId?: boolean;
+      category?: boolean | CategoryDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['product']
+  >;
 
-  export type ProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    originalPrice?: boolean
-    price?: boolean
-    categoryId?: boolean
-    storeId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["product"]>
-
-  export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    originalPrice?: boolean
-    price?: boolean
-    categoryId?: boolean
-    storeId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["product"]>
+  export type ProductSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      description?: boolean;
+      originalPrice?: boolean;
+      price?: boolean;
+      categoryId?: boolean;
+      storeId?: boolean;
+      category?: boolean | CategoryDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['product']
+  >;
 
   export type ProductSelectScalar = {
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    originalPrice?: boolean
-    price?: boolean
-    categoryId?: boolean
-    storeId?: boolean
-  }
+    id?: boolean;
+    name?: boolean;
+    description?: boolean;
+    originalPrice?: boolean;
+    price?: boolean;
+    categoryId?: boolean;
+    storeId?: boolean;
+  };
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "originalPrice" | "price" | "categoryId" | "storeId", ExtArgs["result"]["product"]>
-  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-    reviews?: boolean | Product$reviewsArgs<ExtArgs>
-    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
+  export type ProductOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    | 'id'
+    | 'name'
+    | 'description'
+    | 'originalPrice'
+    | 'price'
+    | 'categoryId'
+    | 'storeId',
+    ExtArgs['result']['product']
+  >;
+  export type ProductInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+    reviews?: boolean | Product$reviewsArgs<ExtArgs>;
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type ProductIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type ProductIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
 
-  export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Product"
+  export type $ProductPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Product';
     objects: {
-      category: Prisma.$CategoryPayload<ExtArgs>
-      store: Prisma.$StorePayload<ExtArgs>
-      reviews: Prisma.$ReviewPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      description: string
-      originalPrice: number
-      price: number
-      categoryId: string
-      storeId: string
-    }, ExtArgs["result"]["product"]>
-    composites: {}
-  }
+      category: Prisma.$CategoryPayload<ExtArgs>;
+      store: Prisma.$StorePayload<ExtArgs>;
+      reviews: Prisma.$ReviewPayload<ExtArgs>[];
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        description: string;
+        originalPrice: number;
+        price: number;
+        categoryId: string;
+        storeId: string;
+      },
+      ExtArgs['result']['product']
+    >;
+    composites: {};
+  };
 
-  type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<Prisma.$ProductPayload, S>
+  type ProductGetPayload<
+    S extends boolean | null | undefined | ProductDefaultArgs,
+  > = $Result.GetResult<Prisma.$ProductPayload, S>;
 
-  type ProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProductCountAggregateInputType | true
-    }
+  type ProductCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: ProductCountAggregateInputType | true;
+  };
 
-  export interface ProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Product'], meta: { name: 'Product' } }
+  export interface ProductDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Product'];
+      meta: { name: 'Product' };
+    };
     /**
      * Find zero or one Product that matches the filter.
      * @param {ProductFindUniqueArgs} args - Arguments to find a Product
@@ -5360,7 +6365,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ProductFindUniqueArgs>(args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ProductFindUniqueArgs>(
+      args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one Product that matches the filter or throw an error with `error.code='P2025'`
@@ -5374,7 +6391,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Product that matches the filter.
@@ -5389,7 +6418,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ProductFindFirstArgs>(args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ProductFindFirstArgs>(
+      args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Product that matches the filter or
@@ -5405,7 +6446,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Products that matches the filter.
@@ -5415,15 +6468,24 @@ export namespace Prisma {
      * @example
      * // Get all Products
      * const products = await prisma.product.findMany()
-     * 
+     *
      * // Get first 10 Products
      * const products = await prisma.product.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends ProductFindManyArgs>(args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ProductFindManyArgs>(
+      args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a Product.
@@ -5435,9 +6497,21 @@ export namespace Prisma {
      *     // ... data to create a Product
      *   }
      * })
-     * 
+     *
      */
-    create<T extends ProductCreateArgs>(args: SelectSubset<T, ProductCreateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ProductCreateArgs>(
+      args: SelectSubset<T, ProductCreateArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Products.
@@ -5449,9 +6523,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends ProductCreateManyArgs>(args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ProductCreateManyArgs>(
+      args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Products and returns the data saved in the database.
@@ -5463,7 +6539,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Products and only return the `id`
      * const productWithIdOnly = await prisma.product.createManyAndReturn({
      *   select: { id: true },
@@ -5473,9 +6549,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends ProductCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ProductCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a Product.
@@ -5487,9 +6572,21 @@ export namespace Prisma {
      *     // ... filter to delete one Product
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends ProductDeleteArgs>(args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ProductDeleteArgs>(
+      args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one Product.
@@ -5504,9 +6601,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends ProductUpdateArgs>(args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ProductUpdateArgs>(
+      args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Products.
@@ -5518,9 +6627,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends ProductDeleteManyArgs>(args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ProductDeleteManyArgs>(
+      args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Products.
@@ -5537,9 +6648,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends ProductUpdateManyArgs>(args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ProductUpdateManyArgs>(
+      args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Products and returns the data updated in the database.
@@ -5554,7 +6667,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Products and only return the `id`
      * const productWithIdOnly = await prisma.product.updateManyAndReturn({
      *   select: { id: true },
@@ -5567,9 +6680,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends ProductUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ProductUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one Product.
@@ -5588,8 +6710,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ProductUpsertArgs>(args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends ProductUpsertArgs>(
+      args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      $Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Products.
@@ -5603,7 +6736,7 @@ export namespace Prisma {
      *     // ... the filter for the Products we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends ProductCountArgs>(
       args?: Subset<T, ProductCountArgs>,
     ): Prisma.PrismaPromise<
@@ -5612,7 +6745,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], ProductCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a Product.
@@ -5637,8 +6770,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
+     **/
+    aggregate<T extends ProductAggregateArgs>(
+      args: Subset<T, ProductAggregateArgs>,
+    ): Prisma.PrismaPromise<GetProductAggregateType<T>>;
 
     /**
      * Group by Product.
@@ -5656,8 +6791,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends ProductGroupByArgs,
       HasSelectOrTake extends Or<
@@ -5667,59 +6802,65 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProductGroupByArgs['orderBy'] }
         : { orderBy?: ProductGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Product model
-   */
-  readonly fields: ProductFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors,
+    ): {} extends InputErrors
+      ? GetProductGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Product model
+     */
+    readonly fields: ProductFieldRefs;
   }
 
   /**
@@ -5728,754 +6869,883 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    reviews<T extends Product$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Product$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  export interface Prisma__ProductClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, CategoryDefaultArgs<ExtArgs>>,
+    ): Prisma__CategoryClient<
+      | $Result.GetResult<
+          Prisma.$CategoryPayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, StoreDefaultArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    reviews<T extends Product$reviewsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Product$reviewsArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$ReviewPayload<ExtArgs>,
+          T,
+          'findMany',
+          GlobalOmitOptions
+        >
+      | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the Product model
    */
   interface ProductFieldRefs {
-    readonly id: FieldRef<"Product", 'String'>
-    readonly name: FieldRef<"Product", 'String'>
-    readonly description: FieldRef<"Product", 'String'>
-    readonly originalPrice: FieldRef<"Product", 'Float'>
-    readonly price: FieldRef<"Product", 'Float'>
-    readonly categoryId: FieldRef<"Product", 'String'>
-    readonly storeId: FieldRef<"Product", 'String'>
+    readonly id: FieldRef<'Product', 'String'>;
+    readonly name: FieldRef<'Product', 'String'>;
+    readonly description: FieldRef<'Product', 'String'>;
+    readonly originalPrice: FieldRef<'Product', 'Float'>;
+    readonly price: FieldRef<'Product', 'Float'>;
+    readonly categoryId: FieldRef<'Product', 'String'>;
+    readonly storeId: FieldRef<'Product', 'String'>;
   }
-    
 
   // Custom InputTypes
   /**
    * Product findUnique
    */
-  export type ProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter, which Product to fetch.
      */
-    where: ProductWhereUniqueInput
-  }
+    where: ProductWhereUniqueInput;
+  };
 
   /**
    * Product findUniqueOrThrow
    */
-  export type ProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter, which Product to fetch.
      */
-    where: ProductWhereUniqueInput
-  }
+    where: ProductWhereUniqueInput;
+  };
 
   /**
    * Product findFirst
    */
-  export type ProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter, which Product to fetch.
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Products to fetch.
      */
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Products.
      */
-    cursor?: ProductWhereUniqueInput
+    cursor?: ProductWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Products from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Products.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Products.
      */
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[];
+  };
 
   /**
    * Product findFirstOrThrow
    */
-  export type ProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter, which Product to fetch.
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Products to fetch.
      */
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Products.
      */
-    cursor?: ProductWhereUniqueInput
+    cursor?: ProductWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Products from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Products.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Products.
      */
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[];
+  };
 
   /**
    * Product findMany
    */
-  export type ProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter, which Products to fetch.
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Products to fetch.
      */
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    orderBy?:
+      | ProductOrderByWithRelationInput
+      | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Products.
      */
-    cursor?: ProductWhereUniqueInput
+    cursor?: ProductWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Products from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Products.
      */
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[];
+  };
 
   /**
    * Product create
    */
-  export type ProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * The data needed to create a Product.
      */
-    data: XOR<ProductCreateInput, ProductUncheckedCreateInput>
-  }
+    data: XOR<ProductCreateInput, ProductUncheckedCreateInput>;
+  };
 
   /**
    * Product createMany
    */
-  export type ProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Products.
      */
-    data: ProductCreateManyInput | ProductCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: ProductCreateManyInput | ProductCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * Product createManyAndReturn
    */
-  export type ProductCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ProductSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * The data used to create many Products.
      */
-    data: ProductCreateManyInput | ProductCreateManyInput[]
-    skipDuplicates?: boolean
+    data: ProductCreateManyInput | ProductCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: ProductIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Product update
    */
-  export type ProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * The data needed to update a Product.
      */
-    data: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
+    data: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>;
     /**
      * Choose, which Product to update.
      */
-    where: ProductWhereUniqueInput
-  }
+    where: ProductWhereUniqueInput;
+  };
 
   /**
    * Product updateMany
    */
-  export type ProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Products.
      */
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>;
     /**
      * Filter which Products to update
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * Limit how many Products to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Product updateManyAndReturn
    */
-  export type ProductUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ProductSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * The data used to update Products.
      */
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>;
     /**
      * Filter which Products to update
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * Limit how many Products to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: ProductIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Product upsert
    */
-  export type ProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * The filter to search for the Product to update in case it exists.
      */
-    where: ProductWhereUniqueInput
+    where: ProductWhereUniqueInput;
     /**
      * In case the Product found by the `where` argument doesn't exist, create a new Product with this data.
      */
-    create: XOR<ProductCreateInput, ProductUncheckedCreateInput>
+    create: XOR<ProductCreateInput, ProductUncheckedCreateInput>;
     /**
      * In case the Product was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
-  }
+    update: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>;
+  };
 
   /**
    * Product delete
    */
-  export type ProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
+    include?: ProductInclude<ExtArgs> | null;
     /**
      * Filter which Product to delete.
      */
-    where: ProductWhereUniqueInput
-  }
+    where: ProductWhereUniqueInput;
+  };
 
   /**
    * Product deleteMany
    */
-  export type ProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Products to delete
      */
-    where?: ProductWhereInput
+    where?: ProductWhereInput;
     /**
      * Limit how many Products to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Product.reviews
    */
-  export type Product$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Product$reviewsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
-    where?: ReviewWhereInput
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
-    cursor?: ReviewWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
+    include?: ReviewInclude<ExtArgs> | null;
+    where?: ReviewWhereInput;
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
+    cursor?: ReviewWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[];
+  };
 
   /**
    * Product without action
    */
-  export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Product
      */
-    select?: ProductSelect<ExtArgs> | null
+    select?: ProductSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Product
      */
-    omit?: ProductOmit<ExtArgs> | null
+    omit?: ProductOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProductInclude<ExtArgs> | null
-  }
-
+    include?: ProductInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Review
    */
 
   export type AggregateReview = {
-    _count: ReviewCountAggregateOutputType | null
-    _avg: ReviewAvgAggregateOutputType | null
-    _sum: ReviewSumAggregateOutputType | null
-    _min: ReviewMinAggregateOutputType | null
-    _max: ReviewMaxAggregateOutputType | null
-  }
+    _count: ReviewCountAggregateOutputType | null;
+    _avg: ReviewAvgAggregateOutputType | null;
+    _sum: ReviewSumAggregateOutputType | null;
+    _min: ReviewMinAggregateOutputType | null;
+    _max: ReviewMaxAggregateOutputType | null;
+  };
 
   export type ReviewAvgAggregateOutputType = {
-    rating: number | null
-  }
+    rating: number | null;
+  };
 
   export type ReviewSumAggregateOutputType = {
-    rating: number | null
-  }
+    rating: number | null;
+  };
 
   export type ReviewMinAggregateOutputType = {
-    id: string | null
-    content: string | null
-    rating: number | null
-    productId: string | null
-    storeId: string | null
-  }
+    id: string | null;
+    content: string | null;
+    rating: number | null;
+    productId: string | null;
+    storeId: string | null;
+  };
 
   export type ReviewMaxAggregateOutputType = {
-    id: string | null
-    content: string | null
-    rating: number | null
-    productId: string | null
-    storeId: string | null
-  }
+    id: string | null;
+    content: string | null;
+    rating: number | null;
+    productId: string | null;
+    storeId: string | null;
+  };
 
   export type ReviewCountAggregateOutputType = {
-    id: number
-    content: number
-    rating: number
-    productId: number
-    storeId: number
-    _all: number
-  }
-
+    id: number;
+    content: number;
+    rating: number;
+    productId: number;
+    storeId: number;
+    _all: number;
+  };
 
   export type ReviewAvgAggregateInputType = {
-    rating?: true
-  }
+    rating?: true;
+  };
 
   export type ReviewSumAggregateInputType = {
-    rating?: true
-  }
+    rating?: true;
+  };
 
   export type ReviewMinAggregateInputType = {
-    id?: true
-    content?: true
-    rating?: true
-    productId?: true
-    storeId?: true
-  }
+    id?: true;
+    content?: true;
+    rating?: true;
+    productId?: true;
+    storeId?: true;
+  };
 
   export type ReviewMaxAggregateInputType = {
-    id?: true
-    content?: true
-    rating?: true
-    productId?: true
-    storeId?: true
-  }
+    id?: true;
+    content?: true;
+    rating?: true;
+    productId?: true;
+    storeId?: true;
+  };
 
   export type ReviewCountAggregateInputType = {
-    id?: true
-    content?: true
-    rating?: true
-    productId?: true
-    storeId?: true
-    _all?: true
-  }
+    id?: true;
+    content?: true;
+    rating?: true;
+    productId?: true;
+    storeId?: true;
+    _all?: true;
+  };
 
-  export type ReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Review to aggregate.
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Reviews to fetch.
      */
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: ReviewWhereUniqueInput
+    cursor?: ReviewWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Reviews from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Reviews.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Reviews
-    **/
-    _count?: true | ReviewCountAggregateInputType
+     **/
+    _count?: true | ReviewCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
-    _avg?: ReviewAvgAggregateInputType
+     **/
+    _avg?: ReviewAvgAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
-    _sum?: ReviewSumAggregateInputType
+     **/
+    _sum?: ReviewSumAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: ReviewMinAggregateInputType
+     **/
+    _min?: ReviewMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: ReviewMaxAggregateInputType
-  }
+     **/
+    _max?: ReviewMaxAggregateInputType;
+  };
 
   export type GetReviewAggregateType<T extends ReviewAggregateArgs> = {
-        [P in keyof T & keyof AggregateReview]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateReview]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateReview[P]>
-      : GetScalarType<T[P], AggregateReview[P]>
-  }
+      : GetScalarType<T[P], AggregateReview[P]>;
+  };
 
-
-
-
-  export type ReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewWhereInput
-    orderBy?: ReviewOrderByWithAggregationInput | ReviewOrderByWithAggregationInput[]
-    by: ReviewScalarFieldEnum[] | ReviewScalarFieldEnum
-    having?: ReviewScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReviewCountAggregateInputType | true
-    _avg?: ReviewAvgAggregateInputType
-    _sum?: ReviewSumAggregateInputType
-    _min?: ReviewMinAggregateInputType
-    _max?: ReviewMaxAggregateInputType
-  }
+  export type ReviewGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ReviewWhereInput;
+    orderBy?:
+      | ReviewOrderByWithAggregationInput
+      | ReviewOrderByWithAggregationInput[];
+    by: ReviewScalarFieldEnum[] | ReviewScalarFieldEnum;
+    having?: ReviewScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: ReviewCountAggregateInputType | true;
+    _avg?: ReviewAvgAggregateInputType;
+    _sum?: ReviewSumAggregateInputType;
+    _min?: ReviewMinAggregateInputType;
+    _max?: ReviewMaxAggregateInputType;
+  };
 
   export type ReviewGroupByOutputType = {
-    id: string
-    content: string
-    rating: number
-    productId: string
-    storeId: string
-    _count: ReviewCountAggregateOutputType | null
-    _avg: ReviewAvgAggregateOutputType | null
-    _sum: ReviewSumAggregateOutputType | null
-    _min: ReviewMinAggregateOutputType | null
-    _max: ReviewMaxAggregateOutputType | null
-  }
+    id: string;
+    content: string;
+    rating: number;
+    productId: string;
+    storeId: string;
+    _count: ReviewCountAggregateOutputType | null;
+    _avg: ReviewAvgAggregateOutputType | null;
+    _sum: ReviewSumAggregateOutputType | null;
+    _min: ReviewMinAggregateOutputType | null;
+    _max: ReviewMaxAggregateOutputType | null;
+  };
 
-  type GetReviewGroupByPayload<T extends ReviewGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReviewGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReviewGroupByOutputType))]: P extends '_count'
+  type GetReviewGroupByPayload<T extends ReviewGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<ReviewGroupByOutputType, T['by']> & {
+          [P in keyof T & keyof ReviewGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ReviewGroupByOutputType[P]>
-            : GetScalarType<T[P], ReviewGroupByOutputType[P]>
+            : GetScalarType<T[P], ReviewGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type ReviewSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      content?: boolean;
+      rating?: boolean;
+      productId?: boolean;
+      storeId?: boolean;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['review']
+  >;
 
-  export type ReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    rating?: boolean
-    productId?: boolean
-    storeId?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["review"]>
+  export type ReviewSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      content?: boolean;
+      rating?: boolean;
+      productId?: boolean;
+      storeId?: boolean;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['review']
+  >;
 
-  export type ReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    rating?: boolean
-    productId?: boolean
-    storeId?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["review"]>
-
-  export type ReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    rating?: boolean
-    productId?: boolean
-    storeId?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["review"]>
+  export type ReviewSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      content?: boolean;
+      rating?: boolean;
+      productId?: boolean;
+      storeId?: boolean;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['review']
+  >;
 
   export type ReviewSelectScalar = {
-    id?: boolean
-    content?: boolean
-    rating?: boolean
-    productId?: boolean
-    storeId?: boolean
-  }
+    id?: boolean;
+    content?: boolean;
+    rating?: boolean;
+    productId?: boolean;
+    storeId?: boolean;
+  };
 
-  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "rating" | "productId" | "storeId", ExtArgs["result"]["review"]>
-  export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type ReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
+  export type ReviewOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    'id' | 'content' | 'rating' | 'productId' | 'storeId',
+    ExtArgs['result']['review']
+  >;
+  export type ReviewInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type ReviewIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type ReviewIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
 
-  export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Review"
+  export type $ReviewPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Review';
     objects: {
-      product: Prisma.$ProductPayload<ExtArgs>
-      store: Prisma.$StorePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      content: string
-      rating: number
-      productId: string
-      storeId: string
-    }, ExtArgs["result"]["review"]>
-    composites: {}
-  }
+      product: Prisma.$ProductPayload<ExtArgs>;
+      store: Prisma.$StorePayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        content: string;
+        rating: number;
+        productId: string;
+        storeId: string;
+      },
+      ExtArgs['result']['review']
+    >;
+    composites: {};
+  };
 
-  type ReviewGetPayload<S extends boolean | null | undefined | ReviewDefaultArgs> = $Result.GetResult<Prisma.$ReviewPayload, S>
+  type ReviewGetPayload<
+    S extends boolean | null | undefined | ReviewDefaultArgs,
+  > = $Result.GetResult<Prisma.$ReviewPayload, S>;
 
-  type ReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReviewFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReviewCountAggregateInputType | true
-    }
+  type ReviewCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<ReviewFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: ReviewCountAggregateInputType | true;
+  };
 
-  export interface ReviewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Review'], meta: { name: 'Review' } }
+  export interface ReviewDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Review'];
+      meta: { name: 'Review' };
+    };
     /**
      * Find zero or one Review that matches the filter.
      * @param {ReviewFindUniqueArgs} args - Arguments to find a Review
@@ -6487,7 +7757,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ReviewFindUniqueArgs>(args: SelectSubset<T, ReviewFindUniqueArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ReviewFindUniqueArgs>(
+      args: SelectSubset<T, ReviewFindUniqueArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one Review that matches the filter or throw an error with `error.code='P2025'`
@@ -6501,7 +7783,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ReviewFindUniqueOrThrowArgs>(args: SelectSubset<T, ReviewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ReviewFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, ReviewFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Review that matches the filter.
@@ -6516,7 +7810,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ReviewFindFirstArgs>(args?: SelectSubset<T, ReviewFindFirstArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ReviewFindFirstArgs>(
+      args?: SelectSubset<T, ReviewFindFirstArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Review that matches the filter or
@@ -6532,7 +7838,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ReviewFindFirstOrThrowArgs>(args?: SelectSubset<T, ReviewFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ReviewFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, ReviewFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Reviews that matches the filter.
@@ -6542,15 +7860,24 @@ export namespace Prisma {
      * @example
      * // Get all Reviews
      * const reviews = await prisma.review.findMany()
-     * 
+     *
      * // Get first 10 Reviews
      * const reviews = await prisma.review.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const reviewWithIdOnly = await prisma.review.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends ReviewFindManyArgs>(args?: SelectSubset<T, ReviewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ReviewFindManyArgs>(
+      args?: SelectSubset<T, ReviewFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a Review.
@@ -6562,9 +7889,21 @@ export namespace Prisma {
      *     // ... data to create a Review
      *   }
      * })
-     * 
+     *
      */
-    create<T extends ReviewCreateArgs>(args: SelectSubset<T, ReviewCreateArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ReviewCreateArgs>(
+      args: SelectSubset<T, ReviewCreateArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Reviews.
@@ -6576,9 +7915,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends ReviewCreateManyArgs>(args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ReviewCreateManyArgs>(
+      args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Reviews and returns the data saved in the database.
@@ -6590,7 +7931,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Reviews and only return the `id`
      * const reviewWithIdOnly = await prisma.review.createManyAndReturn({
      *   select: { id: true },
@@ -6600,9 +7941,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends ReviewCreateManyAndReturnArgs>(args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ReviewCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a Review.
@@ -6614,9 +7964,21 @@ export namespace Prisma {
      *     // ... filter to delete one Review
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends ReviewDeleteArgs>(args: SelectSubset<T, ReviewDeleteArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ReviewDeleteArgs>(
+      args: SelectSubset<T, ReviewDeleteArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one Review.
@@ -6631,9 +7993,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends ReviewUpdateArgs>(args: SelectSubset<T, ReviewUpdateArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ReviewUpdateArgs>(
+      args: SelectSubset<T, ReviewUpdateArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Reviews.
@@ -6645,9 +8019,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends ReviewDeleteManyArgs>(args?: SelectSubset<T, ReviewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ReviewDeleteManyArgs>(
+      args?: SelectSubset<T, ReviewDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Reviews.
@@ -6664,9 +8040,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends ReviewUpdateManyArgs>(args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ReviewUpdateManyArgs>(
+      args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Reviews and returns the data updated in the database.
@@ -6681,7 +8059,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Reviews and only return the `id`
      * const reviewWithIdOnly = await prisma.review.updateManyAndReturn({
      *   select: { id: true },
@@ -6694,9 +8072,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends ReviewUpdateManyAndReturnArgs>(args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ReviewUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one Review.
@@ -6715,8 +8102,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ReviewUpsertArgs>(args: SelectSubset<T, ReviewUpsertArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends ReviewUpsertArgs>(
+      args: SelectSubset<T, ReviewUpsertArgs<ExtArgs>>,
+    ): Prisma__ReviewClient<
+      $Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Reviews.
@@ -6730,7 +8128,7 @@ export namespace Prisma {
      *     // ... the filter for the Reviews we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends ReviewCountArgs>(
       args?: Subset<T, ReviewCountArgs>,
     ): Prisma.PrismaPromise<
@@ -6739,7 +8137,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], ReviewCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a Review.
@@ -6764,8 +8162,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends ReviewAggregateArgs>(args: Subset<T, ReviewAggregateArgs>): Prisma.PrismaPromise<GetReviewAggregateType<T>>
+     **/
+    aggregate<T extends ReviewAggregateArgs>(
+      args: Subset<T, ReviewAggregateArgs>,
+    ): Prisma.PrismaPromise<GetReviewAggregateType<T>>;
 
     /**
      * Group by Review.
@@ -6783,8 +8183,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends ReviewGroupByArgs,
       HasSelectOrTake extends Or<
@@ -6794,59 +8194,65 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ReviewGroupByArgs['orderBy'] }
         : { orderBy?: ReviewGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReviewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Review model
-   */
-  readonly fields: ReviewFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, ReviewGroupByArgs, OrderByArg> & InputErrors,
+    ): {} extends InputErrors
+      ? GetReviewGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Review model
+     */
+    readonly fields: ReviewFieldRefs;
   }
 
   /**
@@ -6855,782 +8261,907 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__ReviewClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, ProductDefaultArgs<ExtArgs>>,
+    ): Prisma__ProductClient<
+      | $Result.GetResult<
+          Prisma.$ProductPayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, StoreDefaultArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the Review model
    */
   interface ReviewFieldRefs {
-    readonly id: FieldRef<"Review", 'String'>
-    readonly content: FieldRef<"Review", 'String'>
-    readonly rating: FieldRef<"Review", 'Int'>
-    readonly productId: FieldRef<"Review", 'String'>
-    readonly storeId: FieldRef<"Review", 'String'>
+    readonly id: FieldRef<'Review', 'String'>;
+    readonly content: FieldRef<'Review', 'String'>;
+    readonly rating: FieldRef<'Review', 'Int'>;
+    readonly productId: FieldRef<'Review', 'String'>;
+    readonly storeId: FieldRef<'Review', 'String'>;
   }
-    
 
   // Custom InputTypes
   /**
    * Review findUnique
    */
-  export type ReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter, which Review to fetch.
      */
-    where: ReviewWhereUniqueInput
-  }
+    where: ReviewWhereUniqueInput;
+  };
 
   /**
    * Review findUniqueOrThrow
    */
-  export type ReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter, which Review to fetch.
      */
-    where: ReviewWhereUniqueInput
-  }
+    where: ReviewWhereUniqueInput;
+  };
 
   /**
    * Review findFirst
    */
-  export type ReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter, which Review to fetch.
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Reviews to fetch.
      */
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Reviews.
      */
-    cursor?: ReviewWhereUniqueInput
+    cursor?: ReviewWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Reviews from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Reviews.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Reviews.
      */
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[];
+  };
 
   /**
    * Review findFirstOrThrow
    */
-  export type ReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter, which Review to fetch.
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Reviews to fetch.
      */
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Reviews.
      */
-    cursor?: ReviewWhereUniqueInput
+    cursor?: ReviewWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Reviews from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Reviews.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Reviews.
      */
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[];
+  };
 
   /**
    * Review findMany
    */
-  export type ReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter, which Reviews to fetch.
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Reviews to fetch.
      */
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Reviews.
      */
-    cursor?: ReviewWhereUniqueInput
+    cursor?: ReviewWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Reviews from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Reviews.
      */
-    skip?: number
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[];
+  };
 
   /**
    * Review create
    */
-  export type ReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * The data needed to create a Review.
      */
-    data: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>
-  }
+    data: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>;
+  };
 
   /**
    * Review createMany
    */
-  export type ReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Reviews.
      */
-    data: ReviewCreateManyInput | ReviewCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: ReviewCreateManyInput | ReviewCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * Review createManyAndReturn
    */
-  export type ReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ReviewSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * The data used to create many Reviews.
      */
-    data: ReviewCreateManyInput | ReviewCreateManyInput[]
-    skipDuplicates?: boolean
+    data: ReviewCreateManyInput | ReviewCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: ReviewIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Review update
    */
-  export type ReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * The data needed to update a Review.
      */
-    data: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>
+    data: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>;
     /**
      * Choose, which Review to update.
      */
-    where: ReviewWhereUniqueInput
-  }
+    where: ReviewWhereUniqueInput;
+  };
 
   /**
    * Review updateMany
    */
-  export type ReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Reviews.
      */
-    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>;
     /**
      * Filter which Reviews to update
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * Limit how many Reviews to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Review updateManyAndReturn
    */
-  export type ReviewUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ReviewSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * The data used to update Reviews.
      */
-    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>;
     /**
      * Filter which Reviews to update
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * Limit how many Reviews to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: ReviewIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Review upsert
    */
-  export type ReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * The filter to search for the Review to update in case it exists.
      */
-    where: ReviewWhereUniqueInput
+    where: ReviewWhereUniqueInput;
     /**
      * In case the Review found by the `where` argument doesn't exist, create a new Review with this data.
      */
-    create: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>
+    create: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>;
     /**
      * In case the Review was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>
-  }
+    update: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>;
+  };
 
   /**
    * Review delete
    */
-  export type ReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
+    include?: ReviewInclude<ExtArgs> | null;
     /**
      * Filter which Review to delete.
      */
-    where: ReviewWhereUniqueInput
-  }
+    where: ReviewWhereUniqueInput;
+  };
 
   /**
    * Review deleteMany
    */
-  export type ReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Reviews to delete
      */
-    where?: ReviewWhereInput
+    where?: ReviewWhereInput;
     /**
      * Limit how many Reviews to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Review without action
    */
-  export type ReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReviewDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Review
      */
-    select?: ReviewSelect<ExtArgs> | null
+    select?: ReviewSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Review
      */
-    omit?: ReviewOmit<ExtArgs> | null
+    omit?: ReviewOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewInclude<ExtArgs> | null
-  }
-
+    include?: ReviewInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Customer
    */
 
   export type AggregateCustomer = {
-    _count: CustomerCountAggregateOutputType | null
-    _min: CustomerMinAggregateOutputType | null
-    _max: CustomerMaxAggregateOutputType | null
-  }
+    _count: CustomerCountAggregateOutputType | null;
+    _min: CustomerMinAggregateOutputType | null;
+    _max: CustomerMaxAggregateOutputType | null;
+  };
 
   export type CustomerMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    password: string | null
-    phone: string | null
-    address: string | null
-    city: string | null
-    state: string | null
-    country: string | null
-    zipCode: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    storeId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    phone: string | null;
+    address: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zipCode: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    storeId: string | null;
+  };
 
   export type CustomerMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    password: string | null
-    phone: string | null
-    address: string | null
-    city: string | null
-    state: string | null
-    country: string | null
-    zipCode: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    storeId: string | null
-  }
+    id: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    phone: string | null;
+    address: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zipCode: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    storeId: string | null;
+  };
 
   export type CustomerCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    password: number
-    phone: number
-    address: number
-    city: number
-    state: number
-    country: number
-    zipCode: number
-    createdAt: number
-    updatedAt: number
-    storeId: number
-    _all: number
-  }
-
+    id: number;
+    name: number;
+    email: number;
+    password: number;
+    phone: number;
+    address: number;
+    city: number;
+    state: number;
+    country: number;
+    zipCode: number;
+    createdAt: number;
+    updatedAt: number;
+    storeId: number;
+    _all: number;
+  };
 
   export type CustomerMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-    storeId?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    storeId?: true;
+  };
 
   export type CustomerMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-    storeId?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    storeId?: true;
+  };
 
   export type CustomerCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    password?: true
-    phone?: true
-    address?: true
-    city?: true
-    state?: true
-    country?: true
-    zipCode?: true
-    createdAt?: true
-    updatedAt?: true
-    storeId?: true
-    _all?: true
-  }
+    id?: true;
+    name?: true;
+    email?: true;
+    password?: true;
+    phone?: true;
+    address?: true;
+    city?: true;
+    state?: true;
+    country?: true;
+    zipCode?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    storeId?: true;
+    _all?: true;
+  };
 
-  export type CustomerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Customer to aggregate.
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Customers to fetch.
      */
-    orderBy?: CustomerOrderByWithRelationInput | CustomerOrderByWithRelationInput[]
+    orderBy?:
+      | CustomerOrderByWithRelationInput
+      | CustomerOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: CustomerWhereUniqueInput
+    cursor?: CustomerWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Customers from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Customers.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Customers
-    **/
-    _count?: true | CustomerCountAggregateInputType
+     **/
+    _count?: true | CustomerCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: CustomerMinAggregateInputType
+     **/
+    _min?: CustomerMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: CustomerMaxAggregateInputType
-  }
+     **/
+    _max?: CustomerMaxAggregateInputType;
+  };
 
   export type GetCustomerAggregateType<T extends CustomerAggregateArgs> = {
-        [P in keyof T & keyof AggregateCustomer]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateCustomer]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateCustomer[P]>
-      : GetScalarType<T[P], AggregateCustomer[P]>
-  }
+      : GetScalarType<T[P], AggregateCustomer[P]>;
+  };
 
-
-
-
-  export type CustomerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CustomerWhereInput
-    orderBy?: CustomerOrderByWithAggregationInput | CustomerOrderByWithAggregationInput[]
-    by: CustomerScalarFieldEnum[] | CustomerScalarFieldEnum
-    having?: CustomerScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CustomerCountAggregateInputType | true
-    _min?: CustomerMinAggregateInputType
-    _max?: CustomerMaxAggregateInputType
-  }
+  export type CustomerGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: CustomerWhereInput;
+    orderBy?:
+      | CustomerOrderByWithAggregationInput
+      | CustomerOrderByWithAggregationInput[];
+    by: CustomerScalarFieldEnum[] | CustomerScalarFieldEnum;
+    having?: CustomerScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: CustomerCountAggregateInputType | true;
+    _min?: CustomerMinAggregateInputType;
+    _max?: CustomerMaxAggregateInputType;
+  };
 
   export type CustomerGroupByOutputType = {
-    id: string
-    name: string
-    email: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt: Date
-    updatedAt: Date
-    storeId: string
-    _count: CustomerCountAggregateOutputType | null
-    _min: CustomerMinAggregateOutputType | null
-    _max: CustomerMaxAggregateOutputType | null
-  }
+    id: string;
+    name: string;
+    email: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt: Date;
+    updatedAt: Date;
+    storeId: string;
+    _count: CustomerCountAggregateOutputType | null;
+    _min: CustomerMinAggregateOutputType | null;
+    _max: CustomerMaxAggregateOutputType | null;
+  };
 
-  type GetCustomerGroupByPayload<T extends CustomerGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CustomerGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CustomerGroupByOutputType))]: P extends '_count'
+  type GetCustomerGroupByPayload<T extends CustomerGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<CustomerGroupByOutputType, T['by']> & {
+          [P in keyof T & keyof CustomerGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], CustomerGroupByOutputType[P]>
-            : GetScalarType<T[P], CustomerGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomerGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type CustomerSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      storeId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['customer']
+  >;
 
-  export type CustomerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    storeId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customer"]>
+  export type CustomerSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      storeId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['customer']
+  >;
 
-  export type CustomerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    storeId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customer"]>
-
-  export type CustomerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    storeId?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customer"]>
+  export type CustomerSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      email?: boolean;
+      password?: boolean;
+      phone?: boolean;
+      address?: boolean;
+      city?: boolean;
+      state?: boolean;
+      country?: boolean;
+      zipCode?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      storeId?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['customer']
+  >;
 
   export type CustomerSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    password?: boolean
-    phone?: boolean
-    address?: boolean
-    city?: boolean
-    state?: boolean
-    country?: boolean
-    zipCode?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    storeId?: boolean
-  }
+    id?: boolean;
+    name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    phone?: boolean;
+    address?: boolean;
+    city?: boolean;
+    state?: boolean;
+    country?: boolean;
+    zipCode?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    storeId?: boolean;
+  };
 
-  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "address" | "city" | "state" | "country" | "zipCode" | "createdAt" | "updatedAt" | "storeId", ExtArgs["result"]["customer"]>
-  export type CustomerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type CustomerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type CustomerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
+  export type CustomerOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    | 'id'
+    | 'name'
+    | 'email'
+    | 'password'
+    | 'phone'
+    | 'address'
+    | 'city'
+    | 'state'
+    | 'country'
+    | 'zipCode'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'storeId',
+    ExtArgs['result']['customer']
+  >;
+  export type CustomerInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type CustomerIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type CustomerIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
 
-  export type $CustomerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Customer"
+  export type $CustomerPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Customer';
     objects: {
-      store: Prisma.$StorePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string | null
-      password: string
-      phone: string
-      address: string
-      city: string
-      state: string
-      country: string
-      zipCode: string
-      createdAt: Date
-      updatedAt: Date
-      storeId: string
-    }, ExtArgs["result"]["customer"]>
-    composites: {}
-  }
+      store: Prisma.$StorePayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        email: string | null;
+        password: string;
+        phone: string;
+        address: string;
+        city: string;
+        state: string;
+        country: string;
+        zipCode: string;
+        createdAt: Date;
+        updatedAt: Date;
+        storeId: string;
+      },
+      ExtArgs['result']['customer']
+    >;
+    composites: {};
+  };
 
-  type CustomerGetPayload<S extends boolean | null | undefined | CustomerDefaultArgs> = $Result.GetResult<Prisma.$CustomerPayload, S>
+  type CustomerGetPayload<
+    S extends boolean | null | undefined | CustomerDefaultArgs,
+  > = $Result.GetResult<Prisma.$CustomerPayload, S>;
 
-  type CustomerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CustomerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CustomerCountAggregateInputType | true
-    }
+  type CustomerCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<CustomerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: CustomerCountAggregateInputType | true;
+  };
 
-  export interface CustomerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Customer'], meta: { name: 'Customer' } }
+  export interface CustomerDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Customer'];
+      meta: { name: 'Customer' };
+    };
     /**
      * Find zero or one Customer that matches the filter.
      * @param {CustomerFindUniqueArgs} args - Arguments to find a Customer
@@ -7642,7 +9173,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CustomerFindUniqueArgs>(args: SelectSubset<T, CustomerFindUniqueArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CustomerFindUniqueArgs>(
+      args: SelectSubset<T, CustomerFindUniqueArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one Customer that matches the filter or throw an error with `error.code='P2025'`
@@ -7656,7 +9199,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CustomerFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CustomerFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, CustomerFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Customer that matches the filter.
@@ -7671,7 +9226,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CustomerFindFirstArgs>(args?: SelectSubset<T, CustomerFindFirstArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CustomerFindFirstArgs>(
+      args?: SelectSubset<T, CustomerFindFirstArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first Customer that matches the filter or
@@ -7687,7 +9254,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CustomerFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomerFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CustomerFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, CustomerFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more Customers that matches the filter.
@@ -7697,15 +9276,24 @@ export namespace Prisma {
      * @example
      * // Get all Customers
      * const customers = await prisma.customer.findMany()
-     * 
+     *
      * // Get first 10 Customers
      * const customers = await prisma.customer.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const customerWithIdOnly = await prisma.customer.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends CustomerFindManyArgs>(args?: SelectSubset<T, CustomerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CustomerFindManyArgs>(
+      args?: SelectSubset<T, CustomerFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a Customer.
@@ -7717,9 +9305,21 @@ export namespace Prisma {
      *     // ... data to create a Customer
      *   }
      * })
-     * 
+     *
      */
-    create<T extends CustomerCreateArgs>(args: SelectSubset<T, CustomerCreateArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CustomerCreateArgs>(
+      args: SelectSubset<T, CustomerCreateArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many Customers.
@@ -7731,9 +9331,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends CustomerCreateManyArgs>(args?: SelectSubset<T, CustomerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CustomerCreateManyArgs>(
+      args?: SelectSubset<T, CustomerCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Customers and returns the data saved in the database.
@@ -7745,7 +9347,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Customers and only return the `id`
      * const customerWithIdOnly = await prisma.customer.createManyAndReturn({
      *   select: { id: true },
@@ -7755,9 +9357,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends CustomerCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends CustomerCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, CustomerCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a Customer.
@@ -7769,9 +9380,21 @@ export namespace Prisma {
      *     // ... filter to delete one Customer
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends CustomerDeleteArgs>(args: SelectSubset<T, CustomerDeleteArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CustomerDeleteArgs>(
+      args: SelectSubset<T, CustomerDeleteArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one Customer.
@@ -7786,9 +9409,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends CustomerUpdateArgs>(args: SelectSubset<T, CustomerUpdateArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CustomerUpdateArgs>(
+      args: SelectSubset<T, CustomerUpdateArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more Customers.
@@ -7800,9 +9435,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends CustomerDeleteManyArgs>(args?: SelectSubset<T, CustomerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CustomerDeleteManyArgs>(
+      args?: SelectSubset<T, CustomerDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Customers.
@@ -7819,9 +9456,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends CustomerUpdateManyArgs>(args: SelectSubset<T, CustomerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CustomerUpdateManyArgs>(
+      args: SelectSubset<T, CustomerUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Customers and returns the data updated in the database.
@@ -7836,7 +9475,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Customers and only return the `id`
      * const customerWithIdOnly = await prisma.customer.updateManyAndReturn({
      *   select: { id: true },
@@ -7849,9 +9488,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends CustomerUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends CustomerUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, CustomerUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one Customer.
@@ -7870,8 +9518,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CustomerUpsertArgs>(args: SelectSubset<T, CustomerUpsertArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends CustomerUpsertArgs>(
+      args: SelectSubset<T, CustomerUpsertArgs<ExtArgs>>,
+    ): Prisma__CustomerClient<
+      $Result.GetResult<
+        Prisma.$CustomerPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of Customers.
@@ -7885,7 +9544,7 @@ export namespace Prisma {
      *     // ... the filter for the Customers we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends CustomerCountArgs>(
       args?: Subset<T, CustomerCountArgs>,
     ): Prisma.PrismaPromise<
@@ -7894,7 +9553,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], CustomerCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a Customer.
@@ -7919,8 +9578,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends CustomerAggregateArgs>(args: Subset<T, CustomerAggregateArgs>): Prisma.PrismaPromise<GetCustomerAggregateType<T>>
+     **/
+    aggregate<T extends CustomerAggregateArgs>(
+      args: Subset<T, CustomerAggregateArgs>,
+    ): Prisma.PrismaPromise<GetCustomerAggregateType<T>>;
 
     /**
      * Group by Customer.
@@ -7938,8 +9599,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends CustomerGroupByArgs,
       HasSelectOrTake extends Or<
@@ -7949,59 +9610,66 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: CustomerGroupByArgs['orderBy'] }
         : { orderBy?: CustomerGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CustomerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Customer model
-   */
-  readonly fields: CustomerFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, CustomerGroupByArgs, OrderByArg> &
+        InputErrors,
+    ): {} extends InputErrors
+      ? GetCustomerGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Customer model
+     */
+    readonly fields: CustomerFieldRefs;
   }
 
   /**
@@ -8010,705 +9678,823 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__CustomerClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, StoreDefaultArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the Customer model
    */
   interface CustomerFieldRefs {
-    readonly id: FieldRef<"Customer", 'String'>
-    readonly name: FieldRef<"Customer", 'String'>
-    readonly email: FieldRef<"Customer", 'String'>
-    readonly password: FieldRef<"Customer", 'String'>
-    readonly phone: FieldRef<"Customer", 'String'>
-    readonly address: FieldRef<"Customer", 'String'>
-    readonly city: FieldRef<"Customer", 'String'>
-    readonly state: FieldRef<"Customer", 'String'>
-    readonly country: FieldRef<"Customer", 'String'>
-    readonly zipCode: FieldRef<"Customer", 'String'>
-    readonly createdAt: FieldRef<"Customer", 'DateTime'>
-    readonly updatedAt: FieldRef<"Customer", 'DateTime'>
-    readonly storeId: FieldRef<"Customer", 'String'>
+    readonly id: FieldRef<'Customer', 'String'>;
+    readonly name: FieldRef<'Customer', 'String'>;
+    readonly email: FieldRef<'Customer', 'String'>;
+    readonly password: FieldRef<'Customer', 'String'>;
+    readonly phone: FieldRef<'Customer', 'String'>;
+    readonly address: FieldRef<'Customer', 'String'>;
+    readonly city: FieldRef<'Customer', 'String'>;
+    readonly state: FieldRef<'Customer', 'String'>;
+    readonly country: FieldRef<'Customer', 'String'>;
+    readonly zipCode: FieldRef<'Customer', 'String'>;
+    readonly createdAt: FieldRef<'Customer', 'DateTime'>;
+    readonly updatedAt: FieldRef<'Customer', 'DateTime'>;
+    readonly storeId: FieldRef<'Customer', 'String'>;
   }
-    
 
   // Custom InputTypes
   /**
    * Customer findUnique
    */
-  export type CustomerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter, which Customer to fetch.
      */
-    where: CustomerWhereUniqueInput
-  }
+    where: CustomerWhereUniqueInput;
+  };
 
   /**
    * Customer findUniqueOrThrow
    */
-  export type CustomerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter, which Customer to fetch.
      */
-    where: CustomerWhereUniqueInput
-  }
+    where: CustomerWhereUniqueInput;
+  };
 
   /**
    * Customer findFirst
    */
-  export type CustomerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter, which Customer to fetch.
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Customers to fetch.
      */
-    orderBy?: CustomerOrderByWithRelationInput | CustomerOrderByWithRelationInput[]
+    orderBy?:
+      | CustomerOrderByWithRelationInput
+      | CustomerOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Customers.
      */
-    cursor?: CustomerWhereUniqueInput
+    cursor?: CustomerWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Customers from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Customers.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Customers.
      */
-    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[]
-  }
+    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[];
+  };
 
   /**
    * Customer findFirstOrThrow
    */
-  export type CustomerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter, which Customer to fetch.
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Customers to fetch.
      */
-    orderBy?: CustomerOrderByWithRelationInput | CustomerOrderByWithRelationInput[]
+    orderBy?:
+      | CustomerOrderByWithRelationInput
+      | CustomerOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Customers.
      */
-    cursor?: CustomerWhereUniqueInput
+    cursor?: CustomerWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Customers from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Customers.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Customers.
      */
-    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[]
-  }
+    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[];
+  };
 
   /**
    * Customer findMany
    */
-  export type CustomerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter, which Customers to fetch.
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Customers to fetch.
      */
-    orderBy?: CustomerOrderByWithRelationInput | CustomerOrderByWithRelationInput[]
+    orderBy?:
+      | CustomerOrderByWithRelationInput
+      | CustomerOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Customers.
      */
-    cursor?: CustomerWhereUniqueInput
+    cursor?: CustomerWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Customers from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Customers.
      */
-    skip?: number
-    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: CustomerScalarFieldEnum | CustomerScalarFieldEnum[];
+  };
 
   /**
    * Customer create
    */
-  export type CustomerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * The data needed to create a Customer.
      */
-    data: XOR<CustomerCreateInput, CustomerUncheckedCreateInput>
-  }
+    data: XOR<CustomerCreateInput, CustomerUncheckedCreateInput>;
+  };
 
   /**
    * Customer createMany
    */
-  export type CustomerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many Customers.
      */
-    data: CustomerCreateManyInput | CustomerCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: CustomerCreateManyInput | CustomerCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * Customer createManyAndReturn
    */
-  export type CustomerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CustomerSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * The data used to create many Customers.
      */
-    data: CustomerCreateManyInput | CustomerCreateManyInput[]
-    skipDuplicates?: boolean
+    data: CustomerCreateManyInput | CustomerCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: CustomerIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Customer update
    */
-  export type CustomerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * The data needed to update a Customer.
      */
-    data: XOR<CustomerUpdateInput, CustomerUncheckedUpdateInput>
+    data: XOR<CustomerUpdateInput, CustomerUncheckedUpdateInput>;
     /**
      * Choose, which Customer to update.
      */
-    where: CustomerWhereUniqueInput
-  }
+    where: CustomerWhereUniqueInput;
+  };
 
   /**
    * Customer updateMany
    */
-  export type CustomerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update Customers.
      */
-    data: XOR<CustomerUpdateManyMutationInput, CustomerUncheckedUpdateManyInput>
+    data: XOR<
+      CustomerUpdateManyMutationInput,
+      CustomerUncheckedUpdateManyInput
+    >;
     /**
      * Filter which Customers to update
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * Limit how many Customers to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Customer updateManyAndReturn
    */
-  export type CustomerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: CustomerSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * The data used to update Customers.
      */
-    data: XOR<CustomerUpdateManyMutationInput, CustomerUncheckedUpdateManyInput>
+    data: XOR<
+      CustomerUpdateManyMutationInput,
+      CustomerUncheckedUpdateManyInput
+    >;
     /**
      * Filter which Customers to update
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * Limit how many Customers to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: CustomerIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * Customer upsert
    */
-  export type CustomerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * The filter to search for the Customer to update in case it exists.
      */
-    where: CustomerWhereUniqueInput
+    where: CustomerWhereUniqueInput;
     /**
      * In case the Customer found by the `where` argument doesn't exist, create a new Customer with this data.
      */
-    create: XOR<CustomerCreateInput, CustomerUncheckedCreateInput>
+    create: XOR<CustomerCreateInput, CustomerUncheckedCreateInput>;
     /**
      * In case the Customer was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CustomerUpdateInput, CustomerUncheckedUpdateInput>
-  }
+    update: XOR<CustomerUpdateInput, CustomerUncheckedUpdateInput>;
+  };
 
   /**
    * Customer delete
    */
-  export type CustomerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
+    include?: CustomerInclude<ExtArgs> | null;
     /**
      * Filter which Customer to delete.
      */
-    where: CustomerWhereUniqueInput
-  }
+    where: CustomerWhereUniqueInput;
+  };
 
   /**
    * Customer deleteMany
    */
-  export type CustomerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which Customers to delete
      */
-    where?: CustomerWhereInput
+    where?: CustomerWhereInput;
     /**
      * Limit how many Customers to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * Customer without action
    */
-  export type CustomerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CustomerDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the Customer
      */
-    select?: CustomerSelect<ExtArgs> | null
+    select?: CustomerSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the Customer
      */
-    omit?: CustomerOmit<ExtArgs> | null
+    omit?: CustomerOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CustomerInclude<ExtArgs> | null
-  }
-
+    include?: CustomerInclude<ExtArgs> | null;
+  };
 
   /**
    * Model PhonePePayment
    */
 
   export type AggregatePhonePePayment = {
-    _count: PhonePePaymentCountAggregateOutputType | null
-    _min: PhonePePaymentMinAggregateOutputType | null
-    _max: PhonePePaymentMaxAggregateOutputType | null
-  }
+    _count: PhonePePaymentCountAggregateOutputType | null;
+    _min: PhonePePaymentMinAggregateOutputType | null;
+    _max: PhonePePaymentMaxAggregateOutputType | null;
+  };
 
   export type PhonePePaymentMinAggregateOutputType = {
-    id: string | null
-    storeId: string | null
-    merchantId: string | null
-    saltKey: string | null
-    saltIndex: string | null
-    active: boolean | null
-  }
+    id: string | null;
+    storeId: string | null;
+    merchantId: string | null;
+    saltKey: string | null;
+    saltIndex: string | null;
+    active: boolean | null;
+  };
 
   export type PhonePePaymentMaxAggregateOutputType = {
-    id: string | null
-    storeId: string | null
-    merchantId: string | null
-    saltKey: string | null
-    saltIndex: string | null
-    active: boolean | null
-  }
+    id: string | null;
+    storeId: string | null;
+    merchantId: string | null;
+    saltKey: string | null;
+    saltIndex: string | null;
+    active: boolean | null;
+  };
 
   export type PhonePePaymentCountAggregateOutputType = {
-    id: number
-    storeId: number
-    merchantId: number
-    saltKey: number
-    saltIndex: number
-    active: number
-    _all: number
-  }
-
+    id: number;
+    storeId: number;
+    merchantId: number;
+    saltKey: number;
+    saltIndex: number;
+    active: number;
+    _all: number;
+  };
 
   export type PhonePePaymentMinAggregateInputType = {
-    id?: true
-    storeId?: true
-    merchantId?: true
-    saltKey?: true
-    saltIndex?: true
-    active?: true
-  }
+    id?: true;
+    storeId?: true;
+    merchantId?: true;
+    saltKey?: true;
+    saltIndex?: true;
+    active?: true;
+  };
 
   export type PhonePePaymentMaxAggregateInputType = {
-    id?: true
-    storeId?: true
-    merchantId?: true
-    saltKey?: true
-    saltIndex?: true
-    active?: true
-  }
+    id?: true;
+    storeId?: true;
+    merchantId?: true;
+    saltKey?: true;
+    saltIndex?: true;
+    active?: true;
+  };
 
   export type PhonePePaymentCountAggregateInputType = {
-    id?: true
-    storeId?: true
-    merchantId?: true
-    saltKey?: true
-    saltIndex?: true
-    active?: true
-    _all?: true
-  }
+    id?: true;
+    storeId?: true;
+    merchantId?: true;
+    saltKey?: true;
+    saltIndex?: true;
+    active?: true;
+    _all?: true;
+  };
 
-  export type PhonePePaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which PhonePePayment to aggregate.
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PhonePePayments to fetch.
      */
-    orderBy?: PhonePePaymentOrderByWithRelationInput | PhonePePaymentOrderByWithRelationInput[]
+    orderBy?:
+      | PhonePePaymentOrderByWithRelationInput
+      | PhonePePaymentOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
-    cursor?: PhonePePaymentWhereUniqueInput
+    cursor?: PhonePePaymentWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PhonePePayments from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PhonePePayments.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned PhonePePayments
-    **/
-    _count?: true | PhonePePaymentCountAggregateInputType
+     **/
+    _count?: true | PhonePePaymentCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
-    _min?: PhonePePaymentMinAggregateInputType
+     **/
+    _min?: PhonePePaymentMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
-    _max?: PhonePePaymentMaxAggregateInputType
-  }
+     **/
+    _max?: PhonePePaymentMaxAggregateInputType;
+  };
 
-  export type GetPhonePePaymentAggregateType<T extends PhonePePaymentAggregateArgs> = {
-        [P in keyof T & keyof AggregatePhonePePayment]: P extends '_count' | 'count'
+  export type GetPhonePePaymentAggregateType<
+    T extends PhonePePaymentAggregateArgs,
+  > = {
+    [P in keyof T & keyof AggregatePhonePePayment]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregatePhonePePayment[P]>
-      : GetScalarType<T[P], AggregatePhonePePayment[P]>
-  }
+      : GetScalarType<T[P], AggregatePhonePePayment[P]>;
+  };
 
-
-
-
-  export type PhonePePaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PhonePePaymentWhereInput
-    orderBy?: PhonePePaymentOrderByWithAggregationInput | PhonePePaymentOrderByWithAggregationInput[]
-    by: PhonePePaymentScalarFieldEnum[] | PhonePePaymentScalarFieldEnum
-    having?: PhonePePaymentScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PhonePePaymentCountAggregateInputType | true
-    _min?: PhonePePaymentMinAggregateInputType
-    _max?: PhonePePaymentMaxAggregateInputType
-  }
+  export type PhonePePaymentGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: PhonePePaymentWhereInput;
+    orderBy?:
+      | PhonePePaymentOrderByWithAggregationInput
+      | PhonePePaymentOrderByWithAggregationInput[];
+    by: PhonePePaymentScalarFieldEnum[] | PhonePePaymentScalarFieldEnum;
+    having?: PhonePePaymentScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: PhonePePaymentCountAggregateInputType | true;
+    _min?: PhonePePaymentMinAggregateInputType;
+    _max?: PhonePePaymentMaxAggregateInputType;
+  };
 
   export type PhonePePaymentGroupByOutputType = {
-    id: string
-    storeId: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active: boolean
-    _count: PhonePePaymentCountAggregateOutputType | null
-    _min: PhonePePaymentMinAggregateOutputType | null
-    _max: PhonePePaymentMaxAggregateOutputType | null
-  }
+    id: string;
+    storeId: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active: boolean;
+    _count: PhonePePaymentCountAggregateOutputType | null;
+    _min: PhonePePaymentMinAggregateOutputType | null;
+    _max: PhonePePaymentMaxAggregateOutputType | null;
+  };
 
-  type GetPhonePePaymentGroupByPayload<T extends PhonePePaymentGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PhonePePaymentGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PhonePePaymentGroupByOutputType))]: P extends '_count'
+  type GetPhonePePaymentGroupByPayload<T extends PhonePePaymentGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<PhonePePaymentGroupByOutputType, T['by']> & {
+          [P in keyof T &
+            keyof PhonePePaymentGroupByOutputType]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], PhonePePaymentGroupByOutputType[P]>
-            : GetScalarType<T[P], PhonePePaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], PhonePePaymentGroupByOutputType[P]>;
         }
       >
-    >
+    >;
 
+  export type PhonePePaymentSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      storeId?: boolean;
+      merchantId?: boolean;
+      saltKey?: boolean;
+      saltIndex?: boolean;
+      active?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['phonePePayment']
+  >;
 
-  export type PhonePePaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    storeId?: boolean
-    merchantId?: boolean
-    saltKey?: boolean
-    saltIndex?: boolean
-    active?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["phonePePayment"]>
+  export type PhonePePaymentSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      storeId?: boolean;
+      merchantId?: boolean;
+      saltKey?: boolean;
+      saltIndex?: boolean;
+      active?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['phonePePayment']
+  >;
 
-  export type PhonePePaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    storeId?: boolean
-    merchantId?: boolean
-    saltKey?: boolean
-    saltIndex?: boolean
-    active?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["phonePePayment"]>
-
-  export type PhonePePaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    storeId?: boolean
-    merchantId?: boolean
-    saltKey?: boolean
-    saltIndex?: boolean
-    active?: boolean
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["phonePePayment"]>
+  export type PhonePePaymentSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      storeId?: boolean;
+      merchantId?: boolean;
+      saltKey?: boolean;
+      saltIndex?: boolean;
+      active?: boolean;
+      store?: boolean | StoreDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['phonePePayment']
+  >;
 
   export type PhonePePaymentSelectScalar = {
-    id?: boolean
-    storeId?: boolean
-    merchantId?: boolean
-    saltKey?: boolean
-    saltIndex?: boolean
-    active?: boolean
-  }
+    id?: boolean;
+    storeId?: boolean;
+    merchantId?: boolean;
+    saltKey?: boolean;
+    saltIndex?: boolean;
+    active?: boolean;
+  };
 
-  export type PhonePePaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "merchantId" | "saltKey" | "saltIndex" | "active", ExtArgs["result"]["phonePePayment"]>
-  export type PhonePePaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type PhonePePaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type PhonePePaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
+  export type PhonePePaymentOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    'id' | 'storeId' | 'merchantId' | 'saltKey' | 'saltIndex' | 'active',
+    ExtArgs['result']['phonePePayment']
+  >;
+  export type PhonePePaymentInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type PhonePePaymentIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
+  export type PhonePePaymentIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>;
+  };
 
-  export type $PhonePePaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PhonePePayment"
+  export type $PhonePePaymentPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'PhonePePayment';
     objects: {
-      store: Prisma.$StorePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      storeId: string
-      merchantId: string
-      saltKey: string
-      saltIndex: string
-      active: boolean
-    }, ExtArgs["result"]["phonePePayment"]>
-    composites: {}
-  }
+      store: Prisma.$StorePayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        storeId: string;
+        merchantId: string;
+        saltKey: string;
+        saltIndex: string;
+        active: boolean;
+      },
+      ExtArgs['result']['phonePePayment']
+    >;
+    composites: {};
+  };
 
-  type PhonePePaymentGetPayload<S extends boolean | null | undefined | PhonePePaymentDefaultArgs> = $Result.GetResult<Prisma.$PhonePePaymentPayload, S>
+  type PhonePePaymentGetPayload<
+    S extends boolean | null | undefined | PhonePePaymentDefaultArgs,
+  > = $Result.GetResult<Prisma.$PhonePePaymentPayload, S>;
 
-  type PhonePePaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PhonePePaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PhonePePaymentCountAggregateInputType | true
-    }
+  type PhonePePaymentCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<
+    PhonePePaymentFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: PhonePePaymentCountAggregateInputType | true;
+  };
 
-  export interface PhonePePaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PhonePePayment'], meta: { name: 'PhonePePayment' } }
+  export interface PhonePePaymentDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['PhonePePayment'];
+      meta: { name: 'PhonePePayment' };
+    };
     /**
      * Find zero or one PhonePePayment that matches the filter.
      * @param {PhonePePaymentFindUniqueArgs} args - Arguments to find a PhonePePayment
@@ -8720,7 +10506,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends PhonePePaymentFindUniqueArgs>(args: SelectSubset<T, PhonePePaymentFindUniqueArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends PhonePePaymentFindUniqueArgs>(
+      args: SelectSubset<T, PhonePePaymentFindUniqueArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find one PhonePePayment that matches the filter or throw an error with `error.code='P2025'`
@@ -8734,7 +10532,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends PhonePePaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, PhonePePaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends PhonePePaymentFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, PhonePePaymentFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first PhonePePayment that matches the filter.
@@ -8749,7 +10559,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends PhonePePaymentFindFirstArgs>(args?: SelectSubset<T, PhonePePaymentFindFirstArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends PhonePePaymentFindFirstArgs>(
+      args?: SelectSubset<T, PhonePePaymentFindFirstArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find the first PhonePePayment that matches the filter or
@@ -8765,7 +10587,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends PhonePePaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, PhonePePaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends PhonePePaymentFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, PhonePePaymentFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Find zero or more PhonePePayments that matches the filter.
@@ -8775,15 +10609,24 @@ export namespace Prisma {
      * @example
      * // Get all PhonePePayments
      * const phonePePayments = await prisma.phonePePayment.findMany()
-     * 
+     *
      * // Get first 10 PhonePePayments
      * const phonePePayments = await prisma.phonePePayment.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const phonePePaymentWithIdOnly = await prisma.phonePePayment.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends PhonePePaymentFindManyArgs>(args?: SelectSubset<T, PhonePePaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends PhonePePaymentFindManyArgs>(
+      args?: SelectSubset<T, PhonePePaymentFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create a PhonePePayment.
@@ -8795,9 +10638,21 @@ export namespace Prisma {
      *     // ... data to create a PhonePePayment
      *   }
      * })
-     * 
+     *
      */
-    create<T extends PhonePePaymentCreateArgs>(args: SelectSubset<T, PhonePePaymentCreateArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends PhonePePaymentCreateArgs>(
+      args: SelectSubset<T, PhonePePaymentCreateArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'create',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Create many PhonePePayments.
@@ -8809,9 +10664,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
-    createMany<T extends PhonePePaymentCreateManyArgs>(args?: SelectSubset<T, PhonePePaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends PhonePePaymentCreateManyArgs>(
+      args?: SelectSubset<T, PhonePePaymentCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many PhonePePayments and returns the data saved in the database.
@@ -8823,7 +10680,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many PhonePePayments and only return the `id`
      * const phonePePaymentWithIdOnly = await prisma.phonePePayment.createManyAndReturn({
      *   select: { id: true },
@@ -8833,9 +10690,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends PhonePePaymentCreateManyAndReturnArgs>(args?: SelectSubset<T, PhonePePaymentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends PhonePePaymentCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, PhonePePaymentCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Delete a PhonePePayment.
@@ -8847,9 +10713,21 @@ export namespace Prisma {
      *     // ... filter to delete one PhonePePayment
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends PhonePePaymentDeleteArgs>(args: SelectSubset<T, PhonePePaymentDeleteArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends PhonePePaymentDeleteArgs>(
+      args: SelectSubset<T, PhonePePaymentDeleteArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'delete',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Update one PhonePePayment.
@@ -8864,9 +10742,21 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends PhonePePaymentUpdateArgs>(args: SelectSubset<T, PhonePePaymentUpdateArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends PhonePePaymentUpdateArgs>(
+      args: SelectSubset<T, PhonePePaymentUpdateArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'update',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Delete zero or more PhonePePayments.
@@ -8878,9 +10768,11 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
-    deleteMany<T extends PhonePePaymentDeleteManyArgs>(args?: SelectSubset<T, PhonePePaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends PhonePePaymentDeleteManyArgs>(
+      args?: SelectSubset<T, PhonePePaymentDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more PhonePePayments.
@@ -8897,9 +10789,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    updateMany<T extends PhonePePaymentUpdateManyArgs>(args: SelectSubset<T, PhonePePaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends PhonePePaymentUpdateManyArgs>(
+      args: SelectSubset<T, PhonePePaymentUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more PhonePePayments and returns the data updated in the database.
@@ -8914,7 +10808,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more PhonePePayments and only return the `id`
      * const phonePePaymentWithIdOnly = await prisma.phonePePayment.updateManyAndReturn({
      *   select: { id: true },
@@ -8927,9 +10821,18 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends PhonePePaymentUpdateManyAndReturnArgs>(args: SelectSubset<T, PhonePePaymentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends PhonePePaymentUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, PhonePePaymentUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
 
     /**
      * Create or update one PhonePePayment.
@@ -8948,8 +10851,19 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends PhonePePaymentUpsertArgs>(args: SelectSubset<T, PhonePePaymentUpsertArgs<ExtArgs>>): Prisma__PhonePePaymentClient<$Result.GetResult<Prisma.$PhonePePaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends PhonePePaymentUpsertArgs>(
+      args: SelectSubset<T, PhonePePaymentUpsertArgs<ExtArgs>>,
+    ): Prisma__PhonePePaymentClient<
+      $Result.GetResult<
+        Prisma.$PhonePePaymentPayload<ExtArgs>,
+        T,
+        'upsert',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
 
     /**
      * Count the number of PhonePePayments.
@@ -8963,7 +10877,7 @@ export namespace Prisma {
      *     // ... the filter for the PhonePePayments we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends PhonePePaymentCountArgs>(
       args?: Subset<T, PhonePePaymentCountArgs>,
     ): Prisma.PrismaPromise<
@@ -8972,7 +10886,7 @@ export namespace Prisma {
           ? number
           : GetScalarType<T['select'], PhonePePaymentCountAggregateOutputType>
         : number
-    >
+    >;
 
     /**
      * Allows you to perform aggregations operations on a PhonePePayment.
@@ -8997,8 +10911,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends PhonePePaymentAggregateArgs>(args: Subset<T, PhonePePaymentAggregateArgs>): Prisma.PrismaPromise<GetPhonePePaymentAggregateType<T>>
+     **/
+    aggregate<T extends PhonePePaymentAggregateArgs>(
+      args: Subset<T, PhonePePaymentAggregateArgs>,
+    ): Prisma.PrismaPromise<GetPhonePePaymentAggregateType<T>>;
 
     /**
      * Group by PhonePePayment.
@@ -9016,8 +10932,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends PhonePePaymentGroupByArgs,
       HasSelectOrTake extends Or<
@@ -9027,59 +10943,66 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: PhonePePaymentGroupByArgs['orderBy'] }
         : { orderBy?: PhonePePaymentGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T['orderBy']>>
+      >,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PhonePePaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPhonePePaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PhonePePayment model
-   */
-  readonly fields: PhonePePaymentFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, PhonePePaymentGroupByArgs, OrderByArg> &
+        InputErrors,
+    ): {} extends InputErrors
+      ? GetPhonePePaymentGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the PhonePePayment model
+     */
+    readonly fields: PhonePePaymentFieldRefs;
   }
 
   /**
@@ -9088,4162 +11011,5014 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PhonePePaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__PhonePePaymentClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, StoreDefaultArgs<ExtArgs>>,
+    ): Prisma__StoreClient<
+      | $Result.GetResult<
+          Prisma.$StorePayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow',
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
-
-
 
   /**
    * Fields of the PhonePePayment model
    */
   interface PhonePePaymentFieldRefs {
-    readonly id: FieldRef<"PhonePePayment", 'String'>
-    readonly storeId: FieldRef<"PhonePePayment", 'String'>
-    readonly merchantId: FieldRef<"PhonePePayment", 'String'>
-    readonly saltKey: FieldRef<"PhonePePayment", 'String'>
-    readonly saltIndex: FieldRef<"PhonePePayment", 'String'>
-    readonly active: FieldRef<"PhonePePayment", 'Boolean'>
+    readonly id: FieldRef<'PhonePePayment', 'String'>;
+    readonly storeId: FieldRef<'PhonePePayment', 'String'>;
+    readonly merchantId: FieldRef<'PhonePePayment', 'String'>;
+    readonly saltKey: FieldRef<'PhonePePayment', 'String'>;
+    readonly saltIndex: FieldRef<'PhonePePayment', 'String'>;
+    readonly active: FieldRef<'PhonePePayment', 'Boolean'>;
   }
-    
 
   // Custom InputTypes
   /**
    * PhonePePayment findUnique
    */
-  export type PhonePePaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter, which PhonePePayment to fetch.
      */
-    where: PhonePePaymentWhereUniqueInput
-  }
+    where: PhonePePaymentWhereUniqueInput;
+  };
 
   /**
    * PhonePePayment findUniqueOrThrow
    */
-  export type PhonePePaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter, which PhonePePayment to fetch.
      */
-    where: PhonePePaymentWhereUniqueInput
-  }
+    where: PhonePePaymentWhereUniqueInput;
+  };
 
   /**
    * PhonePePayment findFirst
    */
-  export type PhonePePaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter, which PhonePePayment to fetch.
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PhonePePayments to fetch.
      */
-    orderBy?: PhonePePaymentOrderByWithRelationInput | PhonePePaymentOrderByWithRelationInput[]
+    orderBy?:
+      | PhonePePaymentOrderByWithRelationInput
+      | PhonePePaymentOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PhonePePayments.
      */
-    cursor?: PhonePePaymentWhereUniqueInput
+    cursor?: PhonePePaymentWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PhonePePayments from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PhonePePayments.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PhonePePayments.
      */
-    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[]
-  }
+    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[];
+  };
 
   /**
    * PhonePePayment findFirstOrThrow
    */
-  export type PhonePePaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter, which PhonePePayment to fetch.
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PhonePePayments to fetch.
      */
-    orderBy?: PhonePePaymentOrderByWithRelationInput | PhonePePaymentOrderByWithRelationInput[]
+    orderBy?:
+      | PhonePePaymentOrderByWithRelationInput
+      | PhonePePaymentOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for PhonePePayments.
      */
-    cursor?: PhonePePaymentWhereUniqueInput
+    cursor?: PhonePePaymentWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PhonePePayments from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PhonePePayments.
      */
-    skip?: number
+    skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of PhonePePayments.
      */
-    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[]
-  }
+    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[];
+  };
 
   /**
    * PhonePePayment findMany
    */
-  export type PhonePePaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter, which PhonePePayments to fetch.
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of PhonePePayments to fetch.
      */
-    orderBy?: PhonePePaymentOrderByWithRelationInput | PhonePePaymentOrderByWithRelationInput[]
+    orderBy?:
+      | PhonePePaymentOrderByWithRelationInput
+      | PhonePePaymentOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing PhonePePayments.
      */
-    cursor?: PhonePePaymentWhereUniqueInput
+    cursor?: PhonePePaymentWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` PhonePePayments from the position of the cursor.
      */
-    take?: number
+    take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` PhonePePayments.
      */
-    skip?: number
-    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[]
-  }
+    skip?: number;
+    distinct?: PhonePePaymentScalarFieldEnum | PhonePePaymentScalarFieldEnum[];
+  };
 
   /**
    * PhonePePayment create
    */
-  export type PhonePePaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * The data needed to create a PhonePePayment.
      */
-    data: XOR<PhonePePaymentCreateInput, PhonePePaymentUncheckedCreateInput>
-  }
+    data: XOR<PhonePePaymentCreateInput, PhonePePaymentUncheckedCreateInput>;
+  };
 
   /**
    * PhonePePayment createMany
    */
-  export type PhonePePaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to create many PhonePePayments.
      */
-    data: PhonePePaymentCreateManyInput | PhonePePaymentCreateManyInput[]
-    skipDuplicates?: boolean
-  }
+    data: PhonePePaymentCreateManyInput | PhonePePaymentCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
 
   /**
    * PhonePePayment createManyAndReturn
    */
-  export type PhonePePaymentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelectCreateManyAndReturn<ExtArgs> | null
+    select?: PhonePePaymentSelectCreateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * The data used to create many PhonePePayments.
      */
-    data: PhonePePaymentCreateManyInput | PhonePePaymentCreateManyInput[]
-    skipDuplicates?: boolean
+    data: PhonePePaymentCreateManyInput | PhonePePaymentCreateManyInput[];
+    skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentIncludeCreateManyAndReturn<ExtArgs> | null
-  }
+    include?: PhonePePaymentIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * PhonePePayment update
    */
-  export type PhonePePaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * The data needed to update a PhonePePayment.
      */
-    data: XOR<PhonePePaymentUpdateInput, PhonePePaymentUncheckedUpdateInput>
+    data: XOR<PhonePePaymentUpdateInput, PhonePePaymentUncheckedUpdateInput>;
     /**
      * Choose, which PhonePePayment to update.
      */
-    where: PhonePePaymentWhereUniqueInput
-  }
+    where: PhonePePaymentWhereUniqueInput;
+  };
 
   /**
    * PhonePePayment updateMany
    */
-  export type PhonePePaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * The data used to update PhonePePayments.
      */
-    data: XOR<PhonePePaymentUpdateManyMutationInput, PhonePePaymentUncheckedUpdateManyInput>
+    data: XOR<
+      PhonePePaymentUpdateManyMutationInput,
+      PhonePePaymentUncheckedUpdateManyInput
+    >;
     /**
      * Filter which PhonePePayments to update
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * Limit how many PhonePePayments to update.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * PhonePePayment updateManyAndReturn
    */
-  export type PhonePePaymentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: PhonePePaymentSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * The data used to update PhonePePayments.
      */
-    data: XOR<PhonePePaymentUpdateManyMutationInput, PhonePePaymentUncheckedUpdateManyInput>
+    data: XOR<
+      PhonePePaymentUpdateManyMutationInput,
+      PhonePePaymentUncheckedUpdateManyInput
+    >;
     /**
      * Filter which PhonePePayments to update
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * Limit how many PhonePePayments to update.
      */
-    limit?: number
+    limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
+    include?: PhonePePaymentIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
 
   /**
    * PhonePePayment upsert
    */
-  export type PhonePePaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * The filter to search for the PhonePePayment to update in case it exists.
      */
-    where: PhonePePaymentWhereUniqueInput
+    where: PhonePePaymentWhereUniqueInput;
     /**
      * In case the PhonePePayment found by the `where` argument doesn't exist, create a new PhonePePayment with this data.
      */
-    create: XOR<PhonePePaymentCreateInput, PhonePePaymentUncheckedCreateInput>
+    create: XOR<PhonePePaymentCreateInput, PhonePePaymentUncheckedCreateInput>;
     /**
      * In case the PhonePePayment was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<PhonePePaymentUpdateInput, PhonePePaymentUncheckedUpdateInput>
-  }
+    update: XOR<PhonePePaymentUpdateInput, PhonePePaymentUncheckedUpdateInput>;
+  };
 
   /**
    * PhonePePayment delete
    */
-  export type PhonePePaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
+    include?: PhonePePaymentInclude<ExtArgs> | null;
     /**
      * Filter which PhonePePayment to delete.
      */
-    where: PhonePePaymentWhereUniqueInput
-  }
+    where: PhonePePaymentWhereUniqueInput;
+  };
 
   /**
    * PhonePePayment deleteMany
    */
-  export type PhonePePaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Filter which PhonePePayments to delete
      */
-    where?: PhonePePaymentWhereInput
+    where?: PhonePePaymentWhereInput;
     /**
      * Limit how many PhonePePayments to delete.
      */
-    limit?: number
-  }
+    limit?: number;
+  };
 
   /**
    * PhonePePayment without action
    */
-  export type PhonePePaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PhonePePaymentDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
     /**
      * Select specific fields to fetch from the PhonePePayment
      */
-    select?: PhonePePaymentSelect<ExtArgs> | null
+    select?: PhonePePaymentSelect<ExtArgs> | null;
     /**
      * Omit specific fields from the PhonePePayment
      */
-    omit?: PhonePePaymentOmit<ExtArgs> | null
+    omit?: PhonePePaymentOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PhonePePaymentInclude<ExtArgs> | null
-  }
-
+    include?: PhonePePaymentInclude<ExtArgs> | null;
+  };
 
   /**
    * Enums
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted',
-    ReadCommitted: 'ReadCommitted',
-    RepeatableRead: 'RepeatableRead',
-    Serializable: 'Serializable'
+    ReadUncommitted: 'ReadUncommitted';
+    ReadCommitted: 'ReadCommitted';
+    RepeatableRead: 'RepeatableRead';
+    Serializable: 'Serializable';
   };
 
-  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
+  export type TransactionIsolationLevel =
+    (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
   export const UserScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    password: 'password',
-    phone: 'phone',
-    address: 'address',
-    city: 'city',
-    state: 'state',
-    country: 'country',
-    zipCode: 'zipCode',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    id: 'id';
+    name: 'name';
+    email: 'email';
+    password: 'password';
+    phone: 'phone';
+    address: 'address';
+    city: 'city';
+    state: 'state';
+    country: 'country';
+    zipCode: 'zipCode';
+    createdAt: 'createdAt';
+    updatedAt: 'updatedAt';
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
+  export type UserScalarFieldEnum =
+    (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
   export const StoreScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    domain: 'domain',
-    ownerId: 'ownerId'
+    id: 'id';
+    name: 'name';
+    domain: 'domain';
+    ownerId: 'ownerId';
   };
 
-  export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
-
+  export type StoreScalarFieldEnum =
+    (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum];
 
   export const CategoryScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    storeId: 'storeId',
-    parentId: 'parentId'
+    id: 'id';
+    name: 'name';
+    storeId: 'storeId';
+    parentId: 'parentId';
   };
 
-  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
-
+  export type CategoryScalarFieldEnum =
+    (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum];
 
   export const ProductScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    description: 'description',
-    originalPrice: 'originalPrice',
-    price: 'price',
-    categoryId: 'categoryId',
-    storeId: 'storeId'
+    id: 'id';
+    name: 'name';
+    description: 'description';
+    originalPrice: 'originalPrice';
+    price: 'price';
+    categoryId: 'categoryId';
+    storeId: 'storeId';
   };
 
-  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
+  export type ProductScalarFieldEnum =
+    (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum];
 
   export const ReviewScalarFieldEnum: {
-    id: 'id',
-    content: 'content',
-    rating: 'rating',
-    productId: 'productId',
-    storeId: 'storeId'
+    id: 'id';
+    content: 'content';
+    rating: 'rating';
+    productId: 'productId';
+    storeId: 'storeId';
   };
 
-  export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
-
+  export type ReviewScalarFieldEnum =
+    (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum];
 
   export const CustomerScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    password: 'password',
-    phone: 'phone',
-    address: 'address',
-    city: 'city',
-    state: 'state',
-    country: 'country',
-    zipCode: 'zipCode',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    storeId: 'storeId'
+    id: 'id';
+    name: 'name';
+    email: 'email';
+    password: 'password';
+    phone: 'phone';
+    address: 'address';
+    city: 'city';
+    state: 'state';
+    country: 'country';
+    zipCode: 'zipCode';
+    createdAt: 'createdAt';
+    updatedAt: 'updatedAt';
+    storeId: 'storeId';
   };
 
-  export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
-
+  export type CustomerScalarFieldEnum =
+    (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum];
 
   export const PhonePePaymentScalarFieldEnum: {
-    id: 'id',
-    storeId: 'storeId',
-    merchantId: 'merchantId',
-    saltKey: 'saltKey',
-    saltIndex: 'saltIndex',
-    active: 'active'
+    id: 'id';
+    storeId: 'storeId';
+    merchantId: 'merchantId';
+    saltKey: 'saltKey';
+    saltIndex: 'saltIndex';
+    active: 'active';
   };
 
-  export type PhonePePaymentScalarFieldEnum = (typeof PhonePePaymentScalarFieldEnum)[keyof typeof PhonePePaymentScalarFieldEnum]
-
+  export type PhonePePaymentScalarFieldEnum =
+    (typeof PhonePePaymentScalarFieldEnum)[keyof typeof PhonePePaymentScalarFieldEnum];
 
   export const SortOrder: {
-    asc: 'asc',
-    desc: 'desc'
+    asc: 'asc';
+    desc: 'desc';
   };
 
-  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
+  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
   export const QueryMode: {
-    default: 'default',
-    insensitive: 'insensitive'
+    default: 'default';
+    insensitive: 'insensitive';
   };
 
-  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
   export const NullsOrder: {
-    first: 'first',
-    last: 'last'
+    first: 'first';
+    last: 'last';
   };
 
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
 
   /**
    * Field references
    */
 
-
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'String'
+  >;
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'String[]'
+  >;
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'DateTime'
+  >;
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'DateTime[]'
+  >;
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Float'
+  >;
 
   /**
    * Reference to a field of type 'Float[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Float[]'
+  >;
 
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Int'
+  >;
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Int[]'
+  >;
 
   /**
    * Reference to a field of type 'Boolean'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Boolean'
+  >;
+
   /**
    * Deep Input Types
    */
 
-
   export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
-    name?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    address?: StringFilter<"User"> | string
-    city?: StringFilter<"User"> | string
-    state?: StringFilter<"User"> | string
-    country?: StringFilter<"User"> | string
-    zipCode?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    stores?: StoreListRelationFilter
-  }
+    AND?: UserWhereInput | UserWhereInput[];
+    OR?: UserWhereInput[];
+    NOT?: UserWhereInput | UserWhereInput[];
+    id?: StringFilter<'User'> | string;
+    name?: StringFilter<'User'> | string;
+    email?: StringFilter<'User'> | string;
+    password?: StringFilter<'User'> | string;
+    phone?: StringFilter<'User'> | string;
+    address?: StringFilter<'User'> | string;
+    city?: StringFilter<'User'> | string;
+    state?: StringFilter<'User'> | string;
+    country?: StringFilter<'User'> | string;
+    zipCode?: StringFilter<'User'> | string;
+    createdAt?: DateTimeFilter<'User'> | Date | string;
+    updatedAt?: DateTimeFilter<'User'> | Date | string;
+    stores?: StoreListRelationFilter;
+  };
 
   export type UserOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    stores?: StoreOrderByRelationAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    stores?: StoreOrderByRelationAggregateInput;
+  };
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    address?: StringFilter<"User"> | string
-    city?: StringFilter<"User"> | string
-    state?: StringFilter<"User"> | string
-    country?: StringFilter<"User"> | string
-    zipCode?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    stores?: StoreListRelationFilter
-  }, "id" | "email">
+  export type UserWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      email?: string;
+      AND?: UserWhereInput | UserWhereInput[];
+      OR?: UserWhereInput[];
+      NOT?: UserWhereInput | UserWhereInput[];
+      name?: StringFilter<'User'> | string;
+      password?: StringFilter<'User'> | string;
+      phone?: StringFilter<'User'> | string;
+      address?: StringFilter<'User'> | string;
+      city?: StringFilter<'User'> | string;
+      state?: StringFilter<'User'> | string;
+      country?: StringFilter<'User'> | string;
+      zipCode?: StringFilter<'User'> | string;
+      createdAt?: DateTimeFilter<'User'> | Date | string;
+      updatedAt?: DateTimeFilter<'User'> | Date | string;
+      stores?: StoreListRelationFilter;
+    },
+    'id' | 'email'
+  >;
 
   export type UserOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    _count?: UserCountOrderByAggregateInput;
+    _max?: UserMaxOrderByAggregateInput;
+    _min?: UserMinOrderByAggregateInput;
+  };
 
   export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
-    name?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
-    phone?: StringWithAggregatesFilter<"User"> | string
-    address?: StringWithAggregatesFilter<"User"> | string
-    city?: StringWithAggregatesFilter<"User"> | string
-    state?: StringWithAggregatesFilter<"User"> | string
-    country?: StringWithAggregatesFilter<"User"> | string
-    zipCode?: StringWithAggregatesFilter<"User"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-  }
+    AND?:
+      | UserScalarWhereWithAggregatesInput
+      | UserScalarWhereWithAggregatesInput[];
+    OR?: UserScalarWhereWithAggregatesInput[];
+    NOT?:
+      | UserScalarWhereWithAggregatesInput
+      | UserScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'User'> | string;
+    name?: StringWithAggregatesFilter<'User'> | string;
+    email?: StringWithAggregatesFilter<'User'> | string;
+    password?: StringWithAggregatesFilter<'User'> | string;
+    phone?: StringWithAggregatesFilter<'User'> | string;
+    address?: StringWithAggregatesFilter<'User'> | string;
+    city?: StringWithAggregatesFilter<'User'> | string;
+    state?: StringWithAggregatesFilter<'User'> | string;
+    country?: StringWithAggregatesFilter<'User'> | string;
+    zipCode?: StringWithAggregatesFilter<'User'> | string;
+    createdAt?: DateTimeWithAggregatesFilter<'User'> | Date | string;
+    updatedAt?: DateTimeWithAggregatesFilter<'User'> | Date | string;
+  };
 
   export type StoreWhereInput = {
-    AND?: StoreWhereInput | StoreWhereInput[]
-    OR?: StoreWhereInput[]
-    NOT?: StoreWhereInput | StoreWhereInput[]
-    id?: StringFilter<"Store"> | string
-    name?: StringFilter<"Store"> | string
-    domain?: StringFilter<"Store"> | string
-    ownerId?: StringFilter<"Store"> | string
-    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
-    categories?: CategoryListRelationFilter
-    products?: ProductListRelationFilter
-    customers?: CustomerListRelationFilter
-    reviews?: ReviewListRelationFilter
-    phonePePayment?: XOR<PhonePePaymentNullableScalarRelationFilter, PhonePePaymentWhereInput> | null
-  }
+    AND?: StoreWhereInput | StoreWhereInput[];
+    OR?: StoreWhereInput[];
+    NOT?: StoreWhereInput | StoreWhereInput[];
+    id?: StringFilter<'Store'> | string;
+    name?: StringFilter<'Store'> | string;
+    domain?: StringFilter<'Store'> | string;
+    ownerId?: StringFilter<'Store'> | string;
+    owner?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    categories?: CategoryListRelationFilter;
+    products?: ProductListRelationFilter;
+    customers?: CustomerListRelationFilter;
+    reviews?: ReviewListRelationFilter;
+    phonePePayment?: XOR<
+      PhonePePaymentNullableScalarRelationFilter,
+      PhonePePaymentWhereInput
+    > | null;
+  };
 
   export type StoreOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    domain?: SortOrder
-    ownerId?: SortOrder
-    owner?: UserOrderByWithRelationInput
-    categories?: CategoryOrderByRelationAggregateInput
-    products?: ProductOrderByRelationAggregateInput
-    customers?: CustomerOrderByRelationAggregateInput
-    reviews?: ReviewOrderByRelationAggregateInput
-    phonePePayment?: PhonePePaymentOrderByWithRelationInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    domain?: SortOrder;
+    ownerId?: SortOrder;
+    owner?: UserOrderByWithRelationInput;
+    categories?: CategoryOrderByRelationAggregateInput;
+    products?: ProductOrderByRelationAggregateInput;
+    customers?: CustomerOrderByRelationAggregateInput;
+    reviews?: ReviewOrderByRelationAggregateInput;
+    phonePePayment?: PhonePePaymentOrderByWithRelationInput;
+  };
 
-  export type StoreWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    domain?: string
-    AND?: StoreWhereInput | StoreWhereInput[]
-    OR?: StoreWhereInput[]
-    NOT?: StoreWhereInput | StoreWhereInput[]
-    name?: StringFilter<"Store"> | string
-    ownerId?: StringFilter<"Store"> | string
-    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
-    categories?: CategoryListRelationFilter
-    products?: ProductListRelationFilter
-    customers?: CustomerListRelationFilter
-    reviews?: ReviewListRelationFilter
-    phonePePayment?: XOR<PhonePePaymentNullableScalarRelationFilter, PhonePePaymentWhereInput> | null
-  }, "id" | "domain">
+  export type StoreWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      domain?: string;
+      AND?: StoreWhereInput | StoreWhereInput[];
+      OR?: StoreWhereInput[];
+      NOT?: StoreWhereInput | StoreWhereInput[];
+      name?: StringFilter<'Store'> | string;
+      ownerId?: StringFilter<'Store'> | string;
+      owner?: XOR<UserScalarRelationFilter, UserWhereInput>;
+      categories?: CategoryListRelationFilter;
+      products?: ProductListRelationFilter;
+      customers?: CustomerListRelationFilter;
+      reviews?: ReviewListRelationFilter;
+      phonePePayment?: XOR<
+        PhonePePaymentNullableScalarRelationFilter,
+        PhonePePaymentWhereInput
+      > | null;
+    },
+    'id' | 'domain'
+  >;
 
   export type StoreOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    domain?: SortOrder
-    ownerId?: SortOrder
-    _count?: StoreCountOrderByAggregateInput
-    _max?: StoreMaxOrderByAggregateInput
-    _min?: StoreMinOrderByAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    domain?: SortOrder;
+    ownerId?: SortOrder;
+    _count?: StoreCountOrderByAggregateInput;
+    _max?: StoreMaxOrderByAggregateInput;
+    _min?: StoreMinOrderByAggregateInput;
+  };
 
   export type StoreScalarWhereWithAggregatesInput = {
-    AND?: StoreScalarWhereWithAggregatesInput | StoreScalarWhereWithAggregatesInput[]
-    OR?: StoreScalarWhereWithAggregatesInput[]
-    NOT?: StoreScalarWhereWithAggregatesInput | StoreScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Store"> | string
-    name?: StringWithAggregatesFilter<"Store"> | string
-    domain?: StringWithAggregatesFilter<"Store"> | string
-    ownerId?: StringWithAggregatesFilter<"Store"> | string
-  }
+    AND?:
+      | StoreScalarWhereWithAggregatesInput
+      | StoreScalarWhereWithAggregatesInput[];
+    OR?: StoreScalarWhereWithAggregatesInput[];
+    NOT?:
+      | StoreScalarWhereWithAggregatesInput
+      | StoreScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'Store'> | string;
+    name?: StringWithAggregatesFilter<'Store'> | string;
+    domain?: StringWithAggregatesFilter<'Store'> | string;
+    ownerId?: StringWithAggregatesFilter<'Store'> | string;
+  };
 
   export type CategoryWhereInput = {
-    AND?: CategoryWhereInput | CategoryWhereInput[]
-    OR?: CategoryWhereInput[]
-    NOT?: CategoryWhereInput | CategoryWhereInput[]
-    id?: StringFilter<"Category"> | string
-    name?: StringFilter<"Category"> | string
-    storeId?: StringFilter<"Category"> | string
-    parentId?: StringNullableFilter<"Category"> | string | null
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    subCategories?: CategoryListRelationFilter
-    products?: ProductListRelationFilter
-  }
+    AND?: CategoryWhereInput | CategoryWhereInput[];
+    OR?: CategoryWhereInput[];
+    NOT?: CategoryWhereInput | CategoryWhereInput[];
+    id?: StringFilter<'Category'> | string;
+    name?: StringFilter<'Category'> | string;
+    storeId?: StringFilter<'Category'> | string;
+    parentId?: StringNullableFilter<'Category'> | string | null;
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+    parent?: XOR<
+      CategoryNullableScalarRelationFilter,
+      CategoryWhereInput
+    > | null;
+    subCategories?: CategoryListRelationFilter;
+    products?: ProductListRelationFilter;
+  };
 
   export type CategoryOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    storeId?: SortOrder
-    parentId?: SortOrderInput | SortOrder
-    store?: StoreOrderByWithRelationInput
-    parent?: CategoryOrderByWithRelationInput
-    subCategories?: CategoryOrderByRelationAggregateInput
-    products?: ProductOrderByRelationAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    storeId?: SortOrder;
+    parentId?: SortOrderInput | SortOrder;
+    store?: StoreOrderByWithRelationInput;
+    parent?: CategoryOrderByWithRelationInput;
+    subCategories?: CategoryOrderByRelationAggregateInput;
+    products?: ProductOrderByRelationAggregateInput;
+  };
 
-  export type CategoryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: CategoryWhereInput | CategoryWhereInput[]
-    OR?: CategoryWhereInput[]
-    NOT?: CategoryWhereInput | CategoryWhereInput[]
-    name?: StringFilter<"Category"> | string
-    storeId?: StringFilter<"Category"> | string
-    parentId?: StringNullableFilter<"Category"> | string | null
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    subCategories?: CategoryListRelationFilter
-    products?: ProductListRelationFilter
-  }, "id">
+  export type CategoryWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      AND?: CategoryWhereInput | CategoryWhereInput[];
+      OR?: CategoryWhereInput[];
+      NOT?: CategoryWhereInput | CategoryWhereInput[];
+      name?: StringFilter<'Category'> | string;
+      storeId?: StringFilter<'Category'> | string;
+      parentId?: StringNullableFilter<'Category'> | string | null;
+      store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+      parent?: XOR<
+        CategoryNullableScalarRelationFilter,
+        CategoryWhereInput
+      > | null;
+      subCategories?: CategoryListRelationFilter;
+      products?: ProductListRelationFilter;
+    },
+    'id'
+  >;
 
   export type CategoryOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    storeId?: SortOrder
-    parentId?: SortOrderInput | SortOrder
-    _count?: CategoryCountOrderByAggregateInput
-    _max?: CategoryMaxOrderByAggregateInput
-    _min?: CategoryMinOrderByAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    storeId?: SortOrder;
+    parentId?: SortOrderInput | SortOrder;
+    _count?: CategoryCountOrderByAggregateInput;
+    _max?: CategoryMaxOrderByAggregateInput;
+    _min?: CategoryMinOrderByAggregateInput;
+  };
 
   export type CategoryScalarWhereWithAggregatesInput = {
-    AND?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
-    OR?: CategoryScalarWhereWithAggregatesInput[]
-    NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Category"> | string
-    name?: StringWithAggregatesFilter<"Category"> | string
-    storeId?: StringWithAggregatesFilter<"Category"> | string
-    parentId?: StringNullableWithAggregatesFilter<"Category"> | string | null
-  }
+    AND?:
+      | CategoryScalarWhereWithAggregatesInput
+      | CategoryScalarWhereWithAggregatesInput[];
+    OR?: CategoryScalarWhereWithAggregatesInput[];
+    NOT?:
+      | CategoryScalarWhereWithAggregatesInput
+      | CategoryScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'Category'> | string;
+    name?: StringWithAggregatesFilter<'Category'> | string;
+    storeId?: StringWithAggregatesFilter<'Category'> | string;
+    parentId?: StringNullableWithAggregatesFilter<'Category'> | string | null;
+  };
 
   export type ProductWhereInput = {
-    AND?: ProductWhereInput | ProductWhereInput[]
-    OR?: ProductWhereInput[]
-    NOT?: ProductWhereInput | ProductWhereInput[]
-    id?: StringFilter<"Product"> | string
-    name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
-    originalPrice?: FloatFilter<"Product"> | number
-    price?: FloatFilter<"Product"> | number
-    categoryId?: StringFilter<"Product"> | string
-    storeId?: StringFilter<"Product"> | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    reviews?: ReviewListRelationFilter
-  }
+    AND?: ProductWhereInput | ProductWhereInput[];
+    OR?: ProductWhereInput[];
+    NOT?: ProductWhereInput | ProductWhereInput[];
+    id?: StringFilter<'Product'> | string;
+    name?: StringFilter<'Product'> | string;
+    description?: StringFilter<'Product'> | string;
+    originalPrice?: FloatFilter<'Product'> | number;
+    price?: FloatFilter<'Product'> | number;
+    categoryId?: StringFilter<'Product'> | string;
+    storeId?: StringFilter<'Product'> | string;
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>;
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+    reviews?: ReviewListRelationFilter;
+  };
 
   export type ProductOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    originalPrice?: SortOrder
-    price?: SortOrder
-    categoryId?: SortOrder
-    storeId?: SortOrder
-    category?: CategoryOrderByWithRelationInput
-    store?: StoreOrderByWithRelationInput
-    reviews?: ReviewOrderByRelationAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    description?: SortOrder;
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+    categoryId?: SortOrder;
+    storeId?: SortOrder;
+    category?: CategoryOrderByWithRelationInput;
+    store?: StoreOrderByWithRelationInput;
+    reviews?: ReviewOrderByRelationAggregateInput;
+  };
 
-  export type ProductWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ProductWhereInput | ProductWhereInput[]
-    OR?: ProductWhereInput[]
-    NOT?: ProductWhereInput | ProductWhereInput[]
-    name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
-    originalPrice?: FloatFilter<"Product"> | number
-    price?: FloatFilter<"Product"> | number
-    categoryId?: StringFilter<"Product"> | string
-    storeId?: StringFilter<"Product"> | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    reviews?: ReviewListRelationFilter
-  }, "id">
+  export type ProductWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      AND?: ProductWhereInput | ProductWhereInput[];
+      OR?: ProductWhereInput[];
+      NOT?: ProductWhereInput | ProductWhereInput[];
+      name?: StringFilter<'Product'> | string;
+      description?: StringFilter<'Product'> | string;
+      originalPrice?: FloatFilter<'Product'> | number;
+      price?: FloatFilter<'Product'> | number;
+      categoryId?: StringFilter<'Product'> | string;
+      storeId?: StringFilter<'Product'> | string;
+      category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>;
+      store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+      reviews?: ReviewListRelationFilter;
+    },
+    'id'
+  >;
 
   export type ProductOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    originalPrice?: SortOrder
-    price?: SortOrder
-    categoryId?: SortOrder
-    storeId?: SortOrder
-    _count?: ProductCountOrderByAggregateInput
-    _avg?: ProductAvgOrderByAggregateInput
-    _max?: ProductMaxOrderByAggregateInput
-    _min?: ProductMinOrderByAggregateInput
-    _sum?: ProductSumOrderByAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    description?: SortOrder;
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+    categoryId?: SortOrder;
+    storeId?: SortOrder;
+    _count?: ProductCountOrderByAggregateInput;
+    _avg?: ProductAvgOrderByAggregateInput;
+    _max?: ProductMaxOrderByAggregateInput;
+    _min?: ProductMinOrderByAggregateInput;
+    _sum?: ProductSumOrderByAggregateInput;
+  };
 
   export type ProductScalarWhereWithAggregatesInput = {
-    AND?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
-    OR?: ProductScalarWhereWithAggregatesInput[]
-    NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Product"> | string
-    name?: StringWithAggregatesFilter<"Product"> | string
-    description?: StringWithAggregatesFilter<"Product"> | string
-    originalPrice?: FloatWithAggregatesFilter<"Product"> | number
-    price?: FloatWithAggregatesFilter<"Product"> | number
-    categoryId?: StringWithAggregatesFilter<"Product"> | string
-    storeId?: StringWithAggregatesFilter<"Product"> | string
-  }
+    AND?:
+      | ProductScalarWhereWithAggregatesInput
+      | ProductScalarWhereWithAggregatesInput[];
+    OR?: ProductScalarWhereWithAggregatesInput[];
+    NOT?:
+      | ProductScalarWhereWithAggregatesInput
+      | ProductScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'Product'> | string;
+    name?: StringWithAggregatesFilter<'Product'> | string;
+    description?: StringWithAggregatesFilter<'Product'> | string;
+    originalPrice?: FloatWithAggregatesFilter<'Product'> | number;
+    price?: FloatWithAggregatesFilter<'Product'> | number;
+    categoryId?: StringWithAggregatesFilter<'Product'> | string;
+    storeId?: StringWithAggregatesFilter<'Product'> | string;
+  };
 
   export type ReviewWhereInput = {
-    AND?: ReviewWhereInput | ReviewWhereInput[]
-    OR?: ReviewWhereInput[]
-    NOT?: ReviewWhereInput | ReviewWhereInput[]
-    id?: StringFilter<"Review"> | string
-    content?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
-    productId?: StringFilter<"Review"> | string
-    storeId?: StringFilter<"Review"> | string
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }
+    AND?: ReviewWhereInput | ReviewWhereInput[];
+    OR?: ReviewWhereInput[];
+    NOT?: ReviewWhereInput | ReviewWhereInput[];
+    id?: StringFilter<'Review'> | string;
+    content?: StringFilter<'Review'> | string;
+    rating?: IntFilter<'Review'> | number;
+    productId?: StringFilter<'Review'> | string;
+    storeId?: StringFilter<'Review'> | string;
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+  };
 
   export type ReviewOrderByWithRelationInput = {
-    id?: SortOrder
-    content?: SortOrder
-    rating?: SortOrder
-    productId?: SortOrder
-    storeId?: SortOrder
-    product?: ProductOrderByWithRelationInput
-    store?: StoreOrderByWithRelationInput
-  }
+    id?: SortOrder;
+    content?: SortOrder;
+    rating?: SortOrder;
+    productId?: SortOrder;
+    storeId?: SortOrder;
+    product?: ProductOrderByWithRelationInput;
+    store?: StoreOrderByWithRelationInput;
+  };
 
-  export type ReviewWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ReviewWhereInput | ReviewWhereInput[]
-    OR?: ReviewWhereInput[]
-    NOT?: ReviewWhereInput | ReviewWhereInput[]
-    content?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
-    productId?: StringFilter<"Review"> | string
-    storeId?: StringFilter<"Review"> | string
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }, "id">
+  export type ReviewWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      AND?: ReviewWhereInput | ReviewWhereInput[];
+      OR?: ReviewWhereInput[];
+      NOT?: ReviewWhereInput | ReviewWhereInput[];
+      content?: StringFilter<'Review'> | string;
+      rating?: IntFilter<'Review'> | number;
+      productId?: StringFilter<'Review'> | string;
+      storeId?: StringFilter<'Review'> | string;
+      product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
+      store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+    },
+    'id'
+  >;
 
   export type ReviewOrderByWithAggregationInput = {
-    id?: SortOrder
-    content?: SortOrder
-    rating?: SortOrder
-    productId?: SortOrder
-    storeId?: SortOrder
-    _count?: ReviewCountOrderByAggregateInput
-    _avg?: ReviewAvgOrderByAggregateInput
-    _max?: ReviewMaxOrderByAggregateInput
-    _min?: ReviewMinOrderByAggregateInput
-    _sum?: ReviewSumOrderByAggregateInput
-  }
+    id?: SortOrder;
+    content?: SortOrder;
+    rating?: SortOrder;
+    productId?: SortOrder;
+    storeId?: SortOrder;
+    _count?: ReviewCountOrderByAggregateInput;
+    _avg?: ReviewAvgOrderByAggregateInput;
+    _max?: ReviewMaxOrderByAggregateInput;
+    _min?: ReviewMinOrderByAggregateInput;
+    _sum?: ReviewSumOrderByAggregateInput;
+  };
 
   export type ReviewScalarWhereWithAggregatesInput = {
-    AND?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
-    OR?: ReviewScalarWhereWithAggregatesInput[]
-    NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Review"> | string
-    content?: StringWithAggregatesFilter<"Review"> | string
-    rating?: IntWithAggregatesFilter<"Review"> | number
-    productId?: StringWithAggregatesFilter<"Review"> | string
-    storeId?: StringWithAggregatesFilter<"Review"> | string
-  }
+    AND?:
+      | ReviewScalarWhereWithAggregatesInput
+      | ReviewScalarWhereWithAggregatesInput[];
+    OR?: ReviewScalarWhereWithAggregatesInput[];
+    NOT?:
+      | ReviewScalarWhereWithAggregatesInput
+      | ReviewScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'Review'> | string;
+    content?: StringWithAggregatesFilter<'Review'> | string;
+    rating?: IntWithAggregatesFilter<'Review'> | number;
+    productId?: StringWithAggregatesFilter<'Review'> | string;
+    storeId?: StringWithAggregatesFilter<'Review'> | string;
+  };
 
   export type CustomerWhereInput = {
-    AND?: CustomerWhereInput | CustomerWhereInput[]
-    OR?: CustomerWhereInput[]
-    NOT?: CustomerWhereInput | CustomerWhereInput[]
-    id?: StringFilter<"Customer"> | string
-    name?: StringFilter<"Customer"> | string
-    email?: StringNullableFilter<"Customer"> | string | null
-    password?: StringFilter<"Customer"> | string
-    phone?: StringFilter<"Customer"> | string
-    address?: StringFilter<"Customer"> | string
-    city?: StringFilter<"Customer"> | string
-    state?: StringFilter<"Customer"> | string
-    country?: StringFilter<"Customer"> | string
-    zipCode?: StringFilter<"Customer"> | string
-    createdAt?: DateTimeFilter<"Customer"> | Date | string
-    updatedAt?: DateTimeFilter<"Customer"> | Date | string
-    storeId?: StringFilter<"Customer"> | string
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }
+    AND?: CustomerWhereInput | CustomerWhereInput[];
+    OR?: CustomerWhereInput[];
+    NOT?: CustomerWhereInput | CustomerWhereInput[];
+    id?: StringFilter<'Customer'> | string;
+    name?: StringFilter<'Customer'> | string;
+    email?: StringNullableFilter<'Customer'> | string | null;
+    password?: StringFilter<'Customer'> | string;
+    phone?: StringFilter<'Customer'> | string;
+    address?: StringFilter<'Customer'> | string;
+    city?: StringFilter<'Customer'> | string;
+    state?: StringFilter<'Customer'> | string;
+    country?: StringFilter<'Customer'> | string;
+    zipCode?: StringFilter<'Customer'> | string;
+    createdAt?: DateTimeFilter<'Customer'> | Date | string;
+    updatedAt?: DateTimeFilter<'Customer'> | Date | string;
+    storeId?: StringFilter<'Customer'> | string;
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+  };
 
   export type CustomerOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    storeId?: SortOrder
-    store?: StoreOrderByWithRelationInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrderInput | SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    storeId?: SortOrder;
+    store?: StoreOrderByWithRelationInput;
+  };
 
-  export type CustomerWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    email_storeId?: CustomerEmailStoreIdCompoundUniqueInput
-    AND?: CustomerWhereInput | CustomerWhereInput[]
-    OR?: CustomerWhereInput[]
-    NOT?: CustomerWhereInput | CustomerWhereInput[]
-    name?: StringFilter<"Customer"> | string
-    email?: StringNullableFilter<"Customer"> | string | null
-    password?: StringFilter<"Customer"> | string
-    phone?: StringFilter<"Customer"> | string
-    address?: StringFilter<"Customer"> | string
-    city?: StringFilter<"Customer"> | string
-    state?: StringFilter<"Customer"> | string
-    country?: StringFilter<"Customer"> | string
-    zipCode?: StringFilter<"Customer"> | string
-    createdAt?: DateTimeFilter<"Customer"> | Date | string
-    updatedAt?: DateTimeFilter<"Customer"> | Date | string
-    storeId?: StringFilter<"Customer"> | string
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }, "id" | "email_storeId">
+  export type CustomerWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      email_storeId?: CustomerEmailStoreIdCompoundUniqueInput;
+      AND?: CustomerWhereInput | CustomerWhereInput[];
+      OR?: CustomerWhereInput[];
+      NOT?: CustomerWhereInput | CustomerWhereInput[];
+      name?: StringFilter<'Customer'> | string;
+      email?: StringNullableFilter<'Customer'> | string | null;
+      password?: StringFilter<'Customer'> | string;
+      phone?: StringFilter<'Customer'> | string;
+      address?: StringFilter<'Customer'> | string;
+      city?: StringFilter<'Customer'> | string;
+      state?: StringFilter<'Customer'> | string;
+      country?: StringFilter<'Customer'> | string;
+      zipCode?: StringFilter<'Customer'> | string;
+      createdAt?: DateTimeFilter<'Customer'> | Date | string;
+      updatedAt?: DateTimeFilter<'Customer'> | Date | string;
+      storeId?: StringFilter<'Customer'> | string;
+      store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+    },
+    'id' | 'email_storeId'
+  >;
 
   export type CustomerOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    storeId?: SortOrder
-    _count?: CustomerCountOrderByAggregateInput
-    _max?: CustomerMaxOrderByAggregateInput
-    _min?: CustomerMinOrderByAggregateInput
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrderInput | SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    storeId?: SortOrder;
+    _count?: CustomerCountOrderByAggregateInput;
+    _max?: CustomerMaxOrderByAggregateInput;
+    _min?: CustomerMinOrderByAggregateInput;
+  };
 
   export type CustomerScalarWhereWithAggregatesInput = {
-    AND?: CustomerScalarWhereWithAggregatesInput | CustomerScalarWhereWithAggregatesInput[]
-    OR?: CustomerScalarWhereWithAggregatesInput[]
-    NOT?: CustomerScalarWhereWithAggregatesInput | CustomerScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Customer"> | string
-    name?: StringWithAggregatesFilter<"Customer"> | string
-    email?: StringNullableWithAggregatesFilter<"Customer"> | string | null
-    password?: StringWithAggregatesFilter<"Customer"> | string
-    phone?: StringWithAggregatesFilter<"Customer"> | string
-    address?: StringWithAggregatesFilter<"Customer"> | string
-    city?: StringWithAggregatesFilter<"Customer"> | string
-    state?: StringWithAggregatesFilter<"Customer"> | string
-    country?: StringWithAggregatesFilter<"Customer"> | string
-    zipCode?: StringWithAggregatesFilter<"Customer"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
-    storeId?: StringWithAggregatesFilter<"Customer"> | string
-  }
+    AND?:
+      | CustomerScalarWhereWithAggregatesInput
+      | CustomerScalarWhereWithAggregatesInput[];
+    OR?: CustomerScalarWhereWithAggregatesInput[];
+    NOT?:
+      | CustomerScalarWhereWithAggregatesInput
+      | CustomerScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'Customer'> | string;
+    name?: StringWithAggregatesFilter<'Customer'> | string;
+    email?: StringNullableWithAggregatesFilter<'Customer'> | string | null;
+    password?: StringWithAggregatesFilter<'Customer'> | string;
+    phone?: StringWithAggregatesFilter<'Customer'> | string;
+    address?: StringWithAggregatesFilter<'Customer'> | string;
+    city?: StringWithAggregatesFilter<'Customer'> | string;
+    state?: StringWithAggregatesFilter<'Customer'> | string;
+    country?: StringWithAggregatesFilter<'Customer'> | string;
+    zipCode?: StringWithAggregatesFilter<'Customer'> | string;
+    createdAt?: DateTimeWithAggregatesFilter<'Customer'> | Date | string;
+    updatedAt?: DateTimeWithAggregatesFilter<'Customer'> | Date | string;
+    storeId?: StringWithAggregatesFilter<'Customer'> | string;
+  };
 
   export type PhonePePaymentWhereInput = {
-    AND?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[]
-    OR?: PhonePePaymentWhereInput[]
-    NOT?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[]
-    id?: StringFilter<"PhonePePayment"> | string
-    storeId?: StringFilter<"PhonePePayment"> | string
-    merchantId?: StringFilter<"PhonePePayment"> | string
-    saltKey?: StringFilter<"PhonePePayment"> | string
-    saltIndex?: StringFilter<"PhonePePayment"> | string
-    active?: BoolFilter<"PhonePePayment"> | boolean
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }
+    AND?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[];
+    OR?: PhonePePaymentWhereInput[];
+    NOT?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[];
+    id?: StringFilter<'PhonePePayment'> | string;
+    storeId?: StringFilter<'PhonePePayment'> | string;
+    merchantId?: StringFilter<'PhonePePayment'> | string;
+    saltKey?: StringFilter<'PhonePePayment'> | string;
+    saltIndex?: StringFilter<'PhonePePayment'> | string;
+    active?: BoolFilter<'PhonePePayment'> | boolean;
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+  };
 
   export type PhonePePaymentOrderByWithRelationInput = {
-    id?: SortOrder
-    storeId?: SortOrder
-    merchantId?: SortOrder
-    saltKey?: SortOrder
-    saltIndex?: SortOrder
-    active?: SortOrder
-    store?: StoreOrderByWithRelationInput
-  }
+    id?: SortOrder;
+    storeId?: SortOrder;
+    merchantId?: SortOrder;
+    saltKey?: SortOrder;
+    saltIndex?: SortOrder;
+    active?: SortOrder;
+    store?: StoreOrderByWithRelationInput;
+  };
 
-  export type PhonePePaymentWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    storeId?: string
-    AND?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[]
-    OR?: PhonePePaymentWhereInput[]
-    NOT?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[]
-    merchantId?: StringFilter<"PhonePePayment"> | string
-    saltKey?: StringFilter<"PhonePePayment"> | string
-    saltIndex?: StringFilter<"PhonePePayment"> | string
-    active?: BoolFilter<"PhonePePayment"> | boolean
-    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-  }, "id" | "storeId">
+  export type PhonePePaymentWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      storeId?: string;
+      AND?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[];
+      OR?: PhonePePaymentWhereInput[];
+      NOT?: PhonePePaymentWhereInput | PhonePePaymentWhereInput[];
+      merchantId?: StringFilter<'PhonePePayment'> | string;
+      saltKey?: StringFilter<'PhonePePayment'> | string;
+      saltIndex?: StringFilter<'PhonePePayment'> | string;
+      active?: BoolFilter<'PhonePePayment'> | boolean;
+      store?: XOR<StoreScalarRelationFilter, StoreWhereInput>;
+    },
+    'id' | 'storeId'
+  >;
 
   export type PhonePePaymentOrderByWithAggregationInput = {
-    id?: SortOrder
-    storeId?: SortOrder
-    merchantId?: SortOrder
-    saltKey?: SortOrder
-    saltIndex?: SortOrder
-    active?: SortOrder
-    _count?: PhonePePaymentCountOrderByAggregateInput
-    _max?: PhonePePaymentMaxOrderByAggregateInput
-    _min?: PhonePePaymentMinOrderByAggregateInput
-  }
+    id?: SortOrder;
+    storeId?: SortOrder;
+    merchantId?: SortOrder;
+    saltKey?: SortOrder;
+    saltIndex?: SortOrder;
+    active?: SortOrder;
+    _count?: PhonePePaymentCountOrderByAggregateInput;
+    _max?: PhonePePaymentMaxOrderByAggregateInput;
+    _min?: PhonePePaymentMinOrderByAggregateInput;
+  };
 
   export type PhonePePaymentScalarWhereWithAggregatesInput = {
-    AND?: PhonePePaymentScalarWhereWithAggregatesInput | PhonePePaymentScalarWhereWithAggregatesInput[]
-    OR?: PhonePePaymentScalarWhereWithAggregatesInput[]
-    NOT?: PhonePePaymentScalarWhereWithAggregatesInput | PhonePePaymentScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PhonePePayment"> | string
-    storeId?: StringWithAggregatesFilter<"PhonePePayment"> | string
-    merchantId?: StringWithAggregatesFilter<"PhonePePayment"> | string
-    saltKey?: StringWithAggregatesFilter<"PhonePePayment"> | string
-    saltIndex?: StringWithAggregatesFilter<"PhonePePayment"> | string
-    active?: BoolWithAggregatesFilter<"PhonePePayment"> | boolean
-  }
+    AND?:
+      | PhonePePaymentScalarWhereWithAggregatesInput
+      | PhonePePaymentScalarWhereWithAggregatesInput[];
+    OR?: PhonePePaymentScalarWhereWithAggregatesInput[];
+    NOT?:
+      | PhonePePaymentScalarWhereWithAggregatesInput
+      | PhonePePaymentScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'PhonePePayment'> | string;
+    storeId?: StringWithAggregatesFilter<'PhonePePayment'> | string;
+    merchantId?: StringWithAggregatesFilter<'PhonePePayment'> | string;
+    saltKey?: StringWithAggregatesFilter<'PhonePePayment'> | string;
+    saltIndex?: StringWithAggregatesFilter<'PhonePePayment'> | string;
+    active?: BoolWithAggregatesFilter<'PhonePePayment'> | boolean;
+  };
 
   export type UserCreateInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    stores?: StoreCreateNestedManyWithoutOwnerInput
-  }
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    stores?: StoreCreateNestedManyWithoutOwnerInput;
+  };
 
   export type UserUncheckedCreateInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    stores?: StoreUncheckedCreateNestedManyWithoutOwnerInput
-  }
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    stores?: StoreUncheckedCreateNestedManyWithoutOwnerInput;
+  };
 
   export type UserUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    stores?: StoreUpdateManyWithoutOwnerNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    stores?: StoreUpdateManyWithoutOwnerNestedInput;
+  };
 
   export type UserUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    stores?: StoreUncheckedUpdateManyWithoutOwnerNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    stores?: StoreUncheckedUpdateManyWithoutOwnerNestedInput;
+  };
 
   export type UserCreateManyInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type UserUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type UserUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type StoreCreateInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreCreateManyInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+  };
 
   export type StoreUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type StoreUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CategoryCreateInput = {
-    id?: string
-    name: string
-    store: StoreCreateNestedOneWithoutCategoriesInput
-    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput
-    subCategories?: CategoryCreateNestedManyWithoutParentInput
-    products?: ProductCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    store: StoreCreateNestedOneWithoutCategoriesInput;
+    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput;
+    subCategories?: CategoryCreateNestedManyWithoutParentInput;
+    products?: ProductCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryUncheckedCreateInput = {
-    id?: string
-    name: string
-    storeId: string
-    parentId?: string | null
-    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput
-    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+    parentId?: string | null;
+    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput;
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput
-    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput
-    subCategories?: CategoryUpdateManyWithoutParentNestedInput
-    products?: ProductUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput;
+    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput;
+    subCategories?: CategoryUpdateManyWithoutParentNestedInput;
+    products?: ProductUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput
-    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryCreateManyInput = {
-    id?: string
-    name: string
-    storeId: string
-    parentId?: string | null
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+    parentId?: string | null;
+  };
 
   export type CategoryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CategoryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+  };
 
   export type ProductCreateInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    category: CategoryCreateNestedOneWithoutProductsInput
-    store: StoreCreateNestedOneWithoutProductsInput
-    reviews?: ReviewCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    category: CategoryCreateNestedOneWithoutProductsInput;
+    store: StoreCreateNestedOneWithoutProductsInput;
+    reviews?: ReviewCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductUncheckedCreateInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-    storeId: string
-    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+    storeId: string;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
-    store?: StoreUpdateOneRequiredWithoutProductsNestedInput
-    reviews?: ReviewUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput;
+    store?: StoreUpdateOneRequiredWithoutProductsNestedInput;
+    reviews?: ReviewUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    categoryId?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductCreateManyInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+    storeId: string;
+  };
 
   export type ProductUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+  };
 
   export type ProductUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    categoryId?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ReviewCreateInput = {
-    id?: string
-    content: string
-    rating: number
-    product: ProductCreateNestedOneWithoutReviewsInput
-    store: StoreCreateNestedOneWithoutReviewsInput
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    product: ProductCreateNestedOneWithoutReviewsInput;
+    store: StoreCreateNestedOneWithoutReviewsInput;
+  };
 
   export type ReviewUncheckedCreateInput = {
-    id?: string
-    content: string
-    rating: number
-    productId: string
-    storeId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    productId: string;
+    storeId: string;
+  };
 
   export type ReviewUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
-    store?: StoreUpdateOneRequiredWithoutReviewsNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput;
+    store?: StoreUpdateOneRequiredWithoutReviewsNestedInput;
+  };
 
   export type ReviewUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    productId?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    productId?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ReviewCreateManyInput = {
-    id?: string
-    content: string
-    rating: number
-    productId: string
-    storeId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    productId: string;
+    storeId: string;
+  };
 
   export type ReviewUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+  };
 
   export type ReviewUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    productId?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    productId?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CustomerCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    store: StoreCreateNestedOneWithoutCustomersInput
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    store: StoreCreateNestedOneWithoutCustomersInput;
+  };
 
   export type CustomerUncheckedCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    storeId: string;
+  };
 
   export type CustomerUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    store?: StoreUpdateOneRequiredWithoutCustomersNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    store?: StoreUpdateOneRequiredWithoutCustomersNestedInput;
+  };
 
   export type CustomerUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CustomerCreateManyInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    storeId: string;
+  };
 
   export type CustomerUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type CustomerUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type PhonePePaymentCreateInput = {
-    id?: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active?: boolean
-    store: StoreCreateNestedOneWithoutPhonePePaymentInput
-  }
+    id?: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active?: boolean;
+    store: StoreCreateNestedOneWithoutPhonePePaymentInput;
+  };
 
   export type PhonePePaymentUncheckedCreateInput = {
-    id?: string
-    storeId: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active?: boolean
-  }
+    id?: string;
+    storeId: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active?: boolean;
+  };
 
   export type PhonePePaymentUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    store?: StoreUpdateOneRequiredWithoutPhonePePaymentNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+    store?: StoreUpdateOneRequiredWithoutPhonePePaymentNestedInput;
+  };
 
   export type PhonePePaymentUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+  };
 
   export type PhonePePaymentCreateManyInput = {
-    id?: string
-    storeId: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active?: boolean
-  }
+    id?: string;
+    storeId: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active?: boolean;
+  };
 
   export type PhonePePaymentUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+  };
 
   export type PhonePePaymentUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+  };
 
   export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel>;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
+    not?: NestedStringFilter<$PrismaModel> | string;
+  };
 
   export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
+  };
 
   export type StoreListRelationFilter = {
-    every?: StoreWhereInput
-    some?: StoreWhereInput
-    none?: StoreWhereInput
-  }
+    every?: StoreWhereInput;
+    some?: StoreWhereInput;
+    none?: StoreWhereInput;
+  };
 
   export type StoreOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
+    _count?: SortOrder;
+  };
 
   export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
 
   export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
 
   export type UserMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel>;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedStringFilter<$PrismaModel>;
+    _max?: NestedStringFilter<$PrismaModel>;
+  };
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedDateTimeFilter<$PrismaModel>;
+    _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
 
   export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
+    is?: UserWhereInput;
+    isNot?: UserWhereInput;
+  };
 
   export type CategoryListRelationFilter = {
-    every?: CategoryWhereInput
-    some?: CategoryWhereInput
-    none?: CategoryWhereInput
-  }
+    every?: CategoryWhereInput;
+    some?: CategoryWhereInput;
+    none?: CategoryWhereInput;
+  };
 
   export type ProductListRelationFilter = {
-    every?: ProductWhereInput
-    some?: ProductWhereInput
-    none?: ProductWhereInput
-  }
+    every?: ProductWhereInput;
+    some?: ProductWhereInput;
+    none?: ProductWhereInput;
+  };
 
   export type CustomerListRelationFilter = {
-    every?: CustomerWhereInput
-    some?: CustomerWhereInput
-    none?: CustomerWhereInput
-  }
+    every?: CustomerWhereInput;
+    some?: CustomerWhereInput;
+    none?: CustomerWhereInput;
+  };
 
   export type ReviewListRelationFilter = {
-    every?: ReviewWhereInput
-    some?: ReviewWhereInput
-    none?: ReviewWhereInput
-  }
+    every?: ReviewWhereInput;
+    some?: ReviewWhereInput;
+    none?: ReviewWhereInput;
+  };
 
   export type PhonePePaymentNullableScalarRelationFilter = {
-    is?: PhonePePaymentWhereInput | null
-    isNot?: PhonePePaymentWhereInput | null
-  }
+    is?: PhonePePaymentWhereInput | null;
+    isNot?: PhonePePaymentWhereInput | null;
+  };
 
   export type CategoryOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
+    _count?: SortOrder;
+  };
 
   export type ProductOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
+    _count?: SortOrder;
+  };
 
   export type CustomerOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
+    _count?: SortOrder;
+  };
 
   export type ReviewOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
+    _count?: SortOrder;
+  };
 
   export type StoreCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    domain?: SortOrder
-    ownerId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    domain?: SortOrder;
+    ownerId?: SortOrder;
+  };
 
   export type StoreMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    domain?: SortOrder
-    ownerId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    domain?: SortOrder;
+    ownerId?: SortOrder;
+  };
 
   export type StoreMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    domain?: SortOrder
-    ownerId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    domain?: SortOrder;
+    ownerId?: SortOrder;
+  };
 
   export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel> | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null;
+  };
 
   export type StoreScalarRelationFilter = {
-    is?: StoreWhereInput
-    isNot?: StoreWhereInput
-  }
+    is?: StoreWhereInput;
+    isNot?: StoreWhereInput;
+  };
 
   export type CategoryNullableScalarRelationFilter = {
-    is?: CategoryWhereInput | null
-    isNot?: CategoryWhereInput | null
-  }
+    is?: CategoryWhereInput | null;
+    isNot?: CategoryWhereInput | null;
+  };
 
   export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
+    sort: SortOrder;
+    nulls?: NullsOrder;
+  };
 
   export type CategoryCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    storeId?: SortOrder
-    parentId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    storeId?: SortOrder;
+    parentId?: SortOrder;
+  };
 
   export type CategoryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    storeId?: SortOrder
-    parentId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    storeId?: SortOrder;
+    parentId?: SortOrder;
+  };
 
   export type CategoryMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    storeId?: SortOrder
-    parentId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    storeId?: SortOrder;
+    parentId?: SortOrder;
+  };
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel> | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
+    not?:
+      | NestedStringNullableWithAggregatesFilter<$PrismaModel>
+      | string
+      | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedStringNullableFilter<$PrismaModel>;
+    _max?: NestedStringNullableFilter<$PrismaModel>;
+  };
 
   export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
+    equals?: number | FloatFieldRefInput<$PrismaModel>;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    lt?: number | FloatFieldRefInput<$PrismaModel>;
+    lte?: number | FloatFieldRefInput<$PrismaModel>;
+    gt?: number | FloatFieldRefInput<$PrismaModel>;
+    gte?: number | FloatFieldRefInput<$PrismaModel>;
+    not?: NestedFloatFilter<$PrismaModel> | number;
+  };
 
   export type CategoryScalarRelationFilter = {
-    is?: CategoryWhereInput
-    isNot?: CategoryWhereInput
-  }
+    is?: CategoryWhereInput;
+    isNot?: CategoryWhereInput;
+  };
 
   export type ProductCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    originalPrice?: SortOrder
-    price?: SortOrder
-    categoryId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    description?: SortOrder;
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+    categoryId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ProductAvgOrderByAggregateInput = {
-    originalPrice?: SortOrder
-    price?: SortOrder
-  }
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+  };
 
   export type ProductMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    originalPrice?: SortOrder
-    price?: SortOrder
-    categoryId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    description?: SortOrder;
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+    categoryId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ProductMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    originalPrice?: SortOrder
-    price?: SortOrder
-    categoryId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    description?: SortOrder;
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+    categoryId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ProductSumOrderByAggregateInput = {
-    originalPrice?: SortOrder
-    price?: SortOrder
-  }
+    originalPrice?: SortOrder;
+    price?: SortOrder;
+  };
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
+    equals?: number | FloatFieldRefInput<$PrismaModel>;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    lt?: number | FloatFieldRefInput<$PrismaModel>;
+    lte?: number | FloatFieldRefInput<$PrismaModel>;
+    gt?: number | FloatFieldRefInput<$PrismaModel>;
+    gte?: number | FloatFieldRefInput<$PrismaModel>;
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _avg?: NestedFloatFilter<$PrismaModel>;
+    _sum?: NestedFloatFilter<$PrismaModel>;
+    _min?: NestedFloatFilter<$PrismaModel>;
+    _max?: NestedFloatFilter<$PrismaModel>;
+  };
 
   export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
+    equals?: number | IntFieldRefInput<$PrismaModel>;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntFilter<$PrismaModel> | number;
+  };
 
   export type ProductScalarRelationFilter = {
-    is?: ProductWhereInput
-    isNot?: ProductWhereInput
-  }
+    is?: ProductWhereInput;
+    isNot?: ProductWhereInput;
+  };
 
   export type ReviewCountOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    rating?: SortOrder
-    productId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    content?: SortOrder;
+    rating?: SortOrder;
+    productId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ReviewAvgOrderByAggregateInput = {
-    rating?: SortOrder
-  }
+    rating?: SortOrder;
+  };
 
   export type ReviewMaxOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    rating?: SortOrder
-    productId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    content?: SortOrder;
+    rating?: SortOrder;
+    productId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ReviewMinOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    rating?: SortOrder
-    productId?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    content?: SortOrder;
+    rating?: SortOrder;
+    productId?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type ReviewSumOrderByAggregateInput = {
-    rating?: SortOrder
-  }
+    rating?: SortOrder;
+  };
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
+    equals?: number | IntFieldRefInput<$PrismaModel>;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _avg?: NestedFloatFilter<$PrismaModel>;
+    _sum?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedIntFilter<$PrismaModel>;
+    _max?: NestedIntFilter<$PrismaModel>;
+  };
 
   export type CustomerEmailStoreIdCompoundUniqueInput = {
-    email: string
-    storeId: string
-  }
+    email: string;
+    storeId: string;
+  };
 
   export type CustomerCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type CustomerMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type CustomerMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    phone?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    country?: SortOrder
-    zipCode?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    storeId?: SortOrder
-  }
+    id?: SortOrder;
+    name?: SortOrder;
+    email?: SortOrder;
+    password?: SortOrder;
+    phone?: SortOrder;
+    address?: SortOrder;
+    city?: SortOrder;
+    state?: SortOrder;
+    country?: SortOrder;
+    zipCode?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    storeId?: SortOrder;
+  };
 
   export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
+  };
 
   export type PhonePePaymentCountOrderByAggregateInput = {
-    id?: SortOrder
-    storeId?: SortOrder
-    merchantId?: SortOrder
-    saltKey?: SortOrder
-    saltIndex?: SortOrder
-    active?: SortOrder
-  }
+    id?: SortOrder;
+    storeId?: SortOrder;
+    merchantId?: SortOrder;
+    saltKey?: SortOrder;
+    saltIndex?: SortOrder;
+    active?: SortOrder;
+  };
 
   export type PhonePePaymentMaxOrderByAggregateInput = {
-    id?: SortOrder
-    storeId?: SortOrder
-    merchantId?: SortOrder
-    saltKey?: SortOrder
-    saltIndex?: SortOrder
-    active?: SortOrder
-  }
+    id?: SortOrder;
+    storeId?: SortOrder;
+    merchantId?: SortOrder;
+    saltKey?: SortOrder;
+    saltIndex?: SortOrder;
+    active?: SortOrder;
+  };
 
   export type PhonePePaymentMinOrderByAggregateInput = {
-    id?: SortOrder
-    storeId?: SortOrder
-    merchantId?: SortOrder
-    saltKey?: SortOrder
-    saltIndex?: SortOrder
-    active?: SortOrder
-  }
+    id?: SortOrder;
+    storeId?: SortOrder;
+    merchantId?: SortOrder;
+    saltKey?: SortOrder;
+    saltIndex?: SortOrder;
+    active?: SortOrder;
+  };
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
+  };
 
   export type StoreCreateNestedManyWithoutOwnerInput = {
-    create?: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput> | StoreCreateWithoutOwnerInput[] | StoreUncheckedCreateWithoutOwnerInput[]
-    connectOrCreate?: StoreCreateOrConnectWithoutOwnerInput | StoreCreateOrConnectWithoutOwnerInput[]
-    createMany?: StoreCreateManyOwnerInputEnvelope
-    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-  }
+    create?:
+      | XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
+      | StoreCreateWithoutOwnerInput[]
+      | StoreUncheckedCreateWithoutOwnerInput[];
+    connectOrCreate?:
+      | StoreCreateOrConnectWithoutOwnerInput
+      | StoreCreateOrConnectWithoutOwnerInput[];
+    createMany?: StoreCreateManyOwnerInputEnvelope;
+    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+  };
 
   export type StoreUncheckedCreateNestedManyWithoutOwnerInput = {
-    create?: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput> | StoreCreateWithoutOwnerInput[] | StoreUncheckedCreateWithoutOwnerInput[]
-    connectOrCreate?: StoreCreateOrConnectWithoutOwnerInput | StoreCreateOrConnectWithoutOwnerInput[]
-    createMany?: StoreCreateManyOwnerInputEnvelope
-    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-  }
+    create?:
+      | XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
+      | StoreCreateWithoutOwnerInput[]
+      | StoreUncheckedCreateWithoutOwnerInput[];
+    connectOrCreate?:
+      | StoreCreateOrConnectWithoutOwnerInput
+      | StoreCreateOrConnectWithoutOwnerInput[];
+    createMany?: StoreCreateManyOwnerInputEnvelope;
+    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+  };
 
   export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
+    set?: string;
+  };
 
   export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
+    set?: Date | string;
+  };
 
   export type StoreUpdateManyWithoutOwnerNestedInput = {
-    create?: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput> | StoreCreateWithoutOwnerInput[] | StoreUncheckedCreateWithoutOwnerInput[]
-    connectOrCreate?: StoreCreateOrConnectWithoutOwnerInput | StoreCreateOrConnectWithoutOwnerInput[]
-    upsert?: StoreUpsertWithWhereUniqueWithoutOwnerInput | StoreUpsertWithWhereUniqueWithoutOwnerInput[]
-    createMany?: StoreCreateManyOwnerInputEnvelope
-    set?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    disconnect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    delete?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    update?: StoreUpdateWithWhereUniqueWithoutOwnerInput | StoreUpdateWithWhereUniqueWithoutOwnerInput[]
-    updateMany?: StoreUpdateManyWithWhereWithoutOwnerInput | StoreUpdateManyWithWhereWithoutOwnerInput[]
-    deleteMany?: StoreScalarWhereInput | StoreScalarWhereInput[]
-  }
+    create?:
+      | XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
+      | StoreCreateWithoutOwnerInput[]
+      | StoreUncheckedCreateWithoutOwnerInput[];
+    connectOrCreate?:
+      | StoreCreateOrConnectWithoutOwnerInput
+      | StoreCreateOrConnectWithoutOwnerInput[];
+    upsert?:
+      | StoreUpsertWithWhereUniqueWithoutOwnerInput
+      | StoreUpsertWithWhereUniqueWithoutOwnerInput[];
+    createMany?: StoreCreateManyOwnerInputEnvelope;
+    set?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    disconnect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    delete?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    update?:
+      | StoreUpdateWithWhereUniqueWithoutOwnerInput
+      | StoreUpdateWithWhereUniqueWithoutOwnerInput[];
+    updateMany?:
+      | StoreUpdateManyWithWhereWithoutOwnerInput
+      | StoreUpdateManyWithWhereWithoutOwnerInput[];
+    deleteMany?: StoreScalarWhereInput | StoreScalarWhereInput[];
+  };
 
   export type StoreUncheckedUpdateManyWithoutOwnerNestedInput = {
-    create?: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput> | StoreCreateWithoutOwnerInput[] | StoreUncheckedCreateWithoutOwnerInput[]
-    connectOrCreate?: StoreCreateOrConnectWithoutOwnerInput | StoreCreateOrConnectWithoutOwnerInput[]
-    upsert?: StoreUpsertWithWhereUniqueWithoutOwnerInput | StoreUpsertWithWhereUniqueWithoutOwnerInput[]
-    createMany?: StoreCreateManyOwnerInputEnvelope
-    set?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    disconnect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    delete?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
-    update?: StoreUpdateWithWhereUniqueWithoutOwnerInput | StoreUpdateWithWhereUniqueWithoutOwnerInput[]
-    updateMany?: StoreUpdateManyWithWhereWithoutOwnerInput | StoreUpdateManyWithWhereWithoutOwnerInput[]
-    deleteMany?: StoreScalarWhereInput | StoreScalarWhereInput[]
-  }
+    create?:
+      | XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
+      | StoreCreateWithoutOwnerInput[]
+      | StoreUncheckedCreateWithoutOwnerInput[];
+    connectOrCreate?:
+      | StoreCreateOrConnectWithoutOwnerInput
+      | StoreCreateOrConnectWithoutOwnerInput[];
+    upsert?:
+      | StoreUpsertWithWhereUniqueWithoutOwnerInput
+      | StoreUpsertWithWhereUniqueWithoutOwnerInput[];
+    createMany?: StoreCreateManyOwnerInputEnvelope;
+    set?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    disconnect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    delete?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[];
+    update?:
+      | StoreUpdateWithWhereUniqueWithoutOwnerInput
+      | StoreUpdateWithWhereUniqueWithoutOwnerInput[];
+    updateMany?:
+      | StoreUpdateManyWithWhereWithoutOwnerInput
+      | StoreUpdateManyWithWhereWithoutOwnerInput[];
+    deleteMany?: StoreScalarWhereInput | StoreScalarWhereInput[];
+  };
 
   export type UserCreateNestedOneWithoutStoresInput = {
-    create?: XOR<UserCreateWithoutStoresInput, UserUncheckedCreateWithoutStoresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStoresInput
-    connect?: UserWhereUniqueInput
-  }
+    create?: XOR<
+      UserCreateWithoutStoresInput,
+      UserUncheckedCreateWithoutStoresInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutStoresInput;
+    connect?: UserWhereUniqueInput;
+  };
 
   export type CategoryCreateNestedManyWithoutStoreInput = {
-    create?: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput> | CategoryCreateWithoutStoreInput[] | CategoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutStoreInput | CategoryCreateOrConnectWithoutStoreInput[]
-    createMany?: CategoryCreateManyStoreInputEnvelope
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutStoreInput,
+          CategoryUncheckedCreateWithoutStoreInput
+        >
+      | CategoryCreateWithoutStoreInput[]
+      | CategoryUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutStoreInput
+      | CategoryCreateOrConnectWithoutStoreInput[];
+    createMany?: CategoryCreateManyStoreInputEnvelope;
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+  };
 
   export type ProductCreateNestedManyWithoutStoreInput = {
-    create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
-    createMany?: ProductCreateManyStoreInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutStoreInput,
+          ProductUncheckedCreateWithoutStoreInput
+        >
+      | ProductCreateWithoutStoreInput[]
+      | ProductUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutStoreInput
+      | ProductCreateOrConnectWithoutStoreInput[];
+    createMany?: ProductCreateManyStoreInputEnvelope;
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+  };
 
   export type CustomerCreateNestedManyWithoutStoreInput = {
-    create?: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput> | CustomerCreateWithoutStoreInput[] | CustomerUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CustomerCreateOrConnectWithoutStoreInput | CustomerCreateOrConnectWithoutStoreInput[]
-    createMany?: CustomerCreateManyStoreInputEnvelope
-    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CustomerCreateWithoutStoreInput,
+          CustomerUncheckedCreateWithoutStoreInput
+        >
+      | CustomerCreateWithoutStoreInput[]
+      | CustomerUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CustomerCreateOrConnectWithoutStoreInput
+      | CustomerCreateOrConnectWithoutStoreInput[];
+    createMany?: CustomerCreateManyStoreInputEnvelope;
+    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+  };
 
   export type ReviewCreateNestedManyWithoutStoreInput = {
-    create?: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput> | ReviewCreateWithoutStoreInput[] | ReviewUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutStoreInput | ReviewCreateOrConnectWithoutStoreInput[]
-    createMany?: ReviewCreateManyStoreInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutStoreInput,
+          ReviewUncheckedCreateWithoutStoreInput
+        >
+      | ReviewCreateWithoutStoreInput[]
+      | ReviewUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutStoreInput
+      | ReviewCreateOrConnectWithoutStoreInput[];
+    createMany?: ReviewCreateManyStoreInputEnvelope;
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+  };
 
   export type PhonePePaymentCreateNestedOneWithoutStoreInput = {
-    create?: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput
-    connect?: PhonePePaymentWhereUniqueInput
-  }
+    create?: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput;
+    connect?: PhonePePaymentWhereUniqueInput;
+  };
 
   export type CategoryUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput> | CategoryCreateWithoutStoreInput[] | CategoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutStoreInput | CategoryCreateOrConnectWithoutStoreInput[]
-    createMany?: CategoryCreateManyStoreInputEnvelope
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutStoreInput,
+          CategoryUncheckedCreateWithoutStoreInput
+        >
+      | CategoryCreateWithoutStoreInput[]
+      | CategoryUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutStoreInput
+      | CategoryCreateOrConnectWithoutStoreInput[];
+    createMany?: CategoryCreateManyStoreInputEnvelope;
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+  };
 
   export type ProductUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
-    createMany?: ProductCreateManyStoreInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutStoreInput,
+          ProductUncheckedCreateWithoutStoreInput
+        >
+      | ProductCreateWithoutStoreInput[]
+      | ProductUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutStoreInput
+      | ProductCreateOrConnectWithoutStoreInput[];
+    createMany?: ProductCreateManyStoreInputEnvelope;
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+  };
 
   export type CustomerUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput> | CustomerCreateWithoutStoreInput[] | CustomerUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CustomerCreateOrConnectWithoutStoreInput | CustomerCreateOrConnectWithoutStoreInput[]
-    createMany?: CustomerCreateManyStoreInputEnvelope
-    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CustomerCreateWithoutStoreInput,
+          CustomerUncheckedCreateWithoutStoreInput
+        >
+      | CustomerCreateWithoutStoreInput[]
+      | CustomerUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CustomerCreateOrConnectWithoutStoreInput
+      | CustomerCreateOrConnectWithoutStoreInput[];
+    createMany?: CustomerCreateManyStoreInputEnvelope;
+    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+  };
 
   export type ReviewUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput> | ReviewCreateWithoutStoreInput[] | ReviewUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutStoreInput | ReviewCreateOrConnectWithoutStoreInput[]
-    createMany?: ReviewCreateManyStoreInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutStoreInput,
+          ReviewUncheckedCreateWithoutStoreInput
+        >
+      | ReviewCreateWithoutStoreInput[]
+      | ReviewUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutStoreInput
+      | ReviewCreateOrConnectWithoutStoreInput[];
+    createMany?: ReviewCreateManyStoreInputEnvelope;
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+  };
 
   export type PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput = {
-    create?: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput
-    connect?: PhonePePaymentWhereUniqueInput
-  }
+    create?: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput;
+    connect?: PhonePePaymentWhereUniqueInput;
+  };
 
   export type UserUpdateOneRequiredWithoutStoresNestedInput = {
-    create?: XOR<UserCreateWithoutStoresInput, UserUncheckedCreateWithoutStoresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStoresInput
-    upsert?: UserUpsertWithoutStoresInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStoresInput, UserUpdateWithoutStoresInput>, UserUncheckedUpdateWithoutStoresInput>
-  }
+    create?: XOR<
+      UserCreateWithoutStoresInput,
+      UserUncheckedCreateWithoutStoresInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutStoresInput;
+    upsert?: UserUpsertWithoutStoresInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        UserUpdateToOneWithWhereWithoutStoresInput,
+        UserUpdateWithoutStoresInput
+      >,
+      UserUncheckedUpdateWithoutStoresInput
+    >;
+  };
 
   export type CategoryUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput> | CategoryCreateWithoutStoreInput[] | CategoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutStoreInput | CategoryCreateOrConnectWithoutStoreInput[]
-    upsert?: CategoryUpsertWithWhereUniqueWithoutStoreInput | CategoryUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: CategoryCreateManyStoreInputEnvelope
-    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    update?: CategoryUpdateWithWhereUniqueWithoutStoreInput | CategoryUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: CategoryUpdateManyWithWhereWithoutStoreInput | CategoryUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutStoreInput,
+          CategoryUncheckedCreateWithoutStoreInput
+        >
+      | CategoryCreateWithoutStoreInput[]
+      | CategoryUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutStoreInput
+      | CategoryCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | CategoryUpsertWithWhereUniqueWithoutStoreInput
+      | CategoryUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: CategoryCreateManyStoreInputEnvelope;
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    update?:
+      | CategoryUpdateWithWhereUniqueWithoutStoreInput
+      | CategoryUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | CategoryUpdateManyWithWhereWithoutStoreInput
+      | CategoryUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+  };
 
   export type ProductUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutStoreInput | ProductUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: ProductCreateManyStoreInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutStoreInput | ProductUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutStoreInput | ProductUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutStoreInput,
+          ProductUncheckedCreateWithoutStoreInput
+        >
+      | ProductCreateWithoutStoreInput[]
+      | ProductUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutStoreInput
+      | ProductCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | ProductUpsertWithWhereUniqueWithoutStoreInput
+      | ProductUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: ProductCreateManyStoreInputEnvelope;
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    update?:
+      | ProductUpdateWithWhereUniqueWithoutStoreInput
+      | ProductUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | ProductUpdateManyWithWhereWithoutStoreInput
+      | ProductUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[];
+  };
 
   export type CustomerUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput> | CustomerCreateWithoutStoreInput[] | CustomerUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CustomerCreateOrConnectWithoutStoreInput | CustomerCreateOrConnectWithoutStoreInput[]
-    upsert?: CustomerUpsertWithWhereUniqueWithoutStoreInput | CustomerUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: CustomerCreateManyStoreInputEnvelope
-    set?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    disconnect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    delete?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    update?: CustomerUpdateWithWhereUniqueWithoutStoreInput | CustomerUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: CustomerUpdateManyWithWhereWithoutStoreInput | CustomerUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: CustomerScalarWhereInput | CustomerScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CustomerCreateWithoutStoreInput,
+          CustomerUncheckedCreateWithoutStoreInput
+        >
+      | CustomerCreateWithoutStoreInput[]
+      | CustomerUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CustomerCreateOrConnectWithoutStoreInput
+      | CustomerCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | CustomerUpsertWithWhereUniqueWithoutStoreInput
+      | CustomerUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: CustomerCreateManyStoreInputEnvelope;
+    set?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    disconnect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    delete?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    update?:
+      | CustomerUpdateWithWhereUniqueWithoutStoreInput
+      | CustomerUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | CustomerUpdateManyWithWhereWithoutStoreInput
+      | CustomerUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: CustomerScalarWhereInput | CustomerScalarWhereInput[];
+  };
 
   export type ReviewUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput> | ReviewCreateWithoutStoreInput[] | ReviewUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutStoreInput | ReviewCreateOrConnectWithoutStoreInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutStoreInput | ReviewUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: ReviewCreateManyStoreInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutStoreInput | ReviewUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutStoreInput | ReviewUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutStoreInput,
+          ReviewUncheckedCreateWithoutStoreInput
+        >
+      | ReviewCreateWithoutStoreInput[]
+      | ReviewUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutStoreInput
+      | ReviewCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | ReviewUpsertWithWhereUniqueWithoutStoreInput
+      | ReviewUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: ReviewCreateManyStoreInputEnvelope;
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    update?:
+      | ReviewUpdateWithWhereUniqueWithoutStoreInput
+      | ReviewUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | ReviewUpdateManyWithWhereWithoutStoreInput
+      | ReviewUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+  };
 
   export type PhonePePaymentUpdateOneWithoutStoreNestedInput = {
-    create?: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput
-    upsert?: PhonePePaymentUpsertWithoutStoreInput
-    disconnect?: PhonePePaymentWhereInput | boolean
-    delete?: PhonePePaymentWhereInput | boolean
-    connect?: PhonePePaymentWhereUniqueInput
-    update?: XOR<XOR<PhonePePaymentUpdateToOneWithWhereWithoutStoreInput, PhonePePaymentUpdateWithoutStoreInput>, PhonePePaymentUncheckedUpdateWithoutStoreInput>
-  }
+    create?: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput;
+    upsert?: PhonePePaymentUpsertWithoutStoreInput;
+    disconnect?: PhonePePaymentWhereInput | boolean;
+    delete?: PhonePePaymentWhereInput | boolean;
+    connect?: PhonePePaymentWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        PhonePePaymentUpdateToOneWithWhereWithoutStoreInput,
+        PhonePePaymentUpdateWithoutStoreInput
+      >,
+      PhonePePaymentUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type CategoryUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput> | CategoryCreateWithoutStoreInput[] | CategoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutStoreInput | CategoryCreateOrConnectWithoutStoreInput[]
-    upsert?: CategoryUpsertWithWhereUniqueWithoutStoreInput | CategoryUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: CategoryCreateManyStoreInputEnvelope
-    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    update?: CategoryUpdateWithWhereUniqueWithoutStoreInput | CategoryUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: CategoryUpdateManyWithWhereWithoutStoreInput | CategoryUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutStoreInput,
+          CategoryUncheckedCreateWithoutStoreInput
+        >
+      | CategoryCreateWithoutStoreInput[]
+      | CategoryUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutStoreInput
+      | CategoryCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | CategoryUpsertWithWhereUniqueWithoutStoreInput
+      | CategoryUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: CategoryCreateManyStoreInputEnvelope;
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    update?:
+      | CategoryUpdateWithWhereUniqueWithoutStoreInput
+      | CategoryUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | CategoryUpdateManyWithWhereWithoutStoreInput
+      | CategoryUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+  };
 
   export type ProductUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutStoreInput | ProductUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: ProductCreateManyStoreInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutStoreInput | ProductUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutStoreInput | ProductUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutStoreInput,
+          ProductUncheckedCreateWithoutStoreInput
+        >
+      | ProductCreateWithoutStoreInput[]
+      | ProductUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutStoreInput
+      | ProductCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | ProductUpsertWithWhereUniqueWithoutStoreInput
+      | ProductUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: ProductCreateManyStoreInputEnvelope;
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    update?:
+      | ProductUpdateWithWhereUniqueWithoutStoreInput
+      | ProductUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | ProductUpdateManyWithWhereWithoutStoreInput
+      | ProductUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[];
+  };
 
   export type CustomerUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput> | CustomerCreateWithoutStoreInput[] | CustomerUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: CustomerCreateOrConnectWithoutStoreInput | CustomerCreateOrConnectWithoutStoreInput[]
-    upsert?: CustomerUpsertWithWhereUniqueWithoutStoreInput | CustomerUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: CustomerCreateManyStoreInputEnvelope
-    set?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    disconnect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    delete?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[]
-    update?: CustomerUpdateWithWhereUniqueWithoutStoreInput | CustomerUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: CustomerUpdateManyWithWhereWithoutStoreInput | CustomerUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: CustomerScalarWhereInput | CustomerScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CustomerCreateWithoutStoreInput,
+          CustomerUncheckedCreateWithoutStoreInput
+        >
+      | CustomerCreateWithoutStoreInput[]
+      | CustomerUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | CustomerCreateOrConnectWithoutStoreInput
+      | CustomerCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | CustomerUpsertWithWhereUniqueWithoutStoreInput
+      | CustomerUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: CustomerCreateManyStoreInputEnvelope;
+    set?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    disconnect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    delete?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    connect?: CustomerWhereUniqueInput | CustomerWhereUniqueInput[];
+    update?:
+      | CustomerUpdateWithWhereUniqueWithoutStoreInput
+      | CustomerUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | CustomerUpdateManyWithWhereWithoutStoreInput
+      | CustomerUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: CustomerScalarWhereInput | CustomerScalarWhereInput[];
+  };
 
   export type ReviewUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput> | ReviewCreateWithoutStoreInput[] | ReviewUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutStoreInput | ReviewCreateOrConnectWithoutStoreInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutStoreInput | ReviewUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: ReviewCreateManyStoreInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutStoreInput | ReviewUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutStoreInput | ReviewUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutStoreInput,
+          ReviewUncheckedCreateWithoutStoreInput
+        >
+      | ReviewCreateWithoutStoreInput[]
+      | ReviewUncheckedCreateWithoutStoreInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutStoreInput
+      | ReviewCreateOrConnectWithoutStoreInput[];
+    upsert?:
+      | ReviewUpsertWithWhereUniqueWithoutStoreInput
+      | ReviewUpsertWithWhereUniqueWithoutStoreInput[];
+    createMany?: ReviewCreateManyStoreInputEnvelope;
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    update?:
+      | ReviewUpdateWithWhereUniqueWithoutStoreInput
+      | ReviewUpdateWithWhereUniqueWithoutStoreInput[];
+    updateMany?:
+      | ReviewUpdateManyWithWhereWithoutStoreInput
+      | ReviewUpdateManyWithWhereWithoutStoreInput[];
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+  };
 
   export type PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput = {
-    create?: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput
-    upsert?: PhonePePaymentUpsertWithoutStoreInput
-    disconnect?: PhonePePaymentWhereInput | boolean
-    delete?: PhonePePaymentWhereInput | boolean
-    connect?: PhonePePaymentWhereUniqueInput
-    update?: XOR<XOR<PhonePePaymentUpdateToOneWithWhereWithoutStoreInput, PhonePePaymentUpdateWithoutStoreInput>, PhonePePaymentUncheckedUpdateWithoutStoreInput>
-  }
+    create?: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+    connectOrCreate?: PhonePePaymentCreateOrConnectWithoutStoreInput;
+    upsert?: PhonePePaymentUpsertWithoutStoreInput;
+    disconnect?: PhonePePaymentWhereInput | boolean;
+    delete?: PhonePePaymentWhereInput | boolean;
+    connect?: PhonePePaymentWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        PhonePePaymentUpdateToOneWithWhereWithoutStoreInput,
+        PhonePePaymentUpdateWithoutStoreInput
+      >,
+      PhonePePaymentUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type StoreCreateNestedOneWithoutCategoriesInput = {
-    create?: XOR<StoreCreateWithoutCategoriesInput, StoreUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutCategoriesInput
-    connect?: StoreWhereUniqueInput
-  }
+    create?: XOR<
+      StoreCreateWithoutCategoriesInput,
+      StoreUncheckedCreateWithoutCategoriesInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutCategoriesInput;
+    connect?: StoreWhereUniqueInput;
+  };
 
   export type CategoryCreateNestedOneWithoutSubCategoriesInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    connect?: CategoryWhereUniqueInput
-  }
+    create?: XOR<
+      CategoryCreateWithoutSubCategoriesInput,
+      CategoryUncheckedCreateWithoutSubCategoriesInput
+    >;
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput;
+    connect?: CategoryWhereUniqueInput;
+  };
 
   export type CategoryCreateNestedManyWithoutParentInput = {
-    create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
-    createMany?: CategoryCreateManyParentInputEnvelope
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutParentInput,
+          CategoryUncheckedCreateWithoutParentInput
+        >
+      | CategoryCreateWithoutParentInput[]
+      | CategoryUncheckedCreateWithoutParentInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutParentInput
+      | CategoryCreateOrConnectWithoutParentInput[];
+    createMany?: CategoryCreateManyParentInputEnvelope;
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+  };
 
   export type ProductCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput> | ProductCreateWithoutCategoryInput[] | ProductUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
-    createMany?: ProductCreateManyCategoryInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutCategoryInput,
+          ProductUncheckedCreateWithoutCategoryInput
+        >
+      | ProductCreateWithoutCategoryInput[]
+      | ProductUncheckedCreateWithoutCategoryInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutCategoryInput
+      | ProductCreateOrConnectWithoutCategoryInput[];
+    createMany?: ProductCreateManyCategoryInputEnvelope;
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+  };
 
   export type CategoryUncheckedCreateNestedManyWithoutParentInput = {
-    create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
-    createMany?: CategoryCreateManyParentInputEnvelope
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutParentInput,
+          CategoryUncheckedCreateWithoutParentInput
+        >
+      | CategoryCreateWithoutParentInput[]
+      | CategoryUncheckedCreateWithoutParentInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutParentInput
+      | CategoryCreateOrConnectWithoutParentInput[];
+    createMany?: CategoryCreateManyParentInputEnvelope;
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+  };
 
   export type ProductUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput> | ProductCreateWithoutCategoryInput[] | ProductUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
-    createMany?: ProductCreateManyCategoryInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutCategoryInput,
+          ProductUncheckedCreateWithoutCategoryInput
+        >
+      | ProductCreateWithoutCategoryInput[]
+      | ProductUncheckedCreateWithoutCategoryInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutCategoryInput
+      | ProductCreateOrConnectWithoutCategoryInput[];
+    createMany?: ProductCreateManyCategoryInputEnvelope;
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+  };
 
   export type StoreUpdateOneRequiredWithoutCategoriesNestedInput = {
-    create?: XOR<StoreCreateWithoutCategoriesInput, StoreUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutCategoriesInput
-    upsert?: StoreUpsertWithoutCategoriesInput
-    connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutCategoriesInput, StoreUpdateWithoutCategoriesInput>, StoreUncheckedUpdateWithoutCategoriesInput>
-  }
+    create?: XOR<
+      StoreCreateWithoutCategoriesInput,
+      StoreUncheckedCreateWithoutCategoriesInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutCategoriesInput;
+    upsert?: StoreUpsertWithoutCategoriesInput;
+    connect?: StoreWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        StoreUpdateToOneWithWhereWithoutCategoriesInput,
+        StoreUpdateWithoutCategoriesInput
+      >,
+      StoreUncheckedUpdateWithoutCategoriesInput
+    >;
+  };
 
   export type CategoryUpdateOneWithoutSubCategoriesNestedInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    upsert?: CategoryUpsertWithoutSubCategoriesInput
-    disconnect?: CategoryWhereInput | boolean
-    delete?: CategoryWhereInput | boolean
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutSubCategoriesInput, CategoryUpdateWithoutSubCategoriesInput>, CategoryUncheckedUpdateWithoutSubCategoriesInput>
-  }
+    create?: XOR<
+      CategoryCreateWithoutSubCategoriesInput,
+      CategoryUncheckedCreateWithoutSubCategoriesInput
+    >;
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput;
+    upsert?: CategoryUpsertWithoutSubCategoriesInput;
+    disconnect?: CategoryWhereInput | boolean;
+    delete?: CategoryWhereInput | boolean;
+    connect?: CategoryWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        CategoryUpdateToOneWithWhereWithoutSubCategoriesInput,
+        CategoryUpdateWithoutSubCategoriesInput
+      >,
+      CategoryUncheckedUpdateWithoutSubCategoriesInput
+    >;
+  };
 
   export type CategoryUpdateManyWithoutParentNestedInput = {
-    create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
-    upsert?: CategoryUpsertWithWhereUniqueWithoutParentInput | CategoryUpsertWithWhereUniqueWithoutParentInput[]
-    createMany?: CategoryCreateManyParentInputEnvelope
-    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    update?: CategoryUpdateWithWhereUniqueWithoutParentInput | CategoryUpdateWithWhereUniqueWithoutParentInput[]
-    updateMany?: CategoryUpdateManyWithWhereWithoutParentInput | CategoryUpdateManyWithWhereWithoutParentInput[]
-    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutParentInput,
+          CategoryUncheckedCreateWithoutParentInput
+        >
+      | CategoryCreateWithoutParentInput[]
+      | CategoryUncheckedCreateWithoutParentInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutParentInput
+      | CategoryCreateOrConnectWithoutParentInput[];
+    upsert?:
+      | CategoryUpsertWithWhereUniqueWithoutParentInput
+      | CategoryUpsertWithWhereUniqueWithoutParentInput[];
+    createMany?: CategoryCreateManyParentInputEnvelope;
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    update?:
+      | CategoryUpdateWithWhereUniqueWithoutParentInput
+      | CategoryUpdateWithWhereUniqueWithoutParentInput[];
+    updateMany?:
+      | CategoryUpdateManyWithWhereWithoutParentInput
+      | CategoryUpdateManyWithWhereWithoutParentInput[];
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+  };
 
   export type ProductUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput> | ProductCreateWithoutCategoryInput[] | ProductUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutCategoryInput | ProductUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: ProductCreateManyCategoryInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutCategoryInput | ProductUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutCategoryInput | ProductUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutCategoryInput,
+          ProductUncheckedCreateWithoutCategoryInput
+        >
+      | ProductCreateWithoutCategoryInput[]
+      | ProductUncheckedCreateWithoutCategoryInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutCategoryInput
+      | ProductCreateOrConnectWithoutCategoryInput[];
+    upsert?:
+      | ProductUpsertWithWhereUniqueWithoutCategoryInput
+      | ProductUpsertWithWhereUniqueWithoutCategoryInput[];
+    createMany?: ProductCreateManyCategoryInputEnvelope;
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    update?:
+      | ProductUpdateWithWhereUniqueWithoutCategoryInput
+      | ProductUpdateWithWhereUniqueWithoutCategoryInput[];
+    updateMany?:
+      | ProductUpdateManyWithWhereWithoutCategoryInput
+      | ProductUpdateManyWithWhereWithoutCategoryInput[];
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[];
+  };
 
   export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
+    set?: string | null;
+  };
 
   export type CategoryUncheckedUpdateManyWithoutParentNestedInput = {
-    create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
-    upsert?: CategoryUpsertWithWhereUniqueWithoutParentInput | CategoryUpsertWithWhereUniqueWithoutParentInput[]
-    createMany?: CategoryCreateManyParentInputEnvelope
-    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
-    update?: CategoryUpdateWithWhereUniqueWithoutParentInput | CategoryUpdateWithWhereUniqueWithoutParentInput[]
-    updateMany?: CategoryUpdateManyWithWhereWithoutParentInput | CategoryUpdateManyWithWhereWithoutParentInput[]
-    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          CategoryCreateWithoutParentInput,
+          CategoryUncheckedCreateWithoutParentInput
+        >
+      | CategoryCreateWithoutParentInput[]
+      | CategoryUncheckedCreateWithoutParentInput[];
+    connectOrCreate?:
+      | CategoryCreateOrConnectWithoutParentInput
+      | CategoryCreateOrConnectWithoutParentInput[];
+    upsert?:
+      | CategoryUpsertWithWhereUniqueWithoutParentInput
+      | CategoryUpsertWithWhereUniqueWithoutParentInput[];
+    createMany?: CategoryCreateManyParentInputEnvelope;
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[];
+    update?:
+      | CategoryUpdateWithWhereUniqueWithoutParentInput
+      | CategoryUpdateWithWhereUniqueWithoutParentInput[];
+    updateMany?:
+      | CategoryUpdateManyWithWhereWithoutParentInput
+      | CategoryUpdateManyWithWhereWithoutParentInput[];
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+  };
 
   export type ProductUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput> | ProductCreateWithoutCategoryInput[] | ProductUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutCategoryInput | ProductUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: ProductCreateManyCategoryInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutCategoryInput | ProductUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutCategoryInput | ProductUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ProductCreateWithoutCategoryInput,
+          ProductUncheckedCreateWithoutCategoryInput
+        >
+      | ProductCreateWithoutCategoryInput[]
+      | ProductUncheckedCreateWithoutCategoryInput[];
+    connectOrCreate?:
+      | ProductCreateOrConnectWithoutCategoryInput
+      | ProductCreateOrConnectWithoutCategoryInput[];
+    upsert?:
+      | ProductUpsertWithWhereUniqueWithoutCategoryInput
+      | ProductUpsertWithWhereUniqueWithoutCategoryInput[];
+    createMany?: ProductCreateManyCategoryInputEnvelope;
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[];
+    update?:
+      | ProductUpdateWithWhereUniqueWithoutCategoryInput
+      | ProductUpdateWithWhereUniqueWithoutCategoryInput[];
+    updateMany?:
+      | ProductUpdateManyWithWhereWithoutCategoryInput
+      | ProductUpdateManyWithWhereWithoutCategoryInput[];
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[];
+  };
 
   export type CategoryCreateNestedOneWithoutProductsInput = {
-    create?: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput
-    connect?: CategoryWhereUniqueInput
-  }
+    create?: XOR<
+      CategoryCreateWithoutProductsInput,
+      CategoryUncheckedCreateWithoutProductsInput
+    >;
+    connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput;
+    connect?: CategoryWhereUniqueInput;
+  };
 
   export type StoreCreateNestedOneWithoutProductsInput = {
-    create?: XOR<StoreCreateWithoutProductsInput, StoreUncheckedCreateWithoutProductsInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutProductsInput
-    connect?: StoreWhereUniqueInput
-  }
+    create?: XOR<
+      StoreCreateWithoutProductsInput,
+      StoreUncheckedCreateWithoutProductsInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutProductsInput;
+    connect?: StoreWhereUniqueInput;
+  };
 
   export type ReviewCreateNestedManyWithoutProductInput = {
-    create?: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput> | ReviewCreateWithoutProductInput[] | ReviewUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[]
-    createMany?: ReviewCreateManyProductInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutProductInput,
+          ReviewUncheckedCreateWithoutProductInput
+        >
+      | ReviewCreateWithoutProductInput[]
+      | ReviewUncheckedCreateWithoutProductInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutProductInput
+      | ReviewCreateOrConnectWithoutProductInput[];
+    createMany?: ReviewCreateManyProductInputEnvelope;
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+  };
 
   export type ReviewUncheckedCreateNestedManyWithoutProductInput = {
-    create?: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput> | ReviewCreateWithoutProductInput[] | ReviewUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[]
-    createMany?: ReviewCreateManyProductInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutProductInput,
+          ReviewUncheckedCreateWithoutProductInput
+        >
+      | ReviewCreateWithoutProductInput[]
+      | ReviewUncheckedCreateWithoutProductInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutProductInput
+      | ReviewCreateOrConnectWithoutProductInput[];
+    createMany?: ReviewCreateManyProductInputEnvelope;
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+  };
 
   export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
+    set?: number;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
+  };
 
   export type CategoryUpdateOneRequiredWithoutProductsNestedInput = {
-    create?: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput
-    upsert?: CategoryUpsertWithoutProductsInput
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutProductsInput, CategoryUpdateWithoutProductsInput>, CategoryUncheckedUpdateWithoutProductsInput>
-  }
+    create?: XOR<
+      CategoryCreateWithoutProductsInput,
+      CategoryUncheckedCreateWithoutProductsInput
+    >;
+    connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput;
+    upsert?: CategoryUpsertWithoutProductsInput;
+    connect?: CategoryWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        CategoryUpdateToOneWithWhereWithoutProductsInput,
+        CategoryUpdateWithoutProductsInput
+      >,
+      CategoryUncheckedUpdateWithoutProductsInput
+    >;
+  };
 
   export type StoreUpdateOneRequiredWithoutProductsNestedInput = {
-    create?: XOR<StoreCreateWithoutProductsInput, StoreUncheckedCreateWithoutProductsInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutProductsInput
-    upsert?: StoreUpsertWithoutProductsInput
-    connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutProductsInput, StoreUpdateWithoutProductsInput>, StoreUncheckedUpdateWithoutProductsInput>
-  }
+    create?: XOR<
+      StoreCreateWithoutProductsInput,
+      StoreUncheckedCreateWithoutProductsInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutProductsInput;
+    upsert?: StoreUpsertWithoutProductsInput;
+    connect?: StoreWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        StoreUpdateToOneWithWhereWithoutProductsInput,
+        StoreUpdateWithoutProductsInput
+      >,
+      StoreUncheckedUpdateWithoutProductsInput
+    >;
+  };
 
   export type ReviewUpdateManyWithoutProductNestedInput = {
-    create?: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput> | ReviewCreateWithoutProductInput[] | ReviewUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutProductInput | ReviewUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: ReviewCreateManyProductInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutProductInput | ReviewUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutProductInput | ReviewUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutProductInput,
+          ReviewUncheckedCreateWithoutProductInput
+        >
+      | ReviewCreateWithoutProductInput[]
+      | ReviewUncheckedCreateWithoutProductInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutProductInput
+      | ReviewCreateOrConnectWithoutProductInput[];
+    upsert?:
+      | ReviewUpsertWithWhereUniqueWithoutProductInput
+      | ReviewUpsertWithWhereUniqueWithoutProductInput[];
+    createMany?: ReviewCreateManyProductInputEnvelope;
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    update?:
+      | ReviewUpdateWithWhereUniqueWithoutProductInput
+      | ReviewUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?:
+      | ReviewUpdateManyWithWhereWithoutProductInput
+      | ReviewUpdateManyWithWhereWithoutProductInput[];
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+  };
 
   export type ReviewUncheckedUpdateManyWithoutProductNestedInput = {
-    create?: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput> | ReviewCreateWithoutProductInput[] | ReviewUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutProductInput | ReviewUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: ReviewCreateManyProductInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutProductInput | ReviewUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutProductInput | ReviewUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
+    create?:
+      | XOR<
+          ReviewCreateWithoutProductInput,
+          ReviewUncheckedCreateWithoutProductInput
+        >
+      | ReviewCreateWithoutProductInput[]
+      | ReviewUncheckedCreateWithoutProductInput[];
+    connectOrCreate?:
+      | ReviewCreateOrConnectWithoutProductInput
+      | ReviewCreateOrConnectWithoutProductInput[];
+    upsert?:
+      | ReviewUpsertWithWhereUniqueWithoutProductInput
+      | ReviewUpsertWithWhereUniqueWithoutProductInput[];
+    createMany?: ReviewCreateManyProductInputEnvelope;
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
+    update?:
+      | ReviewUpdateWithWhereUniqueWithoutProductInput
+      | ReviewUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?:
+      | ReviewUpdateManyWithWhereWithoutProductInput
+      | ReviewUpdateManyWithWhereWithoutProductInput[];
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+  };
 
   export type ProductCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput
-    connect?: ProductWhereUniqueInput
-  }
+    create?: XOR<
+      ProductCreateWithoutReviewsInput,
+      ProductUncheckedCreateWithoutReviewsInput
+    >;
+    connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput;
+    connect?: ProductWhereUniqueInput;
+  };
 
   export type StoreCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<StoreCreateWithoutReviewsInput, StoreUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutReviewsInput
-    connect?: StoreWhereUniqueInput
-  }
+    create?: XOR<
+      StoreCreateWithoutReviewsInput,
+      StoreUncheckedCreateWithoutReviewsInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutReviewsInput;
+    connect?: StoreWhereUniqueInput;
+  };
 
   export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
+    set?: number;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
+  };
 
   export type ProductUpdateOneRequiredWithoutReviewsNestedInput = {
-    create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput
-    upsert?: ProductUpsertWithoutReviewsInput
-    connect?: ProductWhereUniqueInput
-    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutReviewsInput, ProductUpdateWithoutReviewsInput>, ProductUncheckedUpdateWithoutReviewsInput>
-  }
+    create?: XOR<
+      ProductCreateWithoutReviewsInput,
+      ProductUncheckedCreateWithoutReviewsInput
+    >;
+    connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput;
+    upsert?: ProductUpsertWithoutReviewsInput;
+    connect?: ProductWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        ProductUpdateToOneWithWhereWithoutReviewsInput,
+        ProductUpdateWithoutReviewsInput
+      >,
+      ProductUncheckedUpdateWithoutReviewsInput
+    >;
+  };
 
   export type StoreUpdateOneRequiredWithoutReviewsNestedInput = {
-    create?: XOR<StoreCreateWithoutReviewsInput, StoreUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutReviewsInput
-    upsert?: StoreUpsertWithoutReviewsInput
-    connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutReviewsInput, StoreUpdateWithoutReviewsInput>, StoreUncheckedUpdateWithoutReviewsInput>
-  }
+    create?: XOR<
+      StoreCreateWithoutReviewsInput,
+      StoreUncheckedCreateWithoutReviewsInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutReviewsInput;
+    upsert?: StoreUpsertWithoutReviewsInput;
+    connect?: StoreWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        StoreUpdateToOneWithWhereWithoutReviewsInput,
+        StoreUpdateWithoutReviewsInput
+      >,
+      StoreUncheckedUpdateWithoutReviewsInput
+    >;
+  };
 
   export type StoreCreateNestedOneWithoutCustomersInput = {
-    create?: XOR<StoreCreateWithoutCustomersInput, StoreUncheckedCreateWithoutCustomersInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutCustomersInput
-    connect?: StoreWhereUniqueInput
-  }
+    create?: XOR<
+      StoreCreateWithoutCustomersInput,
+      StoreUncheckedCreateWithoutCustomersInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutCustomersInput;
+    connect?: StoreWhereUniqueInput;
+  };
 
   export type StoreUpdateOneRequiredWithoutCustomersNestedInput = {
-    create?: XOR<StoreCreateWithoutCustomersInput, StoreUncheckedCreateWithoutCustomersInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutCustomersInput
-    upsert?: StoreUpsertWithoutCustomersInput
-    connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutCustomersInput, StoreUpdateWithoutCustomersInput>, StoreUncheckedUpdateWithoutCustomersInput>
-  }
+    create?: XOR<
+      StoreCreateWithoutCustomersInput,
+      StoreUncheckedCreateWithoutCustomersInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutCustomersInput;
+    upsert?: StoreUpsertWithoutCustomersInput;
+    connect?: StoreWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        StoreUpdateToOneWithWhereWithoutCustomersInput,
+        StoreUpdateWithoutCustomersInput
+      >,
+      StoreUncheckedUpdateWithoutCustomersInput
+    >;
+  };
 
   export type StoreCreateNestedOneWithoutPhonePePaymentInput = {
-    create?: XOR<StoreCreateWithoutPhonePePaymentInput, StoreUncheckedCreateWithoutPhonePePaymentInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutPhonePePaymentInput
-    connect?: StoreWhereUniqueInput
-  }
+    create?: XOR<
+      StoreCreateWithoutPhonePePaymentInput,
+      StoreUncheckedCreateWithoutPhonePePaymentInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutPhonePePaymentInput;
+    connect?: StoreWhereUniqueInput;
+  };
 
   export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
+    set?: boolean;
+  };
 
   export type StoreUpdateOneRequiredWithoutPhonePePaymentNestedInput = {
-    create?: XOR<StoreCreateWithoutPhonePePaymentInput, StoreUncheckedCreateWithoutPhonePePaymentInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutPhonePePaymentInput
-    upsert?: StoreUpsertWithoutPhonePePaymentInput
-    connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutPhonePePaymentInput, StoreUpdateWithoutPhonePePaymentInput>, StoreUncheckedUpdateWithoutPhonePePaymentInput>
-  }
+    create?: XOR<
+      StoreCreateWithoutPhonePePaymentInput,
+      StoreUncheckedCreateWithoutPhonePePaymentInput
+    >;
+    connectOrCreate?: StoreCreateOrConnectWithoutPhonePePaymentInput;
+    upsert?: StoreUpsertWithoutPhonePePaymentInput;
+    connect?: StoreWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        StoreUpdateToOneWithWhereWithoutPhonePePaymentInput,
+        StoreUpdateWithoutPhonePePaymentInput
+      >,
+      StoreUncheckedUpdateWithoutPhonePePaymentInput
+    >;
+  };
 
   export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel>;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    not?: NestedStringFilter<$PrismaModel> | string;
+  };
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
+  };
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel>;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedStringFilter<$PrismaModel>;
+    _max?: NestedStringFilter<$PrismaModel>;
+  };
 
   export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
+    equals?: number | IntFieldRefInput<$PrismaModel>;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntFilter<$PrismaModel> | number;
+  };
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedDateTimeFilter<$PrismaModel>;
+    _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel> | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null;
+  };
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
+    equals?: string | StringFieldRefInput<$PrismaModel> | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    lt?: string | StringFieldRefInput<$PrismaModel>;
+    lte?: string | StringFieldRefInput<$PrismaModel>;
+    gt?: string | StringFieldRefInput<$PrismaModel>;
+    gte?: string | StringFieldRefInput<$PrismaModel>;
+    contains?: string | StringFieldRefInput<$PrismaModel>;
+    startsWith?: string | StringFieldRefInput<$PrismaModel>;
+    endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    not?:
+      | NestedStringNullableWithAggregatesFilter<$PrismaModel>
+      | string
+      | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedStringNullableFilter<$PrismaModel>;
+    _max?: NestedStringNullableFilter<$PrismaModel>;
+  };
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
+    equals?: number | IntFieldRefInput<$PrismaModel> | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null;
+  };
 
   export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
+    equals?: number | FloatFieldRefInput<$PrismaModel>;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    lt?: number | FloatFieldRefInput<$PrismaModel>;
+    lte?: number | FloatFieldRefInput<$PrismaModel>;
+    gt?: number | FloatFieldRefInput<$PrismaModel>;
+    gte?: number | FloatFieldRefInput<$PrismaModel>;
+    not?: NestedFloatFilter<$PrismaModel> | number;
+  };
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
+    equals?: number | FloatFieldRefInput<$PrismaModel>;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>;
+    lt?: number | FloatFieldRefInput<$PrismaModel>;
+    lte?: number | FloatFieldRefInput<$PrismaModel>;
+    gt?: number | FloatFieldRefInput<$PrismaModel>;
+    gte?: number | FloatFieldRefInput<$PrismaModel>;
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _avg?: NestedFloatFilter<$PrismaModel>;
+    _sum?: NestedFloatFilter<$PrismaModel>;
+    _min?: NestedFloatFilter<$PrismaModel>;
+    _max?: NestedFloatFilter<$PrismaModel>;
+  };
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
+    equals?: number | IntFieldRefInput<$PrismaModel>;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _avg?: NestedFloatFilter<$PrismaModel>;
+    _sum?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedIntFilter<$PrismaModel>;
+    _max?: NestedIntFilter<$PrismaModel>;
+  };
 
   export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
+  };
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
+  };
 
   export type StoreCreateWithoutOwnerInput = {
-    id?: string
-    name: string
-    domain: string
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutOwnerInput = {
-    id?: string
-    name: string
-    domain: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutOwnerInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutOwnerInput,
+      StoreUncheckedCreateWithoutOwnerInput
+    >;
+  };
 
   export type StoreCreateManyOwnerInputEnvelope = {
-    data: StoreCreateManyOwnerInput | StoreCreateManyOwnerInput[]
-    skipDuplicates?: boolean
-  }
+    data: StoreCreateManyOwnerInput | StoreCreateManyOwnerInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type StoreUpsertWithWhereUniqueWithoutOwnerInput = {
-    where: StoreWhereUniqueInput
-    update: XOR<StoreUpdateWithoutOwnerInput, StoreUncheckedUpdateWithoutOwnerInput>
-    create: XOR<StoreCreateWithoutOwnerInput, StoreUncheckedCreateWithoutOwnerInput>
-  }
+    where: StoreWhereUniqueInput;
+    update: XOR<
+      StoreUpdateWithoutOwnerInput,
+      StoreUncheckedUpdateWithoutOwnerInput
+    >;
+    create: XOR<
+      StoreCreateWithoutOwnerInput,
+      StoreUncheckedCreateWithoutOwnerInput
+    >;
+  };
 
   export type StoreUpdateWithWhereUniqueWithoutOwnerInput = {
-    where: StoreWhereUniqueInput
-    data: XOR<StoreUpdateWithoutOwnerInput, StoreUncheckedUpdateWithoutOwnerInput>
-  }
+    where: StoreWhereUniqueInput;
+    data: XOR<
+      StoreUpdateWithoutOwnerInput,
+      StoreUncheckedUpdateWithoutOwnerInput
+    >;
+  };
 
   export type StoreUpdateManyWithWhereWithoutOwnerInput = {
-    where: StoreScalarWhereInput
-    data: XOR<StoreUpdateManyMutationInput, StoreUncheckedUpdateManyWithoutOwnerInput>
-  }
+    where: StoreScalarWhereInput;
+    data: XOR<
+      StoreUpdateManyMutationInput,
+      StoreUncheckedUpdateManyWithoutOwnerInput
+    >;
+  };
 
   export type StoreScalarWhereInput = {
-    AND?: StoreScalarWhereInput | StoreScalarWhereInput[]
-    OR?: StoreScalarWhereInput[]
-    NOT?: StoreScalarWhereInput | StoreScalarWhereInput[]
-    id?: StringFilter<"Store"> | string
-    name?: StringFilter<"Store"> | string
-    domain?: StringFilter<"Store"> | string
-    ownerId?: StringFilter<"Store"> | string
-  }
+    AND?: StoreScalarWhereInput | StoreScalarWhereInput[];
+    OR?: StoreScalarWhereInput[];
+    NOT?: StoreScalarWhereInput | StoreScalarWhereInput[];
+    id?: StringFilter<'Store'> | string;
+    name?: StringFilter<'Store'> | string;
+    domain?: StringFilter<'Store'> | string;
+    ownerId?: StringFilter<'Store'> | string;
+  };
 
   export type UserCreateWithoutStoresInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type UserUncheckedCreateWithoutStoresInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type UserCreateOrConnectWithoutStoresInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutStoresInput, UserUncheckedCreateWithoutStoresInput>
-  }
+    where: UserWhereUniqueInput;
+    create: XOR<
+      UserCreateWithoutStoresInput,
+      UserUncheckedCreateWithoutStoresInput
+    >;
+  };
 
   export type CategoryCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput
-    subCategories?: CategoryCreateNestedManyWithoutParentInput
-    products?: ProductCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput;
+    subCategories?: CategoryCreateNestedManyWithoutParentInput;
+    products?: ProductCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryUncheckedCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    parentId?: string | null
-    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput
-    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    parentId?: string | null;
+    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput;
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryCreateOrConnectWithoutStoreInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput>
-  }
+    where: CategoryWhereUniqueInput;
+    create: XOR<
+      CategoryCreateWithoutStoreInput,
+      CategoryUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type CategoryCreateManyStoreInputEnvelope = {
-    data: CategoryCreateManyStoreInput | CategoryCreateManyStoreInput[]
-    skipDuplicates?: boolean
-  }
+    data: CategoryCreateManyStoreInput | CategoryCreateManyStoreInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type ProductCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    category: CategoryCreateNestedOneWithoutProductsInput
-    reviews?: ReviewCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    category: CategoryCreateNestedOneWithoutProductsInput;
+    reviews?: ReviewCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductUncheckedCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductCreateOrConnectWithoutStoreInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput>
-  }
+    where: ProductWhereUniqueInput;
+    create: XOR<
+      ProductCreateWithoutStoreInput,
+      ProductUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type ProductCreateManyStoreInputEnvelope = {
-    data: ProductCreateManyStoreInput | ProductCreateManyStoreInput[]
-    skipDuplicates?: boolean
-  }
+    data: ProductCreateManyStoreInput | ProductCreateManyStoreInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type CustomerCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type CustomerUncheckedCreateWithoutStoreInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type CustomerCreateOrConnectWithoutStoreInput = {
-    where: CustomerWhereUniqueInput
-    create: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput>
-  }
+    where: CustomerWhereUniqueInput;
+    create: XOR<
+      CustomerCreateWithoutStoreInput,
+      CustomerUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type CustomerCreateManyStoreInputEnvelope = {
-    data: CustomerCreateManyStoreInput | CustomerCreateManyStoreInput[]
-    skipDuplicates?: boolean
-  }
+    data: CustomerCreateManyStoreInput | CustomerCreateManyStoreInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type ReviewCreateWithoutStoreInput = {
-    id?: string
-    content: string
-    rating: number
-    product: ProductCreateNestedOneWithoutReviewsInput
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    product: ProductCreateNestedOneWithoutReviewsInput;
+  };
 
   export type ReviewUncheckedCreateWithoutStoreInput = {
-    id?: string
-    content: string
-    rating: number
-    productId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    productId: string;
+  };
 
   export type ReviewCreateOrConnectWithoutStoreInput = {
-    where: ReviewWhereUniqueInput
-    create: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput>
-  }
+    where: ReviewWhereUniqueInput;
+    create: XOR<
+      ReviewCreateWithoutStoreInput,
+      ReviewUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type ReviewCreateManyStoreInputEnvelope = {
-    data: ReviewCreateManyStoreInput | ReviewCreateManyStoreInput[]
-    skipDuplicates?: boolean
-  }
+    data: ReviewCreateManyStoreInput | ReviewCreateManyStoreInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type PhonePePaymentCreateWithoutStoreInput = {
-    id?: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active?: boolean
-  }
+    id?: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active?: boolean;
+  };
 
   export type PhonePePaymentUncheckedCreateWithoutStoreInput = {
-    id?: string
-    merchantId: string
-    saltKey: string
-    saltIndex: string
-    active?: boolean
-  }
+    id?: string;
+    merchantId: string;
+    saltKey: string;
+    saltIndex: string;
+    active?: boolean;
+  };
 
   export type PhonePePaymentCreateOrConnectWithoutStoreInput = {
-    where: PhonePePaymentWhereUniqueInput
-    create: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-  }
+    where: PhonePePaymentWhereUniqueInput;
+    create: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type UserUpsertWithoutStoresInput = {
-    update: XOR<UserUpdateWithoutStoresInput, UserUncheckedUpdateWithoutStoresInput>
-    create: XOR<UserCreateWithoutStoresInput, UserUncheckedCreateWithoutStoresInput>
-    where?: UserWhereInput
-  }
+    update: XOR<
+      UserUpdateWithoutStoresInput,
+      UserUncheckedUpdateWithoutStoresInput
+    >;
+    create: XOR<
+      UserCreateWithoutStoresInput,
+      UserUncheckedCreateWithoutStoresInput
+    >;
+    where?: UserWhereInput;
+  };
 
   export type UserUpdateToOneWithWhereWithoutStoresInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutStoresInput, UserUncheckedUpdateWithoutStoresInput>
-  }
+    where?: UserWhereInput;
+    data: XOR<
+      UserUpdateWithoutStoresInput,
+      UserUncheckedUpdateWithoutStoresInput
+    >;
+  };
 
   export type UserUpdateWithoutStoresInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type UserUncheckedUpdateWithoutStoresInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type CategoryUpsertWithWhereUniqueWithoutStoreInput = {
-    where: CategoryWhereUniqueInput
-    update: XOR<CategoryUpdateWithoutStoreInput, CategoryUncheckedUpdateWithoutStoreInput>
-    create: XOR<CategoryCreateWithoutStoreInput, CategoryUncheckedCreateWithoutStoreInput>
-  }
+    where: CategoryWhereUniqueInput;
+    update: XOR<
+      CategoryUpdateWithoutStoreInput,
+      CategoryUncheckedUpdateWithoutStoreInput
+    >;
+    create: XOR<
+      CategoryCreateWithoutStoreInput,
+      CategoryUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type CategoryUpdateWithWhereUniqueWithoutStoreInput = {
-    where: CategoryWhereUniqueInput
-    data: XOR<CategoryUpdateWithoutStoreInput, CategoryUncheckedUpdateWithoutStoreInput>
-  }
+    where: CategoryWhereUniqueInput;
+    data: XOR<
+      CategoryUpdateWithoutStoreInput,
+      CategoryUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type CategoryUpdateManyWithWhereWithoutStoreInput = {
-    where: CategoryScalarWhereInput
-    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyWithoutStoreInput>
-  }
+    where: CategoryScalarWhereInput;
+    data: XOR<
+      CategoryUpdateManyMutationInput,
+      CategoryUncheckedUpdateManyWithoutStoreInput
+    >;
+  };
 
   export type CategoryScalarWhereInput = {
-    AND?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-    OR?: CategoryScalarWhereInput[]
-    NOT?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
-    id?: StringFilter<"Category"> | string
-    name?: StringFilter<"Category"> | string
-    storeId?: StringFilter<"Category"> | string
-    parentId?: StringNullableFilter<"Category"> | string | null
-  }
+    AND?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+    OR?: CategoryScalarWhereInput[];
+    NOT?: CategoryScalarWhereInput | CategoryScalarWhereInput[];
+    id?: StringFilter<'Category'> | string;
+    name?: StringFilter<'Category'> | string;
+    storeId?: StringFilter<'Category'> | string;
+    parentId?: StringNullableFilter<'Category'> | string | null;
+  };
 
   export type ProductUpsertWithWhereUniqueWithoutStoreInput = {
-    where: ProductWhereUniqueInput
-    update: XOR<ProductUpdateWithoutStoreInput, ProductUncheckedUpdateWithoutStoreInput>
-    create: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput>
-  }
+    where: ProductWhereUniqueInput;
+    update: XOR<
+      ProductUpdateWithoutStoreInput,
+      ProductUncheckedUpdateWithoutStoreInput
+    >;
+    create: XOR<
+      ProductCreateWithoutStoreInput,
+      ProductUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type ProductUpdateWithWhereUniqueWithoutStoreInput = {
-    where: ProductWhereUniqueInput
-    data: XOR<ProductUpdateWithoutStoreInput, ProductUncheckedUpdateWithoutStoreInput>
-  }
+    where: ProductWhereUniqueInput;
+    data: XOR<
+      ProductUpdateWithoutStoreInput,
+      ProductUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type ProductUpdateManyWithWhereWithoutStoreInput = {
-    where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutStoreInput>
-  }
+    where: ProductScalarWhereInput;
+    data: XOR<
+      ProductUpdateManyMutationInput,
+      ProductUncheckedUpdateManyWithoutStoreInput
+    >;
+  };
 
   export type ProductScalarWhereInput = {
-    AND?: ProductScalarWhereInput | ProductScalarWhereInput[]
-    OR?: ProductScalarWhereInput[]
-    NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
-    id?: StringFilter<"Product"> | string
-    name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
-    originalPrice?: FloatFilter<"Product"> | number
-    price?: FloatFilter<"Product"> | number
-    categoryId?: StringFilter<"Product"> | string
-    storeId?: StringFilter<"Product"> | string
-  }
+    AND?: ProductScalarWhereInput | ProductScalarWhereInput[];
+    OR?: ProductScalarWhereInput[];
+    NOT?: ProductScalarWhereInput | ProductScalarWhereInput[];
+    id?: StringFilter<'Product'> | string;
+    name?: StringFilter<'Product'> | string;
+    description?: StringFilter<'Product'> | string;
+    originalPrice?: FloatFilter<'Product'> | number;
+    price?: FloatFilter<'Product'> | number;
+    categoryId?: StringFilter<'Product'> | string;
+    storeId?: StringFilter<'Product'> | string;
+  };
 
   export type CustomerUpsertWithWhereUniqueWithoutStoreInput = {
-    where: CustomerWhereUniqueInput
-    update: XOR<CustomerUpdateWithoutStoreInput, CustomerUncheckedUpdateWithoutStoreInput>
-    create: XOR<CustomerCreateWithoutStoreInput, CustomerUncheckedCreateWithoutStoreInput>
-  }
+    where: CustomerWhereUniqueInput;
+    update: XOR<
+      CustomerUpdateWithoutStoreInput,
+      CustomerUncheckedUpdateWithoutStoreInput
+    >;
+    create: XOR<
+      CustomerCreateWithoutStoreInput,
+      CustomerUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type CustomerUpdateWithWhereUniqueWithoutStoreInput = {
-    where: CustomerWhereUniqueInput
-    data: XOR<CustomerUpdateWithoutStoreInput, CustomerUncheckedUpdateWithoutStoreInput>
-  }
+    where: CustomerWhereUniqueInput;
+    data: XOR<
+      CustomerUpdateWithoutStoreInput,
+      CustomerUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type CustomerUpdateManyWithWhereWithoutStoreInput = {
-    where: CustomerScalarWhereInput
-    data: XOR<CustomerUpdateManyMutationInput, CustomerUncheckedUpdateManyWithoutStoreInput>
-  }
+    where: CustomerScalarWhereInput;
+    data: XOR<
+      CustomerUpdateManyMutationInput,
+      CustomerUncheckedUpdateManyWithoutStoreInput
+    >;
+  };
 
   export type CustomerScalarWhereInput = {
-    AND?: CustomerScalarWhereInput | CustomerScalarWhereInput[]
-    OR?: CustomerScalarWhereInput[]
-    NOT?: CustomerScalarWhereInput | CustomerScalarWhereInput[]
-    id?: StringFilter<"Customer"> | string
-    name?: StringFilter<"Customer"> | string
-    email?: StringNullableFilter<"Customer"> | string | null
-    password?: StringFilter<"Customer"> | string
-    phone?: StringFilter<"Customer"> | string
-    address?: StringFilter<"Customer"> | string
-    city?: StringFilter<"Customer"> | string
-    state?: StringFilter<"Customer"> | string
-    country?: StringFilter<"Customer"> | string
-    zipCode?: StringFilter<"Customer"> | string
-    createdAt?: DateTimeFilter<"Customer"> | Date | string
-    updatedAt?: DateTimeFilter<"Customer"> | Date | string
-    storeId?: StringFilter<"Customer"> | string
-  }
+    AND?: CustomerScalarWhereInput | CustomerScalarWhereInput[];
+    OR?: CustomerScalarWhereInput[];
+    NOT?: CustomerScalarWhereInput | CustomerScalarWhereInput[];
+    id?: StringFilter<'Customer'> | string;
+    name?: StringFilter<'Customer'> | string;
+    email?: StringNullableFilter<'Customer'> | string | null;
+    password?: StringFilter<'Customer'> | string;
+    phone?: StringFilter<'Customer'> | string;
+    address?: StringFilter<'Customer'> | string;
+    city?: StringFilter<'Customer'> | string;
+    state?: StringFilter<'Customer'> | string;
+    country?: StringFilter<'Customer'> | string;
+    zipCode?: StringFilter<'Customer'> | string;
+    createdAt?: DateTimeFilter<'Customer'> | Date | string;
+    updatedAt?: DateTimeFilter<'Customer'> | Date | string;
+    storeId?: StringFilter<'Customer'> | string;
+  };
 
   export type ReviewUpsertWithWhereUniqueWithoutStoreInput = {
-    where: ReviewWhereUniqueInput
-    update: XOR<ReviewUpdateWithoutStoreInput, ReviewUncheckedUpdateWithoutStoreInput>
-    create: XOR<ReviewCreateWithoutStoreInput, ReviewUncheckedCreateWithoutStoreInput>
-  }
+    where: ReviewWhereUniqueInput;
+    update: XOR<
+      ReviewUpdateWithoutStoreInput,
+      ReviewUncheckedUpdateWithoutStoreInput
+    >;
+    create: XOR<
+      ReviewCreateWithoutStoreInput,
+      ReviewUncheckedCreateWithoutStoreInput
+    >;
+  };
 
   export type ReviewUpdateWithWhereUniqueWithoutStoreInput = {
-    where: ReviewWhereUniqueInput
-    data: XOR<ReviewUpdateWithoutStoreInput, ReviewUncheckedUpdateWithoutStoreInput>
-  }
+    where: ReviewWhereUniqueInput;
+    data: XOR<
+      ReviewUpdateWithoutStoreInput,
+      ReviewUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type ReviewUpdateManyWithWhereWithoutStoreInput = {
-    where: ReviewScalarWhereInput
-    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutStoreInput>
-  }
+    where: ReviewScalarWhereInput;
+    data: XOR<
+      ReviewUpdateManyMutationInput,
+      ReviewUncheckedUpdateManyWithoutStoreInput
+    >;
+  };
 
   export type ReviewScalarWhereInput = {
-    AND?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-    OR?: ReviewScalarWhereInput[]
-    NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-    id?: StringFilter<"Review"> | string
-    content?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
-    productId?: StringFilter<"Review"> | string
-    storeId?: StringFilter<"Review"> | string
-  }
+    AND?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+    OR?: ReviewScalarWhereInput[];
+    NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
+    id?: StringFilter<'Review'> | string;
+    content?: StringFilter<'Review'> | string;
+    rating?: IntFilter<'Review'> | number;
+    productId?: StringFilter<'Review'> | string;
+    storeId?: StringFilter<'Review'> | string;
+  };
 
   export type PhonePePaymentUpsertWithoutStoreInput = {
-    update: XOR<PhonePePaymentUpdateWithoutStoreInput, PhonePePaymentUncheckedUpdateWithoutStoreInput>
-    create: XOR<PhonePePaymentCreateWithoutStoreInput, PhonePePaymentUncheckedCreateWithoutStoreInput>
-    where?: PhonePePaymentWhereInput
-  }
+    update: XOR<
+      PhonePePaymentUpdateWithoutStoreInput,
+      PhonePePaymentUncheckedUpdateWithoutStoreInput
+    >;
+    create: XOR<
+      PhonePePaymentCreateWithoutStoreInput,
+      PhonePePaymentUncheckedCreateWithoutStoreInput
+    >;
+    where?: PhonePePaymentWhereInput;
+  };
 
   export type PhonePePaymentUpdateToOneWithWhereWithoutStoreInput = {
-    where?: PhonePePaymentWhereInput
-    data: XOR<PhonePePaymentUpdateWithoutStoreInput, PhonePePaymentUncheckedUpdateWithoutStoreInput>
-  }
+    where?: PhonePePaymentWhereInput;
+    data: XOR<
+      PhonePePaymentUpdateWithoutStoreInput,
+      PhonePePaymentUncheckedUpdateWithoutStoreInput
+    >;
+  };
 
   export type PhonePePaymentUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+  };
 
   export type PhonePePaymentUncheckedUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    merchantId?: StringFieldUpdateOperationsInput | string
-    saltKey?: StringFieldUpdateOperationsInput | string
-    saltIndex?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    merchantId?: StringFieldUpdateOperationsInput | string;
+    saltKey?: StringFieldUpdateOperationsInput | string;
+    saltIndex?: StringFieldUpdateOperationsInput | string;
+    active?: BoolFieldUpdateOperationsInput | boolean;
+  };
 
   export type StoreCreateWithoutCategoriesInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutCategoriesInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutCategoriesInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutCategoriesInput, StoreUncheckedCreateWithoutCategoriesInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutCategoriesInput,
+      StoreUncheckedCreateWithoutCategoriesInput
+    >;
+  };
 
   export type CategoryCreateWithoutSubCategoriesInput = {
-    id?: string
-    name: string
-    store: StoreCreateNestedOneWithoutCategoriesInput
-    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput
-    products?: ProductCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    store: StoreCreateNestedOneWithoutCategoriesInput;
+    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput;
+    products?: ProductCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryUncheckedCreateWithoutSubCategoriesInput = {
-    id?: string
-    name: string
-    storeId: string
-    parentId?: string | null
-    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+    parentId?: string | null;
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryCreateOrConnectWithoutSubCategoriesInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-  }
+    where: CategoryWhereUniqueInput;
+    create: XOR<
+      CategoryCreateWithoutSubCategoriesInput,
+      CategoryUncheckedCreateWithoutSubCategoriesInput
+    >;
+  };
 
   export type CategoryCreateWithoutParentInput = {
-    id?: string
-    name: string
-    store: StoreCreateNestedOneWithoutCategoriesInput
-    subCategories?: CategoryCreateNestedManyWithoutParentInput
-    products?: ProductCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    store: StoreCreateNestedOneWithoutCategoriesInput;
+    subCategories?: CategoryCreateNestedManyWithoutParentInput;
+    products?: ProductCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryUncheckedCreateWithoutParentInput = {
-    id?: string
-    name: string
-    storeId: string
-    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput
-    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput;
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput;
+  };
 
   export type CategoryCreateOrConnectWithoutParentInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput>
-  }
+    where: CategoryWhereUniqueInput;
+    create: XOR<
+      CategoryCreateWithoutParentInput,
+      CategoryUncheckedCreateWithoutParentInput
+    >;
+  };
 
   export type CategoryCreateManyParentInputEnvelope = {
-    data: CategoryCreateManyParentInput | CategoryCreateManyParentInput[]
-    skipDuplicates?: boolean
-  }
+    data: CategoryCreateManyParentInput | CategoryCreateManyParentInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type ProductCreateWithoutCategoryInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    store: StoreCreateNestedOneWithoutProductsInput
-    reviews?: ReviewCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    store: StoreCreateNestedOneWithoutProductsInput;
+    reviews?: ReviewCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    storeId: string
-    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    storeId: string;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
+  };
 
   export type ProductCreateOrConnectWithoutCategoryInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput>
-  }
+    where: ProductWhereUniqueInput;
+    create: XOR<
+      ProductCreateWithoutCategoryInput,
+      ProductUncheckedCreateWithoutCategoryInput
+    >;
+  };
 
   export type ProductCreateManyCategoryInputEnvelope = {
-    data: ProductCreateManyCategoryInput | ProductCreateManyCategoryInput[]
-    skipDuplicates?: boolean
-  }
+    data: ProductCreateManyCategoryInput | ProductCreateManyCategoryInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type StoreUpsertWithoutCategoriesInput = {
-    update: XOR<StoreUpdateWithoutCategoriesInput, StoreUncheckedUpdateWithoutCategoriesInput>
-    create: XOR<StoreCreateWithoutCategoriesInput, StoreUncheckedCreateWithoutCategoriesInput>
-    where?: StoreWhereInput
-  }
+    update: XOR<
+      StoreUpdateWithoutCategoriesInput,
+      StoreUncheckedUpdateWithoutCategoriesInput
+    >;
+    create: XOR<
+      StoreCreateWithoutCategoriesInput,
+      StoreUncheckedCreateWithoutCategoriesInput
+    >;
+    where?: StoreWhereInput;
+  };
 
   export type StoreUpdateToOneWithWhereWithoutCategoriesInput = {
-    where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutCategoriesInput, StoreUncheckedUpdateWithoutCategoriesInput>
-  }
+    where?: StoreWhereInput;
+    data: XOR<
+      StoreUpdateWithoutCategoriesInput,
+      StoreUncheckedUpdateWithoutCategoriesInput
+    >;
+  };
 
   export type StoreUpdateWithoutCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type CategoryUpsertWithoutSubCategoriesInput = {
-    update: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
-    create: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    where?: CategoryWhereInput
-  }
+    update: XOR<
+      CategoryUpdateWithoutSubCategoriesInput,
+      CategoryUncheckedUpdateWithoutSubCategoriesInput
+    >;
+    create: XOR<
+      CategoryCreateWithoutSubCategoriesInput,
+      CategoryUncheckedCreateWithoutSubCategoriesInput
+    >;
+    where?: CategoryWhereInput;
+  };
 
   export type CategoryUpdateToOneWithWhereWithoutSubCategoriesInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
-  }
+    where?: CategoryWhereInput;
+    data: XOR<
+      CategoryUpdateWithoutSubCategoriesInput,
+      CategoryUncheckedUpdateWithoutSubCategoriesInput
+    >;
+  };
 
   export type CategoryUpdateWithoutSubCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput
-    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput
-    products?: ProductUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput;
+    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput;
+    products?: ProductUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateWithoutSubCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUpsertWithWhereUniqueWithoutParentInput = {
-    where: CategoryWhereUniqueInput
-    update: XOR<CategoryUpdateWithoutParentInput, CategoryUncheckedUpdateWithoutParentInput>
-    create: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput>
-  }
+    where: CategoryWhereUniqueInput;
+    update: XOR<
+      CategoryUpdateWithoutParentInput,
+      CategoryUncheckedUpdateWithoutParentInput
+    >;
+    create: XOR<
+      CategoryCreateWithoutParentInput,
+      CategoryUncheckedCreateWithoutParentInput
+    >;
+  };
 
   export type CategoryUpdateWithWhereUniqueWithoutParentInput = {
-    where: CategoryWhereUniqueInput
-    data: XOR<CategoryUpdateWithoutParentInput, CategoryUncheckedUpdateWithoutParentInput>
-  }
+    where: CategoryWhereUniqueInput;
+    data: XOR<
+      CategoryUpdateWithoutParentInput,
+      CategoryUncheckedUpdateWithoutParentInput
+    >;
+  };
 
   export type CategoryUpdateManyWithWhereWithoutParentInput = {
-    where: CategoryScalarWhereInput
-    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyWithoutParentInput>
-  }
+    where: CategoryScalarWhereInput;
+    data: XOR<
+      CategoryUpdateManyMutationInput,
+      CategoryUncheckedUpdateManyWithoutParentInput
+    >;
+  };
 
   export type ProductUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: ProductWhereUniqueInput
-    update: XOR<ProductUpdateWithoutCategoryInput, ProductUncheckedUpdateWithoutCategoryInput>
-    create: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput>
-  }
+    where: ProductWhereUniqueInput;
+    update: XOR<
+      ProductUpdateWithoutCategoryInput,
+      ProductUncheckedUpdateWithoutCategoryInput
+    >;
+    create: XOR<
+      ProductCreateWithoutCategoryInput,
+      ProductUncheckedCreateWithoutCategoryInput
+    >;
+  };
 
   export type ProductUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: ProductWhereUniqueInput
-    data: XOR<ProductUpdateWithoutCategoryInput, ProductUncheckedUpdateWithoutCategoryInput>
-  }
+    where: ProductWhereUniqueInput;
+    data: XOR<
+      ProductUpdateWithoutCategoryInput,
+      ProductUncheckedUpdateWithoutCategoryInput
+    >;
+  };
 
   export type ProductUpdateManyWithWhereWithoutCategoryInput = {
-    where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutCategoryInput>
-  }
+    where: ProductScalarWhereInput;
+    data: XOR<
+      ProductUpdateManyMutationInput,
+      ProductUncheckedUpdateManyWithoutCategoryInput
+    >;
+  };
 
   export type CategoryCreateWithoutProductsInput = {
-    id?: string
-    name: string
-    store: StoreCreateNestedOneWithoutCategoriesInput
-    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput
-    subCategories?: CategoryCreateNestedManyWithoutParentInput
-  }
+    id?: string;
+    name: string;
+    store: StoreCreateNestedOneWithoutCategoriesInput;
+    parent?: CategoryCreateNestedOneWithoutSubCategoriesInput;
+    subCategories?: CategoryCreateNestedManyWithoutParentInput;
+  };
 
   export type CategoryUncheckedCreateWithoutProductsInput = {
-    id?: string
-    name: string
-    storeId: string
-    parentId?: string | null
-    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+    parentId?: string | null;
+    subCategories?: CategoryUncheckedCreateNestedManyWithoutParentInput;
+  };
 
   export type CategoryCreateOrConnectWithoutProductsInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
-  }
+    where: CategoryWhereUniqueInput;
+    create: XOR<
+      CategoryCreateWithoutProductsInput,
+      CategoryUncheckedCreateWithoutProductsInput
+    >;
+  };
 
   export type StoreCreateWithoutProductsInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutProductsInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutProductsInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutProductsInput, StoreUncheckedCreateWithoutProductsInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutProductsInput,
+      StoreUncheckedCreateWithoutProductsInput
+    >;
+  };
 
   export type ReviewCreateWithoutProductInput = {
-    id?: string
-    content: string
-    rating: number
-    store: StoreCreateNestedOneWithoutReviewsInput
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    store: StoreCreateNestedOneWithoutReviewsInput;
+  };
 
   export type ReviewUncheckedCreateWithoutProductInput = {
-    id?: string
-    content: string
-    rating: number
-    storeId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    storeId: string;
+  };
 
   export type ReviewCreateOrConnectWithoutProductInput = {
-    where: ReviewWhereUniqueInput
-    create: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
-  }
+    where: ReviewWhereUniqueInput;
+    create: XOR<
+      ReviewCreateWithoutProductInput,
+      ReviewUncheckedCreateWithoutProductInput
+    >;
+  };
 
   export type ReviewCreateManyProductInputEnvelope = {
-    data: ReviewCreateManyProductInput | ReviewCreateManyProductInput[]
-    skipDuplicates?: boolean
-  }
+    data: ReviewCreateManyProductInput | ReviewCreateManyProductInput[];
+    skipDuplicates?: boolean;
+  };
 
   export type CategoryUpsertWithoutProductsInput = {
-    update: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
-    create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
-    where?: CategoryWhereInput
-  }
+    update: XOR<
+      CategoryUpdateWithoutProductsInput,
+      CategoryUncheckedUpdateWithoutProductsInput
+    >;
+    create: XOR<
+      CategoryCreateWithoutProductsInput,
+      CategoryUncheckedCreateWithoutProductsInput
+    >;
+    where?: CategoryWhereInput;
+  };
 
   export type CategoryUpdateToOneWithWhereWithoutProductsInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
-  }
+    where?: CategoryWhereInput;
+    data: XOR<
+      CategoryUpdateWithoutProductsInput,
+      CategoryUncheckedUpdateWithoutProductsInput
+    >;
+  };
 
   export type CategoryUpdateWithoutProductsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput
-    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput
-    subCategories?: CategoryUpdateManyWithoutParentNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput;
+    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput;
+    subCategories?: CategoryUpdateManyWithoutParentNestedInput;
+  };
 
   export type CategoryUncheckedUpdateWithoutProductsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput;
+  };
 
   export type StoreUpsertWithoutProductsInput = {
-    update: XOR<StoreUpdateWithoutProductsInput, StoreUncheckedUpdateWithoutProductsInput>
-    create: XOR<StoreCreateWithoutProductsInput, StoreUncheckedCreateWithoutProductsInput>
-    where?: StoreWhereInput
-  }
+    update: XOR<
+      StoreUpdateWithoutProductsInput,
+      StoreUncheckedUpdateWithoutProductsInput
+    >;
+    create: XOR<
+      StoreCreateWithoutProductsInput,
+      StoreUncheckedCreateWithoutProductsInput
+    >;
+    where?: StoreWhereInput;
+  };
 
   export type StoreUpdateToOneWithWhereWithoutProductsInput = {
-    where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutProductsInput, StoreUncheckedUpdateWithoutProductsInput>
-  }
+    where?: StoreWhereInput;
+    data: XOR<
+      StoreUpdateWithoutProductsInput,
+      StoreUncheckedUpdateWithoutProductsInput
+    >;
+  };
 
   export type StoreUpdateWithoutProductsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutProductsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type ReviewUpsertWithWhereUniqueWithoutProductInput = {
-    where: ReviewWhereUniqueInput
-    update: XOR<ReviewUpdateWithoutProductInput, ReviewUncheckedUpdateWithoutProductInput>
-    create: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
-  }
+    where: ReviewWhereUniqueInput;
+    update: XOR<
+      ReviewUpdateWithoutProductInput,
+      ReviewUncheckedUpdateWithoutProductInput
+    >;
+    create: XOR<
+      ReviewCreateWithoutProductInput,
+      ReviewUncheckedCreateWithoutProductInput
+    >;
+  };
 
   export type ReviewUpdateWithWhereUniqueWithoutProductInput = {
-    where: ReviewWhereUniqueInput
-    data: XOR<ReviewUpdateWithoutProductInput, ReviewUncheckedUpdateWithoutProductInput>
-  }
+    where: ReviewWhereUniqueInput;
+    data: XOR<
+      ReviewUpdateWithoutProductInput,
+      ReviewUncheckedUpdateWithoutProductInput
+    >;
+  };
 
   export type ReviewUpdateManyWithWhereWithoutProductInput = {
-    where: ReviewScalarWhereInput
-    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutProductInput>
-  }
+    where: ReviewScalarWhereInput;
+    data: XOR<
+      ReviewUpdateManyMutationInput,
+      ReviewUncheckedUpdateManyWithoutProductInput
+    >;
+  };
 
   export type ProductCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    category: CategoryCreateNestedOneWithoutProductsInput
-    store: StoreCreateNestedOneWithoutProductsInput
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    category: CategoryCreateNestedOneWithoutProductsInput;
+    store: StoreCreateNestedOneWithoutProductsInput;
+  };
 
   export type ProductUncheckedCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+    storeId: string;
+  };
 
   export type ProductCreateOrConnectWithoutReviewsInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
-  }
+    where: ProductWhereUniqueInput;
+    create: XOR<
+      ProductCreateWithoutReviewsInput,
+      ProductUncheckedCreateWithoutReviewsInput
+    >;
+  };
 
   export type StoreCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutReviewsInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutReviewsInput, StoreUncheckedCreateWithoutReviewsInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutReviewsInput,
+      StoreUncheckedCreateWithoutReviewsInput
+    >;
+  };
 
   export type ProductUpsertWithoutReviewsInput = {
-    update: XOR<ProductUpdateWithoutReviewsInput, ProductUncheckedUpdateWithoutReviewsInput>
-    create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
-    where?: ProductWhereInput
-  }
+    update: XOR<
+      ProductUpdateWithoutReviewsInput,
+      ProductUncheckedUpdateWithoutReviewsInput
+    >;
+    create: XOR<
+      ProductCreateWithoutReviewsInput,
+      ProductUncheckedCreateWithoutReviewsInput
+    >;
+    where?: ProductWhereInput;
+  };
 
   export type ProductUpdateToOneWithWhereWithoutReviewsInput = {
-    where?: ProductWhereInput
-    data: XOR<ProductUpdateWithoutReviewsInput, ProductUncheckedUpdateWithoutReviewsInput>
-  }
+    where?: ProductWhereInput;
+    data: XOR<
+      ProductUpdateWithoutReviewsInput,
+      ProductUncheckedUpdateWithoutReviewsInput
+    >;
+  };
 
   export type ProductUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
-    store?: StoreUpdateOneRequiredWithoutProductsNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput;
+    store?: StoreUpdateOneRequiredWithoutProductsNestedInput;
+  };
 
   export type ProductUncheckedUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    categoryId?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type StoreUpsertWithoutReviewsInput = {
-    update: XOR<StoreUpdateWithoutReviewsInput, StoreUncheckedUpdateWithoutReviewsInput>
-    create: XOR<StoreCreateWithoutReviewsInput, StoreUncheckedCreateWithoutReviewsInput>
-    where?: StoreWhereInput
-  }
+    update: XOR<
+      StoreUpdateWithoutReviewsInput,
+      StoreUncheckedUpdateWithoutReviewsInput
+    >;
+    create: XOR<
+      StoreCreateWithoutReviewsInput,
+      StoreUncheckedCreateWithoutReviewsInput
+    >;
+    where?: StoreWhereInput;
+  };
 
   export type StoreUpdateToOneWithWhereWithoutReviewsInput = {
-    where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutReviewsInput, StoreUncheckedUpdateWithoutReviewsInput>
-  }
+    where?: StoreWhereInput;
+    data: XOR<
+      StoreUpdateWithoutReviewsInput,
+      StoreUncheckedUpdateWithoutReviewsInput
+    >;
+  };
 
   export type StoreUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreCreateWithoutCustomersInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutCustomersInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+    phonePePayment?: PhonePePaymentUncheckedCreateNestedOneWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutCustomersInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutCustomersInput, StoreUncheckedCreateWithoutCustomersInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutCustomersInput,
+      StoreUncheckedCreateWithoutCustomersInput
+    >;
+  };
 
   export type StoreUpsertWithoutCustomersInput = {
-    update: XOR<StoreUpdateWithoutCustomersInput, StoreUncheckedUpdateWithoutCustomersInput>
-    create: XOR<StoreCreateWithoutCustomersInput, StoreUncheckedCreateWithoutCustomersInput>
-    where?: StoreWhereInput
-  }
+    update: XOR<
+      StoreUpdateWithoutCustomersInput,
+      StoreUncheckedUpdateWithoutCustomersInput
+    >;
+    create: XOR<
+      StoreCreateWithoutCustomersInput,
+      StoreUncheckedCreateWithoutCustomersInput
+    >;
+    where?: StoreWhereInput;
+  };
 
   export type StoreUpdateToOneWithWhereWithoutCustomersInput = {
-    where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutCustomersInput, StoreUncheckedUpdateWithoutCustomersInput>
-  }
+    where?: StoreWhereInput;
+    data: XOR<
+      StoreUpdateWithoutCustomersInput,
+      StoreUncheckedUpdateWithoutCustomersInput
+    >;
+  };
 
   export type StoreUpdateWithoutCustomersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutCustomersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreCreateWithoutPhonePePaymentInput = {
-    id?: string
-    name: string
-    domain: string
-    owner: UserCreateNestedOneWithoutStoresInput
-    categories?: CategoryCreateNestedManyWithoutStoreInput
-    products?: ProductCreateNestedManyWithoutStoreInput
-    customers?: CustomerCreateNestedManyWithoutStoreInput
-    reviews?: ReviewCreateNestedManyWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    owner: UserCreateNestedOneWithoutStoresInput;
+    categories?: CategoryCreateNestedManyWithoutStoreInput;
+    products?: ProductCreateNestedManyWithoutStoreInput;
+    customers?: CustomerCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewCreateNestedManyWithoutStoreInput;
+  };
 
   export type StoreUncheckedCreateWithoutPhonePePaymentInput = {
-    id?: string
-    name: string
-    domain: string
-    ownerId: string
-    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput
-    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
-    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput
-  }
+    id?: string;
+    name: string;
+    domain: string;
+    ownerId: string;
+    categories?: CategoryUncheckedCreateNestedManyWithoutStoreInput;
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput;
+    customers?: CustomerUncheckedCreateNestedManyWithoutStoreInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutStoreInput;
+  };
 
   export type StoreCreateOrConnectWithoutPhonePePaymentInput = {
-    where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutPhonePePaymentInput, StoreUncheckedCreateWithoutPhonePePaymentInput>
-  }
+    where: StoreWhereUniqueInput;
+    create: XOR<
+      StoreCreateWithoutPhonePePaymentInput,
+      StoreUncheckedCreateWithoutPhonePePaymentInput
+    >;
+  };
 
   export type StoreUpsertWithoutPhonePePaymentInput = {
-    update: XOR<StoreUpdateWithoutPhonePePaymentInput, StoreUncheckedUpdateWithoutPhonePePaymentInput>
-    create: XOR<StoreCreateWithoutPhonePePaymentInput, StoreUncheckedCreateWithoutPhonePePaymentInput>
-    where?: StoreWhereInput
-  }
+    update: XOR<
+      StoreUpdateWithoutPhonePePaymentInput,
+      StoreUncheckedUpdateWithoutPhonePePaymentInput
+    >;
+    create: XOR<
+      StoreCreateWithoutPhonePePaymentInput,
+      StoreUncheckedCreateWithoutPhonePePaymentInput
+    >;
+    where?: StoreWhereInput;
+  };
 
   export type StoreUpdateToOneWithWhereWithoutPhonePePaymentInput = {
-    where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutPhonePePaymentInput, StoreUncheckedUpdateWithoutPhonePePaymentInput>
-  }
+    where?: StoreWhereInput;
+    data: XOR<
+      StoreUpdateWithoutPhonePePaymentInput,
+      StoreUncheckedUpdateWithoutPhonePePaymentInput
+    >;
+  };
 
   export type StoreUpdateWithoutPhonePePaymentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutPhonePePaymentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    ownerId?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+  };
 
   export type StoreCreateManyOwnerInput = {
-    id?: string
-    name: string
-    domain: string
-  }
+    id?: string;
+    name: string;
+    domain: string;
+  };
 
   export type StoreUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUpdateManyWithoutStoreNestedInput
-    products?: ProductUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUpdateManyWithoutStoreNestedInput;
+    products?: ProductUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput
-    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
-    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput
-    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+    categories?: CategoryUncheckedUpdateManyWithoutStoreNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput;
+    customers?: CustomerUncheckedUpdateManyWithoutStoreNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutStoreNestedInput;
+    phonePePayment?: PhonePePaymentUncheckedUpdateOneWithoutStoreNestedInput;
+  };
 
   export type StoreUncheckedUpdateManyWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    domain?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    domain?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CategoryCreateManyStoreInput = {
-    id?: string
-    name: string
-    parentId?: string | null
-  }
+    id?: string;
+    name: string;
+    parentId?: string | null;
+  };
 
   export type ProductCreateManyStoreInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    categoryId: string
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    categoryId: string;
+  };
 
   export type CustomerCreateManyStoreInput = {
-    id?: string
-    name: string
-    email?: string | null
-    password: string
-    phone: string
-    address: string
-    city: string
-    state: string
-    country: string
-    zipCode: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
+    id?: string;
+    name: string;
+    email?: string | null;
+    password: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
 
   export type ReviewCreateManyStoreInput = {
-    id?: string
-    content: string
-    rating: number
-    productId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    productId: string;
+  };
 
   export type CategoryUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput
-    subCategories?: CategoryUpdateManyWithoutParentNestedInput
-    products?: ProductUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    parent?: CategoryUpdateOneWithoutSubCategoriesNestedInput;
+    subCategories?: CategoryUpdateManyWithoutParentNestedInput;
+    products?: ProductUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput
-    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateManyWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null;
+  };
 
   export type ProductUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
-    reviews?: ReviewUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput;
+    reviews?: ReviewUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductUncheckedUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    categoryId?: StringFieldUpdateOperationsInput | string;
+    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductUncheckedUpdateManyWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    categoryId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CustomerUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type CustomerUncheckedUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type CustomerUncheckedUpdateManyWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    address?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    state?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
+    zipCode?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
 
   export type ReviewUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput;
+  };
 
   export type ReviewUncheckedUpdateWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    productId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    productId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ReviewUncheckedUpdateManyWithoutStoreInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    productId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    productId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type CategoryCreateManyParentInput = {
-    id?: string
-    name: string
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    storeId: string;
+  };
 
   export type ProductCreateManyCategoryInput = {
-    id?: string
-    name: string
-    description: string
-    originalPrice: number
-    price: number
-    storeId: string
-  }
+    id?: string;
+    name: string;
+    description: string;
+    originalPrice: number;
+    price: number;
+    storeId: string;
+  };
 
   export type CategoryUpdateWithoutParentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput
-    subCategories?: CategoryUpdateManyWithoutParentNestedInput
-    products?: ProductUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    store?: StoreUpdateOneRequiredWithoutCategoriesNestedInput;
+    subCategories?: CategoryUpdateManyWithoutParentNestedInput;
+    products?: ProductUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateWithoutParentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput
-    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    subCategories?: CategoryUncheckedUpdateManyWithoutParentNestedInput;
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput;
+  };
 
   export type CategoryUncheckedUpdateManyWithoutParentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ProductUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    store?: StoreUpdateOneRequiredWithoutProductsNestedInput
-    reviews?: ReviewUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    store?: StoreUpdateOneRequiredWithoutProductsNestedInput;
+    reviews?: ReviewUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    storeId?: StringFieldUpdateOperationsInput | string
-    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    storeId?: StringFieldUpdateOperationsInput | string;
+    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
+  };
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    originalPrice?: FloatFieldUpdateOperationsInput | number
-    price?: FloatFieldUpdateOperationsInput | number
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    originalPrice?: FloatFieldUpdateOperationsInput | number;
+    price?: FloatFieldUpdateOperationsInput | number;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ReviewCreateManyProductInput = {
-    id?: string
-    content: string
-    rating: number
-    storeId: string
-  }
+    id?: string;
+    content: string;
+    rating: number;
+    storeId: string;
+  };
 
   export type ReviewUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    store?: StoreUpdateOneRequiredWithoutReviewsNestedInput
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    store?: StoreUpdateOneRequiredWithoutReviewsNestedInput;
+  };
 
   export type ReviewUncheckedUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   export type ReviewUncheckedUpdateManyWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    storeId?: StringFieldUpdateOperationsInput | string
-  }
-
-
+    id?: StringFieldUpdateOperationsInput | string;
+    content?: StringFieldUpdateOperationsInput | string;
+    rating?: IntFieldUpdateOperationsInput | number;
+    storeId?: StringFieldUpdateOperationsInput | string;
+  };
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
    */
 
   export type BatchPayload = {
-    count: number
-  }
+    count: number;
+  };
 
   /**
    * DMMF
    */
-  export const dmmf: runtime.BaseDMMF
+  export const dmmf: runtime.BaseDMMF;
 }

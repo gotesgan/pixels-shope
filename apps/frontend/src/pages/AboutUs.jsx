@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { fetchGraphQL } from "../lib/fetchGrap";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { fetchGraphQL } from '../lib/fetchGrap';
 
 const AboutPage = () => {
   const [aboutData, setAboutData] = useState(null);
@@ -23,10 +23,10 @@ const AboutPage = () => {
           }
         `;
         const response = await fetchGraphQL(hostname, ABOUT_QUERY);
-        console.log("Fetched About Page:", response?.aboutPage?.content);
+        console.log('Fetched About Page:', response?.aboutPage?.content);
         setAboutData(response?.aboutPage?.content || null);
       } catch (err) {
-        console.error("Error fetching about page:", err);
+        console.error('Error fetching about page:', err);
       }
     };
 
@@ -55,47 +55,46 @@ const AboutPage = () => {
             transition={{ duration: 1 }}
             className="md:w-1/2 relative"
           >
-        <img
-  src={`https://media.pixelperfects.in/${aboutData.story.image}`}
-  alt="Story"
-  className="rounded-xl shadow-2xl object-cover w-full max-h-[400px]"
-/>
-
+            <img
+              src={`https://media.pixelperfects.in/${aboutData.story.image}`}
+              alt="Story"
+              className="rounded-xl shadow-2xl object-cover w-full max-h-[400px]"
+            />
           </motion.div>
         </div>
       </div>
 
       {/* Milestones */}
-  <div className="max-w-7xl mx-auto px-6 py-20">
-  <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent">
-    Milestones
-  </h2>
-  <div className="space-y-8">
-    {aboutData.milestones.map((m, idx) => (
-      <motion.div
-        key={idx}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: idx * 0.1 }}
-        className="group relative bg-white border border-gray-200 hover:border-blue-300 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-        <div className="relative z-10">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
-            <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
-              {m.year}
-            </span>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
-            {m.event}
-          </h3>
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent">
+          Milestones
+        </h2>
+        <div className="space-y-8">
+          {aboutData.milestones.map((m, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="group relative bg-white border border-gray-200 hover:border-blue-300 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                  <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+                    {m.year}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
+                  {m.event}
+                </h3>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</div>
+      </div>
 
       {/* Team */}
       <div className="bg-gray-50 py-20">
@@ -110,11 +109,11 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 className="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center"
               >
-              <img
-  src={`https://media.pixelperfects.in/${member.image}`}
-  alt={member.name}
-  className="w-32 h-32 rounded-full object-cover mb-4 shadow-md"
-/>
+                <img
+                  src={`https://media.pixelperfects.in/${member.image}`}
+                  alt={member.name}
+                  className="w-32 h-32 rounded-full object-cover mb-4 shadow-md"
+                />
 
                 <h3 className="text-xl font-bold">{member.name}</h3>
                 <p className="text-gray-600">{member.role}</p>

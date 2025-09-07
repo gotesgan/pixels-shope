@@ -1,20 +1,20 @@
-"use client"
+'use client';
 
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
 export default function DomainSetup() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formData = {
-    aRecord: "62.72.58.149",
-    cnameRecord: "srv679222",
-  }
+    aRecord: '62.72.58.149',
+    cnameRecord: 'srv679222',
+  };
 
   const handleNext = () => {
     // Store DNS records for verification
-    localStorage.setItem("dnsRecords", JSON.stringify(formData))
-    navigate("/domain-verify")
-  }
+    localStorage.setItem('dnsRecords', JSON.stringify(formData));
+    navigate('/domain-verify');
+  };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md ">
@@ -24,27 +24,30 @@ export default function DomainSetup() {
         <h3 className="font-semibold text-blue-800 mb-2">Instructions:</h3>
         <ul className="text-blue-700 text-sm list-disc list-inside space-y-2">
           <li>
-            Log in to your domain provider’s control panel (e.g., GoDaddy, Namecheap, Google Domains).
+            Log in to your domain provider’s control panel (e.g., GoDaddy,
+            Namecheap, Google Domains).
           </li>
-          <li>
-            Locate the section to manage DNS or DNS Zone Records.
-          </li>
+          <li>Locate the section to manage DNS or DNS Zone Records.</li>
           <li>
             Add the following two DNS records exactly as shown below:
             <ul className="ml-4 list-decimal list-inside mt-1 space-y-1">
               <li>
-                <strong>A Record</strong>: Points your domain to our server using an IP address.
+                <strong>A Record</strong>: Points your domain to our server
+                using an IP address.
               </li>
               <li>
-                <strong>CNAME Record</strong>: Ensures that www.yourdomain.com redirects to the root domain.
+                <strong>CNAME Record</strong>: Ensures that www.yourdomain.com
+                redirects to the root domain.
               </li>
             </ul>
           </li>
           <li>
-            After you’ve added the records, click the <strong>Next</strong> button below to proceed with domain verification.
+            After you’ve added the records, click the <strong>Next</strong>{' '}
+            button below to proceed with domain verification.
           </li>
           <li>
-            Note: DNS changes might take a few minutes to propagate globally (up to 24 hours in rare cases).
+            Note: DNS changes might take a few minutes to propagate globally (up
+            to 24 hours in rare cases).
           </li>
         </ul>
       </div>
@@ -71,7 +74,9 @@ export default function DomainSetup() {
             className="p-2 border rounded bg-gray-100 text-center"
           />
         </div>
-        <p className="text-xs text-gray-500 mt-1">Points your domain to our server IP address</p>
+        <p className="text-xs text-gray-500 mt-1">
+          Points your domain to our server IP address
+        </p>
       </div>
 
       <div className="mb-4">
@@ -96,7 +101,9 @@ export default function DomainSetup() {
             className="p-2 border rounded bg-gray-100 text-center"
           />
         </div>
-        <p className="text-xs text-gray-500 mt-1">Redirects www to your root domain</p>
+        <p className="text-xs text-gray-500 mt-1">
+          Redirects www to your root domain
+        </p>
       </div>
 
       <button
@@ -106,5 +113,5 @@ export default function DomainSetup() {
         Next
       </button>
     </div>
-  )
+  );
 }

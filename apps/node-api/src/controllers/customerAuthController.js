@@ -1,9 +1,9 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { prisma } from "../db/db.js";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { prisma } from '../db/db.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 
 // Customer Registration
 export const registerCustomer = async (req, res) => {
@@ -13,7 +13,7 @@ export const registerCustomer = async (req, res) => {
 
     // Validate input
     if (!name || !email || !password || !phone) {
-      return res.status(400).json({ error: "All fields are required" });
+      return res.status(400).json({ error: 'All fields are required' });
     }
 
     // Check if customer already exists in this store
@@ -26,7 +26,7 @@ export const registerCustomer = async (req, res) => {
     if (existingCustomer) {
       return res
         .status(400)
-        .json({ error: "Email already registered in this store" });
+        .json({ error: 'Email already registered in this store' });
     }
 
     // Hash password
@@ -47,13 +47,13 @@ export const registerCustomer = async (req, res) => {
     const token = jwt.sign(
       { id: customer.id, email: customer.email, storeId },
       JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN }
+      { expiresIn: JWT_EXPIRES_IN },
     );
 
     res.status(201).json({ customer, token });
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Registration error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -63,7 +63,7 @@ export const loginCustomer = async (req, res) => {
     const storeId = req.store.id; // From middleware
 
     if (!email || !password) {
-      return res.status(400).json({ error: "Email and password required" });
+      return res.status(400).json({ error: 'Email and password required' });
     }
 
     // Find customer in current store
@@ -74,26 +74,26 @@ export const loginCustomer = async (req, res) => {
     });
 
     if (!customer) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Verify password
     const passwordValid = await bcrypt.compare(password, customer.password);
     if (!passwordValid) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Generate JWT
     const token = jwt.sign(
       { id: customer.id, email: customer.email, storeId },
       JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN }
+      { expiresIn: JWT_EXPIRES_IN },
     );
 
     res.json({ customer, token });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -117,7 +117,7 @@ export const createShippingAddress = async (req, res) => {
 
     res.status(201).json(shippingAddress);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create shipping address" });
+    res.status(500).json({ error: 'Failed to create shipping address' });
   }
 };
 
@@ -132,7 +132,7 @@ export const getShippingAddresses = async (req, res) => {
 
     res.json(addresses);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch shipping addresses" });
+    res.status(500).json({ error: 'Failed to fetch shipping addresses' });
   }
 };
 
@@ -151,12 +151,12 @@ export const updateShippingAddress = async (req, res) => {
     if (updated.count === 0) {
       return res
         .status(404)
-        .json({ error: "Shipping address not found or unauthorized" });
+        .json({ error: 'Shipping address not found or unauthorized' });
     }
 
-    res.json({ message: "Shipping address updated successfully" });
+    res.json({ message: 'Shipping address updated successfully' });
   } catch (error) {
-    res.status(500).json({ error: "Failed to update shipping address" });
+    res.status(500).json({ error: 'Failed to update shipping address' });
   }
 };
 
@@ -173,11 +173,11 @@ export const deleteShippingAddress = async (req, res) => {
     if (deleted.count === 0) {
       return res
         .status(404)
-        .json({ error: "Shipping address not found or unauthorized" });
+        .json({ error: 'Shipping address not found or unauthorized' });
     }
 
-    res.json({ message: "Shipping address deleted successfully" });
+    res.json({ message: 'Shipping address deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: "Failed to delete shipping address" });
+    res.status(500).json({ error: 'Failed to delete shipping address' });
   }
 };

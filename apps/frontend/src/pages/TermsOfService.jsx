@@ -1,8 +1,8 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import PolicyLayout from "../components/PolicyLayout";
-import { termsOfServiceData } from "./PolicyData";
-import { fetchGraphQL } from "../lib/fetchGrap";
+'use client';
+import React, { useState, useEffect } from 'react';
+import PolicyLayout from '../components/PolicyLayout';
+import { termsOfServiceData } from './PolicyData';
+import { fetchGraphQL } from '../lib/fetchGrap';
 
 const TermsOfService = () => {
   const [policyData, setPolicyData] = useState(termsOfServiceData);
@@ -37,12 +37,12 @@ const TermsOfService = () => {
         if (data?.legalDocument) {
           setPolicyData(data.legalDocument);
         } else {
-          throw new Error("Terms of service not found");
+          throw new Error('Terms of service not found');
         }
 
         setLoading(false);
       } catch (err) {
-        setError(err.message || "An error occurred");
+        setError(err.message || 'An error occurred');
         setLoading(false);
       }
     };
@@ -63,7 +63,7 @@ const TermsOfService = () => {
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           <p>Error loading terms of service: {error}</p>
-          <button 
+          <button
             className="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
             onClick={() => window.location.reload()}
           >
@@ -78,26 +78,31 @@ const TermsOfService = () => {
     <PolicyLayout title={policyData.title} lastUpdated={policyData.lastUpdated}>
       {policyData.sections.map((section, index) => (
         <div key={index} className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">{section.heading}</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            {section.heading}
+          </h2>
           <div
             className="mb-4"
             dangerouslySetInnerHTML={{ __html: section.content }}
           />
-          {section.listItems && (
-            section.isOrdered ? (
+          {section.listItems &&
+            (section.isOrdered ? (
               <ol className="list-decimal pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ol>
             ) : (
               <ul className="list-disc pl-6 mb-4">
                 {section.listItems.map((item, i) => (
-                  <li key={i} className="mb-2">{item}</li>
+                  <li key={i} className="mb-2">
+                    {item}
+                  </li>
                 ))}
               </ul>
-            )
-          )}
+            ))}
         </div>
       ))}
     </PolicyLayout>

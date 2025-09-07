@@ -1,23 +1,23 @@
 // Required Imports
-import { prisma } from "../db/db.js";
-import dns from "dns/promises";
-import fs from "fs";
-import os from "os";
-import path from "path";
-import { exec } from "child_process";
-import { promisify } from "util";
-import mediaHandler from "../utils/mediahandler.js";
+import { prisma } from '../db/db.js';
+import dns from 'dns/promises';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import mediaHandler from '../utils/mediahandler.js';
 
 const execAsync = promisify(exec);
 
 // Constants
-const NGINX_SITES_AVAILABLE = "/etc/nginx/sites-available";
-const NGINX_SITES_ENABLED = "/etc/nginx/sites-enabled";
+const NGINX_SITES_AVAILABLE = '/etc/nginx/sites-available';
+const NGINX_SITES_ENABLED = '/etc/nginx/sites-enabled';
 const NGINX_COMBINED_CONFIG = path.join(
   NGINX_SITES_AVAILABLE,
-  "multi-store.conf"
+  'multi-store.conf',
 );
-const NGINX_ENABLED_LINK = path.join(NGINX_SITES_ENABLED, "multi-store.conf");
+const NGINX_ENABLED_LINK = path.join(NGINX_SITES_ENABLED, 'multi-store.conf');
 const BACKEND_PORT = process.env.PORT;
 
 // Utility Functions
@@ -25,16 +25,16 @@ const getServerIPs = () => {
   const nets = os.networkInterfaces();
   return Object.values(nets)
     .flat()
-    .filter((i) => i.family === "IPv4" && !i.internal)
+    .filter((i) => i.family === 'IPv4' && !i.internal)
     .map((i) => i.address);
 };
 
 const generateSlug = (name) => {
-  return name.toLowerCase().replace(/\s+/g, "-");
+  return name.toLowerCase().replace(/\s+/g, '-');
 };
 
 const generateLocalDomain = (slug) => {
-  const localIP = "127.0.0.1"; // Or your LAN IP if you want to share in network
+  const localIP = '127.0.0.1'; // Or your LAN IP if you want to share in network
   return `${slug}.${localIP}.nip.io`;
 };
 
@@ -42,12 +42,12 @@ const generateSelfSignedCert = async (domain) => {
   const cmd = `sudo certbot --nginx -d ${domain} -d www.${domain} --non-interactive --agree-tos -m your-email@example.com --redirect`;
   try {
     const { stdout, stderr } = await execAsync(cmd);
-    console.log("Certbot output:", stdout);
-    if (stderr) console.error("Certbot error:", stderr);
+    console.log('Certbot output:', stdout);
+    if (stderr) console.error('Certbot error:', stderr);
     return { certPath: null, keyPath: null }; // Certbot manages certs internally
   } catch (err) {
-    console.error("Certbot failed:", err);
-    throw new Error("Failed to obtain SSL certificate with Certbot");
+    console.error('Certbot failed:', err);
+    throw new Error('Failed to obtain SSL certificate with Certbot');
   }
 };
 
@@ -100,9 +100,9 @@ server {
 
 const reloadNginx = async () => {
   try {
-    await execAsync("nginx -s reload");
+    await execAsync('nginx -s reload');
   } catch (err) {
-    throw new Error("Failed to reload NGINX");
+    throw new Error('Failed to reload NGINX');
   }
 };
 
@@ -112,7 +112,7 @@ export const createStore = async (req, res) => {
   const file = req.file;
 
   if (!name) {
-    return res.status(400).json({ error: "Store name is required" });
+    return res.status(400).json({ error: 'Store name is required' });
   }
 
   try {
@@ -123,7 +123,7 @@ export const createStore = async (req, res) => {
     if (existingStore) {
       return res
         .status(400)
-        .json({ error: "Store with this name already exists on localhost" });
+        .json({ error: 'Store with this name already exists on localhost' });
     }
 
     let uploadFilename = null;
@@ -160,7 +160,7 @@ export const createStore = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Store created successfully",
+      message: 'Store created successfully',
       store: {
         id: result.store.id,
         domain: result.store.domain,
@@ -171,8 +171,8 @@ export const createStore = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Store creation failed:", err);
-    res.status(500).json({ error: "Server error" });
+    console.error('Store creation failed:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 };
 
@@ -180,14 +180,14 @@ export const createStore = async (req, res) => {
 export const verifyAndSetupDomain = async (req, res) => {
   let { domain } = req.body;
   if (!domain) {
-    return res.status(400).json({ error: "Domain is required" });
+    return res.status(400).json({ error: 'Domain is required' });
   }
 
   try {
     domain = domain
       .toLowerCase()
       .trim()
-      .replace(/^www\./, "");
+      .replace(/^www\./, '');
     const serverIPs = getServerIPs();
 
     const cnameRecords = await dns.resolveCname(domain).catch(() => []);
@@ -205,7 +205,7 @@ export const verifyAndSetupDomain = async (req, res) => {
       where: { userId: req.user.id },
     });
     if (!store) {
-      return res.status(404).json({ error: "Store not found for user" });
+      return res.status(404).json({ error: 'Store not found for user' });
     }
 
     await prisma.store.update({ where: { id: store.id }, data: { domain } });
@@ -215,14 +215,14 @@ export const verifyAndSetupDomain = async (req, res) => {
     await reloadNginx();
 
     res.status(200).json({
-      message: "Domain verified, configured, and SSL installed.",
+      message: 'Domain verified, configured, and SSL installed.',
       domain,
       configPath: confPath,
       storeId: store.id,
     });
   } catch (err) {
-    console.error("Domain setup failed:", err);
-    const status = err.message.includes("Domain does not point") ? 400 : 500;
+    console.error('Domain setup failed:', err);
+    const status = err.message.includes('Domain does not point') ? 400 : 500;
     res.status(status).json({ error: err.message });
   }
 };

@@ -1,17 +1,17 @@
-"use client"
-import { useNavigate } from "react-router-dom"
+'use client';
+import { useNavigate } from 'react-router-dom';
 
 export default function DomainQuestion() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleNoDomain = () => {
     // Redirect to admin.bizonance.com
-    window.location.href = "https://admin.bizonance.com"
-  }
+    window.location.href = 'https://admin.bizonance.com';
+  };
 
   const handleHasDomain = () => {
-    navigate("/domain-setup")
-  }
+    navigate('/domain-setup');
+  };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-16">
@@ -36,5 +36,5 @@ export default function DomainQuestion() {
         </div>
       </div>
     </div>
-  )
+  );
 }

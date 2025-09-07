@@ -1,4 +1,4 @@
-import { prisma } from "../db/db.js";
+import { prisma } from '../db/db.js';
 
 // Create PhonePe Config
 export const createPhonePe = async (req, res) => {
@@ -13,7 +13,7 @@ export const createPhonePe = async (req, res) => {
 
     if (existingConfig) {
       return res.status(400).json({
-        message: "PhonePe configuration already exists for this store",
+        message: 'PhonePe configuration already exists for this store',
         success: false,
       });
     }
@@ -29,14 +29,14 @@ export const createPhonePe = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "PhonePe configuration created successfully",
+      message: 'PhonePe configuration created successfully',
       success: true,
       data: phonePeConfig,
     });
   } catch (error) {
-    console.error("Error creating PhonePe configuration:", error);
+    console.error('Error creating PhonePe configuration:', error);
     res.status(500).json({
-      message: "Failed to create PhonePe configuration",
+      message: 'Failed to create PhonePe configuration',
       success: false,
       error: error.message,
     });
@@ -54,20 +54,20 @@ export const getPhonePe = async (req, res) => {
 
     if (!phonePeConfig) {
       return res.status(404).json({
-        message: "PhonePe configuration not found for this store",
+        message: 'PhonePe configuration not found for this store',
         success: false,
       });
     }
 
     res.status(200).json({
-      message: "PhonePe configuration fetched successfully",
+      message: 'PhonePe configuration fetched successfully',
       success: true,
       data: phonePeConfig,
     });
   } catch (error) {
-    console.error("Error fetching PhonePe configuration:", error);
+    console.error('Error fetching PhonePe configuration:', error);
     res.status(500).json({
-      message: "Failed to fetch PhonePe configuration",
+      message: 'Failed to fetch PhonePe configuration',
       success: false,
       error: error.message,
     });
@@ -87,7 +87,7 @@ export const updatePhonePe = async (req, res) => {
 
     if (!existingConfig) {
       return res.status(404).json({
-        message: "PhonePe configuration not found for this store",
+        message: 'PhonePe configuration not found for this store',
         success: false,
       });
     }
@@ -103,14 +103,14 @@ export const updatePhonePe = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "PhonePe configuration updated successfully",
+      message: 'PhonePe configuration updated successfully',
       success: true,
       data: updatedConfig,
     });
   } catch (error) {
-    console.error("Error updating PhonePe configuration:", error);
+    console.error('Error updating PhonePe configuration:', error);
     res.status(500).json({
-      message: "Failed to update PhonePe configuration",
+      message: 'Failed to update PhonePe configuration',
       success: false,
       error: error.message,
     });
@@ -129,7 +129,7 @@ export const deletePhonePe = async (req, res) => {
 
     if (!existingConfig) {
       return res.status(404).json({
-        message: "PhonePe configuration not found for this store",
+        message: 'PhonePe configuration not found for this store',
         success: false,
       });
     }
@@ -139,13 +139,13 @@ export const deletePhonePe = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "PhonePe configuration deleted successfully",
+      message: 'PhonePe configuration deleted successfully',
       success: true,
     });
   } catch (error) {
-    console.error("Error deleting PhonePe configuration:", error);
+    console.error('Error deleting PhonePe configuration:', error);
     res.status(500).json({
-      message: "Failed to delete PhonePe configuration",
+      message: 'Failed to delete PhonePe configuration',
       success: false,
       error: error.message,
     });
@@ -163,7 +163,7 @@ export const togglePhonePeStatus = async (req, res) => {
 
     if (!existingConfig) {
       return res.status(404).json({
-        message: "PhonePe configuration not found for this store",
+        message: 'PhonePe configuration not found for this store',
         success: false,
       });
     }
@@ -177,15 +177,15 @@ export const togglePhonePeStatus = async (req, res) => {
 
     res.status(200).json({
       message: `PhonePe configuration ${
-        updatedConfig.isActive ? "activated" : "deactivated"
+        updatedConfig.isActive ? 'activated' : 'deactivated'
       } successfully`,
       success: true,
       data: updatedConfig,
     });
   } catch (error) {
-    console.error("Error toggling PhonePe configuration status:", error);
+    console.error('Error toggling PhonePe configuration status:', error);
     res.status(500).json({
-      message: "Failed to toggle PhonePe status",
+      message: 'Failed to toggle PhonePe status',
       success: false,
       error: error.message,
     });

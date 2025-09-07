@@ -122,7 +122,7 @@ const resolvers = {
     contactSubmissions: async (
       _,
       { page = 1, limit = 10, status },
-      context
+      context,
     ) => {
       try {
         const where = {

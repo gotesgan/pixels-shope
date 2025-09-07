@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema(
     specifications: [mongoose.Schema.Types.Mixed], // ✅ Array of key-value or object specs
     featuresStrip: [String], // ✅ Short feature highlights
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Store-scoped unique slugs

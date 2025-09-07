@@ -18,7 +18,7 @@ export const CreateHeroSection = async (req, res) => {
     });
 
     const hasStoreAccess = userExist?.stores.some(
-      (store) => store.id === storeId
+      (store) => store.id === storeId,
     );
 
     if (!hasStoreAccess) {
@@ -98,7 +98,7 @@ export const deleteHeroSection = async (req, res) => {
   const storeId = req.user.storeId;
 
   console.log(
-    `[deleteHeroSection] Request received for heroSection id: ${id}, storeId: ${storeId}`
+    `[deleteHeroSection] Request received for heroSection id: ${id}, storeId: ${storeId}`,
   );
 
   try {
@@ -112,7 +112,7 @@ export const deleteHeroSection = async (req, res) => {
 
     if (!heroSection || heroSection.storeId !== storeId) {
       console.warn(
-        `[deleteHeroSection] Hero section not found or access denied for storeId: ${storeId}`
+        `[deleteHeroSection] Hero section not found or access denied for storeId: ${storeId}`,
       );
       return res.status(404).json({
         message: 'Hero Section not found or access denied',
@@ -123,7 +123,7 @@ export const deleteHeroSection = async (req, res) => {
     // Delete associated media if it exists
     if (heroSection.media) {
       console.log(
-        `[deleteHeroSection] Deleting associated media id: ${heroSection.media.id}`
+        `[deleteHeroSection] Deleting associated media id: ${heroSection.media.id}`,
       );
       await prisma.media.delete({
         where: { id: heroSection.media.id },
@@ -135,14 +135,14 @@ export const deleteHeroSection = async (req, res) => {
 
     // Delete the hero section itself
     console.log(
-      `[deleteHeroSection] Deleting heroSection id: ${heroSection.id}`
+      `[deleteHeroSection] Deleting heroSection id: ${heroSection.id}`,
     );
     const deletedHeroSection = await prisma.heroSection.delete({
       where: { id }, // string ID
     });
     console.log(
       '[deleteHeroSection] Hero section deleted successfully:',
-      deletedHeroSection
+      deletedHeroSection,
     );
 
     res.json({

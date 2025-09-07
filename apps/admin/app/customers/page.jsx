@@ -1,90 +1,100 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Search, Filter, Eye, Mail, Phone } from "lucide-react"
-import Navbar from "../components/navbar"
-import Sidebar from "../components/sidebar"
+import { useState } from 'react';
+import { Search, Filter, Eye, Mail, Phone } from 'lucide-react';
+import Navbar from '../components/navbar';
+import Sidebar from '../components/sidebar';
 
 export default function CustomersPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const [customers] = useState([
     {
       id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+91 9876543210",
+      name: 'John Doe',
+      email: 'john@example.com',
+      phone: '+91 9876543210',
       orders: 5,
       totalSpent: 12450,
-      joinDate: "2023-12-15",
-      status: "Active",
+      joinDate: '2023-12-15',
+      status: 'Active',
     },
     {
       id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "+91 9876543211",
+      name: 'Jane Smith',
+      email: 'jane@example.com',
+      phone: '+91 9876543211',
       orders: 3,
       totalSpent: 8900,
-      joinDate: "2024-01-02",
-      status: "Active",
+      joinDate: '2024-01-02',
+      status: 'Active',
     },
     {
       id: 3,
-      name: "Mike Johnson",
-      email: "mike@example.com",
-      phone: "+91 9876543212",
+      name: 'Mike Johnson',
+      email: 'mike@example.com',
+      phone: '+91 9876543212',
       orders: 8,
       totalSpent: 25600,
-      joinDate: "2023-11-20",
-      status: "VIP",
+      joinDate: '2023-11-20',
+      status: 'VIP',
     },
     {
       id: 4,
-      name: "Sarah Wilson",
-      email: "sarah@example.com",
-      phone: "+91 9876543213",
+      name: 'Sarah Wilson',
+      email: 'sarah@example.com',
+      phone: '+91 9876543213',
       orders: 1,
       totalSpent: 1200,
-      joinDate: "2024-01-10",
-      status: "New",
+      joinDate: '2024-01-10',
+      status: 'New',
     },
-  ])
+  ]);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "VIP":
-        return "bg-purple-100 text-purple-800"
-      case "Active":
-        return "bg-green-100 text-green-800"
-      case "New":
-        return "bg-blue-100 text-blue-800"
+      case 'VIP':
+        return 'bg-purple-100 text-purple-800';
+      case 'Active':
+        return 'bg-green-100 text-green-800';
+      case 'New':
+        return 'bg-blue-100 text-blue-800';
       default:
-        return "bg-gray-100 text-gray-800"
+        return 'bg-gray-100 text-gray-800';
     }
-  }
+  };
 
   const filteredCustomers = customers.filter(
     (customer) =>
       customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.phone.includes(searchTerm),
-  )
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Sidebar isOpen={sidebarOpen} />
-      <Navbar toggleSidebar={toggleSidebar} storeName="My Store" sidebarOpen={sidebarOpen} />
-      <main className={`transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-16"} pt-16`}>
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        storeName="My Store"
+        sidebarOpen={sidebarOpen}
+      />
+      <main
+        className={`transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'} pt-16`}
+      >
         <div className="p-6">
           <div className="max-w-7xl mx-auto">
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-8">Customer Management</h1>
-              <p className="text-gray-600">View and manage customer information</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                Customer Management
+              </h1>
+              <p className="text-gray-600">
+                View and manage customer information
+              </p>
             </div>
             <div className="space-y-6 mt-8">
               {/* Stats */}
@@ -102,8 +112,12 @@ export default function CustomersPage() {
                   <div className="text-sm text-purple-600">VIP Customers</div>
                 </div>
                 <div className="bg-orange-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-orange-700">₹48,150</div>
-                  <div className="text-sm text-orange-600">Avg. Order Value</div>
+                  <div className="text-2xl font-bold text-orange-700">
+                    ₹48,150
+                  </div>
+                  <div className="text-sm text-orange-600">
+                    Avg. Order Value
+                  </div>
                 </div>
               </div>
 
@@ -160,21 +174,37 @@ export default function CustomersPage() {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center">
-                                <span className="text-white font-medium">{customer.name.charAt(0)}</span>
+                                <span className="text-white font-medium">
+                                  {customer.name.charAt(0)}
+                                </span>
                               </div>
                               <div className="ml-4">
-                                <div className="text-sm font-medium text-gray-900">{customer.name}</div>
-                                <div className="text-sm text-gray-500">ID: {customer.id}</div>
+                                <div className="text-sm font-medium text-gray-900">
+                                  {customer.name}
+                                </div>
+                                <div className="text-sm text-gray-500">
+                                  ID: {customer.id}
+                                </div>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">{customer.email}</div>
-                            <div className="text-sm text-gray-500">{customer.phone}</div>
+                            <div className="text-sm text-gray-900">
+                              {customer.email}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {customer.phone}
+                            </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{customer.orders}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{customer.totalSpent}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{customer.joinDate}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {customer.orders}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ₹{customer.totalSpent}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {customer.joinDate}
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
                               className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(customer.status)}`}
@@ -206,5 +236,5 @@ export default function CustomersPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

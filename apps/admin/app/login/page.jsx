@@ -1,31 +1,31 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Store, Eye, EyeOff, LogIn } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useState } from 'react';
+import { Store, Eye, EyeOff, LogIn } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
-  const router = useRouter()
+    email: '',
+    password: '',
+  });
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    console.log("Login attempt:", formData)
+    e.preventDefault();
+    console.log('Login attempt:', formData);
     // Add authentication logic here
     // For now, just redirect to dashboard
-    router.push("/")
-  }
+    router.push('/');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -36,13 +36,20 @@ export default function LoginPage() {
               <Store className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your store</h2>
-          <p className="mt-2 text-center text-sm text-gray-600">Access your e-commerce dashboard</p>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in to your store
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Access your e-commerce dashboard
+          </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <input
@@ -57,14 +64,17 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="mt-1 relative">
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={formData.password}
                   onChange={handleInputChange}
@@ -76,7 +86,11 @@ export default function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
                 </button>
               </div>
             </div>
@@ -90,13 +104,19 @@ export default function LoginPage() {
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 Remember me
               </label>
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+              <a
+                href="#"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              >
                 Forgot your password?
               </a>
             </div>
@@ -116,5 +136,5 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
-  )
+  );
 }

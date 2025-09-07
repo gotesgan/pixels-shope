@@ -1,4 +1,4 @@
-import SectionCard from "../components/section-card"
+import SectionCard from '../components/section-card';
 import {
   ImageIcon,
   Package,
@@ -16,119 +16,120 @@ import {
   TrendingDown,
   DollarSign,
   Eye,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function Dashboard() {
   const sections = [
     {
-      title: "Hero Section",
-      description: "Manage your homepage hero images and content to attract customers",
+      title: 'Hero Section',
+      description:
+        'Manage your homepage hero images and content to attract customers',
       icon: ImageIcon,
-      color: "bg-gradient-to-r from-purple-500 to-pink-500",
-      stats: "3 Active Images",
-      actions: ["Edit", "Add New", "Preview"],
-      path: "/hero",
+      color: 'bg-gradient-to-r from-purple-500 to-pink-500',
+      stats: '3 Active Images',
+      actions: ['Edit', 'Add New', 'Preview'],
+      path: '/hero',
     },
     {
-      title: "Products",
-      description: "Add, edit, and manage your complete product catalog",
+      title: 'Products',
+      description: 'Add, edit, and manage your complete product catalog',
       icon: Package,
-      color: "bg-gradient-to-r from-blue-500 to-cyan-500",
-      stats: "124 Products",
-      actions: ["View All", "Add Product", "Manage"],
-      path: "/products",
+      color: 'bg-gradient-to-r from-blue-500 to-cyan-500',
+      stats: '124 Products',
+      actions: ['View All', 'Add Product', 'Manage'],
+      path: '/products',
     },
     {
-      title: "Categories",
-      description: "Organize products with categories and subcategories",
+      title: 'Categories',
+      description: 'Organize products with categories and subcategories',
       icon: LayoutGrid,
-      color: "bg-gradient-to-r from-green-500 to-emerald-500",
-      stats: "12 Categories",
-      actions: ["View All", "Add Category", "Edit"],
-      path: "/categories",
+      color: 'bg-gradient-to-r from-green-500 to-emerald-500',
+      stats: '12 Categories',
+      actions: ['View All', 'Add Category', 'Edit'],
+      path: '/categories',
     },
     {
-      title: "About Page",
-      description: "Tell your story and showcase company information",
+      title: 'About Page',
+      description: 'Tell your story and showcase company information',
       icon: Info,
-      color: "bg-gradient-to-r from-indigo-500 to-purple-500",
-      stats: "5 Sections",
-      actions: ["Edit Content", "Add Section", "Preview"],
-      path: "/about",
+      color: 'bg-gradient-to-r from-indigo-500 to-purple-500',
+      stats: '5 Sections',
+      actions: ['Edit Content', 'Add Section', 'Preview'],
+      path: '/about',
     },
     {
-      title: "Contact Page",
-      description: "Manage contact information and customer inquiries",
+      title: 'Contact Page',
+      description: 'Manage contact information and customer inquiries',
       icon: Phone,
-      color: "bg-gradient-to-r from-teal-500 to-cyan-500",
-      stats: "23 New Messages",
-      actions: ["View Messages", "Edit Info", "Settings"],
-      path: "/contact",
+      color: 'bg-gradient-to-r from-teal-500 to-cyan-500',
+      stats: '23 New Messages',
+      actions: ['View Messages', 'Edit Info', 'Settings'],
+      path: '/contact',
     },
     {
-      title: "FAQ",
-      description: "Frequently asked questions and helpful answers",
+      title: 'FAQ',
+      description: 'Frequently asked questions and helpful answers',
       icon: HelpCircle,
-      color: "bg-gradient-to-r from-orange-500 to-red-500",
-      stats: "18 Questions",
-      actions: ["View All", "Add FAQ", "Edit"],
-      path: "/faq",
+      color: 'bg-gradient-to-r from-orange-500 to-red-500',
+      stats: '18 Questions',
+      actions: ['View All', 'Add FAQ', 'Edit'],
+      path: '/faq',
     },
     {
-      title: "Policies",
-      description: "Legal documents: Terms, Privacy, and Return policies",
+      title: 'Policies',
+      description: 'Legal documents: Terms, Privacy, and Return policies',
       icon: FileText,
-      color: "bg-gradient-to-r from-red-500 to-pink-500",
-      stats: "3 Documents",
-      actions: ["Terms", "Privacy", "Returns"],
-      path: "/policies",
+      color: 'bg-gradient-to-r from-red-500 to-pink-500',
+      stats: '3 Documents',
+      actions: ['Terms', 'Privacy', 'Returns'],
+      path: '/policies',
     },
     {
-      title: "Payment Settings",
-      description: "Configure PhonePe and other payment methods",
+      title: 'Payment Settings',
+      description: 'Configure PhonePe and other payment methods',
       icon: CreditCard,
-      color: "bg-gradient-to-r from-yellow-500 to-orange-500",
-      stats: "PhonePe Active",
-      actions: ["Configure", "Test", "View Logs"],
-      path: "/payments",
+      color: 'bg-gradient-to-r from-yellow-500 to-orange-500',
+      stats: 'PhonePe Active',
+      actions: ['Configure', 'Test', 'View Logs'],
+      path: '/payments',
     },
     {
-      title: "Orders",
-      description: "View and manage all customer orders",
+      title: 'Orders',
+      description: 'View and manage all customer orders',
       icon: ShoppingCart,
-      color: "bg-gradient-to-r from-pink-500 to-rose-500",
-      stats: "45 Orders",
-      actions: ["View All", "Pending", "Completed"],
-      path: "/orders",
+      color: 'bg-gradient-to-r from-pink-500 to-rose-500',
+      stats: '45 Orders',
+      actions: ['View All', 'Pending', 'Completed'],
+      path: '/orders',
     },
     {
-      title: "Customers",
-      description: "Manage customer accounts and relationships",
+      title: 'Customers',
+      description: 'Manage customer accounts and relationships',
       icon: Users,
-      color: "bg-gradient-to-r from-cyan-500 to-blue-500",
-      stats: "89 Customers",
-      actions: ["View All", "Add Customer", "Export"],
-      path: "/customers",
+      color: 'bg-gradient-to-r from-cyan-500 to-blue-500',
+      stats: '89 Customers',
+      actions: ['View All', 'Add Customer', 'Export'],
+      path: '/customers',
     },
     {
-      title: "Analytics",
-      description: "View sales reports and performance metrics",
+      title: 'Analytics',
+      description: 'View sales reports and performance metrics',
       icon: BarChart3,
-      color: "bg-gradient-to-r from-violet-500 to-purple-500",
-      stats: "Last 30 days",
-      actions: ["Sales Report", "Traffic", "Revenue"],
-      path: "/analytics",
+      color: 'bg-gradient-to-r from-violet-500 to-purple-500',
+      stats: 'Last 30 days',
+      actions: ['Sales Report', 'Traffic', 'Revenue'],
+      path: '/analytics',
     },
     {
-      title: "Store Settings",
-      description: "Configure store information and preferences",
+      title: 'Store Settings',
+      description: 'Configure store information and preferences',
       icon: Settings,
-      color: "bg-gradient-to-r from-gray-500 to-slate-500",
-      stats: "Store Active",
-      actions: ["General", "Appearance", "Advanced"],
-      path: "/settings",
+      color: 'bg-gradient-to-r from-gray-500 to-slate-500',
+      stats: 'Store Active',
+      actions: ['General', 'Appearance', 'Advanced'],
+      path: '/settings',
     },
-  ]
+  ];
 
   return (
     <div className="space-y-8">
@@ -137,7 +138,9 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">Welcome back! 👋</h1>
-            <p className="text-blue-100 text-lg">Manage your e-commerce store from one powerful dashboard</p>
+            <p className="text-blue-100 text-lg">
+              Manage your e-commerce store from one powerful dashboard
+            </p>
           </div>
           <div className="hidden md:block">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
@@ -153,7 +156,9 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-3xl font-bold text-blue-700">124</div>
-              <div className="text-sm text-gray-600 font-medium">Total Products</div>
+              <div className="text-sm text-gray-600 font-medium">
+                Total Products
+              </div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+12% this month</span>
@@ -169,7 +174,9 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-3xl font-bold text-green-700">45</div>
-              <div className="text-sm text-gray-600 font-medium">Active Orders</div>
+              <div className="text-sm text-gray-600 font-medium">
+                Active Orders
+              </div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+8% this week</span>
@@ -185,7 +192,9 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-3xl font-bold text-purple-700">89</div>
-              <div className="text-sm text-gray-600 font-medium">Total Customers</div>
+              <div className="text-sm text-gray-600 font-medium">
+                Total Customers
+              </div>
               <div className="flex items-center mt-2 text-red-600">
                 <TrendingDown className="h-4 w-4 mr-1" />
                 <span className="text-sm">-2% this month</span>
@@ -201,7 +210,9 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-3xl font-bold text-orange-700">₹12,450</div>
-              <div className="text-sm text-gray-600 font-medium">Monthly Revenue</div>
+              <div className="text-sm text-gray-600 font-medium">
+                Monthly Revenue
+              </div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+15% this month</span>
@@ -218,7 +229,9 @@ export default function Dashboard() {
       <div>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Store Management</h2>
-          <div className="text-sm text-gray-500">Click any section to manage</div>
+          <div className="text-sm text-gray-500">
+            Click any section to manage
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -228,5 +241,5 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
