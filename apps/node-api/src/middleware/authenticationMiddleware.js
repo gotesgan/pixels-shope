@@ -1,24 +1,24 @@
-import jwt from "jsonwebtoken";
-import { prisma } from "../db/db.js";
+import jwt from 'jsonwebtoken';
+import { prisma } from '../db/db.js';
 
 // Main authentication middleware
 export const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
-      error: "Authorization token required",
+      error: 'Authorization token required',
       success: false,
     });
   }
 
-  const token = authHeader.split(" ")[1];
-  console.log("Token:", token);
+  const token = authHeader.split(' ')[1];
+  console.log('Token:', token);
   try {
     // Decode JWT
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded);
+    console.log('Decoded token:', decoded);
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
       include: { stores: { select: { id: true } } },
@@ -26,7 +26,7 @@ export const authenticate = async (req, res, next) => {
 
     if (!user) {
       return res.status(401).json({
-        error: "Invalid authentication token",
+        error: 'Invalid authentication token',
         success: false,
       });
     }
@@ -38,13 +38,13 @@ export const authenticate = async (req, res, next) => {
       const validStore = user.stores.some((store) => store.id === tokenStoreId);
       if (!validStore) {
         return res.status(403).json({
-          error: "Invalid store access",
+          error: 'Invalid store access',
           success: false,
         });
       }
     } else {
       // No storeId provided => likely the user has not created or selected a store yet
-      console.log("No storeId in token — assuming store not created yet");
+      console.log('No storeId in token — assuming store not created yet');
     }
 
     // Attach user data to request
@@ -54,13 +54,13 @@ export const authenticate = async (req, res, next) => {
       storeId: tokenStoreId || null, // can be null for store creation flow
     };
 
-    req.store = tokenStoreId ? { Id: tokenStoreId } : null;
+    req.store = tokenStoreId ? { id: tokenStoreId } : null;
 
     next();
   } catch (error) {
-    console.error("Authentication error:", error);
+    console.error('Authentication error:', error);
     return res.status(401).json({
-      error: "Invalid or expired token",
+      error: 'Invalid or expired token',
       success: false,
     });
   }
@@ -70,7 +70,7 @@ export const authenticate = async (req, res, next) => {
 export const authorizeStoreAccess = (req, res, next) => {
   if (!req.user.storeId) {
     return res.status(403).json({
-      error: "Store access required for this operation",
+      error: 'Store access required for this operation',
       success: false,
     });
   }

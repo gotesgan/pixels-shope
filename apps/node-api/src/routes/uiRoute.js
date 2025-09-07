@@ -1,18 +1,22 @@
-import express from "express";
-import upload from "../middleware/multerConfig.js";
-import { CreateHeroSection } from "../controllers/heroSectionContoler.js";
-import storeIdentifctionMiddleware from "../middleware/storeIdentifctionMiddleware.js";
+import express from 'express';
+import upload from '../middleware/multerConfig.js';
+import {
+  CreateHeroSection,
+  deleteHeroSection,
+  fetchHerosection,
+} from '../controllers/heroSectionContoler.js';
+import storeIdentifctionMiddleware from '../middleware/storeIdentifctionMiddleware.js';
 import {
   createLegalDocument,
   getLegalDocument,
   updateLegalDocument,
   deleteLegalDocument,
   listLegalDocuments,
-} from "../controllers/policyController.js";
+} from '../controllers/policyController.js';
 import {
-  createAboutPage,
+  upsertAboutPage,
   fetchAboutPage,
-} from "../controllers/AboutPageConttoler.js";
+} from '../controllers/AboutPageConttoler.js';
 import {
   createContactPage,
   fetchContactPage,
@@ -20,11 +24,11 @@ import {
   updateSubmissionStatus,
   fetchSubmissions,
   updateContactPage,
-} from "../controllers/contactController.js";
+} from '../controllers/contactController.js';
 import {
   authenticate,
   authorizeStoreAccess,
-} from "../middleware/authenticationMiddleware.js";
+} from '../middleware/authenticationMiddleware.js';
 
 const router = express.Router();
 import {
@@ -32,40 +36,35 @@ import {
   updateBlog,
   deleteBlog,
   getBlogById,
-} from "../controllers/BlogControllers.js";
-import {
-  getFaq,
-  createFaq,
-  updateFaq,
-  deleteFaq,
-} from "../controllers/faqControllers.js";
+} from '../controllers/BlogControllers.js';
+import { getFaq, createFaq, deleteFaq } from '../controllers/faqControllers.js';
 // Legal Document (Policy) Routes
 router.post(
-  "/legal-documents",
+  '/legal-documents',
   authenticate,
   authorizeStoreAccess,
   createLegalDocument
 );
 router.get(
-  "/legal-documents/:type",
+  '/legal-documents/:type',
   authenticate,
   authorizeStoreAccess,
   getLegalDocument
 );
 router.put(
-  "/legal-documents/:id",
+  '/legal-documents/:id',
   authenticate,
   authorizeStoreAccess,
   updateLegalDocument
 );
 router.delete(
-  "/legal-documents/:id",
+  '/legal-documents/:id',
   authenticate,
   authorizeStoreAccess,
   deleteLegalDocument
 );
 router.get(
-  "/legal-documents",
+  '/legal-documents',
   authenticate,
   authorizeStoreAccess,
   listLegalDocuments
@@ -74,39 +73,39 @@ router.get(
 // About Page Routes
 // In uiRoute.js
 router.post(
-  "/about-page",
+  '/about-page',
   upload.any(),
   authenticate,
   authorizeStoreAccess,
-  createAboutPage
+  upsertAboutPage
 );
-router.get("/about-page", authenticate, authorizeStoreAccess, fetchAboutPage);
+router.get('/about-page', authenticate, authorizeStoreAccess, fetchAboutPage);
 
 // Contact Page Routes
 router.post(
-  "/contact-page",
+  '/contact-page',
   authenticate,
   authorizeStoreAccess,
   createContactPage
 );
-router.get("/contact-page", storeIdentifctionMiddleware, fetchContactPage);
+router.get('/contact-page', storeIdentifctionMiddleware, fetchContactPage);
 router.put(
-  "/contact-page",
+  '/contact-page',
   authenticate,
   authorizeStoreAccess,
   updateContactPage
 );
 
 // Contact form Submission Routes
-router.post("/contact-submissions", authenticate, createContactSubmission);
+router.post('/contact-submissions', authenticate, createContactSubmission);
 router.put(
-  "/contact-submissions/:id/status",
+  '/contact-submissions/:id/status',
   authenticate,
   authorizeStoreAccess,
   updateSubmissionStatus
 );
 router.get(
-  "/contact-submissions",
+  '/contact-submissions',
   authenticate,
   authorizeStoreAccess,
   fetchSubmissions
@@ -114,28 +113,41 @@ router.get(
 
 // hero section routes
 router.post(
-  "/create-hero-section",
+  '/create-hero-section',
   authenticate,
   authorizeStoreAccess,
-  upload.single("file"),
+  upload.single('file'),
   CreateHeroSection
 );
+router.get(
+  '/create-hero-section',
+  authenticate,
+  authorizeStoreAccess,
 
+  fetchHerosection
+);
+router.delete(
+  '/create-hero-section/:id',
+  authenticate,
+  authorizeStoreAccess,
+
+  deleteHeroSection
+);
 // Blog Routes
-router.post("/blogs", authenticate, authorizeStoreAccess, createBlog);
-router.get("/blogs/:id", storeIdentifctionMiddleware, getBlogById);
+router.post('/blogs', authenticate, authorizeStoreAccess, createBlog);
+router.get('/blogs/:id', storeIdentifctionMiddleware, getBlogById);
 
-router.put("/blogs/:id", authenticate, authorizeStoreAccess, updateBlog);
+router.put('/blogs/:id', authenticate, authorizeStoreAccess, updateBlog);
 
-router.delete("/blogs/:id", authenticate, authorizeStoreAccess, deleteBlog);
+router.delete('/blogs/:id', authenticate, authorizeStoreAccess, deleteBlog);
 
 // FAQ Routes
-router.get("/faqs", authenticate, authorizeStoreAccess, getFaq);
+router.get('/faqs', authenticate, authorizeStoreAccess, getFaq);
 
-router.post("/faqs", authenticate, authorizeStoreAccess, createFaq);
+router.post('/faqs', authenticate, authorizeStoreAccess, createFaq);
 
-router.put("/faqs/:id", authenticate, authorizeStoreAccess, updateFaq);
+// router.put('/faqs/:id', authenticate, authorizeStoreAccess, updateFaq);
 
-router.delete("/faqs/:id", authenticate, authorizeStoreAccess, deleteFaq);
+router.delete('/faqs/:id', authenticate, authorizeStoreAccess, deleteFaq);
 
 export default router;

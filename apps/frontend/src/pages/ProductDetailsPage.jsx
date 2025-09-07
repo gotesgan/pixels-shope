@@ -8,7 +8,7 @@ import { fetchGraphQL } from "../lib/fetchGrap"
 import { useCart } from "../context/CartContext"
 
 // Base URL for images
-const IMAGE_BASE_URL = "https://media.bizonance.in/api/v1/image/download/473d09b1-bd47-4297-9b0c-f79e6a7c9fc8/META/"
+const IMAGE_BASE_URL = "https://media.pixelperfects.in/"
 
 // Star Rating Component
 const StarRating = ({ rating }) => {
@@ -97,7 +97,7 @@ export default function ProductDetailsPage() {
       try {
         // Get hostname from window location
         const host = window.location.hostname
-        const response = await fetch(`http://${host}:3000/api/v1/products/${slug}`)
+        const response = await fetch(`http://${host}:3001/api/v1/products/${slug}`)
         
         if (!response.ok) {
           throw new Error('Product not found')
@@ -136,7 +136,7 @@ export default function ProductDetailsPage() {
       try {
         // Get hostname from window location
         const host = window.location.hostname
-        const response = await fetch(`http://${host}:3000/api/v1/products?limit=5&category=${slug.split('-')[0]}`)
+        const response = await fetch(`http://${host}:3001/api/v1/products?limit=5&category=${slug.split('-')[0]}`)
         
         if (!response.ok) {
           throw new Error('Failed to fetch related products')
@@ -465,7 +465,7 @@ function ProductInfo({ product, quantity, setQuantity}) {
       </div>
 
       {/* Extra Information */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
         <div className="flex items-center">
           <Truck className="h-5 w-5 text-gray-500 mr-2" />
           <span className="text-sm">Free shipping over ₹999</span>

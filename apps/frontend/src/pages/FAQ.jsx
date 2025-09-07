@@ -16,7 +16,7 @@ const FAQ_QUERY = `
   }
 `;
 
-// Direct GraphQL fetch function specifically for the bizonance endpoint
+// Direct GraphQL fetch function specifically for the pixel endpoint
 const fetchFaqs = async () => {
   try {
 

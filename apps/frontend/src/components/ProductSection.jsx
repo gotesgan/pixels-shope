@@ -62,7 +62,7 @@ export default function DynamicProductsSection() {
       setLoading(true)
       try {
         const host = window.location.hostname
-        const response = await fetch(`http://${host}:3000/api/v1/products/`)
+        const response = await fetch(`http://${host}:3001/api/v1/products/`)
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`)
         }
@@ -210,7 +210,7 @@ export default function DynamicProductsSection() {
 // Product Card Component
 function ProductCard({ product, onViewDetails }) {
   const imageUrl = product?.image
-    ? `https://media.bizonance.in/api/v1/image/download/473d09b1-bd47-4297-9b0c-f79e6a7c9fc8/META/${product.image}`
+    ? `https://media.pixelperfects.in/${product.image}`
     : "/placeholder.svg";
 
   return (

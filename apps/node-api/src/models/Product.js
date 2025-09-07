@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema(
 
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: 'Category',
       required: true,
     },
 
@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema(
 
     features: [String], // ✅ List of bullet-point features
     specifications: [mongoose.Schema.Types.Mixed], // ✅ Array of key-value or object specs
+    featuresStrip: [String], // ✅ Short feature highlights
   },
   { timestamps: true }
 );
@@ -32,5 +33,5 @@ productSchema.index({ slug: 1, storeId: 1 }, { unique: true });
 // Index for common queries
 productSchema.index({ storeId: 1, category: 1 });
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model('Product', productSchema);
 export default Product;

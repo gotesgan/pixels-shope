@@ -21,7 +21,10 @@ export default function ProductsPage() {
     originalPrice: "",
     stock: "",
     category: "",
-    variants: [],
+    sku: "",
+    rating: "",
+    features: [],
+    specifications: {},
     images: [],
   })
 
@@ -32,87 +35,85 @@ export default function ProductsPage() {
   // Fetch products from API
   const fetchProducts = async () => {
     try {
-      setLoading(true);
-      const response = await fetch("http://localhost:4000/api/v1/products", {
+      setLoading(true)
+      const response = await fetch("http://localhost:3001/api/v1/products/admin", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-      });
-      
+      })
+
       if (!response.ok) {
-        throw new Error('Failed to fetch products');
+        throw new Error("Failed to fetch products")
       }
-      
-      const data = await response.json();
-      
+
+      const data = await response.json()
+
       // Ensure we're working with an array
       if (Array.isArray(data)) {
-        setProducts(data);
+        setProducts(data)
       } else if (data && Array.isArray(data.products)) {
         // Handle case where response is an object with products array
-        setProducts(data.products);
+        setProducts(data.products)
       } else {
         // Handle unexpected response format
-        console.error('Unexpected API response format:', data);
-        setProducts([]);
+        console.error("Unexpected API response format:", data)
+        setProducts([])
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
-      setProducts([]);
+      console.error("Error fetching products:", error)
+      setProducts([])
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
-
-  // Fetch categories from API
-  // Fetch categories from API
-const fetchCategories = async () => {
-  try {
-    const response = await fetch("http://localhost:4000/api/v1/products/category", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch categories');
-    }
-    
-    const data = await response.json();
-    
-    // Ensure we're working with an array
-    if (Array.isArray(data)) {
-      setCategories(data);
-    } else if (data && Array.isArray(data.categories)) {
-      // Handle case where response is an object with categories array
-      setCategories(data.categories);
-    } else {
-      // Handle unexpected response format
-      console.error('Unexpected API response format:', data);
-      setCategories([]);
-    }
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    setCategories([]);
   }
-};
 
-  // Create or update product
+  // Fetch categories from API
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/v1/products/categorys", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch categories")
+      }
+
+      const result = await response.json()
+      console.log("Fetched categories:", result)
+
+      // Use the correct path to the array
+      if (result && Array.isArray(result.data)) {
+        setCategories(result.data)
+      } else {
+        console.error("Unexpected API response format:", result)
+        setCategories([])
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error)
+      setCategories([])
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formDataToSend = new FormData()
 
     // Append text fields
     Object.keys(formData).forEach((key) => {
-      if (key !== "images" && key !== "variants") {
+      if (key !== "images" && key !== "features" && key !== "specifications") {
         formDataToSend.append(key, formData[key])
       }
     })
 
-    // Append variants as JSON
-    formDataToSend.append("variants", JSON.stringify(formData.variants))
+    // Append features as JSON array
+    formDataToSend.append("features", JSON.stringify(formData.features))
+
+    // Append specifications as JSON object
+    formDataToSend.append("specifications", JSON.stringify(formData.specifications))
 
     // Append images
     formData.images.forEach((image) => {
@@ -120,7 +121,9 @@ const fetchCategories = async () => {
     })
 
     try {
-      const url = editingProduct ? `/api/products/${editingProduct.id}` : "/api/products"
+      const url = editingProduct
+        ? `http://localhost:3001/api/v1/products/${editingProduct.id}`
+        : "http://localhost:3001/api/v1/products"
       const method = editingProduct ? "PUT" : "POST"
 
       const response = await fetch(url, {
@@ -142,7 +145,10 @@ const fetchCategories = async () => {
           originalPrice: "",
           stock: "",
           category: "",
-          variants: [],
+          sku: "",
+          rating: "",
+          features: [],
+          specifications: {},
           images: [],
         })
       }
@@ -187,21 +193,67 @@ const fetchCategories = async () => {
     }))
   }
 
+  const addFeature = () => {
+    setFormData((prev) => ({
+      ...prev,
+      features: [...prev.features, ""],
+    }))
+  }
+
+  const updateFeature = (index, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      features: prev.features.map((feature, i) => (i === index ? value : feature)),
+    }))
+  }
+
+  const removeFeature = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      features: prev.features.filter((_, i) => i !== index),
+    }))
+  }
+
+  const addSpecification = () => {
+    const key = prompt("Enter specification key:")
+    if (key) {
+      setFormData((prev) => ({
+        ...prev,
+        specifications: { ...prev.specifications, [key]: "" },
+      }))
+    }
+  }
+
+  const updateSpecification = (key, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      specifications: { ...prev.specifications, [key]: value },
+    }))
+  }
+
+  const removeSpecification = (key) => {
+    setFormData((prev) => {
+      const newSpecs = { ...prev.specifications }
+      delete newSpecs[key]
+      return { ...prev, specifications: newSpecs }
+    })
+  }
+
   useEffect(() => {
     fetchProducts()
     fetchCategories()
   }, [])
 
-  const filteredProducts = Array.isArray(products) 
-  ? products.filter((product) => {
-      const matchesSearch =
-        product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.sku?.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    })
-  : [];
+  const filteredProducts = Array.isArray(products)
+    ? products.filter((product) => {
+        const matchesSearch =
+          product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.sku?.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
+        return matchesSearch && matchesCategory
+      })
+    : []
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -371,7 +423,10 @@ const fetchCategories = async () => {
                             originalPrice: product.originalPrice || "",
                             stock: product.stock || "",
                             category: product.category || "",
-                            variants: product.variants || [],
+                            sku: product.sku || "",
+                            rating: product.rating || "",
+                            features: product.features || [],
+                            specifications: product.specifications || {},
                             images: [],
                           })
                           setShowAddModal(true)
@@ -444,7 +499,10 @@ const fetchCategories = async () => {
                             originalPrice: product.originalPrice || "",
                             stock: product.stock || "",
                             category: product.category || "",
-                            variants: product.variants || [],
+                            sku: product.sku || "",
+                            rating: product.rating || "",
+                            features: product.features || [],
+                            specifications: product.specifications || {},
                             images: [],
                           })
                           setShowAddModal(true)
@@ -483,7 +541,7 @@ const fetchCategories = async () => {
       {/* Add/Edit Product Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -500,7 +558,10 @@ const fetchCategories = async () => {
                       originalPrice: "",
                       stock: "",
                       category: "",
-                      variants: [],
+                      sku: "",
+                      rating: "",
+                      features: [],
+                      specifications: {},
                       images: [],
                     })
                   }}
@@ -514,7 +575,7 @@ const fetchCategories = async () => {
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Product Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Product Name *</label>
                   <input
                     type="text"
                     value={formData.name}
@@ -525,7 +586,7 @@ const fetchCategories = async () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
@@ -542,7 +603,33 @@ const fetchCategories = async () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Price (₹)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">SKU *</label>
+                  <input
+                    type="text"
+                    value={formData.sku}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, sku: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Stock Keeping Unit"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Rating (0-5)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value={formData.rating}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, rating: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Price (₹) *</label>
                   <input
                     type="number"
                     value={formData.price}
@@ -563,7 +650,7 @@ const fetchCategories = async () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Stock Quantity</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Stock Quantity *</label>
                   <input
                     type="number"
                     value={formData.stock}
@@ -575,7 +662,7 @@ const fetchCategories = async () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description *</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
@@ -585,8 +672,83 @@ const fetchCategories = async () => {
                 />
               </div>
 
+              {/* Features Section */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Product Images</label>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium text-gray-700">Features</label>
+                  <button
+                    type="button"
+                    onClick={addFeature}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    + Add Feature
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  {formData.features.map((feature, index) => (
+                    <div key={index} className="flex gap-2">
+                      <input
+                        type="text"
+                        value={feature}
+                        onChange={(e) => updateFeature(index, e.target.value)}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Enter feature"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeFeature(index)}
+                        className="px-3 py-2 text-red-600 hover:text-red-800"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Specifications Section */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium text-gray-700">Specifications</label>
+                  <button
+                    type="button"
+                    onClick={addSpecification}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    + Add Specification
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  {Object.entries(formData.specifications).map(([key, value]) => (
+                    <div key={key} className="flex gap-2">
+                      <input
+                        type="text"
+                        value={key}
+                        readOnly
+                        className="w-1/3 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                        placeholder="Specification key"
+                      />
+                      <input
+                        type="text"
+                        value={value}
+                        onChange={(e) => updateSpecification(key, e.target.value)}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Specification value"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeSpecification(key)}
+                        className="px-3 py-2 text-red-600 hover:text-red-800"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Product Images *</label>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
                   <input
                     type="file"
@@ -640,7 +802,10 @@ const fetchCategories = async () => {
                       originalPrice: "",
                       stock: "",
                       category: "",
-                      variants: [],
+                      sku: "",
+                      rating: "",
+                      features: [],
+                      specifications: {},
                       images: [],
                     })
                   }}

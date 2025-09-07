@@ -17,7 +17,7 @@ const Navbar = () => {
     const fetchCategories = async () => {
       try {
         const hostname = window.location.hostname
-        const res = await fetch(`http://${hostname}:3000/api/v1/products/category`)
+        const res = await fetch(`http://${hostname}:3001/api/v1/products/category`)
         const data = await res.json()
 
         const categoriesArray = Array.isArray(data.data) ? data.data : []

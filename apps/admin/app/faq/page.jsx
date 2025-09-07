@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Plus, Search, Trash2, Save, ChevronDown, ChevronUp } from "lucide-react"
 import Navbar from "../components/navbar"
 import Sidebar from "../components/sidebar"
@@ -57,6 +57,82 @@ export default function FAQPage() {
     },
   ])
 
+
+useEffect(() => {
+  const fetchFaqs = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/v1/ui/faqs`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch FAQs");
+      const data = await response.json();
+      console.log("Fetched FAQs:", data);
+
+      // Set state with the array returned by the API
+      setFaqs(data.data || []);
+    } catch (error) {
+      console.error(error);
+      alert("Error fetching FAQs");
+    }
+  };
+
+  fetchFaqs();
+}, []);
+
+//handle delete
+const handleDelete = async (id) => {
+  try {
+    // Example API call
+    console.log("Deleting FAQ with id:", id);
+    const response = await fetch(`http://localhost:3001/api/v1/ui/faqs/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (!response.ok) throw new Error("Failed to delete FAQ");
+
+    // Update state to remove deleted FAQ
+    setFaqs(faqs.filter((faq) => faq.id !== id));
+
+    alert("FAQ deleted successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Error deleting FAQ");
+  }
+};
+
+const handleSave = async (faq) => {
+  try {
+    // Example API call
+    console.log("Saving FAQ:", faq);
+    const response = await fetch(`http://localhost:3001/api/v1/ui/faqs`, {
+
+      method: "post",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(faq),
+    });
+
+    if (!response.ok) throw new Error("Failed to save FAQ");
+
+    // Optionally update state if API returns updated FAQ
+    const updatedFaq = await response.json();
+    setFaqs(faqs.map((f) => (f.id === updatedFaq.id ? updatedFaq : f)));
+
+    alert("FAQ saved successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Error saving FAQ");
+  }
+};
+
   const categories = ["all", "Returns & Refunds", "Shipping", "Orders", "Payment", "Account", "Products"]
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -64,15 +140,15 @@ export default function FAQPage() {
 
   const filteredFaqs = faqs.filter((faq) => {
     const matchesSearch =
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "all" || faq.category === selectedCategory
+        faq.question?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        faq.answer?.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCategory = selectedCategory === "all" || faq?.category === selectedCategory
     return matchesSearch && matchesCategory
   })
 
   const addNewFaq = () => {
     const newFaq = {
-      id: Date.now(),
+    
       question: "New FAQ Question",
       answer: "New FAQ Answer",
       category: "General",
@@ -176,7 +252,7 @@ export default function FAQPage() {
 
               {/* FAQ List */}
               <div className="space-y-4">
-                {filteredFaqs.map((faq) => (
+                {filteredFaqs?.map((faq) => (
                     <div key={faq.id} className="bg-white rounded-lg shadow-sm border border-gray-200">
                       <div className="p-6 border-b border-gray-200">
                         <div className="flex justify-between items-start">
@@ -196,7 +272,7 @@ export default function FAQPage() {
                             <button onClick={() => toggleFaq(faq.id)} className="p-2 text-gray-400 hover:text-gray-600">
                               {expandedFaq === faq.id ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                             </button>
-                            <button onClick={() => deleteFaq(faq.id)} className="p-2 text-red-400 hover:text-red-600">
+                            <button onClick={() => handleDelete(faq.id)} className="p-2 text-red-400 hover:text-red-600">
                               <Trash2 className="h-5 w-5" />
                             </button>
                           </div>
@@ -230,10 +306,14 @@ export default function FAQPage() {
                                   />
                                 </div>
                                 <div className="flex justify-end">
-                                  <button className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                                    <Save className="h-4 w-4" />
-                                    <span>Save Changes</span>
-                                  </button>
+                         <button
+  onClick={() => handleSave(faq)}
+  className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+>
+  <Save className="h-4 w-4" />
+  <span>Save Changes</span>
+</button>
+
                                 </div>
                               </div>
                             </div>

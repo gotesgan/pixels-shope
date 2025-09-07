@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react"
-import { Plus, Edit, Trash2, Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react"
+import { useState,useEffect } from "react"
+import { Plus,Save, Edit, Trash2, Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react"
 import Navbar from "../components/navbar"
 import Sidebar from "../components/sidebar"
 
 export default function ContactPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [activeTab, setActiveTab] = useState("info")
+  const [authToken, setAuthToken] = useState(null); // store token in state
+
   const [contactData, setContactData] = useState({
     information: [
       { type: "PHONE", value: "+91 9876543210", label: "Primary Phone", isPrimary: true },
@@ -61,11 +63,42 @@ export default function ContactPage() {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
   }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setAuthToken(token);
+  }, []);
 
-  const handleSave = () => {
-    console.log("Saving contact page data:", contactData)
-    // Add save logic here
+
+
+const handleSave = async () => {
+  try {
+    console.log("Saving contact page data:", contactData);
+    
+    // Option 1: Send as JSON (recommended)
+    const response = await fetch("http://localhost:3001/api/v1/ui/contact-page", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json", // Important: Set content type for JSON
+      },
+      body: JSON.stringify(contactData), // Fixed: was missing JSON.stringify
+    });
+
+    console.log("Raw response:", response);
+    const result = await response.json();
+    console.log("Server response:", result);
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to save contact page data");
+    }
+
+    alert("Contact page saved successfully!");
+  } catch (error) {
+    console.error("Error saving contact page:", error);
+    alert("Error saving contact page");
   }
+};
+
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -117,10 +150,23 @@ export default function ContactPage() {
       <main className={`transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-16"} pt-16`}>
         <div className="p-6">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-8">Contact Management</h1>
-              <p className="text-gray-600">Manage contact information and inquiries</p>
-            </div>
+         <div className="bg-white rounded-xl shadow-lg p-8">
+  <div className="flex items-center justify-between mb-8">
+    <div>
+      <h1 className="text-3xl font-bold text-gray-900">Contact Management</h1>
+      <p className="text-gray-600">Manage contact information and inquiries</p>
+    </div>
+
+    <button
+      onClick={handleSave} // <-- Add your save function here
+      className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+    >
+      <Save className="h-5 w-5" />
+      <span>Save All Changes</span>
+    </button>
+  </div>
+</div>
+
             <div className="space-y-6 mt-8">
               {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

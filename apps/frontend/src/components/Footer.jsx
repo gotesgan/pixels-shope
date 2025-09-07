@@ -81,9 +81,9 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-gray-200 mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-600">© {new Date().getFullYear()} Bizonance. All rights reserved.</p>
+            <p className="text-sm text-gray-600">© {new Date().getFullYear()} pixel. All rights reserved.</p>
             <div className="flex space-x-4 mt-4 md:mt-0">
-              <p className="text-sm text-gray-600"> Cretated by <a href="https://bizonance.com" target="_blank">Bizonance</a></p>
+              <p className="text-sm text-gray-600"> Cretated by <a href="https://pixel.com" target="_blank">pixel</a></p>
 
             </div>
           </div>

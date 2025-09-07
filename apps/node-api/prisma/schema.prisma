@@ -35,7 +35,7 @@ model Store {
   userId        String
   owner         User            @relation(fields: [userId], references: [id])
   media         Media[]
-  HeroSection   HeroSection?
+  HeroSection   HeroSection[]
   storeInfo     StoreInfo?
   phonePe       PhonePe?
   AboutPage     AboutPage?
@@ -87,135 +87,46 @@ enum Show {
 }
 
 model HeroSection {
-  id      String  @id @default(cuid())
-  storeId String  @unique
-  store   Store   @relation(fields: [storeId], references: [id])
-  media   Media[]
+  id       String  @id @default(cuid())
+  storeId  String
+  store    Store   @relation(fields: [storeId], references: [id])
+  title    String?
+  subtitle String?
+  ctaText  String?
+  ctaLink  String?
+  media    Media? // one-to-one relation
 }
 
 model Media {
-  id             String        @id @default(cuid())
-  image          String
-  Store          Store?        @relation(fields: [storeId], references: [id])
-  storeId        String?
-  HeroSection    HeroSection?  @relation(fields: [heroSectionId], references: [id])
-  heroSectionId  String?
-  storeInfo      StoreInfo?    @relation("StoreInfoToMedia", fields: [storeInfoId], references: [id])
-  storeInfoId    String?       @unique
-  AboutCompany   AboutCompany? @relation(fields: [aboutCompanyId], references: [id])
-  aboutCompanyId String?
-  AboutSection   AboutSection? @relation(fields: [aboutSectionId], references: [id])
-  aboutSectionId String?
-  OurBrand       OurBrand?     @relation(fields: [ourBrandId], references: [id])
-  ourBrandId     String?
-  CompanyFact    CompanyFact?  @relation(fields: [companyFactId], references: [id])
-  companyFactId  String?
-  SectionItem    SectionItem?  @relation(fields: [sectionItemId], references: [id])
-  sectionItemId  String?
-  blog           Blog?         @relation(fields: [blogId], references: [id])
-  blogId         String?
+  id      String  @id @default(cuid())
+  image   String
+  storeId String?
+  Store   Store?  @relation(fields: [storeId], references: [id])
+
+  heroSectionId String?      @unique
+  HeroSection   HeroSection? @relation(fields: [heroSectionId], references: [id])
+
+  storeInfoId String?    @unique
+  storeInfo   StoreInfo? @relation("StoreInfoToMedia", fields: [storeInfoId], references: [id])
+
+  blogId      String?
+  Blog        Blog?      @relation(fields: [blogId], references: [id])
+  AboutPage   AboutPage? @relation(fields: [aboutPageId], references: [id])
+  aboutPageId String?
 }
 
 // ABOUT PAGE & CONTENT SECTIONS
 model AboutPage {
-  id            String         @id @default(cuid())
-  storeId       String         @unique
-  store         Store          @relation(fields: [storeId], references: [id])
-  aboutCompany  AboutCompany?
-  ourBrand      OurBrand?
-  companyFact   CompanyFact?
-  aboutSections AboutSection[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-}
+  id      String @id @default(cuid())
+  storeId String @unique
+  store   Store  @relation(fields: [storeId], references: [id])
 
-model AboutCompany {
-  id              String    @id @default(cuid())
-  aboutPageId     String    @unique
-  aboutPage       AboutPage @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
-  title           String
-  description     String
-  media           Media[]
-  storyParagraphs Json
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-}
+  title   String?
+  content Json    @default("{}")
 
-model AboutSection {
-  id           String        @id @default(cuid())
-  aboutPageId  String
-  aboutPage    AboutPage     @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
-  title        String
-  description  String
-  sortOrder    Int           @default(0)
-  bgColor      String?
-  media        Media[]
-  sectionType  String        @default("DEFAULT")
-  sectionItems SectionItem[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-}
-
-model SectionItem {
-  id          String       @id @default(cuid())
-  sectionId   String
-  section     AboutSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-  title       String?
-  description String?
-  iconName    String?
-  value       String?
-  label       String?
-  media       Media[]
-  sortOrder   Int          @default(0)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-}
-
-model OurBrand {
-  id          String      @id @default(cuid())
-  aboutPageId String      @unique
-  aboutPage   AboutPage   @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
-  title       String?
-  description String?
-  media       Media[]
-  brandItems  BrandItem[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-}
-
-model BrandItem {
-  id         String   @id @default(cuid())
-  ourBrandId String
-  ourBrand   OurBrand @relation(fields: [ourBrandId], references: [id], onDelete: Cascade)
-  name       String
-  logoUrl    String
-  sortOrder  Int      @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-}
-
-model CompanyFact {
-  id          String     @id @default(cuid())
-  aboutPageId String     @unique
-  aboutPage   AboutPage  @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
-  title       String
-  description String?
-  media       Media[]
-  factItems   FactItem[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-}
-
-model FactItem {
-  id            String      @id @default(cuid())
-  companyFactId String
-  companyFact   CompanyFact @relation(fields: [companyFactId], references: [id], onDelete: Cascade)
-  value         String
-  label         String
-  iconName      String
-  sortOrder     Int         @default(0)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  media     Media[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // CONTACT PAGE

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Save, FileText, Shield, RotateCcw } from "lucide-react"
 import Navbar from "../components/navbar"
 import Sidebar from "../components/sidebar"
@@ -102,15 +102,76 @@ export default function PoliciesPage() {
       ],
     },
   })
+useEffect(() => {
+  const token = localStorage.getItem("token")
+
+  async function fetchPolicies() {
+    try {
+      const response = await fetch("http://localhost:3001/api/v1/ui/legal-documents", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const result = await response.json()
+      console.log("API Response:", result)
+
+      if (result.success && Array.isArray(result.data)) {
+        const formatted = result.data.reduce((acc, doc) => {
+          acc[doc.type] = {
+            type: doc.type,
+            title: doc.title,
+            lastUpdated: new Date(doc.lastUpdated).toISOString().split("T")[0],
+            sections: doc.sections.map((sec, index) => ({
+              id: index + 1,
+              heading: sec.heading,
+              content: sec.content,
+              isOrdered: sec.isOrdered,
+              listItems: sec.listItems,
+            })),
+          }
+          return acc
+        }, {})
+
+        setPolicies(formatted)
+      }
+    } catch (error) {
+      console.error("Error fetching policies:", error)
+    }
+  }
+
+  fetchPolicies()
+}, [])
+
+
+
+
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
   }
-
-  const handleSave = () => {
-    console.log("Saving policies:", policies)
-    // Add save logic here
+const handleSave = async () => {
+  const token = localStorage.getItem("token")
+  if (!token) {
+    console.error("No token found in localStorage.")
+    return
   }
+  for (const key of Object.keys(policies)) {
+    try {
+      await fetch("http://localhost:3001/api/v1/ui/legal-documents", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(policies[key]),
+      })
+    } catch (error) {
+      console.error(`Error saving ${key} policy:`, error)
+    }
+  }
+  console.log("All policies saved.")
+}
 
   const addSection = (policyType) => {
     const newSection = {

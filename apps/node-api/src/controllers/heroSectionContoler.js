@@ -1,13 +1,15 @@
-import { prisma } from "../db/db.js";
-import fs from "fs";
-import path from "path";
-import mediaHandler from "../utils/mediahandler.js";
+import { prisma } from '../db/db.js';
+import fs from 'fs';
+import path from 'path';
+import mediaHandler from '../utils/mediahandler.js';
 
 export const CreateHeroSection = async (req, res) => {
   const userid = req.user.userid;
   const storeId = req.user.storeId;
-  const file = req.file;
-  console.log("File path:", file.path);
+  const { title, subtitle, buttonText, buttonLink } = req.body;
+  const key = req.file.key;
+  console.log('User Data:', req.user);
+  console.log('Request Body:', req.body);
 
   try {
     const userExist = await prisma.user.findUnique({
@@ -21,60 +23,45 @@ export const CreateHeroSection = async (req, res) => {
 
     if (!hasStoreAccess) {
       return res.status(400).json({
-        message: "Store ID is invalid",
+        message: 'Store ID is invalid',
         success: false,
       });
     }
 
-    if (!file) {
-      return res.status(400).json({
-        message: "No image file uploaded",
-        success: false,
-      });
-    }
-
-    // Process only the first file
-    const mediaData = await mediaHandler.upload(file.path);
-    const uploadedImage = mediaData.uploadedImages[0]?.filename;
-
-    // Delete all uploaded temp files
-    await fs.promises.unlink(file.path);
-
-    const result = await prisma.$transaction(async (tx) => {
-      const heroSection = await tx.heroSection.create({
-        data: {
-          storeId: storeId,
-          // add other fields from req.body if needed
+    const heroSection = await prisma.heroSection.create({
+      data: {
+        storeId: storeId,
+        title: title,
+        subtitle: subtitle,
+        ctaText: buttonText,
+        ctaLink: buttonLink,
+        media: {
+          create: {
+            image: key,
+            storeId: storeId,
+          },
         },
-      });
 
-      const media = await tx.media.create({
-        data: {
-          storeId: storeId,
-          heroSectionId: heroSection.id,
-          image: uploadedImage,
-        },
-      });
-
-      return { heroSection, media };
+        // add other fields from req.body if needed later
+      },
     });
-
+    console.log('Created Hero Section:', heroSection);
     res.status(201).json({
-      message: "Hero Section and Media Created Successfully",
+      message: 'Hero Section Created Successfully',
       success: true,
-      data: result,
+      data: heroSection,
     });
   } catch (error) {
-    console.error("Error in CreateHeroSection:", error);
+    console.error('Error in CreateHeroSection:', error);
     return res.status(500).json({
-      message: "Something went wrong",
+      message: 'Something went wrong',
       success: false,
     });
   }
 };
 
 export const fetchHerosection = async (req, res) => {
-  const storeId = res.store.id;
+  const storeId = req.user.storeId;
   try {
     const heroSection = await prisma.heroSection.findMany({
       where: {
@@ -87,21 +74,86 @@ export const fetchHerosection = async (req, res) => {
 
     if (!heroSection) {
       return res.status(404).json({
-        message: "Hero Section not found",
+        message: 'Hero Section not found',
         success: false,
       });
     }
 
     res.status(200).json({
-      message: "Hero Section fetched successfully",
+      message: 'Hero Section fetched successfully',
       success: true,
       data: heroSection,
     });
   } catch (error) {
-    console.error("Error in fetchHerosection:", error);
+    console.error('Error in fetchHerosection:', error);
     return res.status(500).json({
-      message: "Something went wrong",
+      message: 'Something went wrong',
       success: false,
     });
   }
 };
+
+export const deleteHeroSection = async (req, res) => {
+  const { id } = req.params; // id is already a string
+  const storeId = req.user.storeId;
+
+  console.log(
+    `[deleteHeroSection] Request received for heroSection id: ${id}, storeId: ${storeId}`
+  );
+
+  try {
+    // Fetch hero section with its associated media
+    const heroSection = await prisma.heroSection.findUnique({
+      where: { id }, // use the string ID directly
+      include: { media: true }, // single media object
+    });
+
+    console.log('[deleteHeroSection] Fetched heroSection:', heroSection);
+
+    if (!heroSection || heroSection.storeId !== storeId) {
+      console.warn(
+        `[deleteHeroSection] Hero section not found or access denied for storeId: ${storeId}`
+      );
+      return res.status(404).json({
+        message: 'Hero Section not found or access denied',
+        success: false,
+      });
+    }
+
+    // Delete associated media if it exists
+    if (heroSection.media) {
+      console.log(
+        `[deleteHeroSection] Deleting associated media id: ${heroSection.media.id}`
+      );
+      await prisma.media.delete({
+        where: { id: heroSection.media.id },
+      });
+      console.log('[deleteHeroSection] Media deleted successfully');
+    } else {
+      console.log('[deleteHeroSection] No associated media found');
+    }
+
+    // Delete the hero section itself
+    console.log(
+      `[deleteHeroSection] Deleting heroSection id: ${heroSection.id}`
+    );
+    const deletedHeroSection = await prisma.heroSection.delete({
+      where: { id }, // string ID
+    });
+    console.log(
+      '[deleteHeroSection] Hero section deleted successfully:',
+      deletedHeroSection
+    );
+
+    res.json({
+      message: 'Hero Section deleted successfully',
+      success: true,
+      deletedHeroSection,
+    });
+  } catch (error) {
+    console.error('[deleteHeroSection] Error deleting hero section:', error);
+    res.status(500).json({ message: 'Something went wrong', success: false });
+  }
+};
+
+// delete hero section

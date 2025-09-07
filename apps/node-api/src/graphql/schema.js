@@ -1,11 +1,13 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-tag';
 
 export const schema = gql`
+  scalar JSON
+
   # Query Root
   type Query {
     contactPage: ContactPage
     aboutPage: AboutPage
-    heroSection: HeroSection
+    heroSections: [HeroSection!]!
     storeInfo: StoreInfo
     contactSubmissions(
       page: Int
@@ -14,9 +16,20 @@ export const schema = gql`
     ): SubmissionResponse
     legalDocument(type: String!): LegalDocument
     legalDocuments: [LegalDocument]
-    blog: Blog
+    blog: [Blog]
     faq: [FAQ]
     phonepeStatus: PhonePeStatus
+  }
+
+  # Hero Section
+  type HeroSection {
+    id: ID!
+    storeId: ID!
+    title: String
+    subtitle: String
+    ctaText: String
+    ctaLink: String
+    media: Media
   }
 
   # Contact Page
@@ -93,78 +106,10 @@ export const schema = gql`
   type AboutPage {
     id: ID!
     storeId: ID!
-    aboutCompany: AboutCompany
-    ourBrand: OurBrand
-    companyFact: CompanyFact
-    aboutSections: [AboutSection]
-  }
-
-  type AboutCompany {
-    id: ID!
-    title: String!
-    description: String
-    storyParagraphs: [String]
+    content: JSON
     media: [Media]
-  }
-
-  type OurBrand {
-    id: ID!
-    title: String!
-    description: String
-    media: [Media]
-    brandItems: [BrandItem]
-  }
-
-  type CompanyFact {
-    id: ID!
-    title: String!
-    description: String
-    media: [Media]
-    factItems: [FactItem]
-  }
-
-  type AboutSection {
-    id: ID!
-    title: String!
-    description: String
-    sortOrder: Int!
-    bgColor: String
-    sectionType: String!
-    media: [Media]
-    sectionItems: [SectionItem]
-  }
-
-  type BrandItem {
-    id: ID!
-    name: String!
-    logoUrl: String
-    sortOrder: Int!
-  }
-
-  type FactItem {
-    id: ID!
-    value: String!
-    label: String!
-    iconName: String
-    sortOrder: Int!
-  }
-
-  type SectionItem {
-    id: ID!
-    title: String
-    description: String
-    iconName: String
-    value: String
-    label: String
-    sortOrder: Int!
-    media: [Media]
-  }
-
-  # Hero Section
-  type HeroSection {
-    id: ID!
-    storeId: ID!
-    media: [Media]
+    createdAt: String!
+    updatedAt: String!
   }
 
   # Store Info
@@ -199,16 +144,16 @@ export const schema = gql`
     id: ID!
     heading: String!
     content: String!
-
     isOrdered: Boolean!
     listItems: [String]
   }
 
-  # Shared
+  # Shared Media
   type Media {
     id: ID!
     image: String!
   }
+
   type Blog {
     id: ID!
     title: String!
@@ -228,6 +173,7 @@ export const schema = gql`
     createdAt: String!
     updatedAt: String!
   }
+
   type PhonePeStatus {
     isActive: Boolean!
   }

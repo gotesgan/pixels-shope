@@ -117,7 +117,7 @@ export default function PaymentsPage() {
   // Toggle PhonePe status
   const togglePhonePeStatus = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/phonepe/toggle-status", {
+      const response = await fetch("http://localhost:3001/api/v1/phonepe/toggle-status", {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -1,10 +1,7 @@
-import Product from "../models/Product.js";
-import Category from "../models/Category.js";
-import fs from "fs/promises";
-import slugify from "slugify";
-
-import upload from "../utils/mediahandler.js"; // or wherever your upload.js is
-import mediaHandler from "../utils/mediahandler.js";
+import Product from '../models/Product.js';
+import Category from '../models/Category.js';
+import fs from 'fs/promises';
+import slugify from 'slugify';
 
 export const createProduct = async (req, res) => {
   try {
@@ -22,52 +19,36 @@ export const createProduct = async (req, res) => {
     } = req.body;
 
     const storeId = req.user?.storeId;
-    console.log("Request body:", req.body);
+    console.log('Store ID:', storeId);
+    console.log('Request body:', req.body);
+    console.log('Files:', req.files);
 
+    // Ensure images come as array of strings (URLs or keys)
+    let images = [];
+    if (req.files && req.files.length > 0) {
+      images = req.files.map((file) => file.location || file.key);
+    } else if (req.body.images) {
+      images = Array.isArray(req.body.images)
+        ? req.body.images
+        : [req.body.images];
+    }
+
+    // Validate category
     const categoryObj = await Category.findOne({ name: category, storeId });
     if (!categoryObj) {
       return res.status(400).json({
         success: false,
-        error: "Invalid category for this store",
+        error: 'Invalid category for this store',
       });
     }
 
+    // Generate product slug
     const slug = slugify(`${categoryObj.slug}/${name}`, { lower: true });
 
-    const files = req.files || [];
-    if (!files.length) {
+    if (!images || images.length === 0) {
       return res.status(400).json({
         success: false,
-        error: "At least one image is required.",
-      });
-    }
-
-    const uploadedImages = [];
-    for (const file of files) {
-      const data = await mediaHandler.upload(file.path);
-      console.log("Uploaded file response:", data);
-
-      if (data?.uploadedImages?.length) {
-        for (const img of data.uploadedImages) {
-          if (img.filename) {
-            uploadedImages.push(img.filename);
-          }
-        }
-      }
-
-      // Delete local file
-      try {
-        await fs.unlink(file.path);
-        console.log(`Deleted local file: ${file.path}`);
-      } catch (err) {
-        console.error(`Failed to delete local file: ${file.path}`, err);
-      }
-    }
-
-    if (!uploadedImages.length) {
-      return res.status(400).json({
-        success: false,
-        error: "Image upload failed.",
+        error: 'Please provide at least one product image.',
       });
     }
 
@@ -76,26 +57,27 @@ export const createProduct = async (req, res) => {
     let parsedSpecifications = {};
 
     try {
-      parsedFeatures = typeof features === "string" ? JSON.parse(features) : features;
+      parsedFeatures =
+        typeof features === 'string' ? JSON.parse(features) : features;
     } catch (err) {
       return res.status(400).json({
         success: false,
-        error: "Invalid JSON format for features",
+        error: 'Invalid JSON format for features',
       });
     }
 
     try {
-      const parsed = typeof specifications === "string" ? JSON.parse(specifications) : specifications;
+      const parsed =
+        typeof specifications === 'string'
+          ? JSON.parse(specifications)
+          : specifications;
       parsedSpecifications = Array.isArray(parsed) ? parsed[0] : parsed;
     } catch (err) {
       return res.status(400).json({
         success: false,
-        error: "Invalid JSON format for specifications",
+        error: 'Invalid JSON format for specifications',
       });
     }
-
-    const mainImage = uploadedImages[0];
-    const galleryImages = uploadedImages;
 
     const product = new Product({
       name,
@@ -108,8 +90,8 @@ export const createProduct = async (req, res) => {
       sku,
       rating: rating || 0,
       category: categoryObj._id,
-      image: mainImage,
-      images: galleryImages,
+      image: images[0],
+      images,
       features: parsedFeatures,
       specifications: parsedSpecifications,
     });
@@ -117,18 +99,17 @@ export const createProduct = async (req, res) => {
     const saved = await product.save();
     res.status(201).json({ success: true, data: saved });
   } catch (error) {
-    console.error("Create product error:", error);
+    console.error('Create product error:', error);
     res.status(400).json({ success: false, error: error.message });
   }
 };
-
 // Get all products
 export const getAllProducts = async (req, res) => {
   try {
-    const storeId = req.store?.id;
+    const storeId = req.store?.id || req.user?.storeId;
     const products = await Product.find({ storeId }).populate(
-      "category",
-      "name slug"
+      'category',
+      'name slug'
     );
     res.status(200).json({ success: true, data: products });
   } catch (error) {
@@ -139,15 +120,15 @@ export const getAllProducts = async (req, res) => {
 // Get product by slug
 export const getProductBySlug = async (req, res) => {
   try {
-    const storeId = req.store?.id;
+    const storeId = req.store?.id || req.user?.storeId;
     const product = await Product.findOne({
       slug: req.params.slug,
       storeId,
-    }).populate("category");
+    }).populate('category');
     if (!product)
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: 'Product not found' });
     res.status(200).json({ success: true, data: product });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -177,7 +158,7 @@ export const updateProduct = async (req, res) => {
     if (!product)
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: 'Product not found' });
     res.status(200).json({ success: true, data: product });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
@@ -195,10 +176,10 @@ export const deleteProduct = async (req, res) => {
     if (!product)
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: 'Product not found' });
     res
       .status(200)
-      .json({ success: true, message: "Product deleted successfully" });
+      .json({ success: true, message: 'Product deleted successfully' });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -206,57 +187,86 @@ export const deleteProduct = async (req, res) => {
 
 export const createCategory = async (req, res) => {
   try {
-    console.log(req.user);
     const { name, parent } = req.body;
     const storeId = req.user?.storeId;
-    console.log(req.body);
+    console.log('Store ID:', storeId);
+    console.log('Request body:', req.body);
+    if (!name) {
+      return res
+        .status(400)
+        .json({ success: false, error: 'Category name is required' });
+    }
 
     let parentId = null;
     let slug;
 
     if (parent) {
-      // Find the parent category by name and storeId
-      const parentCategory = await Category.findOne({ name: parent, storeId });
-
+      // If parent is provided, find it by _id
+      const parentCategory = await Category.findOne({ _id: parent, storeId });
       if (!parentCategory) {
         return res
           .status(400)
-          .json({ success: false, error: "Invalid parent category" });
+          .json({ success: false, error: 'Invalid parent category' });
       }
 
       parentId = parentCategory._id;
-      // Use parent's slug as prefix for the new category slug
+      // Slug includes parent's slug for hierarchy
       slug = slugify(`${parentCategory.slug}/${name}`, { lower: true });
     } else {
       // Root category slug
       slug = slugify(name, { lower: true });
     }
 
-    // Create the new category with parent as ObjectId or null
-    const newCategory = new Category({
-      name,
-      slug,
-      storeId,
-      parent: parentId,
-    });
+    // Upsert: create new or update existing category with same name and parent
+    const upsertedCategory = await Category.findOneAndUpdate(
+      { name, storeId, parent: parentId },
+      { name, slug, storeId, parent: parentId },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
-    const saved = await newCategory.save();
-
-    res.status(201).json({ success: true, data: saved });
+    return res.status(201).json({ success: true, data: upsertedCategory });
   } catch (error) {
-    console.log("Create category error:", error);
-    res.status(400).json({ success: false, error: error.message });
+    console.error('Create/Update category error:', error);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
+export const deleteCategory = async (req, res) => {
+  try {
+    const storeId = req.user?.storeId;
+    const categoryId = req.params.id;
 
+    const category = await Category.findOneAndDelete({
+      _id: categoryId,
+      storeId,
+    });
+    console.log('Deleted category:', category);
+    if (!category) {
+      return res.status(404).json({
+        success: false,
+        error: 'Category not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Category deleted successfully',
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
 // Get all categories
 export const getAllCategories = async (req, res) => {
   try {
-    const storeId = req.store?.id;
+    const storeId = req.store?.id || req.user?.storeId;
     const categories = await Category.find({ storeId }).populate(
-      "parent",
-      "name slug"
+      'parent',
+      'name slug'
     );
+    console.log('Fetched categories:', req.user?.storeId);
     res.status(200).json({ success: true, data: categories });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -290,23 +300,45 @@ export const getProductsByCategory = async (req, res) => {
     const storeId = req.store?.id;
     const { slug } = req.params;
 
+    // Find the main category
     const category = await Category.findOne({ slug, storeId });
-    console.log("Category found:", category);
+    console.log('Category found:', category);
 
     if (!category) {
       return res
         .status(404)
-        .json({ success: false, error: "Category not found" });
+        .json({ success: false, error: 'Category not found' });
     }
 
-    const products = await Product.find({ category: category._id, storeId })
-      .populate("category", "name slug")
+    // Get all nested category IDs (including the main one)
+    const getAllChildCategories = async (parentId) => {
+      const children = await Category.find({ parent: parentId, storeId });
+      let ids = children.map((c) => c._id);
+
+      for (let child of children) {
+        const subChildIds = await getAllChildCategories(child._id);
+        ids = ids.concat(subChildIds);
+      }
+
+      return ids;
+    };
+
+    const nestedCategoryIds = await getAllChildCategories(category._id);
+    const allCategoryIds = [category._id, ...nestedCategoryIds];
+
+    // Fetch products from all categories (parent + children)
+    const products = await Product.find({
+      category: { $in: allCategoryIds },
+      storeId,
+    })
+      .populate('category', 'name slug')
       .exec();
-    console.log("Products found:", products);
+
+    console.log('Products found:', products);
 
     res.status(200).json({ success: true, data: products });
   } catch (error) {
-    console.error("Get products by category error:", error);
+    console.error('Get products by category error:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -319,35 +351,35 @@ export const getProductById = async (req, res) => {
     if (!storeId) {
       return res.status(400).json({
         success: false,
-        error: "Missing store ID",
+        error: 'Missing store ID',
       });
     }
 
     if (!productId) {
       return res.status(400).json({
         success: false,
-        error: "Product ID is required",
+        error: 'Product ID is required',
       });
     }
 
     const product = await Product.findOne({
       _id: productId,
       storeId,
-    }).populate("category", "name slug");
+    }).populate('category', 'name slug');
 
     if (!product) {
       return res.status(404).json({
         success: false,
-        error: "Product not found",
+        error: 'Product not found',
       });
     }
 
     res.status(200).json({ success: true, data: product });
   } catch (error) {
-    console.error("Get product by ID error:", error);
+    console.error('Get product by ID error:', error);
     res.status(500).json({
       success: false,
-      error: error.message || "Internal server error",
+      error: error.message || 'Internal server error',
     });
   }
 };

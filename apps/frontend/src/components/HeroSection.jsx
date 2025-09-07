@@ -1,4 +1,4 @@
-"use client"
+    "use client"
 
 import { useState, useEffect } from "react"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
@@ -6,9 +6,13 @@ import { fetchGraphQL } from "../lib/fetchGrap"
 
 const HERO_QUERY = `
   query {
-    heroSection {
+    heroSections {
       id
       storeId
+      title
+      subtitle
+      ctaText
+      ctaLink
       media {
         id
         image
@@ -19,38 +23,40 @@ const HERO_QUERY = `
 
 const buildImageUrl = (imagePath) => {
   if (!imagePath) return "/placeholder.svg"
-  return `https://media.bizonance.in/api/v1/image/download/473d09b1-bd47-4297-9b0c-f79e6a7c9fc8/META/${imagePath}`
+  return `https://media.pixelperfects.in/${imagePath}`
 }
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [slides, setSlides] = useState([
-    {
-      id: 1,
-      image: null,
-      alt: "Main image",
-    },
-  ])
+  const [slides, setSlides] = useState([])
 
   useEffect(() => {
     const loadHero = async () => {
       const hostname = window.location.hostname
       try {
         const res = await fetchGraphQL(hostname, HERO_QUERY)
-        const heroMedia = res?.heroSection?.media || []
-        console.log("Hero Media:", heroMedia)
+        console.log("Hero Section Response:", res)
 
-        const slideImages = heroMedia.map((mediaItem, index) => ({
-          id: mediaItem.id || index,
-          image: mediaItem.image,
-          alt: `Hero image ${index + 1}`,
-        }))
+        const heroSections = res?.heroSections || []
 
-        if (slideImages.length > 0) {
-          setSlides(slideImages)
-        }
+        // Flatten media from all hero sections into slides
+        const allSlides = heroSections
+          .map((hero) => {
+            if (!hero.media) return null
+            return {
+              id: hero.media.id,
+              image: hero.media.image,
+              title: hero.title,
+              subtitle: hero.subtitle,
+              ctaText: hero.ctaText,
+              ctaLink: hero.ctaLink,
+            }
+          })
+          .filter(Boolean)
+
+        setSlides(allSlides)
       } catch (err) {
-        console.error("Failed to fetch hero images", err)
+        console.error("Failed to fetch hero data", err)
       }
     }
 
@@ -61,7 +67,7 @@ const HeroSection = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [slides.length])
 
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
@@ -71,27 +77,35 @@ const HeroSection = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
   }
 
+  if (slides.length === 0) return null
+
+  const current = slides[currentSlide]
+
   return (
     <div className="w-full">
       <div className="px-0">
         <div className="relative w-full h-[180px] md:h-[300px] lg:h-[350px] overflow-hidden">
           {/* Prev Button */}
-          <button
-            onClick={goToPrevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-md bg-white/80"
-            aria-label="Previous slide"
-          >
-            <FiChevronLeft size={24} />
-          </button>
+          {slides.length > 1 && (
+            <button
+              onClick={goToPrevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-md bg-white/80"
+              aria-label="Previous slide"
+            >
+              <FiChevronLeft size={24} />
+            </button>
+          )}
 
           {/* Next Button */}
-          <button
-            onClick={goToNextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-md bg-white/80"
-            aria-label="Next slide"
-          >
-            <FiChevronRight size={24} />
-          </button>
+          {slides.length > 1 && (
+            <button
+              onClick={goToNextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-md bg-white/80"
+              aria-label="Next slide"
+            >
+              <FiChevronRight size={24} />
+            </button>
+          )}
 
           {/* Slides */}
           <div className="relative w-full h-full">
@@ -104,9 +118,33 @@ const HeroSection = () => {
               >
                 <img
                   src={buildImageUrl(slide.image)}
-                  alt={slide.alt}
+                  alt={slide.title || "Hero image"}
                   className="w-full h-full object-cover object-center"
                 />
+
+                {/* Overlay Content (title + CTA) */}
+                {(slide.title || slide.subtitle || slide.ctaText) && (
+                  <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black/40 text-white px-4">
+                    {slide.title && (
+                      <h2 className="text-lg md:text-2xl font-bold mb-2 drop-shadow-lg">
+                        {slide.title}
+                      </h2>
+                    )}
+                    {slide.subtitle && (
+                      <p className="text-sm md:text-base mb-4 drop-shadow-lg">
+                        {slide.subtitle}
+                      </p>
+                    )}
+                    {slide.ctaText && slide.ctaLink && (
+                      <a
+                        href={slide.ctaLink}
+                        className="bg-white text-black font-medium px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition"
+                      >
+                        {slide.ctaText}
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -117,3 +155,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection
+ 

@@ -26,5 +26,9 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "express-list-endpoints": "^7.1.1",
+    "framer-motion": "^12.23.12"
+  }
 }

@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Star, StarHalf } from "lucide-react"
 
 // Base URL for images
-const IMAGE_BASE_URL = "https://media.bizonance.in/api/v1/image/download/473d09b1-bd47-4297-9b0c-f79e6a7c9fc8/META/"
+const IMAGE_BASE_URL = "https://media.pixelperfects.in/"
 
 // Helper function to properly format image URLs
 const formatImageUrl = (imagePath) => {
@@ -113,7 +113,7 @@ console.log("hit")
       try {
         const hostname = window.location.hostname
         console.log("Hostname:", hostname)
-        const url = `http://${hostname}:3000/api/v1/products/category/${slug}`
+        const url = `http://${hostname}:3001/api/v1/products/category/${slug}`
 
         const res = await fetch(url)
         const data = await res.json()

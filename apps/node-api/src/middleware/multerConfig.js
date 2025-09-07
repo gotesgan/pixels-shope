@@ -1,30 +1,27 @@
+import { S3Client } from "@aws-sdk/client-s3";
 import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
+import multerS3 from "multer-s3";
+import dotenv from "dotenv";
 
-// Emulate __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+dotenv.config();
 
-// Define the directory where files will be uploaded
-const direcName = path.join(__dirname, "../../public/upload");
-
-// Configure multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    // Set the destination folder
-    callback(null, direcName);
-  },
-  filename: (req, file, callback) => {
-    // Extract the original file extension
-    const extension = path.extname(file.originalname);
-    // Generate a unique filename with the same extension
-    callback(null, `image${Date.now()}${extension}`);
-  },
+const s3 = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  }
 });
 
-// Create the multer instance with the defined storage
-const upload = multer({ storage });
+const upload = multer({
+  storage: multerS3({
+    s3,
+    bucket: process.env.AWS_S3_BUCKET, // ✅ Correct variable name
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+});
 
-// Export variables for use in other modules
 export default upload;

@@ -70,7 +70,7 @@ const Header = () => {
     loadStoreInfo()
   }, [isLoggedIn, authToken])
 
-  const storeName = storeInfo?.name || "Bizonance"
+  const storeName = storeInfo?.name || "pixel"
   const storeColor = storeInfo?.colour || "#F4E7E1"
   const displayMode = storeInfo?.displayMode || "both"
   // const logoImage = storeInfo?.media?.image || null
@@ -86,7 +86,7 @@ const Header = () => {
 
   const buildImageUrl = (imagePath) => {
   if (!imagePath) return "/placeholder.svg"
-  return `https://media.bizonance.in/api/v1/image/download/473d09b1-bd47-4297-9b0c-f79e6a7c9fc8/META/${imagePath}`
+  return `https://media.pixelperfects.in/${imagePath}`
 }
 
   const renderStoreBranding = () => {

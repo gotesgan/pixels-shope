@@ -63,7 +63,7 @@ export const privacyPolicyData = {
     },
     {
       heading: "Contact Us",
-      content: "If you have questions about this Privacy Policy or our data practices, please contact us at:<br /><br />Email: <a href='mailto:privacy@bizonance.com' class='text-green-500 hover:underline'>privacy@bizonance.com</a><br />Phone: +91 1234567890<br />Address: 123 Amravati, Maharashtra, India"
+      content: "If you have questions about this Privacy Policy or our data practices, please contact us at:<br /><br />Email: <a href='mailto:privacy@pixel.com' class='text-green-500 hover:underline'>privacy@pixel.com</a><br />Phone: +91 1234567890<br />Address: 123 Amravati, Maharashtra, India"
     }
   ]
 };
@@ -73,7 +73,7 @@ export const termsOfServiceData = {
   lastUpdated: "May 15, 2025",
   sections: [
     {
-      heading: "Welcome to Bizonance",
+      heading: "Welcome to pixel",
       content: "By accessing or using our website, you agree to be bound by these Terms of Service ('Terms'). Please read these Terms carefully before using our services."
     },
     {
@@ -108,7 +108,7 @@ export const termsOfServiceData = {
     },
     {
       heading: "Intellectual Property",
-      content: "All content on our website, including text, graphics, logos, images, and software, is the property of Bizonance and is protected by copyright, trademark, and other intellectual property laws."
+      content: "All content on our website, including text, graphics, logos, images, and software, is the property of pixel and is protected by copyright, trademark, and other intellectual property laws."
     },
     {
       heading: "User Content",
@@ -116,7 +116,7 @@ export const termsOfServiceData = {
     },
     {
       heading: "Limitation of Liability",
-      content: "To the maximum extent permitted by law, Bizonance shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of our website or products."
+      content: "To the maximum extent permitted by law, pixel shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of our website or products."
     },
     {
       heading: "Governing Law",
@@ -128,7 +128,7 @@ export const termsOfServiceData = {
     },
     {
       heading: "Contact Us",
-      content: "If you have questions about these Terms, please contact us at:<br /><br />Email: <a href='mailto:legal@bizonance.com' class='text-green-500 hover:underline'>legal@bizonance.com</a><br />Phone: +91 1234567890<br />Address: 123 Amravati, Maharashtra, India"
+      content: "If you have questions about these Terms, please contact us at:<br /><br />Email: <a href='mailto:legal@pixel.com' class='text-green-500 hover:underline'>legal@pixel.com</a><br />Phone: +91 1234567890<br />Address: 123 Amravati, Maharashtra, India"
     }
   ]
 };
@@ -186,7 +186,7 @@ export const returnPolicyData = {
     },
     {
       heading: "Contact Us",
-      content: "If you have questions about our return policy or need assistance with a return, please contact our customer service team:<br /><br />Email: <a href='mailto:returns@bizonance.com' class='text-green-500 hover:underline'>returns@bizonance.com</a><br />Phone: +91 1234567890<br />"
+      content: "If you have questions about our return policy or need assistance with a return, please contact our customer service team:<br /><br />Email: <a href='mailto:returns@pixel.com' class='text-green-500 hover:underline'>returns@pixel.com</a><br />Phone: +91 1234567890<br />"
     }
   ]
 };
