@@ -9,8 +9,8 @@ export default function SignIn() {
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'tushar@example.com',
+    password: 'password123',
   });
 
   const handleChange = (e) => {
@@ -37,7 +37,7 @@ export default function SignIn() {
       }
 
       const data = await res.json();
-
+console.log('Login response data:', data);
       if (!data.token) {
         throw new Error('No token returned from server');
       }
@@ -51,7 +51,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-mordern from-gray-900 via-black to-gray-800 flex items-center justify-center p-4 relative">
       <div className="absolute top-6 left-6 z-20">
         <img
           src="https://media.pixelperfects.in/pixelperfect03.png"

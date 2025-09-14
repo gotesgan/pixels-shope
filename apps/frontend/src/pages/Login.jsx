@@ -82,7 +82,7 @@ function LoginForm({ setCurrentPage, showNotification }) {
       // Replace with your login API endpoint
       const host = window.location.hostname;
       const response = await fetch(
-        `http://${host}:3000/api/v1/customer/login`,
+        `http://${host}:3001/api/v1/customer/login`,
         {
           method: 'POST',
           headers: {
@@ -302,7 +302,7 @@ function SignupForm({ setCurrentPage, showNotification }) {
       // Replace {host} with the actual host or use a variable
       const host = window.location.hostname; // or use your API host
       const response = await fetch(
-        `http://${host}:3000/api/v1/customer/register`,
+        `http://${host}:3001/api/v1/customer/register`,
         {
           method: 'POST',
           headers: {

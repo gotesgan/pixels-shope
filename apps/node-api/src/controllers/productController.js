@@ -3,9 +3,14 @@ import Category from '../models/Category.js';
 import fs from 'fs/promises';
 import slugify from 'slugify';
 
+// import Product from '../models/Product.js';
+// import Category from '../models/Category.js';
+// import slugify from 'slugify';
+
 export const createProduct = async (req, res) => {
   try {
     const {
+      id,
       name,
       category,
       description,
@@ -16,22 +21,26 @@ export const createProduct = async (req, res) => {
       rating,
       features,
       specifications,
-      featuresStrip,
+      badges,
     } = req.body;
 
     const storeId = req.user?.storeId;
-    console.log('Store ID:', storeId);
-    console.log('Request body:', req.body);
-    console.log('Files:', req.files);
 
     // Ensure images come as array of strings (URLs or keys)
     let images = [];
     if (req.files && req.files.length > 0) {
-      images = req.files.map((file) => file.location || file.key);
+      images = req.files.map((file) => file.key);
     } else if (req.body.images) {
       images = Array.isArray(req.body.images)
         ? req.body.images
         : [req.body.images];
+    }
+
+    if (!images || images.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please provide at least one product image.',
+      });
     }
 
     // Validate category
@@ -43,85 +52,92 @@ export const createProduct = async (req, res) => {
       });
     }
 
-    // Generate product slug
+    // Generate slug
     const slug = slugify(`${categoryObj.slug}/${name}`, { lower: true });
 
-    if (!images || images.length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Please provide at least one product image.',
-      });
+    // Parse features/specifications/badges safely
+    const parseJSON = (val, fallback) => {
+      try {
+        return typeof val === 'string' ? JSON.parse(val) : val || fallback;
+      } catch {
+        return fallback;
+      }
+    };
+
+    const parsedFeatures = parseJSON(features, []);
+    const parsedBadges = parseJSON(badges, []);
+    const parsedSpecifications = parseJSON(specifications, {});
+
+    // --- Find existing product ---
+    let product;
+
+    if (id) {
+      product = await Product.findOne({ _id: id, storeId });
+    }
+    if (!product) {
+      product = await Product.findOne({ slug, storeId });
+    }
+    if (!product) {
+      product = await Product.findOne({ name, storeId });
     }
 
-    // Safely parse features and specifications
-    let parsedFeatures = [];
-    let parsedSpecifications = {};
-    let parsedfeaturesStrip = [];
-
-    try {
-      parsedFeatures =
-        typeof features === 'string' ? JSON.parse(features) : features;
-    } catch (err) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid JSON format for features',
+    if (product) {
+      // If found, update it
+      product.set({
+        name,
+        slug,
+        description,
+        price,
+        originalPrice,
+        stock,
+        sku,
+        rating: rating || 0,
+        category: categoryObj._id,
+        image: images[0],
+        images,
+        features: parsedFeatures,
+        specifications: parsedSpecifications,
+        featuresStrip: parsedBadges,
       });
-    }
-    try {
-      parsedfeaturesStrip =
-        typeof features === 'string'
-          ? JSON.parse(featuresStrip)
-          : featuresStrip;
-    } catch (err) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid JSON format for features',
-      });
-    }
-    try {
-      const parsed =
-        typeof specifications === 'string'
-          ? JSON.parse(specifications)
-          : specifications;
-      parsedSpecifications = Array.isArray(parsed) ? parsed[0] : parsed;
-    } catch (err) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid JSON format for specifications',
-      });
-    }
 
-    const product = new Product({
-      name,
-      slug,
-      storeId,
-      description,
-      price,
-      originalPrice,
-      stock,
-      sku,
-      rating: rating || 0,
-      category: categoryObj._id,
-      image: images[0],
-      images,
-      features: parsedFeatures,
-      specifications: parsedSpecifications,
-    });
+      const updated = await product.save();
+      return res.status(200).json({ success: true, data: updated });
+    } else {
+      // If not found, create new
+      const newProduct = new Product({
+        name,
+        slug,
+        storeId,
+        description,
+        price,
+        originalPrice,
+        stock,
+        sku,
+        rating: rating || 0,
+        category: categoryObj._id,
+        image: images[0],
+        images,
+        features: parsedFeatures,
+        specifications: parsedSpecifications,
+        featuresStrip: parsedBadges,
+      });
 
-    const saved = await product.save();
-    res.status(201).json({ success: true, data: saved });
+      const saved = await newProduct.save();
+      return res.status(201).json({ success: true, data: saved });
+    }
   } catch (error) {
-    console.error('Create product error:', error);
-    res.status(400).json({ success: false, error: error.message });
+    console.error('Upsert product error:', error);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
+
 // Get all products
 export const getAllProducts = async (req, res) => {
   try {
     const storeId = req.store?.id || req.user?.storeId;
     const products = await Product.find({ storeId }).populate(
       'category',
-      'name slug',
+      'name slug'
     );
     res.status(200).json({ success: true, data: products });
   } catch (error) {
@@ -165,7 +181,7 @@ export const updateProduct = async (req, res) => {
     const product = await Product.findOneAndUpdate(
       { _id: req.params.id, storeId },
       updates,
-      { new: true },
+      { new: true }
     );
     if (!product)
       return res
@@ -233,7 +249,7 @@ export const createCategory = async (req, res) => {
     const upsertedCategory = await Category.findOneAndUpdate(
       { name, storeId, parent: parentId },
       { name, slug, storeId, parent: parentId },
-      { upsert: true, new: true, setDefaultsOnInsert: true },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
     return res.status(201).json({ success: true, data: upsertedCategory });
@@ -276,7 +292,7 @@ export const getAllCategories = async (req, res) => {
     const storeId = req.store?.id || req.user?.storeId;
     const categories = await Category.find({ storeId }).populate(
       'parent',
-      'name slug',
+      'name slug'
     );
     console.log('Fetched categories:', req.user?.storeId);
     res.status(200).json({ success: true, data: categories });

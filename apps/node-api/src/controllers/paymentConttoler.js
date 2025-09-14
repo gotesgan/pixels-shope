@@ -28,7 +28,7 @@ function getPhonePeClient(clientId, clientSecret, clientVersion, env) {
       clientId,
       clientSecret,
       clientVersion,
-      env,
+      env
     );
   }
   return phonePeClient;
@@ -38,6 +38,7 @@ const sendData = async (req, res) => {
   const { simplifiedItems, amount, shippingAddressId } = req.body;
   const storeId = req.store.id;
   const customerId = req.customer.id;
+  console.log('storeId', storeId);
 
   console.log('simplifiedItems', simplifiedItems);
 
@@ -46,7 +47,8 @@ const sendData = async (req, res) => {
       prisma.store.findUnique({ where: { id: storeId } }),
       prisma.phonePe.findUnique({ where: { storeId } }),
     ]);
-
+    console.log('store', store);
+    console.log('phonePe', phonePe);
     if (!store || !phonePe) {
       return res
         .status(404)
@@ -60,7 +62,7 @@ const sendData = async (req, res) => {
       clientId,
       clientSecret,
       clientVersion,
-      process.env.NODE_ENV,
+      Env.SANDBOX
     );
 
     const merchantTransactionId = `TX-${uniqid()}`;
@@ -82,8 +84,8 @@ const sendData = async (req, res) => {
     // ✅ Generate and create OrderItems array
     const orderItems = await Promise.all(
       simplifiedItems.map(({ _id, quantity }) =>
-        createOrderItemFromProduct(_id, quantity),
-      ),
+        createOrderItemFromProduct(_id, quantity)
+      )
     );
 
     // ✅ Create order + payment
@@ -163,7 +165,7 @@ const CheckData = async (req, res) => {
       phonePe.clientId,
       phonePe.clientSecret,
       phonePe.clientVersion,
-      env,
+      env
     );
 
     const statusResponse = await client.getOrderStatus(merchantTransactionId);

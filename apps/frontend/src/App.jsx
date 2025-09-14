@@ -15,26 +15,30 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import CategoryPage from './pages/CategoryPage';
 import Login from './pages/Login';
+import AdminPageRedirect from './components/AdminPageRedirect';
 import AccountPage from './pages/AccountPage';
+import DynamicStoreHelmet from './components/DynamicStoreHelmet.jsx'; // <-- Import the combined Helmet component
 import './App.css';
 
 export default function App() {
   return (
     <CartProvider>
-      {/* Wrap the entire apps with CartProvider */}
       <Router>
         <ScrollToTop />
 
-        {/* Fixed Header and Navbar Container */}
+        {/* Global dynamic Helmet */}
+        <DynamicStoreHelmet />
+
+        {/* Fixed Header and Navbar */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
           <Header />
           <Navbar />
         </div>
 
-        {/* Main content with proper spacing to account for fixed header */}
+        {/* Main content with spacing for fixed header */}
         <main className="min-h-screen pt-32">
           <Routes>
-            {/* Homepage route */}
+            <Route path="/admin" element={<AdminPageRedirect />} />
             <Route path="/" element={<Homepage />} />
 
             {/* Product routes */}

@@ -11,26 +11,26 @@ export default function App() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    // ✅ Check if token comes from URL params
-    const urlToken = searchParams.get('token');
+useEffect(() => {
+  const updateToken = () => {
+    const urlToken = searchParams.get('token'); // get token from URL
 
     if (urlToken) {
-      localStorage.setItem('token', urlToken); // save in localStorage
+      // ✅ Always update localStorage with URL token
+      localStorage.setItem('token', urlToken);
+      console.log('Token updated:', urlToken);
     }
 
-    // ✅ Get token from localStorage
     const token = localStorage.getItem('token');
-
     if (!token) {
-      // If no token, redirect
-      window.location.href = 'https://account.bizonance.com';
+      window.location.href = 'http://localhost:5173'; // redirect if no token
     }
-  }, [searchParams]);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
   };
+
+  updateToken();
+}, [searchParams]); // runs whenever search params change
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -104,10 +105,17 @@ export default function PoliciesPage() {
       ],
     },
   });
+
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     async function fetchPolicies() {
+      // If no token, retain demo data and skip fetch
+      if (!token) {
+        console.warn('No token found in localStorage. Using demo data.');
+        return;
+      }
+
       try {
         const response = await fetch(
           'http://localhost:3001/api/v1/ui/legal-documents',
@@ -121,29 +129,44 @@ export default function PoliciesPage() {
         const result = await response.json();
         console.log('API Response:', result);
 
-        if (result.success && Array.isArray(result.data)) {
+        // Only update policies if API returns valid data
+        if (result?.success && Array.isArray(result?.data) && result.data.length > 0) {
           const formatted = result.data.reduce((acc, doc) => {
+            // Ensure doc has required fields
+            if (!doc?.type || !doc?.title || !Array.isArray(doc?.sections)) {
+              console.warn(`Invalid policy data for type: ${doc?.type}`);
+              return acc;
+            }
+
             acc[doc.type] = {
               type: doc.type,
               title: doc.title,
-              lastUpdated: new Date(doc.lastUpdated)
-                .toISOString()
-                .split('T')[0],
+              lastUpdated: doc.lastUpdated
+                ? new Date(doc.lastUpdated).toISOString().split('T')[0]
+                : new Date().toISOString().split('T')[0],
               sections: doc.sections.map((sec, index) => ({
-                id: index + 1,
-                heading: sec.heading,
-                content: sec.content,
-                isOrdered: sec.isOrdered,
-                listItems: sec.listItems,
+                id: sec?.id || index + 1,
+                heading: sec?.heading || 'Untitled Section',
+                content: sec?.content || '',
+                isOrdered: sec?.isOrdered || false,
+                listItems: Array.isArray(sec?.listItems) ? sec.listItems : [],
               })),
             };
             return acc;
           }, {});
 
-          setPolicies(formatted);
+          // Only update state if formatted data is not empty
+          if (Object.keys(formatted).length > 0) {
+            setPolicies(formatted);
+          } else {
+            console.warn('No valid policies in API response. Retaining demo data.');
+          }
+        } else {
+          console.warn('Invalid or empty API response. Retaining demo data.');
         }
       } catch (error) {
         console.error('Error fetching policies:', error);
+        // Retain demo data on error
       }
     }
 
@@ -153,6 +176,7 @@ export default function PoliciesPage() {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
   const handleSave = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -161,7 +185,7 @@ export default function PoliciesPage() {
     }
     for (const key of Object.keys(policies)) {
       try {
-        await fetch('http://localhost:3001/api/v1/ui/legal-documents', {
+       const data = await fetch('http://localhost:3001/api/v1/ui/legal-documents', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -169,11 +193,12 @@ export default function PoliciesPage() {
           },
           body: JSON.stringify(policies[key]),
         });
+            console.log('All policies saved.',data);
       } catch (error) {
         console.error(`Error saving ${key} policy:`, error);
       }
     }
-    console.log('All policies saved.');
+
   };
 
   const addSection = (policyType) => {
@@ -273,7 +298,11 @@ export default function PoliciesPage() {
     }
   };
 
-  const currentPolicy = policies[activePolicy];
+  const currentPolicy = policies[activePolicy] || {
+    title: 'No Policy Selected',
+    lastUpdated: new Date().toISOString().split('T')[0],
+    sections: [],
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

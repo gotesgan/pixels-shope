@@ -157,7 +157,7 @@ export default function Dashboard() {
             <div>
               <div className="text-3xl font-bold text-blue-700">124</div>
               <div className="text-sm text-gray-600 font-medium">
-                Total Products
+                Total Products(demo data)
               </div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />

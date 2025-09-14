@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     // Option 1: Allow all hosts (what you currently have)
-    allowedHosts: ['all', 'souled-store.localtest.me'],
+    allowedHosts: ['.localtest.me'],
 
     // Option 2: If 'all' doesn't work, try this regex pattern for .localtest.me domains
     // allowedHosts: [/.+\.localtest\.me$/],

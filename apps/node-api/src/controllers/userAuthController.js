@@ -57,7 +57,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log('Login attempt for email:', email);
   if (!email || !password)
     return res.status(400).json({ error: 'Email and password required' });
 
@@ -74,6 +74,7 @@ export const login = async (req, res) => {
         },
       },
     });
+    console.log('User found:', user);
 
     if (!user) return res.status(404).json({ error: 'User not found' });
 

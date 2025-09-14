@@ -1,7 +1,7 @@
 import { prisma } from '../db/db.js';
 import fs from 'fs';
 import path from 'path';
-import mediaHandler from '../utils/mediahandler.js';
+
 
 export const CreateHeroSection = async (req, res) => {
   const userid = req.user.userid;

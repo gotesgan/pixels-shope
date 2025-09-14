@@ -1,1 +1,6 @@
 @import "tailwindcss";
+.bg-mordern {
+    background: #03001e;  /* fallback */
+    background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+    background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+}

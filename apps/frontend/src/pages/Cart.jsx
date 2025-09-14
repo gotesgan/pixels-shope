@@ -54,7 +54,7 @@ export default function Cart() {
     try {
       const hostname = window.location.hostname;
       const response = await fetch(
-        `http://${hostname}:3000/api/v1/customer/Shipping`,
+        `http://${hostname}:3001/api/v1/customer/Shipping`,
         {
           method: 'GET',
           headers: {
@@ -63,6 +63,7 @@ export default function Cart() {
           },
         },
       );
+      console.log('Fetch addresses response:', response);
 
       if (response.ok) {
         const data = await response.json();
@@ -141,7 +142,7 @@ export default function Cart() {
       const hostname = window.location.hostname;
 
       // Make the API call to the payment endpoint
-      const response = await fetch(`http://${hostname}:3000/api/v1/pay/`, {
+      const response = await fetch(`http://${hostname}:3001/api/v1/pay/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

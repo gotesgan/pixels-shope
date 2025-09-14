@@ -3,8 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 /// ---
@@ -17,7 +19,7 @@ model User {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
-  password  String
+  password  String?
   phone     String
   address   String
   city      String
@@ -53,7 +55,7 @@ model Store {
 model Customer {
   id                String            @id @default(cuid())
   name              String
-  email             String            @unique
+  email             String
   password          String
   phone             String
   shippingAddresses ShippingAddress[]
@@ -68,12 +70,21 @@ model Customer {
 
 // STORE SETUP
 model StoreInfo {
-  id            String   @id @default(cuid())
-  storeId       String   @unique
-  store         Store    @relation(fields: [storeId], references: [id])
-  name          String
-  media         Media?   @relation("StoreInfoToMedia")
-  displayMode   Show     @default(both)
+  id          String  @id @default(cuid())
+  storeId     String  @unique
+  store       Store   @relation(fields: [storeId], references: [id])
+  name        String
+  media       Media?  @relation("StoreInfoToMedia")
+  displayMode Show    @default(both)
+  tagline     String?
+  description String?
+  address     String?
+  city        String?
+  state       String?
+  country     String? @default("India")
+  postalCode  String?
+  phone       String?
+
   colour        String?
   businessTypes String?
   createdAt     DateTime @default(now())
@@ -122,7 +133,7 @@ model AboutPage {
   store   Store  @relation(fields: [storeId], references: [id])
 
   title   String?
-  content Json    @default("{}")
+  content Json?
 
   media     Media[]
   createdAt DateTime @default(now())

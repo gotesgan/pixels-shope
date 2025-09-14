@@ -127,6 +127,14 @@ export const schema = gql`
     displayMode: Show!
     colour: String!
     businessTypes: String
+    tagline: String
+    description: String
+    address: String
+    city: String
+    state: String
+    country: String
+    postalCode: String
+    phone: String
     createdAt: String!
     updatedAt: String!
   }

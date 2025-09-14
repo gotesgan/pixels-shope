@@ -7,7 +7,7 @@ export const createPhonePe = async (req, res) => {
 
   try {
     // Check if a config already exists for this store
-    const existingConfig = await prisma.phonePe.findUnique({
+    const existingConfig = await prisma.phonePe.findFirst({
       where: { storeId },
     });
 
@@ -157,17 +157,30 @@ export const togglePhonePeStatus = async (req, res) => {
   const { storeId } = req.user;
 
   try {
-    const existingConfig = await prisma.phonePe.findUnique({
+    // Find existing configuration
+    let existingConfig = await prisma.phonePe.findFirst({
       where: { storeId },
     });
 
+    // If not found, create a new config with default/empty fields and isActive = true
     if (!existingConfig) {
-      return res.status(404).json({
-        message: 'PhonePe configuration not found for this store',
-        success: false,
+      existingConfig = await prisma.phonePe.create({
+        data: {
+          storeId,
+          isActive: true,
+          // Add other fields here with default/empty values if required
+          // e.g., merchantId: '', apiKey: '', etc.
+        },
+      });
+
+      return res.status(201).json({
+        message: 'PhonePe configuration created and activated successfully',
+        success: true,
+        data: existingConfig,
       });
     }
 
+    // If found, toggle the isActive status
     const updatedConfig = await prisma.phonePe.update({
       where: { storeId },
       data: {

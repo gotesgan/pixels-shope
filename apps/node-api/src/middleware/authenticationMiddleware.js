@@ -13,7 +13,7 @@ export const authenticate = async (req, res, next) => {
   }
 
   const token = authHeader.split(' ')[1];
-  console.log('Token:', token);
+
   try {
     // Decode JWT
 
@@ -23,7 +23,7 @@ export const authenticate = async (req, res, next) => {
       where: { id: decoded.userId },
       include: { stores: { select: { id: true } } },
     });
-
+    console.log('Authenticated user:', user);
     if (!user) {
       return res.status(401).json({
         error: 'Invalid authentication token',

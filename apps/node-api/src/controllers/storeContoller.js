@@ -15,7 +15,7 @@ const NGINX_SITES_AVAILABLE = '/etc/nginx/sites-available';
 const NGINX_SITES_ENABLED = '/etc/nginx/sites-enabled';
 const NGINX_COMBINED_CONFIG = path.join(
   NGINX_SITES_AVAILABLE,
-  'multi-store.conf',
+  'multi-store.conf'
 );
 const NGINX_ENABLED_LINK = path.join(NGINX_SITES_ENABLED, 'multi-store.conf');
 const BACKEND_PORT = process.env.PORT;
@@ -34,8 +34,8 @@ const generateSlug = (name) => {
 };
 
 const generateLocalDomain = (slug) => {
-  const localIP = '127.0.0.1'; // Or your LAN IP if you want to share in network
-  return `${slug}.${localIP}.nip.io`;
+  // const localIP = '127.0.0.1'; // Or your LAN IP if you want to share in network
+  return `${slug}.localtest.me`;
 };
 
 const generateSelfSignedCert = async (domain) => {
@@ -126,12 +126,6 @@ export const createStore = async (req, res) => {
         .json({ error: 'Store with this name already exists on localhost' });
     }
 
-    let uploadFilename = null;
-    if (file) {
-      const data = await mediaHandler.upload(file.path);
-      uploadFilename = data.uploadedImages[0]?.filename || null;
-    }
-
     const result = await prisma.$transaction(async (tx) => {
       const store = await tx.store.create({
         data: { domain, userId: req.user.userid },
@@ -146,10 +140,10 @@ export const createStore = async (req, res) => {
         },
       });
 
-      if (uploadFilename) {
+      if (file?.key) {
         await tx.media.create({
           data: {
-            image: uploadFilename,
+            image: file.key, // ✅ directly saving file.key
             storeId: store.id,
             storeInfoId: storeInfo.id,
           },
@@ -167,6 +161,7 @@ export const createStore = async (req, res) => {
         storeInfo: {
           name: result.storeInfo.name,
           businessTypes: result.storeInfo.businessTypes,
+          colour: result.storeInfo.colour,
         },
       },
     });
@@ -176,7 +171,6 @@ export const createStore = async (req, res) => {
   }
 };
 
-// Domain Verification and Setup
 export const verifyAndSetupDomain = async (req, res) => {
   let { domain } = req.body;
   if (!domain) {
@@ -188,41 +182,145 @@ export const verifyAndSetupDomain = async (req, res) => {
       .toLowerCase()
       .trim()
       .replace(/^www\./, '');
-    const serverIPs = getServerIPs();
 
+    // Try resolving DNS
     const cnameRecords = await dns.resolveCname(domain).catch(() => []);
     const aRecords = await dns.resolve4(domain).catch(() => []);
-    const cnameMatches = cnameRecords.length > 0;
-    const aMatch = aRecords.some((ip) => serverIPs.includes(ip));
 
-    if (!cnameMatches && !aMatch) {
+    if (cnameRecords.length === 0 && aRecords.length === 0) {
       return res.status(400).json({
-        error: `Domain does not point to this server. CNAME: ${cnameRecords}, A: ${aRecords}`,
+        error: `Domain does not resolve to any server. CNAME: ${cnameRecords}, A: ${aRecords}`,
       });
     }
 
+    // Find store for current user
     const store = await prisma.store.findFirst({
       where: { userId: req.user.id },
+      include: { storeInfo: true, media: true },
     });
     if (!store) {
       return res.status(404).json({ error: 'Store not found for user' });
     }
 
-    await prisma.store.update({ where: { id: store.id }, data: { domain } });
-
-    const { certPath, keyPath } = await generateSelfSignedCert(domain);
-    const confPath = writeNginxConfig(domain, certPath, keyPath);
-    await reloadNginx();
+    // Update domain
+    const updatedStore = await prisma.store.update({
+      where: { id: store.id },
+      data: { domain },
+      include: { storeInfo: true, media: true },
+    });
 
     res.status(200).json({
-      message: 'Domain verified, configured, and SSL installed.',
+      message: 'Domain verified and updated successfully.',
       domain,
-      configPath: confPath,
-      storeId: store.id,
+      store: updatedStore,
     });
   } catch (err) {
-    console.error('Domain setup failed:', err);
-    const status = err.message.includes('Domain does not point') ? 400 : 500;
-    res.status(status).json({ error: err.message });
+    console.error('Domain verification failed:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+//get store details
+export const getStoreDetails = async (req, res) => {
+  try {
+    console.log('Fetching store details for user:', req.user);
+    const store = await prisma.store.findFirst({
+      where: { userId: req.user.userid },
+      include: { storeInfo: true, media: true, owner: true },
+    });
+    if (!store) {
+      return res.status(404).json({ error: 'Store not found for user' });
+    }
+    res.status(200).json({ store });
+  } catch (err) {
+    console.error('Fetching store details failed:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// Update store details
+
+export const updateStoreDetails = async (req, res) => {
+  const {
+    name,
+    businessTypes,
+    colour,
+    tagline,
+    description,
+    address,
+    city,
+    state,
+    country,
+    postalCode,
+    phone,
+    displayMode,
+  } = req.body;
+
+  const file = req.file;
+
+  try {
+    const store = await prisma.store.findFirst({
+      where: { userId: req.user.id },
+      include: { storeInfo: true, media: true },
+    });
+
+    if (!store) {
+      return res.status(404).json({ error: 'Store not found for user' });
+    }
+
+    // --- Upsert storeInfo ---
+    const updatedStoreInfo = await prisma.storeInfo.upsert({
+      where: { id: store.storeInfo?.id ?? '' }, // if empty, will trigger create
+      update: {
+        ...(name && { name }),
+        ...(businessTypes && { businessTypes }),
+        ...(colour && { colour }),
+        ...(tagline && { tagline }),
+        ...(description && { description }),
+        ...(address && { address }),
+        ...(city && { city }),
+        ...(state && { state }),
+        ...(country && { country }),
+        ...(postalCode && { postalCode }),
+        ...(phone && { phone }),
+        ...(displayMode && { displayMode }),
+      },
+      create: {
+        name: name ?? '',
+        businessTypes: businessTypes ?? '',
+        colour: colour ?? '',
+        tagline: tagline ?? '',
+        description: description ?? '',
+        address: address ?? '',
+        city: city ?? '',
+        state: state ?? '',
+        country: country ?? 'India',
+        postalCode: postalCode ?? '',
+        phone: phone ?? '',
+        displayMode: displayMode ?? 'both',
+        storeId: store.id,
+      },
+    });
+
+    // --- Upsert media (only if file provided) ---
+    if (file?.key) {
+      await prisma.media.upsert({
+        where: { id: store.media[0]?.id ?? '' },
+        update: { image: file.key },
+        create: {
+          image: file.key,
+          storeId: store.id,
+          storeInfoId: updatedStoreInfo.id,
+        },
+      });
+    }
+
+    res.status(200).json({
+      message: 'Store details updated successfully',
+      storeInfo: updatedStoreInfo,
+    });
+  } catch (err) {
+    console.error('Updating store details failed:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 };

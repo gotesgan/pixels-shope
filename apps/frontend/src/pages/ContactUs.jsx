@@ -18,14 +18,12 @@ export default function ContactUs() {
     mobile: '',
     message: '',
   });
-
   const [contactData, setContactData] = useState({
     locations: [],
     socialLinks: [],
     hours: [],
     information: [],
   });
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -85,7 +83,13 @@ export default function ContactUs() {
           }
         `;
         const data = await fetchGraphQL(host, query);
-        setContactData(data.contactPage);
+        // Ensure contactData properties are always arrays to prevent crashes
+        setContactData({
+          locations: data?.contactPage?.locations || [],
+          socialLinks: data?.contactPage?.socialLinks || [],
+          hours: data?.contactPage?.hours || [],
+          information: data?.contactPage?.information || [],
+        });
       } catch (err) {
         console.error(err);
         setError(err.message || 'Failed to load contact information');
@@ -93,7 +97,6 @@ export default function ContactUs() {
         setLoading(false);
       }
     };
-
     fetchContactPageData();
   }, []);
 
@@ -106,19 +109,17 @@ export default function ContactUs() {
     e.preventDefault();
     // Add your form submission logic here
     console.log('Form submitted:', formData);
-
     // Example mutation (not implemented)
     // const mutation = `
-    //   mutation CreateSubmission($input: ContactSubmissionInput!) {
-    //     createContactSubmission(input: $input) {
-    //       id
-    //       status
-    //     }
-    //   }
+    // mutation CreateSubmission($input: ContactSubmissionInput!) {
+    // createContactSubmission(input: $input) {
+    // id
+    // status
+    // }
+    // }
     // `
     // const variables = { input: formData }
     // await fetchGraphQL(window.location.hostname, mutation, variables)
-
     // Reset form after submission
     setFormData({
       name: '',
@@ -126,33 +127,32 @@ export default function ContactUs() {
       mobile: '',
       message: '',
     });
-
     // Show success message to user
     alert('Your message has been sent. We will get back to you soon!');
   };
 
   // Get primary email and phone from information
   const getContactInfo = (type) => {
-    const info = contactData.information?.find((item) => item.type === type);
+    const info = contactData.information?.find((item) => item?.type === type);
     return info ? info.value : '';
   };
 
   // Get primary location
   const getPrimaryLocation = () => {
     return (
-      contactData.locations?.find((location) => location.isPrimary) ||
+      contactData.locations?.find((location) => location?.isPrimary) ||
       contactData.locations?.[0]
     );
   };
 
   // Sort business hours by sortOrder
   const getSortedHours = () => {
-    return contactData.hours?.sort((a, b) => a.sortOrder - b.sortOrder) || [];
+    return contactData.hours?.sort((a, b) => a?.sortOrder - b?.sortOrder) || [];
   };
 
   // Get active social links
   const getActiveSocialLinks = () => {
-    return contactData.socialLinks?.filter((link) => link.isActive) || [];
+    return contactData.socialLinks?.filter((link) => link?.isActive) || [];
   };
 
   // Map social platform to icon component
@@ -166,9 +166,23 @@ export default function ContactUs() {
       WHATSAPP: FaWhatsapp,
       TELEGRAM: FaTelegram,
     };
-
     const IconComponent = icons[platform];
+    // Log warning for unrecognized platforms (optional, for debugging)
+    if (!IconComponent && platform) {
+      console.warn(`No icon found for platform: ${platform}`);
+    }
     return IconComponent ? <IconComponent className="h-6 w-6" /> : null;
+  };
+
+  // Validate URL for map embed to prevent iframe errors
+  const isValidUrl = (url) => {
+    if (!url) return false;
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
   };
 
   if (loading) {
@@ -226,7 +240,6 @@ export default function ContactUs() {
             </p>
           </div>
         </section>
-
         {/* Contact Information */}
         <section className="py-6 px-4 md:px-6 bg-gradient-to-b">
           <div className="container max-w-6xl mx-auto">
@@ -254,7 +267,6 @@ export default function ContactUs() {
                   </div>
                 </div>
               )}
-
               {/* Email Card */}
               {email && (
                 <div className="border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
@@ -278,7 +290,6 @@ export default function ContactUs() {
                   </div>
                 </div>
               )}
-
               {/* Address Card */}
               {primaryLocation && (
                 <div className="border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
@@ -291,15 +302,12 @@ export default function ContactUs() {
                       <h3 className="text-xl font-semibold mb-2">Address</h3>
                       <p className="text-gray-600 mb-2">Visit our office</p>
                       <address className="font-medium not-italic">
-                        {primaryLocation.address &&
-                          `${primaryLocation.address},`}
+                        {primaryLocation?.address && `${primaryLocation.address},`}
                         <br />
-                        {primaryLocation.city && `${primaryLocation.city}, `}
-                        {primaryLocation.state && `${primaryLocation.state}, `}
-                        {primaryLocation.country &&
-                          `${primaryLocation.country}`}
-                        {primaryLocation.postalCode &&
-                          ` - ${primaryLocation.postalCode}`}
+                        {primaryLocation?.city && `${primaryLocation.city}, `}
+                        {primaryLocation?.state && `${primaryLocation.state}, `}
+                        {primaryLocation?.country && `${primaryLocation.country}`}
+                        {primaryLocation?.postalCode && ` - ${primaryLocation.postalCode}`}
                       </address>
                     </div>
                   </div>
@@ -308,7 +316,6 @@ export default function ContactUs() {
             </div>
           </div>
         </section>
-
         {/* Business Hours */}
         {businessHours.length > 0 && (
           <section className="py-10 px-4 md:px-6">
@@ -319,15 +326,15 @@ export default function ContactUs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 {businessHours.map((hourEntry) => (
                   <div
-                    key={hourEntry.id}
+                    key={hourEntry?.id}
                     className="border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
                   >
                     <div className="w-full"></div>
                     <div className="p-6">
                       <div className="flex items-center gap-6 text-left">
                         <div className="p-4 rounded-full bg-blue-100 shadow-sm flex-shrink-0">
-                          {hourEntry.days.toLowerCase().includes('saturday') ||
-                          hourEntry.days.toLowerCase().includes('sunday') ? (
+                          {hourEntry?.days?.toLowerCase().includes('saturday') ||
+                          hourEntry?.days?.toLowerCase().includes('sunday') ? (
                             <Calendar className="h-6 w-6 text-blue-600" />
                           ) : (
                             <Clock className="h-6 w-6 text-blue-600" />
@@ -335,9 +342,9 @@ export default function ContactUs() {
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold mb-1">
-                            {hourEntry.days}
+                            {hourEntry?.days}
                           </h3>
-                          <p className="text-gray-600">{hourEntry.hours}</p>
+                          <p className="text-gray-600">{hourEntry?.hours}</p>
                         </div>
                       </div>
                     </div>
@@ -347,9 +354,8 @@ export default function ContactUs() {
             </div>
           </section>
         )}
-
         {/* Map Section */}
-        {primaryLocation && primaryLocation.mapEmbedUrl && (
+        {primaryLocation && primaryLocation?.mapEmbedUrl && isValidUrl(primaryLocation.mapEmbedUrl) && (
           <section className="py-10 px-4 md:px-6 bg-gray-50">
             <div className="container max-w-3xl mx-auto">
               <div className="p-6">
@@ -360,7 +366,6 @@ export default function ContactUs() {
                   <h3 className="text-xl font-semibold mb-2">
                     Our Map Location
                   </h3>
-
                   {/* Google Maps iframe with dynamic location */}
                   <div className="aspect-video w-full max-w-xl border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
                     <iframe
@@ -378,7 +383,6 @@ export default function ContactUs() {
             </div>
           </section>
         )}
-
         {/* Contact Form */}
         <section className="py-10 bg-gradient-to-b from-gray-50 to-gray-100 px-4 md:px-6">
           <div className="container max-w-3xl mx-auto">
@@ -430,7 +434,6 @@ export default function ContactUs() {
                       />
                     </div>
                   </div>
-
                   <div className="space-y-2">
                     <label
                       htmlFor="mobile"
@@ -447,7 +450,6 @@ export default function ContactUs() {
                       onChange={handleChange}
                     />
                   </div>
-
                   <div className="space-y-2">
                     <label
                       htmlFor="message"
@@ -465,7 +467,6 @@ export default function ContactUs() {
                       onChange={handleChange}
                     />
                   </div>
-
                   <div className="pt-2">
                     <button
                       type="submit"
@@ -479,7 +480,6 @@ export default function ContactUs() {
             </div>
           </div>
         </section>
-
         {/* Social Media */}
         {socialLinks.length > 0 && (
           <section className="py-4 px-4 md:px-6">
@@ -494,14 +494,14 @@ export default function ContactUs() {
               <div className="flex justify-center gap-6">
                 {socialLinks.map((link) => (
                   <a
-                    key={link.id}
-                    href={link.url}
+                    key={link?.id}
+                    href={link?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 transform shadow-sm"
-                    aria-label={link.platform}
+                    aria-label={link?.platform}
                   >
-                    {getSocialIcon(link.platform)}
+                    {getSocialIcon(link?.platform)}
                   </a>
                 ))}
               </div>

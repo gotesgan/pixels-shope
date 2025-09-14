@@ -49,7 +49,7 @@ export default function Create() {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/api/v1/user/register',
+        'http://localhost:3001/api/v1/user/register',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -84,7 +84,7 @@ export default function Create() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-mordern from-gray-900 via-black to-gray-800 flex items-center justify-center p-6 relative overflow-hidden">
       {/* Soft spotlight effect */}
       <div className="absolute w-[600px] h-[600px] bg-green-600/20 rounded-full blur-[120px] -top-20 -left-20 animate-pulse" />
       <div className="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] bottom-0 right-0 animate-pulse" />

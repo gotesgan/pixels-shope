@@ -13,8 +13,8 @@ import {
 } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = `http://${window.location.hostname}:3000/api/v1/customer`;
-const PRODUCTS_API_BASE_URL = `http://tesr.127.0.0.1.nip.io:3000/api/v1/products`;
+const API_BASE_URL = `http://${window.location.hostname}:3001/api/v1/customer`;
+const PRODUCTS_API_BASE_URL = `http://tesr.127.0.0.1.nip.io:3001/api/v1/products`;
 
 export default function AccountPage() {
   const navigate = useNavigate();
@@ -898,7 +898,7 @@ export default function AccountPage() {
                                   {item.productImage && (
                                     <div className="mt-2">
                                       <img
-                                        src={`http://tesr.127.0.0.1.nip.io:3000/uploads/${item.productImage}`}
+                                        src={`https://media.pixelperfects.in/${item.productImage}`}
                                         alt={item.productName}
                                         className="w-16 h-16 object-cover rounded-md"
                                         onError={(e) => {

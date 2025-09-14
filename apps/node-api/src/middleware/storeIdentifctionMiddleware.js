@@ -1,14 +1,17 @@
 // storeIdentificationMiddleware.js
 import { prisma } from '../db/db.js';
 
-// Allowed subdomains (without typo)
-const allowedSubdomains = [
-  'admin.bizonance.com',
-  'account.bizonance.com',
-  'http://souled-store.localtest.me',
-];
+// Allowed subdomains
+const allowedSubdomains = ['http://souled-store.localtest.me'];
 
 const storeIdentificationMiddleware = async (req, res, next) => {
+  const path = req.path || '';
+
+  // Only run for /api or /graphql routes
+  if (!path.startsWith('/api') && !path.startsWith('/graphql')) {
+    return next(); // Skip middleware
+  }
+
   const host = req.headers.host
     ? req.headers.host.split(':')[0].toLowerCase()
     : null;
@@ -32,7 +35,7 @@ const storeIdentificationMiddleware = async (req, res, next) => {
       return next();
     }
 
-    // Lookup store by domain (e.g., user store domains like `store1.bizonance.com`)
+    // Lookup store by domain
     const store = await prisma.store.findUnique({
       where: { domain: host },
     });
@@ -40,6 +43,7 @@ const storeIdentificationMiddleware = async (req, res, next) => {
     if (!store) {
       return res.status(404).json({ error: 'Store not found for this domain' });
     }
+
     console.log('Store found:', store);
     req.store = store;
     next();

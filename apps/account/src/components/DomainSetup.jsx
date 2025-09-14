@@ -1,114 +1,82 @@
 'use client';
 
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from './StoreContext';
+import { useContext } from 'react';
 
 export default function DomainSetup() {
+  const { storeDomain } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const formData = {
-    aRecord: '62.72.58.149',
-    cnameRecord: 'srv679222',
+    cnameRecord: storeDomain
   };
 
   const handleNext = () => {
-    // Store DNS records for verification
     localStorage.setItem('dnsRecords', JSON.stringify(formData));
     navigate('/domain-verify');
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md ">
-      <h2 className="text-2xl font-bold mb-3 text-center">DNS Configuration</h2>
+    <div className="max-w-lg mx-auto mt-10 p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+      <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-900">
+        DNS Configuration
+      </h2>
 
-      <div className="mb-3 p-4 bg-blue-50 rounded-lg">
-        <h3 className="font-semibold text-blue-800 mb-2">Instructions:</h3>
-        <ul className="text-blue-700 text-sm list-disc list-inside space-y-2">
+      <div className="mb-6 p-5 bg-blue-50 rounded-xl border-l-4 border-blue-400">
+        <h3 className="font-semibold text-blue-900 mb-3">Instructions:</h3>
+        <ul className="text-blue-800 text-sm list-disc list-inside space-y-2">
           <li>
-            Log in to your domain provider’s control panel (e.g., GoDaddy,
-            Namecheap, Google Domains).
+            Log in to your domain provider’s control panel (e.g., GoDaddy, Namecheap, Google Domains).
           </li>
           <li>Locate the section to manage DNS or DNS Zone Records.</li>
           <li>
-            Add the following two DNS records exactly as shown below:
-            <ul className="ml-4 list-decimal list-inside mt-1 space-y-1">
+            Add the following DNS record exactly as shown:
+            <ul className="ml-5 list-decimal list-inside mt-1 space-y-1">
               <li>
-                <strong>A Record</strong>: Points your domain to our server
-                using an IP address.
-              </li>
-              <li>
-                <strong>CNAME Record</strong>: Ensures that www.yourdomain.com
-                redirects to the root domain.
+                <strong>CNAME Record</strong>: Ensures that <code>www.yourdomain.com</code> redirects to the root domain.
               </li>
             </ul>
           </li>
           <li>
-            After you’ve added the records, click the <strong>Next</strong>{' '}
-            button below to proceed with domain verification.
+            After adding the record, click the <strong>Next</strong> button below to proceed.
           </li>
           <li>
-            Note: DNS changes might take a few minutes to propagate globally (up
-            to 24 hours in rare cases).
+            Note: DNS changes might take a few minutes to propagate globally (up to 24 hours in rare cases).
           </li>
         </ul>
       </div>
 
-      <div className="mb-3">
-        <label className="block text-sm font-medium mb-1">A Record *</label>
-        <div className="grid grid-cols-3 gap-4">
-          <input
-            type="text"
-            disabled
-            value="A"
-            className="p-2 border rounded bg-gray-100 text-center"
-          />
-          <input
-            type="text"
-            disabled
-            value="@"
-            className="p-2 border rounded bg-gray-100 text-center"
-          />
-          <input
-            type="text"
-            disabled
-            value={formData.aRecord}
-            className="p-2 border rounded bg-gray-100 text-center"
-          />
-        </div>
-        <p className="text-xs text-gray-500 mt-1">
-          Points your domain to our server IP address
-        </p>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">CNAME Record *</label>
-        <div className="grid grid-cols-3 gap-4">
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">CNAME Record</label>
+        <div className="grid grid-cols-3 gap-3">
           <input
             type="text"
             disabled
             value="CNAME"
-            className="p-2 border rounded bg-gray-100 text-center"
+            className="p-3 border rounded-lg bg-gray-100 text-center text-gray-600 font-medium shadow-sm"
           />
           <input
             type="text"
             disabled
             value="www"
-            className="p-2 border rounded bg-gray-100 text-center"
+            className="p-3 border rounded-lg bg-gray-100 text-center text-gray-600 font-medium shadow-sm"
           />
           <input
             type="text"
             disabled
             value={formData.cnameRecord}
-            className="p-2 border rounded bg-gray-100 text-center"
+            className="p-3 border rounded-lg bg-gray-100 text-center text-gray-700 font-semibold shadow-sm"
           />
         </div>
-        <p className="text-xs text-gray-500 mt-1">
-          Redirects www to your root domain
+        <p className="text-xs text-gray-400 mt-2">
+          Redirects <code>www</code> to your root domain
         </p>
       </div>
 
       <button
         onClick={handleNext}
-        className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring focus:ring-blue-300 transition-colors"
+        className="w-full py-3 px-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-300 transition-all"
       >
         Next
       </button>

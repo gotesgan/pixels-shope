@@ -75,81 +75,92 @@ export default function PaymentsPage() {
   };
 
   // Fetch PhonePe settings
-  const fetchPhonePeSettings = async () => {
-    try {
-      const response = await fetch('/api/phonepe', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setPaymentSettings((prev) => ({
-          ...prev,
-          phonePe: {
-            ...prev.phonePe,
-            ...data,
-          },
-        }));
-      }
-    } catch (error) {
-      console.error('Error fetching PhonePe settings:', error);
-    } finally {
-      setLoading(false);
+// Helper to get headers with token
+const getHeaders = () => {
+  const token = localStorage.getItem('token'); // Make sure your token is stored with key 'token'
+  const headers = new Headers();
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+  if (token) headers.append("Authorization", `Bearer ${token}`);
+  return headers;
+};
+
+// Fetch PhonePe settings
+const fetchPhonePeSettings = async () => {
+  try {
+    const response = await fetch("http://localhost:3001/api/v1/phonepe/", {
+      method: "GET",
+      headers: getHeaders(),
+      redirect: "follow",
+    });
+
+    if (response.ok) {
+      const resJson = await response.json();
+      console.log('Fetched PhonePe settings:', resJson);
+
+      // Use resJson.data to get the actual settings
+      setPaymentSettings(prev => ({
+        ...prev,
+        phonePe: { ...resJson.data },
+      }));
     }
-  };
+  } catch (error) {
+    console.error('Error fetching PhonePe settings:', error);
+  } finally {
+    setLoading(false);
+  }
+};
 
-  // Save PhonePe settings
-  const savePhonePeSettings = async () => {
-    try {
-      const method = paymentSettings.phonePe.id ? 'PUT' : 'POST';
-      const response = await fetch('/api/phonepe', {
-        method,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(paymentSettings.phonePe),
-      });
 
-      if (response.ok) {
-        alert('PhonePe settings saved successfully!');
-        fetchPhonePeSettings();
-      }
-    } catch (error) {
-      console.error('Error saving PhonePe settings:', error);
-      alert('Error saving settings. Please try again.');
+// Save PhonePe settings
+const savePhonePeSettings = async () => {
+  try {
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("clientId", paymentSettings.phonePe.clientId);
+    urlencoded.append("clientSecret", paymentSettings.phonePe.clientSecret);
+    urlencoded.append("clientVersion", paymentSettings.phonePe.clientVersion);
+
+    const response = await fetch("http://localhost:3001/api/v1/phonepe/", {
+      method: paymentSettings.phonePe.id ? "PUT" : "POST",
+      headers: getHeaders(),
+      body: urlencoded,
+      redirect: "follow",
+    });
+
+    if (response.ok) {
+      alert('PhonePe settings saved successfully!');
+      fetchPhonePeSettings();
     }
-  };
+  } catch (error) {
+    console.error('Error saving PhonePe settings:', error);
+    alert('Error saving settings. Please try again.');
+  }
+};
 
-  // Toggle PhonePe status
-  const togglePhonePeStatus = async () => {
-    try {
-      const response = await fetch(
-        'http://localhost:3001/api/v1/phonepe/toggle-status',
-        {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+// Toggle PhonePe status
+const togglePhonePeStatus = async () => {
+  try {
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("clientId", paymentSettings.phonePe.clientId);
+    urlencoded.append("clientSecret", paymentSettings.phonePe.clientSecret);
+    urlencoded.append("clientVersion", paymentSettings.phonePe.clientVersion);
 
-      if (response.ok) {
-        setPaymentSettings((prev) => ({
-          ...prev,
-          phonePe: {
-            ...prev.phonePe,
-            isActive: !prev.phonePe.isActive,
-          },
-        }));
-      }
-    } catch (error) {
-      console.error('Error toggling PhonePe status:', error);
+    const response = await fetch("http://localhost:3001/api/v1/phonepe/toggle-status", {
+      method: "PATCH",
+      headers: getHeaders(),
+      body: urlencoded,
+      redirect: "follow",
+    });
+
+    if (response.ok) {
+      setPaymentSettings(prev => ({
+        ...prev,
+        phonePe: { ...prev.phonePe, isActive: !prev.phonePe.isActive },
+      }));
     }
-  };
+  } catch (error) {
+    console.error('Error toggling PhonePe status:', error);
+  }
+};
 
   const handleSave = () => {
     savePhonePeSettings();
