@@ -31,7 +31,7 @@ const Header = () => {
         const host = window.location.hostname;
         const query = `
           query StoreData {
-            phonepeStatus {
+            razorpayStatus {
               isActive
             }
             storeInfo {
@@ -57,7 +57,7 @@ const Header = () => {
           setStoreInfo(data.storeInfo);
         }
 
-        if (data?.phonepeStatus?.isActive) {
+        if (data?.razorpayStatus?.isActive) {
           setIsPhonepeActive(true);
         }
       } catch (error) {

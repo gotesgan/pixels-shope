@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = `http://${window.location.hostname}:3001/api/v1/customer`;
-const PRODUCTS_API_BASE_URL = `http://tesr.127.0.0.1.nip.io:3001/api/v1/products`;
+const PRODUCTS_API_BASE_URL = `http://${window.location.hostname}:3001/api/v1/products`;
 
 export default function AccountPage() {
   const navigate = useNavigate();

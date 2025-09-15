@@ -16,7 +16,7 @@ const DynamicStoreHelmet = () => {
         const host = window.location.hostname;
         const query = `
           query StoreData {
-            phonepeStatus {
+            razorpayStatus {
               isActive
             }
             storeInfo {
@@ -38,7 +38,7 @@ const DynamicStoreHelmet = () => {
         const data = await fetchGraphQL(host, query);
 
         if (data?.storeInfo) setStoreInfo(data.storeInfo);
-        if (data?.phonepeStatus?.isActive) setIsPhonepeActive(true);
+        if (data?.razorpayStatus?.isActive) setIsPhonepeActive(true);
       } catch (error) {
         console.error('Failed to load store info:', error);
       } finally {

@@ -114,7 +114,7 @@ export default function ProductDetailsPage() {
         // Get hostname from window location
         const host = window.location.hostname;
         const response = await fetch(
-          `http://${host}:3001/api/v1/products/${slug}`,
+          `https://${host}/api/v1/products/${slug}`,
         );
 
         if (!response.ok) {
@@ -155,7 +155,7 @@ export default function ProductDetailsPage() {
         // Get hostname from window location
         const host = window.location.hostname;
         const response = await fetch(
-          `http://${host}:3001/api/v1/products?limit=5&category=${slug.split('-')[0]}`,
+          `https://${host}/api/v1/products?limit=5&category=${slug.split('-')[0]}`,
         );
 
         if (!response.ok) {
@@ -357,14 +357,14 @@ function ProductInfo({ product, quantity, setQuantity }) {
   useEffect(() => {
     const phonepe = async () => {
       const query = `query StoreData {
-            phonepeStatus {
+            razorpayStatus {
               isActive
     }}
 `;
       const hostname = window.location.hostname;
       const response = await fetchGraphQL(hostname, query);
       console.log(response);
-      if (response.phonepeStatus.isActive === true) {
+      if (response.razorpayStatus.isActive === true) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);

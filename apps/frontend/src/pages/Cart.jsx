@@ -28,6 +28,17 @@ export default function Cart() {
 
   const [payment, setPayment] = useState({});
 
+  // Razorpay script loader
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   // Check authentication status and fetch addresses on component mount
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -54,7 +65,7 @@ export default function Cart() {
     try {
       const hostname = window.location.hostname;
       const response = await fetch(
-        `http://${hostname}:3001/api/v1/customer/Shipping`,
+        `https://api.pixelperfects.in/api/v1/customer/Shipping`,
         {
           method: 'GET',
           headers: {
@@ -141,8 +152,8 @@ export default function Cart() {
       // Get the current hostname dynamically
       const hostname = window.location.hostname;
 
-      // Make the API call to the payment endpoint
-      const response = await fetch(`http://${hostname}:3001/api/v1/pay/`, {
+      // Make the API call to create the Razorpay order
+      const response = await fetch(`https://api.pixelperfects.in/api/v1/pay/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,18 +170,50 @@ export default function Cart() {
         );
       }
 
-      const responseData = await response.json();
-      setPayment(responseData);
+      const orderData = await response.json();
+      setPayment(orderData);
 
-      // If there's a redirect URL in the response, redirect the user
-      if (responseData.redirectUrl) {
-        window.location.href = responseData.redirectUrl;
-        return;
+      // Load Razorpay script
+      const loaded = await loadRazorpayScript();
+      if (!loaded) {
+        throw new Error('Failed to load Razorpay SDK');
       }
 
-      // If no redirect URL but payment was successful, clear cart and show success
-      clearCart();
-      navigate('/order-confirmation', { state: { orderData: responseData } });
+      // Razorpay checkout options
+      const options = {
+        key: orderData.key,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: 'Your Store Name',
+        order_id: orderData.orderId,
+        handler: async function (response) {
+          // Verify payment at backend
+          const verifyRes = await fetch(`https://api.pixelperfects.in/api/v1/pay/verify`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${authToken}`,
+            },
+            body: JSON.stringify(response),
+          });
+
+          if (!verifyRes.ok) throw new Error('Payment verification failed');
+          const verifiedData = await verifyRes.json();
+
+          // Clear cart & navigate
+          clearCart();
+          navigate('/order-confirmation', { state: { orderData: verifiedData } });
+        },
+        prefill: {
+          name: customerInfo?.name,
+          email: customerInfo?.email,
+          contact: customerInfo?.phone,
+        },
+        theme: { color: '#22c55e' },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
     } catch (error) {
       console.error('Error placing order:', error);
       setError(error.message || 'Failed to place order. Please try again.');
