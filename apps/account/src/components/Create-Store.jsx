@@ -49,7 +49,7 @@ const {setStoreDomain} =  useContext(StoreContext);
       }
 
       const response = await fetch(
-        'http://localhost:3001/api/v1/user/create-store',
+        'https://api.pixelperfects.in/api/v1/user/create-store',
         {
           method: 'POST',
           headers: {

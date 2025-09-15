@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, Eye, Mail, Phone } from 'lucide-react';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
@@ -8,48 +8,34 @@ import Sidebar from '../components/sidebar';
 export default function CustomersPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [customers] = useState([
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john@example.com',
-      phone: '+91 9876543210',
-      orders: 5,
-      totalSpent: 12450,
-      joinDate: '2023-12-15',
-      status: 'Active',
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'jane@example.com',
-      phone: '+91 9876543211',
-      orders: 3,
-      totalSpent: 8900,
-      joinDate: '2024-01-02',
-      status: 'Active',
-    },
-    {
-      id: 3,
-      name: 'Mike Johnson',
-      email: 'mike@example.com',
-      phone: '+91 9876543212',
-      orders: 8,
-      totalSpent: 25600,
-      joinDate: '2023-11-20',
-      status: 'VIP',
-    },
-    {
-      id: 4,
-      name: 'Sarah Wilson',
-      email: 'sarah@example.com',
-      phone: '+91 9876543213',
-      orders: 1,
-      totalSpent: 1200,
-      joinDate: '2024-01-10',
-      status: 'New',
-    },
-  ]);
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await fetch('https://api.pixelperfects.in/api/v1/analytics/customer', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch customers');
+        }
+
+        const data = await response.json();
+        setCustomers(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -74,6 +60,22 @@ export default function CustomersPage() {
       customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.phone.includes(searchTerm),
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+        <div>Error: {error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -100,20 +102,24 @@ export default function CustomersPage() {
               {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-700">89</div>
+                  <div className="text-2xl font-bold text-blue-700">{customers.length}</div>
                   <div className="text-sm text-blue-600">Total Customers</div>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-green-700">76</div>
+                  <div className="text-2xl font-bold text-green-700">
+                    {customers.filter(c => c.status === 'Active').length}
+                  </div>
                   <div className="text-sm text-green-600">Active Customers</div>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-700">12</div>
+                  <div className="text-2xl font-bold text-purple-700">
+                    {customers.filter(c => c.status === 'VIP').length}
+                  </div>
                   <div className="text-sm text-purple-600">VIP Customers</div>
                 </div>
                 <div className="bg-orange-50 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-orange-700">
-                    ₹48,150
+                    ₹{customers.length > 0 ? Math.round(customers.reduce((sum, c) => sum + c.totalSpent, 0) / customers.length) : 0}
                   </div>
                   <div className="text-sm text-orange-600">
                     Avg. Order Value
@@ -158,14 +164,11 @@ export default function CustomersPage() {
                           Total Spent
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Join Date
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
@@ -202,9 +205,6 @@ export default function CustomersPage() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             ₹{customer.totalSpent}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {customer.joinDate}
-                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
                               className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(customer.status)}`}
@@ -212,7 +212,7 @@ export default function CustomersPage() {
                               {customer.status}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex space-x-2">
                               <button className="text-blue-600 hover:text-blue-900">
                                 <Eye className="h-4 w-4" />
@@ -224,7 +224,7 @@ export default function CustomersPage() {
                                 <Phone className="h-4 w-4" />
                               </button>
                             </div>
-                          </td>
+                          </td> */}
                         </tr>
                       ))}
                     </tbody>

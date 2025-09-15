@@ -1,201 +1,208 @@
+import crypto from 'crypto';
 import { prisma } from '../db/db.js';
 import uniqid from 'uniqid';
 import createOrderItemFromProduct from '../utils/createOrderItemFromProduct.js';
-import {
-  StandardCheckoutClient,
-  Env,
-  StandardCheckoutPayRequest,
-} from 'pg-sdk-node';
-import { fileURLToPath } from 'url';
-import path from 'path';
+import getRazorpayClient from '../utils/razorpayClient.js';
 
-// Setup __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Constants for success/failure pages
-const successPath = path.join(__dirname, '../../public/success.html');
-const failedPath = path.join(__dirname, '../../public/failed.html');
-
-// Use sandbox environment
-const env = Env.SANDBOX;
-
-// Singleton PhonePe client
-let phonePeClient = null;
-function getPhonePeClient(clientId, clientSecret, clientVersion, env) {
-  if (!phonePeClient) {
-    phonePeClient = StandardCheckoutClient.getInstance(
-      clientId,
-      clientSecret,
-      clientVersion,
-      env
-    );
-  }
-  return phonePeClient;
-}
-
-const sendData = async (req, res) => {
-  const { simplifiedItems, amount, shippingAddressId } = req.body;
+// ✅ Create Razorpay Order
+export const createOrder = async (req, res) => {
   const storeId = req.store.id;
   const customerId = req.customer.id;
-  console.log('storeId', storeId);
-
-  console.log('simplifiedItems', simplifiedItems);
+  const { simplifiedItems, amount, shippingAddressId } = req.body;
 
   try {
-    const [store, phonePe] = await Promise.all([
-      prisma.store.findUnique({ where: { id: storeId } }),
-      prisma.phonePe.findUnique({ where: { storeId } }),
-    ]);
-    console.log('store', store);
-    console.log('phonePe', phonePe);
-    if (!store || !phonePe) {
-      return res
-        .status(404)
-        .json({ message: 'Store or PhonePe config not found' });
+    // 1️⃣ Get Razorpay credentials for this store
+    const razorpayConfig = await prisma.razorpay.findUnique({
+      where: { storeId },
+    });
+
+    if (!razorpayConfig) {
+      return res.status(404).json({ message: 'Razorpay config not found' });
     }
 
-    const { clientId, clientSecret, clientVersion } = phonePe;
-
-    // ✅ Use singleton client
-    const client = getPhonePeClient(
-      clientId,
-      clientSecret,
-      clientVersion,
-      Env.SANDBOX
+    // 2️⃣ Init client dynamically
+    const razorpay = getRazorpayClient(
+      storeId,
+      razorpayConfig.keyId,
+      razorpayConfig.keySecret
     );
 
-    const merchantTransactionId = `TX-${uniqid()}`;
-    const amountInPaise = Number(amount) * 100;
-    const redirectUrl = `http://${store.domain}:3000/api/v1/pay/check/${merchantTransactionId}/${customerId}`;
+    // 3️⃣ Create order in Razorpay
+    const options = {
+      amount: Number(amount) * 100, // in paise
+      currency: 'INR',
+      receipt: `rcpt_${uniqid()}`,
+    };
 
-    const request = StandardCheckoutPayRequest.builder()
-      .merchantOrderId(merchantTransactionId)
-      .amount(amountInPaise)
-      .redirectUrl(redirectUrl)
-      .build();
-
-    const response = await client.pay(request);
-    const checkoutPageUrl = response.redirectUrl;
-
-    // ✅ Immediately respond to the user
-    res.status(200).json({ redirectUrl: checkoutPageUrl });
-
-    // ✅ Generate and create OrderItems array
+    const razorOrder = await razorpay.orders.create(options);
+    console.log(razorOrder);
+    // 4️⃣ Generate and create OrderItems array
     const orderItems = await Promise.all(
       simplifiedItems.map(({ _id, quantity }) =>
         createOrderItemFromProduct(_id, quantity)
       )
     );
 
-    // ✅ Create order + payment
+    // 5️⃣ Save order + payment in DB
     await prisma.order.create({
       data: {
-        shippingAddress: {
-          connect: { id: shippingAddressId },
-        },
+        shippingAddress: { connect: { id: shippingAddressId } },
         totalAmount: Number(amount),
         currency: 'INR',
         status: 'PENDING',
-        store: {
-          connect: { id: storeId },
-        },
-        customer: {
-          connect: { id: customerId },
-        },
-        items: {
-          create: orderItems,
-        },
+        store: { connect: { id: storeId } },
+        customer: { connect: { id: customerId } },
+        items: { create: orderItems },
         payment: {
           create: {
             amount: Number(amount),
-            method: 'PHONEPE',
+            method: 'RAZORPAY',
             status: 'PENDING',
-            transactionId: merchantTransactionId,
+            transactionId: razorOrder.id, // save Razorpay orderId
+            store: { connect: { id: storeId } },
           },
         },
       },
     });
 
-    console.log('Order and payment initialized:', merchantTransactionId);
-  } catch (error) {
-    console.error('Payment/Order setup failed:', error);
-    if (!res.headersSent) {
-      res
-        .status(500)
-        .json({ message: 'Internal error during order/payment setup.' });
-    }
+    // 6️⃣ Send details back to frontend
+    return res.json({
+      key: razorpayConfig.keyId,
+      amount: options.amount,
+      currency: options.currency,
+      orderId: razorOrder.id,
+    });
+  } catch (err) {
+    console.error('Error creating Razorpay order:', err);
+    res.status(500).json({ message: 'Error creating order' });
   }
 };
 
-const CheckData = async (req, res) => {
-  const { merchantTransactionId, id } = req.params;
+// ✅ Verify Razorpay Payment
+export const verifyPayment = async (req, res) => {
   const storeId = req.store.id;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+    req.body;
 
   try {
-    const payment = await prisma.payment.findFirst({
-      where: {
-        transactionId: merchantTransactionId,
-        order: {
-          customerId: id,
-          storeId: storeId,
-        },
-      },
-      include: {
-        order: true,
-      },
-    });
-
-    if (!payment || !payment.order) {
-      return res.status(404).json({ message: 'Payment or order not found.' });
-    }
-
-    const phonePe = await prisma.phonePe.findUnique({
+    // 1️⃣ Get Razorpay config for this store
+    const razorpayConfig = await prisma.razorpay.findUnique({
       where: { storeId },
     });
 
-    if (!phonePe) {
-      return res
-        .status(404)
-        .json({ message: 'PhonePe config not found for store.' });
+    if (!razorpayConfig) {
+      return res.status(404).json({ message: 'Razorpay config not found' });
     }
 
-    // ✅ Use singleton client
-    const client = getPhonePeClient(
-      phonePe.clientId,
-      phonePe.clientSecret,
-      phonePe.clientVersion,
-      env
+    // 2️⃣ Init Razorpay client dynamically
+    const razorpay = getRazorpayClient(
+      storeId,
+      razorpayConfig.keyId,
+      razorpayConfig.keySecret
     );
 
-    const statusResponse = await client.getOrderStatus(merchantTransactionId);
-    const state = statusResponse?.state;
-    const paymentDetails = statusResponse?.paymentDetails?.[0];
+    // 3️⃣ Verify signature
+    const hmac = crypto.createHmac('sha256', razorpayConfig.keySecret);
+    hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
+    const generatedSignature = hmac.digest('hex');
 
-    if (!paymentDetails) {
-      return res
-        .status(400)
-        .json({ message: 'Payment details not found from PhonePe.' });
+    if (generatedSignature !== razorpay_signature) {
+      return res.status(400).json({ message: 'Invalid payment signature' });
     }
 
-    const paymentStatus = state === 'COMPLETED' ? 'COMPLETED' : 'FAILED';
+    // 4️⃣ Fetch payment details from Razorpay to check status
+    const paymentDetails = await razorpay.payments.fetch(razorpay_payment_id);
 
-    await prisma.payment.update({
-      where: { id: payment.id },
-      data: {
-        status: paymentStatus,
-        transactionId: paymentDetails.transactionId,
-        method: 'PHONEPE',
-        timestamp: new Date(paymentDetails.timestamp),
-      },
+    // 5️⃣ Find DB payment record
+    const payment = await prisma.payment.findFirst({
+      where: { transactionId: razorpay_order_id },
+      include: { order: true },
     });
 
-    const filePath = paymentStatus === 'COMPLETED' ? successPath : failedPath;
-    return res.sendFile(filePath);
-  } catch (error) {
-    console.error('Error checking payment status:', error.message);
-    return res.status(500).sendFile(failedPath);
+    if (!payment) {
+      return res.status(404).json({ message: 'Payment record not found' });
+    }
+
+    // 6️⃣ Update DB based on payment status
+    if (paymentDetails.status === 'captured') {
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: {
+          status: 'COMPLETED',
+          method: 'RAZORPAY',
+          transactionId: razorpay_payment_id,
+        },
+      });
+
+      await prisma.order.update({
+        where: { id: payment.order.id },
+        data: { status: 'PROCESSING' },
+      });
+
+      return res.status(200).json({ message: 'Payment verified successfully' });
+    } else {
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: { status: 'FAILED' },
+      });
+
+      await prisma.order.update({
+        where: { id: payment.order.id },
+        data: { status: 'PENDING' },
+      });
+
+      return res.status(400).json({ message: 'Payment not successful' });
+    }
+  } catch (err) {
+    console.error('Payment verification failed:', err);
+    res.status(500).json({
+      message: 'Internal error verifying payment',
+      error: err.message,
+    });
+  }
+};
+export const fetchPayments = async (req, res) => {
+  const storeId = req.user?.storeId;
+  // console.log(req.user);
+
+  if (!storeId) {
+    return res.status(400).json({ message: 'Missing storeId' });
+  }
+
+  try {
+    const payments = await prisma.payment.findMany({
+      where: { order: { storeId } },
+      include: { order: true },
+      orderBy: { timestamp: 'desc' },
+    });
+
+    res.status(200).json(payments);
+  } catch (err) {
+    console.error('Error fetching payments:', err);
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch payments', error: err.message });
   }
 };
 
-export { sendData, CheckData };
+// ✅ Fetch payment by ID (or transactionId)
+export const fetchPaymentById = async (req, res) => {
+  const { id } = req.params; // this can be payment.id or transactionId
+  try {
+    const payment = await prisma.payment.findUnique({
+      where: { id },
+      include: { order: true },
+    });
+
+    if (!payment) {
+      return res.status(404).json({ message: 'Payment not found' });
+    }
+
+    res.status(200).json(payment);
+  } catch (err) {
+    console.error('Error fetching payment:', err);
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch payment', error: err.message });
+  }
+};

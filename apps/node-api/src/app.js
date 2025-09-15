@@ -18,10 +18,11 @@ import uiRoute from './routes/uiRoute.js';
 // import HeroRouter from "./routes/heroSection.js";
 import ProductRouter from './routes/prodcutRoute.js';
 import customerRouter from './routes/customerRoutes.js';
-import phonepeRoute from './routes/phonePeRoute.js';
+import razorpayRoute from './routes/razorpayRoute.js';
 import paymentRoute from './routes/paymentRoute.js';
 import storeInfoRoute from './routes/storeInfoRoute.js';
 import orderRoute from './routes/merchentOrderRoute.js';
+import analyticsRoute from './routes/analyticsRoute.js';
 import chalk from 'chalk';
 
 dotenv.config();
@@ -34,7 +35,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
-app.use(cors({ origin: true }));
+app.use(cors({ origin: '*' }));
 app.use(rateLimit);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -47,12 +48,13 @@ app.use('/api/v1/ui', uiRoute);
 // apps.use("/api/v1/ui/hero", HeroRouter); // Optional if used
 app.use('/api/v1/products', ProductRouter);
 app.use('/api/v1/customer', customerRouter);
-app.use('/api/v1/phonepe', phonepeRoute);
+app.use('/api/v1/razorpay', razorpayRoute);
 app.use('/api/v1/pay', paymentRoute);
 app.use('/api/v1/store', storeInfoRoute);
 app.use('/api/v1/orders', orderRoute);
+app.use('/api/v1/analytics', analyticsRoute);
 
-app.get('/', async (req, res) => {
+app.get(/.*/, async (req, res) => {
   try {
     const domain = req.hostname;
 
@@ -104,6 +106,14 @@ app.get('/', async (req, res) => {
 app.get('/admin', (req, res) => {
   res.redirect('http://localhost:3000');
 });
+
+// app.get('/assets/:file', async (req, res) => {
+//   const url = `https://media.pixelperfects.in/Devassets/${req.params.file}`;
+//   const response = await fetch(url);
+//   const data = await response.text();
+//   res.setHeader('Content-Type', 'application/javascript');
+//   res.send(data);
+// });
 
 // Start Server
 

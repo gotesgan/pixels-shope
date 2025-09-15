@@ -1,5 +1,5 @@
 import { prisma } from '../db/db.js';
-import mediaHandler from '../utils/mediahandler.js';
+//import mediaHandler from '../utils/mediahandler.js';
 import fs from 'fs';
 
 // Create Blog with Media

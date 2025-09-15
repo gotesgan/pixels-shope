@@ -18,8 +18,9 @@ export default function PaymentsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showCredentials, setShowCredentials] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [paymentSettings, setPaymentSettings] = useState({
-    phonePe: {
+    razorpay: {
       isActive: false,
       clientId: '',
       clientSecret: '',
@@ -39,137 +40,150 @@ export default function PaymentsPage() {
       freeShippingThreshold: 999,
     },
   });
-
-  const [transactions] = useState([
-    {
-      id: 'TXN001',
-      orderId: 'ORD-001',
-      amount: 2999,
-      method: 'PHONEPE',
-      status: 'COMPLETED',
-      transactionId: 'T2024011501',
-      timestamp: '2024-01-15T10:30:00Z',
-    },
-    {
-      id: 'TXN002',
-      orderId: 'ORD-002',
-      amount: 1599,
-      method: 'COD',
-      status: 'PENDING',
-      transactionId: null,
-      timestamp: '2024-01-14T15:45:00Z',
-    },
-    {
-      id: 'TXN003',
-      orderId: 'ORD-003',
-      amount: 4299,
-      method: 'PHONEPE',
-      status: 'FAILED',
-      transactionId: 'T2024011301',
-      timestamp: '2024-01-13T09:15:00Z',
-    },
-  ]);
+  const [transactions, setTransactions] = useState([]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Fetch PhonePe settings
-// Helper to get headers with token
-const getHeaders = () => {
-  const token = localStorage.getItem('token'); // Make sure your token is stored with key 'token'
-  const headers = new Headers();
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-  if (token) headers.append("Authorization", `Bearer ${token}`);
-  return headers;
-};
-
-// Fetch PhonePe settings
-const fetchPhonePeSettings = async () => {
-  try {
-    const response = await fetch("http://localhost:3001/api/v1/phonepe/", {
-      method: "GET",
-      headers: getHeaders(),
-      redirect: "follow",
-    });
-
-    if (response.ok) {
-      const resJson = await response.json();
-      console.log('Fetched PhonePe settings:', resJson);
-
-      // Use resJson.data to get the actual settings
-      setPaymentSettings(prev => ({
-        ...prev,
-        phonePe: { ...resJson.data },
-      }));
-    }
-  } catch (error) {
-    console.error('Error fetching PhonePe settings:', error);
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-// Save PhonePe settings
-const savePhonePeSettings = async () => {
-  try {
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("clientId", paymentSettings.phonePe.clientId);
-    urlencoded.append("clientSecret", paymentSettings.phonePe.clientSecret);
-    urlencoded.append("clientVersion", paymentSettings.phonePe.clientVersion);
-
-    const response = await fetch("http://localhost:3001/api/v1/phonepe/", {
-      method: paymentSettings.phonePe.id ? "PUT" : "POST",
-      headers: getHeaders(),
-      body: urlencoded,
-      redirect: "follow",
-    });
-
-    if (response.ok) {
-      alert('PhonePe settings saved successfully!');
-      fetchPhonePeSettings();
-    }
-  } catch (error) {
-    console.error('Error saving PhonePe settings:', error);
-    alert('Error saving settings. Please try again.');
-  }
-};
-
-// Toggle PhonePe status
-const togglePhonePeStatus = async () => {
-  try {
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("clientId", paymentSettings.phonePe.clientId);
-    urlencoded.append("clientSecret", paymentSettings.phonePe.clientSecret);
-    urlencoded.append("clientVersion", paymentSettings.phonePe.clientVersion);
-
-    const response = await fetch("http://localhost:3001/api/v1/phonepe/toggle-status", {
-      method: "PATCH",
-      headers: getHeaders(),
-      body: urlencoded,
-      redirect: "follow",
-    });
-
-    if (response.ok) {
-      setPaymentSettings(prev => ({
-        ...prev,
-        phonePe: { ...prev.phonePe, isActive: !prev.phonePe.isActive },
-      }));
-    }
-  } catch (error) {
-    console.error('Error toggling PhonePe status:', error);
-  }
-};
-
-  const handleSave = () => {
-    savePhonePeSettings();
+  // Helper to get headers with token
+  const getHeaders = () => {
+    const token = localStorage.getItem('token');
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    if (token) headers.append('Authorization', `Bearer ${token}`);
+    return headers;
   };
 
-  const updatePhonePeSetting = (field, value) => {
+  // Fetch Razorpay settings
+  const fetchRazorpaySettings = async () => {
+    try {
+      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/', {
+        method: 'GET',
+        headers: getHeaders(),
+        redirect: 'follow',
+      });
+
+      if (response.ok) {
+        const resJson = await response.json();
+        console.log('Fetched Razorpay settings:', resJson);
+        setPaymentSettings((prev) => ({
+          ...prev,
+          razorpay: { ...resJson.data },
+        }));
+      } else {
+        throw new Error('Failed to fetch Razorpay settings');
+      }
+    } catch (error) {
+      console.error('Error fetching Razorpay settings:', error);
+      setError('Failed to load Razorpay settings.');
+    }
+  };
+
+  // Fetch transactions
+  const fetchTransactions = async () => {
+    try {
+      const response = await fetch('https://api.pixelperfects.in/api/v1/pay/', {
+        method: 'GET',
+        headers: getHeaders(),
+        redirect: 'follow',
+      });
+
+      if (response.ok) {
+        const resJson = await response.json();
+        console.log('Fetched transactions:', resJson);
+        // Transform API data to match the expected transaction structure
+        const transformedTransactions = resJson.map((item) => ({
+          id: item.id,
+          orderId: item.orderId,
+          amount: item.amount,
+          method: item.method,
+          status: item.status,
+          transactionId: item.transactionId,
+          timestamp: item.timestamp,
+        }));
+        setTransactions(transformedTransactions);
+      } else {
+        throw new Error('Failed to fetch transactions');
+      }
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      setError('Failed to load transactions.');
+    }
+  };
+
+  // Fetch both settings and transactions on mount
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await Promise.all([fetchRazorpaySettings(), fetchTransactions()]);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  // Save Razorpay settings
+  const saveRazorpaySettings = async () => {
+    try {
+      const urlencoded = new URLSearchParams();
+      urlencoded.append('keyId', paymentSettings.razorpay.clientId);
+      urlencoded.append('keySecret', paymentSettings.razorpay.clientSecret);
+
+      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/', {
+        method: paymentSettings.razorpay.id ? 'PUT' : 'POST',
+        headers: getHeaders(),
+        body: urlencoded,
+        redirect: 'follow',
+      });
+
+      if (response.ok) {
+        alert('Razorpay settings saved successfully!');
+        await fetchRazorpaySettings();
+      } else {
+        throw new Error('Failed to save Razorpay settings');
+      }
+    } catch (error) {
+      console.error('Error saving Razorpay settings:', error);
+      alert('Error saving settings. Please try again.');
+    }
+  };
+
+  // Toggle Razorpay status
+  const toggleRazorpayStatus = async () => {
+    try {
+      const urlencoded = new URLSearchParams();
+      urlencoded.append('keyId', paymentSettings.razorpay.clientId);
+      urlencoded.append('keySecret', paymentSettings.razorpay.clientSecret);
+
+      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/toggle-status', {
+        method: 'PATCH',
+        headers: getHeaders(),
+        body: urlencoded,
+        redirect: 'follow',
+      });
+
+      if (response.ok) {
+        setPaymentSettings((prev) => ({
+          ...prev,
+          razorpay: { ...prev.razorpay, isActive: !prev.razorpay.isActive },
+        }));
+      } else {
+        throw new Error('Failed to toggle Razorpay status');
+      }
+    } catch (error) {
+      console.error('Error toggling Razorpay status:', error);
+      alert('Error toggling Razorpay status.');
+    }
+  };
+
+  const handleSave = () => {
+    saveRazorpaySettings();
+  };
+
+  const updateRazorpaySetting = (field, value) => {
     setPaymentSettings((prev) => ({
       ...prev,
-      phonePe: { ...prev.phonePe, [field]: value },
+      razorpay: { ...prev.razorpay, [field]: value },
     }));
   };
 
@@ -204,7 +218,7 @@ const togglePhonePeStatus = async () => {
 
   const getMethodIcon = (method) => {
     switch (method) {
-      case 'PHONEPE':
+      case 'RAZORPAY':
         return <Smartphone className="h-4 w-4" />;
       case 'COD':
         return <DollarSign className="h-4 w-4" />;
@@ -212,10 +226,6 @@ const togglePhonePeStatus = async () => {
         return <CreditCard className="h-4 w-4" />;
     }
   };
-
-  useEffect(() => {
-    fetchPhonePeSettings();
-  }, []);
 
   if (loading) {
     return (
@@ -232,7 +242,39 @@ const togglePhonePeStatus = async () => {
           <div className="p-6 flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-              <p className="mt-4 text-gray-600">Loading payment settings...</p>
+              <p className="mt-4 text-gray-600">Loading payment settings and transactions...</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <Sidebar isOpen={sidebarOpen} />
+        <Navbar
+          toggleSidebar={toggleSidebar}
+          storeName="My Store"
+          sidebarOpen={sidebarOpen}
+        />
+        <main
+          className={`transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'} pt-16`}
+        >
+          <div className="p-6 flex items-center justify-center">
+            <div className="text-center">
+              <p className="text-red-600">{error}</p>
+              <button
+                onClick={() => {
+                  setError(null);
+                  setLoading(true);
+                  fetchData();
+                }}
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Retry
+              </button>
             </div>
           </div>
         </main>
@@ -308,7 +350,7 @@ const togglePhonePeStatus = async () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* PhonePe Settings */}
+              {/* Razorpay Settings */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
@@ -317,24 +359,24 @@ const togglePhonePeStatus = async () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">
-                        PhonePe Integration
+                        Razorpay Integration
                       </h3>
                       <p className="text-sm text-gray-600">
-                        Configure PhonePe payment gateway
+                        Configure Razorpay payment gateway
                       </p>
                     </div>
                   </div>
                   <button
-                    onClick={togglePhonePeStatus}
+                    onClick={toggleRazorpayStatus}
                     className="flex items-center space-x-2"
                   >
-                    {paymentSettings.phonePe.isActive ? (
+                    {paymentSettings.razorpay.isActive ? (
                       <ToggleRight className="h-8 w-8 text-green-600" />
                     ) : (
                       <ToggleLeft className="h-8 w-8 text-gray-400" />
                     )}
                     <span className="text-sm font-medium">
-                      {paymentSettings.phonePe.isActive ? 'Active' : 'Inactive'}
+                      {paymentSettings.razorpay.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </button>
                 </div>
@@ -342,34 +384,34 @@ const togglePhonePeStatus = async () => {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Client ID
+                      Key ID
                     </label>
                     <input
                       type={showCredentials ? 'text' : 'password'}
-                      value={paymentSettings.phonePe.clientId}
+                      value={paymentSettings.razorpay.clientId}
                       onChange={(e) =>
-                        updatePhonePeSetting('clientId', e.target.value)
+                        updateRazorpaySetting('clientId', e.target.value)
                       }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      disabled={!paymentSettings.phonePe.isActive}
-                      placeholder="Enter PhonePe Client ID"
+                      disabled={!paymentSettings.razorpay.isActive}
+                      placeholder="Enter Razorpay Key ID"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Client Secret
+                      Key Secret
                     </label>
                     <div className="relative">
                       <input
                         type={showCredentials ? 'text' : 'password'}
-                        value={paymentSettings.phonePe.clientSecret}
+                        value={paymentSettings.razorpay.clientSecret}
                         onChange={(e) =>
-                          updatePhonePeSetting('clientSecret', e.target.value)
+                          updateRazorpaySetting('clientSecret', e.target.value)
                         }
                         className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        disabled={!paymentSettings.phonePe.isActive}
-                        placeholder="Enter PhonePe Client Secret"
+                        disabled={!paymentSettings.razorpay.isActive}
+                        placeholder="Enter Razorpay Key Secret"
                       />
                       <button
                         type="button"
@@ -385,40 +427,23 @@ const togglePhonePeStatus = async () => {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      API Version
-                    </label>
-                    <select
-                      value={paymentSettings.phonePe.clientVersion}
-                      onChange={(e) =>
-                        updatePhonePeSetting('clientVersion', e.target.value)
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      disabled={!paymentSettings.phonePe.isActive}
-                    >
-                      <option value="v1">Version 1</option>
-                      <option value="v2">Version 2</option>
-                    </select>
-                  </div>
-
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      checked={paymentSettings.phonePe.testMode}
+                      checked={paymentSettings.razorpay.testMode}
                       onChange={(e) =>
-                        updatePhonePeSetting('testMode', e.target.checked)
+                        updateRazorpaySetting('testMode', e.target.checked)
                       }
                       className="rounded"
-                      disabled={!paymentSettings.phonePe.isActive}
+                      disabled={!paymentSettings.razorpay.isActive}
                     />
                     <span className="text-sm text-gray-700">Test Mode</span>
                   </label>
                 </div>
               </div>
 
-              {/* Cash on Delivery Settings */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              {/* Uncomment Cash on Delivery Settings if needed */}
+              {/* <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="bg-green-100 p-2 rounded-lg">
@@ -502,7 +527,7 @@ const togglePhonePeStatus = async () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* General Settings */}

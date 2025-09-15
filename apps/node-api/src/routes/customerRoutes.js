@@ -7,7 +7,7 @@ import {
   updateShippingAddress,
   deleteShippingAddress,
 } from '../controllers/customerAuthController.js';
-import fetchOrder from '../controllers/orderController.js';
+import {fetchOrder} from '../controllers/orderController.js';
 import storeIdentifctionMiddleware from '../middleware/storeIdentifctionMiddleware.js';
 import { verifyCustomer } from '../middleware/authtenicateCustomer.js';
 

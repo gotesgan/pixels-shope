@@ -1,6 +1,6 @@
 import { prisma } from '../db/db.js';
 
-const fetchOrder = async (req, res) => {
+export const fetchOrder = async (req, res) => {
   const isCustomer = !!req.customer;
   const isUser = !!req.user;
 
@@ -41,7 +41,56 @@ const fetchOrder = async (req, res) => {
   }
 };
 
+// import { prisma } from '../db/db.js';
 
+// Update order status
+export const updateOrderStatus = async (req, res) => {
+  const { id } = req.params; // fixed typo: req.parmas -> req.params
+  const { storeId } = req.user;
+  const { status } = req.body; // new status to update
 
+  // Validate input
+  const validStatuses = [
+    'PENDING',
+    'PROCESSING',
+    'SHIPPED',
+    'DELIVERED',
+    'CANCELLED',
+    'RETURNED',
+  ];
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({
+      message: `Invalid status. Valid statuses are: ${validStatuses.join(
+        ', '
+      )}`,
+    });
+  }
 
-export default fetchOrder;
+  try {
+    // Ensure order exists and belongs to the store
+    const existingOrder = await prisma.order.findUnique({
+      where: { id },
+    });
+
+    if (!existingOrder || existingOrder.storeId !== storeId) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    // Update status
+    const updatedOrder = await prisma.order.update({
+      where: { id },
+      data: { status },
+      include: { items: true, shippingAddress: true, payment: true },
+    });
+
+    res.status(200).json({
+      message: 'Order status updated successfully',
+      data: updatedOrder,
+    });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res
+      .status(500)
+      .json({ message: 'Failed to update order status', error: error.message });
+  }
+};

@@ -1,4 +1,4 @@
-import mediaHandler from '../utils/mediahandler.js';
+//import mediaHandler from '../utils/mediahandler.js';
 import { prisma } from '../db/db.js';
 import fs from 'fs';
 import path from 'path';

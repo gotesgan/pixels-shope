@@ -3,20 +3,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Mock domain verification function
-const mockVerifyDomain = async (domain) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
-  // Mock verification logic
-  if (domain && domain.includes('.')) {
-    return { success: true, message: 'Domain verified successfully!' };
-  } else {
-    throw new Error(
-      'Domain verification failed. Please check your domain and DNS settings.',
-    );
-  }
-};
-
 export default function DomainVerify() {
   const navigate = useNavigate();
   const [domain, setDomain] = useState('');
@@ -34,16 +20,26 @@ export default function DomainVerify() {
     setError('');
 
     try {
-      const result = await mockVerifyDomain(domain);
-      setVerified(true);
+      const response = await fetch('https://api.pixelperfects.in/verify-store', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+        body: JSON.stringify({ domain }),
+      });
 
-      // Store verified domain
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Verification failed');
+      }
+
+      setVerified(true);
       localStorage.setItem('verifiedDomain', domain);
 
-      // Auto redirect to login after 2 seconds
-      setTimeout(() => {
-        navigate('/Login');
-      }, 2000);
+      // Auto redirect to login after 2s
+      setTimeout(() => navigate('/Login'), 2000);
     } catch (err) {
       setError(err.message || 'Verification failed. Please try again.');
     } finally {
@@ -53,44 +49,24 @@ export default function DomainVerify() {
 
   if (verified) {
     return (
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-16">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg
-              className="w-8 h-8 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold text-green-600 mb-2">
-            Domain Verified!
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Your domain {domain} has been successfully verified.
-          </p>
-          <p className="text-sm text-gray-500">Redirecting to login...</p>
+      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-16 text-center">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
         </div>
+        <h2 className="text-2xl font-bold text-green-600 mb-2">Domain Verified!</h2>
+        <p className="text-gray-600 mb-4">Your domain {domain} has been successfully verified.</p>
+        <p className="text-sm text-gray-500">Redirecting to login...</p>
       </div>
     );
   }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-16">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Verify Your Domain
-      </h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Verify Your Domain</h2>
 
-      {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
-      )}
+      {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>}
 
       <div className="mb-6">
         <label className="block text-sm font-medium mb-1" htmlFor="domain">
@@ -105,9 +81,7 @@ export default function DomainVerify() {
           placeholder="e.g., yourdomain.com"
           required
         />
-        <p className="text-xs text-gray-500 mt-1">
-          Enter the domain you configured with DNS records
-        </p>
+        <p className="text-xs text-gray-500 mt-1">Enter the domain you configured with DNS records</p>
       </div>
 
       <button

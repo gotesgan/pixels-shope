@@ -43,17 +43,16 @@ export default function Sidebar({ isOpen }) {
 
   return (
     <aside
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-gradient-to-b from-slate-900 to-slate-800 shadow-2xl transition-all duration-300 z-40 ${
+      className={`fixed left-0 top-0 h-[calc(100vh)] bg-gradient-to-b from-slate-900 to-slate-800 shadow-2xl transition-all duration-300 z-40 ${
         isOpen ? 'w-64' : 'w-16'
-      }`}
+      } `} // Always open on medium screens and above
     >
       {/* Sidebar Header */}
       <div className="p-4 border-b border-slate-700">
         <div className="flex items-center justify-center">
-          {isOpen && (
+          {isOpen ? (
             <h2 className="text-white font-semibold text-lg">Store Manager</h2>
-          )}
-          {!isOpen && (
+          ) : (
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Home className="h-4 w-4 text-white" />
             </div>
@@ -62,7 +61,7 @@ export default function Sidebar({ isOpen }) {
       </div>
 
       {/* Navigation */}
-      <div className="p-2 overflow-y-auto">
+      <div className="p-2 overflow-y-auto h-[calc(100%-4rem-4rem)]"> {/* Adjust for header and footer */}
         <nav className="space-y-2">
           {menuItems.map((item, index) => {
             const Icon = item.icon;
@@ -71,12 +70,15 @@ export default function Sidebar({ isOpen }) {
               <button
                 key={index}
                 onClick={() => handleNavigation(item.path)}
-                className={`w-full flex items-center ${isOpen ? 'space-x-3 px-3' : 'justify-center px-2'} py-3 rounded-xl text-left transition-all duration-200 group relative ${
+                className={`w-full flex items-center ${
+                  isOpen ? 'space-x-3 px-3' : 'justify-center px-2'
+                } py-3 rounded-xl text-left transition-all duration-200 group relative ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
                     : 'text-slate-300 hover:bg-slate-700 hover:text-white'
                 }`}
                 title={!isOpen ? item.label : undefined}
+                aria-label={item.label} // Added for accessibility
               >
                 <Icon
                   className={`h-5 w-5 flex-shrink-0 transition-transform group-hover:scale-110 ${

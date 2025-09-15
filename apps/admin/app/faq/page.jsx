@@ -68,7 +68,7 @@ export default function FAQPage() {
   useEffect(() => {
     const fetchFaqs = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/v1/ui/faqs`, {
+        const response = await fetch(`https://api.pixelperfects.in/api/v1/ui/faqs`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -95,7 +95,7 @@ export default function FAQPage() {
       // Example API call
       console.log('Deleting FAQ with id:', id);
       const response = await fetch(
-        `http://localhost:3001/api/v1/ui/faqs/${id}`,
+        `https://api.pixelperfects.in/api/v1/ui/faqs/${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -120,7 +120,7 @@ export default function FAQPage() {
     try {
       // Example API call
       console.log('Saving FAQ:', faq);
-      const response = await fetch(`http://localhost:3001/api/v1/ui/faqs`, {
+      const response = await fetch(`https://api.pixelperfects.in/api/v1/ui/faqs`, {
         method: 'post',
         headers: {
           authorization: `Bearer ${localStorage.getItem('token')}`,

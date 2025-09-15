@@ -1,51 +1,62 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, Filter, Eye, Package, Truck } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Filter } from 'lucide-react';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
+
+const changeOrderStatus = async (orderId, token, status = "SHIPPED") => {
+  try {
+    const response = await fetch(`https://api.pixelperfects.in/api/v1/orders/changeStatus/${orderId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status }),
+    });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Order status updated:", data);
+    return data;
+  } catch (error) {
+    console.error("Error updating order status:", error);
+    throw error;
+  }
+};
 
 export default function OrdersPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [orders] = useState([
-    {
-      id: 'ORD-001',
-      customer: 'John Doe',
-      email: 'john@example.com',
-      total: 2999,
-      status: 'Pending',
-      date: '2024-01-15',
-      items: 2,
-    },
-    {
-      id: 'ORD-002',
-      customer: 'Jane Smith',
-      email: 'jane@example.com',
-      total: 1599,
-      status: 'Processing',
-      date: '2024-01-14',
-      items: 1,
-    },
-    {
-      id: 'ORD-003',
-      customer: 'Mike Johnson',
-      email: 'mike@example.com',
-      total: 4299,
-      status: 'Shipped',
-      date: '2024-01-13',
-      items: 3,
-    },
-    {
-      id: 'ORD-004',
-      customer: 'Sarah Wilson',
-      email: 'sarah@example.com',
-      total: 899,
-      status: 'Delivered',
-      date: '2024-01-12',
-      items: 1,
-    },
-  ]);
+  const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
+
+  const orderStatuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED'];
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('https://api.pixelperfects.in/api/v1/orders/', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch orders');
+        }
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        setError('Failed to load orders. Please try again.');
+      }
+    };
+    fetchOrders();
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -53,24 +64,88 @@ export default function OrdersPage() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Pending':
+      case 'PENDING':
         return 'bg-yellow-100 text-yellow-800';
-      case 'Processing':
+      case 'PROCESSING':
         return 'bg-blue-100 text-blue-800';
-      case 'Shipped':
+      case 'SHIPPED':
         return 'bg-purple-100 text-purple-800';
-      case 'Delivered':
+      case 'DELIVERED':
         return 'bg-green-100 text-green-800';
+      case 'CANCELLED':
+        return 'bg-red-100 text-red-800';
+      case 'RETURNED':
+        return 'bg-orange-100 text-orange-800';
       default:
         return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStats = () => {
+    const stats = {
+      pending: 0,
+      processing: 0,
+      shipped: 0,
+      delivered: 0,
+      cancelled: 0,
+      returned: 0,
+    };
+    orders.forEach((order) => {
+      switch (order.status) {
+        case 'PENDING':
+          stats.pending += 1;
+          break;
+        case 'PROCESSING':
+          stats.processing += 1;
+          break;
+        case 'SHIPPED':
+          stats.shipped += 1;
+          break;
+        case 'DELIVERED':
+          stats.delivered += 1;
+          break;
+        case 'CANCELLED':
+          stats.cancelled += 1;
+          break;
+        case 'RETURNED':
+          stats.returned += 1;
+          break;
+      }
+    });
+    return stats;
+  };
+
+  const stats = getStats();
+
+  const handleStatusChange = async (orderId, newStatus) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('No authentication token found. Please log in.');
+        return;
+      }
+
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+
+      await changeOrderStatus(orderId, token, newStatus);
+    } catch (error) {
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, status: order.status } : order
+        )
+      );
+      setError('Failed to update order status. Please try again.');
     }
   };
 
   const filteredOrders = orders.filter(
     (order) =>
       order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      order.customer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      order.email.toLowerCase().includes(searchTerm.toLowerCase()),
+      order.shippingAddress.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -91,29 +166,32 @@ export default function OrdersPage() {
                 Orders Management
               </h1>
               <p className="text-gray-600">Track and manage customer orders</p>
+              {error && (
+                <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
+                  {error}
+                </div>
+              )}
             </div>
             <div className="space-y-6 mt-8">
-              {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-yellow-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-yellow-700">12</div>
+                  <div className="text-2xl font-bold text-yellow-700">{stats.pending}</div>
                   <div className="text-sm text-yellow-600">Pending Orders</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-700">8</div>
+                  <div className="text-2xl font-bold text-blue-700">{stats.processing}</div>
                   <div className="text-sm text-blue-600">Processing</div>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-700">15</div>
+                  <div className="text-2xl font-bold text-purple-700">{stats.shipped}</div>
                   <div className="text-sm text-purple-600">Shipped</div>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-green-700">10</div>
+                  <div className="text-2xl font-bold text-green-700">{stats.delivered}</div>
                   <div className="text-sm text-green-600">Delivered</div>
                 </div>
               </div>
 
-              {/* Search and Filter */}
               <div className="flex space-x-4">
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -132,7 +210,6 @@ export default function OrdersPage() {
               </div>
             </div>
 
-            {/* Orders Table */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mt-8">
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -154,7 +231,16 @@ export default function OrdersPage() {
                         Total
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
+                        Order Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Payment Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Payment Method
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Transaction ID
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Actions
@@ -170,21 +256,21 @@ export default function OrdersPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div>
                             <div className="text-sm font-medium text-gray-900">
-                              {order.customer}
+                              {order.shippingAddress.name}
                             </div>
                             <div className="text-sm text-gray-500">
-                              {order.email}
+                              {order.shippingAddress.address}, {order.shippingAddress.city}
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {order.date}
+                          {new Date(order.createdAt).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {order.items}
+                          {order.items.length}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          ₹{order.total}
+                          {order.currency} {order.totalAmount}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
@@ -193,17 +279,32 @@ export default function OrdersPage() {
                             {order.status}
                           </span>
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.payment.status)}`}
+                          >
+                            {order.payment.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {order.payment.method}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {order.payment.transactionId}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex space-x-2">
-                            <button className="text-blue-600 hover:text-blue-900">
-                              <Eye className="h-4 w-4" />
-                            </button>
-                            <button className="text-green-600 hover:text-green-900">
-                              <Package className="h-4 w-4" />
-                            </button>
-                            <button className="text-purple-600 hover:text-purple-900">
-                              <Truck className="h-4 w-4" />
-                            </button>
+                            <select
+                              value={order.status}
+                              onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                              className="text-purple-600 hover:text-purple-900 border border-gray-300 rounded-md text-sm p-1"
+                            >
+                              {orderStatuses.map((status) => (
+                                <option key={status} value={status}>
+                                  {status}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </td>
                       </tr>

@@ -18,7 +18,7 @@ export const schema = gql`
     legalDocuments: [LegalDocument]
     blog: [Blog]
     faq: [FAQ]
-    phonepeStatus: PhonePeStatus
+    razorpayStatus: RazorpayStatus
   }
 
   # Hero Section
@@ -182,7 +182,7 @@ export const schema = gql`
     updatedAt: String!
   }
 
-  type PhonePeStatus {
+  type RazorpayStatus {
     isActive: Boolean!
   }
 `;

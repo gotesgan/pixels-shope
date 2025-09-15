@@ -48,6 +48,8 @@ model Store {
   blog          Blog[]
   Customer      Customer[]
   Order         Order[]
+  Razorpay      Razorpay?
+  Payment       Payment[]
 
   @@index([domain])
 }
@@ -66,6 +68,16 @@ model Customer {
   @@unique([email, storeId])
   @@unique([phone, storeId])
   @@index([storeId])
+}
+
+model Razorpay {
+  id        String   @id @default(cuid())
+  keyId     String
+  keySecret String
+  isActive  Boolean
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   String   @unique
+  createdAt DateTime @default(now())
 }
 
 // STORE SETUP
@@ -344,6 +356,7 @@ model OrderItem {
   quantity  Int
   price     Float
   variant   String?
+  
 
   @@index([productId])
 }
@@ -370,6 +383,8 @@ model Payment {
   order         Order         @relation(fields: [orderId], references: [id])
   orderId       String        @unique
   amount        Float
+  store         Store?        @relation(fields: [storeId], references: [id])
+  storeId       String?
   method        PaymentMethod
   status        PaymentStatus @default(PENDING)
   transactionId String?
@@ -398,6 +413,7 @@ enum OrderStatus {
 }
 
 enum PaymentMethod {
+  RAZORPAY
   PHONEPE
   CARD
   NETBANKING

@@ -122,7 +122,7 @@ const resolvers = {
     contactSubmissions: async (
       _,
       { page = 1, limit = 10, status },
-      context,
+      context
     ) => {
       try {
         const where = {
@@ -172,13 +172,13 @@ const resolvers = {
       }
     },
 
-    phonepeStatus: async (_, __, context) => {
+    razorpayStatus: async (_, __, context) => {
       try {
-        const phonePeConfig = await prisma.phonePe.findUnique({
+        const razorpayeConfig = await prisma.razorpay.findUnique({
           where: { storeId: context.req.store.id },
           select: { isActive: true },
         });
-        return { isActive: phonePeConfig?.isActive || false };
+        return { isActive: razorpayeConfig?.isActive || false };
       } catch (error) {
         console.error('PhonePe status resolver error:', error);
         return { isActive: false };

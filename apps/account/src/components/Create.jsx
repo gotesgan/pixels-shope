@@ -9,15 +9,15 @@ export default function Create() {
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
-    name: 'John Doe',
-    email: 'john@example.com',
-    phone: '9876543210',
-    address: '123 Main Street',
-    city: 'Mumbai',
-    state: 'Maharashtra',
-    country: 'IN',
-    zipCode: '400001',
-    password: 'password123',
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    zipCode: '',
+    password: '',
     confirmPassword: 'password123',
   });
 
@@ -49,7 +49,7 @@ export default function Create() {
 
     try {
       const response = await fetch(
-        'http://localhost:3001/api/v1/user/register',
+        'https://api.pixelperfects.in/api/v1/user/register',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

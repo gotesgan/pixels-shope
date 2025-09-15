@@ -5,8 +5,8 @@ export default function DomainQuestion() {
   const navigate = useNavigate();
 
   const handleNoDomain = () => {
-    // Redirect to admin.bizonance.com
-  window.location.href = 'htpp://localhost:3000/';
+   
+  navigate("/login")
   };
 
   const handleHasDomain = () => {

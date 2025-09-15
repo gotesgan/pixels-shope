@@ -30,6 +30,7 @@
   "dependencies": {
     "express-list-endpoints": "^7.1.1",
     "framer-motion": "^12.23.12",
+    "razorpay": "^2.9.6",
     "react-helmet-async": "^2.0.5"
   }
 }

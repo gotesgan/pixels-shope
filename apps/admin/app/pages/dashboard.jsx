@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import SectionCard from '../components/section-card';
 import {
   ImageIcon,
@@ -19,11 +20,53 @@ import {
 } from 'lucide-react';
 
 export default function Dashboard() {
+  // State to hold dynamic analytics data
+  const [analytics, setAnalytics] = useState({
+    activeOrders: 0,
+    totalCustomers: 0,
+    monthlyRevenue: 0,
+    totalProducts: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch analytics data on component mount
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+          throw new Error('No authentication token found');
+        }
+
+        const response = await fetch('https://api.pixelperfects.in/api/v1/analytics/dashbaord', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch analytics data');
+        }
+
+        const data = await response.json();
+        setAnalytics(data); // Update state with fetched data
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchAnalytics();
+  }, []);
+
+  // Static sections data (unchanged, as these seem to be UI-specific)
   const sections = [
     {
       title: 'Hero Section',
-      description:
-        'Manage your homepage hero images and content to attract customers',
+      description: 'Manage your homepage hero images and content to attract customers',
       icon: ImageIcon,
       color: 'bg-gradient-to-r from-purple-500 to-pink-500',
       stats: '3 Active Images',
@@ -35,7 +78,7 @@ export default function Dashboard() {
       description: 'Add, edit, and manage your complete product catalog',
       icon: Package,
       color: 'bg-gradient-to-r from-blue-500 to-cyan-500',
-      stats: '124 Products',
+      stats: `${analytics.totalProducts} Products`, // Dynamic stat
       actions: ['View All', 'Add Product', 'Manage'],
       path: '/products',
     },
@@ -98,7 +141,7 @@ export default function Dashboard() {
       description: 'View and manage all customer orders',
       icon: ShoppingCart,
       color: 'bg-gradient-to-r from-pink-500 to-rose-500',
-      stats: '45 Orders',
+      stats: `${analytics.activeOrders} Orders`, // Dynamic stat
       actions: ['View All', 'Pending', 'Completed'],
       path: '/orders',
     },
@@ -107,7 +150,7 @@ export default function Dashboard() {
       description: 'Manage customer accounts and relationships',
       icon: Users,
       color: 'bg-gradient-to-r from-cyan-500 to-blue-500',
-      stats: '89 Customers',
+      stats: `${analytics.totalCustomers} Customers`, // Dynamic stat
       actions: ['View All', 'Add Customer', 'Export'],
       path: '/customers',
     },
@@ -130,6 +173,15 @@ export default function Dashboard() {
       path: '/settings',
     },
   ];
+
+  // Handle loading and error states
+  if (loading) {
+    return <div className="text-center p-8">Loading dashboard...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-8 text-red-600">Error: {error}</div>;
+  }
 
   return (
     <div className="space-y-8">
@@ -155,10 +207,8 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-3xl font-bold text-blue-700">124</div>
-              <div className="text-sm text-gray-600 font-medium">
-                Total Products(demo data)
-              </div>
+              <div className="text-3xl font-bold text-blue-700">{analytics.totalProducts}</div>
+              <div className="text-sm text-gray-600 font-medium">Total Products</div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+12% this month</span>
@@ -173,10 +223,8 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-3xl font-bold text-green-700">45</div>
-              <div className="text-sm text-gray-600 font-medium">
-                Active Orders
-              </div>
+              <div className="text-3xl font-bold text-green-700">{analytics.activeOrders}</div>
+              <div className="text-sm text-gray-600 font-medium">Active Orders</div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+8% this week</span>
@@ -191,10 +239,8 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-3xl font-bold text-purple-700">89</div>
-              <div className="text-sm text-gray-600 font-medium">
-                Total Customers
-              </div>
+              <div className="text-3xl font-bold text-purple-700">{analytics.totalCustomers}</div>
+              <div className="text-sm text-gray-600 font-medium">Total Customers</div>
               <div className="flex items-center mt-2 text-red-600">
                 <TrendingDown className="h-4 w-4 mr-1" />
                 <span className="text-sm">-2% this month</span>
@@ -209,10 +255,8 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-3xl font-bold text-orange-700">₹12,450</div>
-              <div className="text-sm text-gray-600 font-medium">
-                Monthly Revenue
-              </div>
+              <div className="text-3xl font-bold text-orange-700">₹{analytics.monthlyRevenue.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 font-medium">Monthly Revenue</div>
               <div className="flex items-center mt-2 text-green-600">
                 <TrendingUp className="h-4 w-4 mr-1" />
                 <span className="text-sm">+15% this month</span>

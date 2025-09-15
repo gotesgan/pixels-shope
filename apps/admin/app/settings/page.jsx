@@ -34,7 +34,7 @@ export default function SettingsPage() {
       if (!token) return;
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:3001/api/v1/store/store-info', {
+        const res = await fetch('https://api.pixelperfects.in/api/v1/store/store-info', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -101,7 +101,7 @@ export default function SettingsPage() {
         form.append(key, formData[key]);
       });
       if (file) form.append('file', file);
-      const res = await fetch('http://localhost:3001/api/v1/store/store-info', {
+      const res = await fetch('https://api.pixelperfects.in/api/v1/store/store-info', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -131,7 +131,7 @@ export default function SettingsPage() {
   // Save custom domain (mock API call)
   const handleSaveDomain = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/v1/store/custom-domain', {
+      const res = await fetch('https://api.pixelperfects.in/api/v1/store/custom-domain', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

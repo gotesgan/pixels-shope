@@ -6,7 +6,7 @@ import os from 'os';
 import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import mediaHandler from '../utils/mediahandler.js';
+// //import mediaHandler from '../utils/mediahandler.js';
 
 const execAsync = promisify(exec);
 
@@ -36,74 +36,6 @@ const generateSlug = (name) => {
 const generateLocalDomain = (slug) => {
   // const localIP = '127.0.0.1'; // Or your LAN IP if you want to share in network
   return `${slug}.localtest.me`;
-};
-
-const generateSelfSignedCert = async (domain) => {
-  const cmd = `sudo certbot --nginx -d ${domain} -d www.${domain} --non-interactive --agree-tos -m your-email@example.com --redirect`;
-  try {
-    const { stdout, stderr } = await execAsync(cmd);
-    console.log('Certbot output:', stdout);
-    if (stderr) console.error('Certbot error:', stderr);
-    return { certPath: null, keyPath: null }; // Certbot manages certs internally
-  } catch (err) {
-    console.error('Certbot failed:', err);
-    throw new Error('Failed to obtain SSL certificate with Certbot');
-  }
-};
-
-const writeNginxConfig = (domain, certPath, keyPath) => {
-  const wwwDomain = `www.${domain}`;
-  const conf = `
-server {
-  listen 80;
-  server_name ${domain} ${wwwDomain};
-  return 301 https://${domain}$request_uri;
-}
-
-server {
-  listen 443 ssl;
-  server_name ${domain} ${wwwDomain};
-
-  ssl_certificate ${certPath};
-  ssl_certificate_key ${keyPath};
-
-  root /var/www/mtea;
-  index index.html;
-
-  location / {
-    try_files $uri /index.html;
-  }
-
-  location /api/ {
-    proxy_pass http://localhost:${BACKEND_PORT};
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-  }
-
-  location ~* \\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|otf)$ {
-    expires 30d;
-    access_log off;
-    add_header Cache-Control "public";
-  }
-}`.trim();
-
-  fs.appendFileSync(NGINX_COMBINED_CONFIG, `\n\n${conf}`);
-
-  if (!fs.existsSync(NGINX_ENABLED_LINK)) {
-    fs.symlinkSync(NGINX_COMBINED_CONFIG, NGINX_ENABLED_LINK);
-  }
-
-  return NGINX_COMBINED_CONFIG;
-};
-
-const reloadNginx = async () => {
-  try {
-    await execAsync('nginx -s reload');
-  } catch (err) {
-    throw new Error('Failed to reload NGINX');
-  }
 };
 
 // Store Creation
@@ -183,30 +115,32 @@ export const verifyAndSetupDomain = async (req, res) => {
       .trim()
       .replace(/^www\./, '');
 
-    // Try resolving DNS
-    const cnameRecords = await dns.resolveCname(domain).catch(() => []);
-    const aRecords = await dns.resolve4(domain).catch(() => []);
-
-    if (cnameRecords.length === 0 && aRecords.length === 0) {
-      return res.status(400).json({
-        error: `Domain does not resolve to any server. CNAME: ${cnameRecords}, A: ${aRecords}`,
-      });
-    }
-
     // Find store for current user
     const store = await prisma.store.findFirst({
       where: { userId: req.user.id },
-      include: { storeInfo: true, media: true },
     });
     if (!store) {
       return res.status(404).json({ error: 'Store not found for user' });
     }
 
-    // Update domain
+    // System-generated default domain (like mystore.pixelperfects.in)
+    const expectedTarget = store.domain;
+
+    // Resolve CNAME record for custom domain
+    const cnameRecords = await dns.resolveCname(domain).catch(() => []);
+
+    if (!cnameRecords.includes(expectedTarget)) {
+      return res.status(400).json({
+        error: `Invalid CNAME. Expected: ${expectedTarget}, Found: ${
+          cnameRecords.join(', ') || 'none'
+        }`,
+      });
+    }
+
+    // ✅ Update custom domain in DB
     const updatedStore = await prisma.store.update({
       where: { id: store.id },
       data: { domain },
-      include: { storeInfo: true, media: true },
     });
 
     res.status(200).json({

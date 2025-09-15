@@ -37,7 +37,7 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const response = await fetch("http://localhost:3001/api/v1/products/admin", {
+      const response = await fetch("https://api.pixelperfects.in/api/v1/products/admin", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export default function ProductsPage() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/v1/products/categorys", {
+      const response = await fetch("https://api.pixelperfects.in/api/v1/products/categorys", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export default function ProductsPage() {
     })
 
     try {
-      const url = "http://localhost:3001/api/v1/products/"
+      const url = "https://api.pixelperfects.in/api/v1/products/"
       const method = "POST"
 
       const response = await fetch(url, {
@@ -156,7 +156,7 @@ export default function ProductsPage() {
   const handleDelete = async (productId) => {
     if (confirm("Are you sure you want to delete this product?")) {
       try {
-        const response = await fetch(`http://localhost:3001/api/v1/products/${productId}`, {
+        const response = await fetch(`https://api.pixelperfects.in/api/v1/products/${productId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
