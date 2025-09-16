@@ -7,7 +7,7 @@ import Sidebar from '../components/sidebar';
 
 const changeOrderStatus = async (orderId, token, status = "SHIPPED") => {
   try {
-    const response = await fetch(`https://api.pixelperfects.in/api/v1/orders/changeStatus/${orderId}`, {
+    const response = await fetch(`http://localhost:3001/api/v1/orders/changeStatus/${orderId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export default function OrdersPage() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://api.pixelperfects.in/api/v1/orders/', {
+        const response = await fetch('http://localhost:3001/api/v1/orders/', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',

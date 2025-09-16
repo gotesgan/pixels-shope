@@ -124,7 +124,7 @@ export default function CategoryPage() {
       try {
         const hostname = window.location.hostname;
         console.log('Hostname:', hostname);
-        const url = `https://api.pixelperfects.in/api/v1/products/category/${slug}`;
+        const url = `http://${hostname}:3001/api/v1/products/category/${slug}`;
 
         const res = await fetch(url);
         const data = await res.json();

@@ -20,7 +20,7 @@ export default function DomainVerify() {
     setError('');
 
     try {
-      const response = await fetch('https://api.pixelperfects.in/verify-store', {
+      const response = await fetch('http://localhost:3001/verify-store', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

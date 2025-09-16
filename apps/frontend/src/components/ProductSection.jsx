@@ -69,7 +69,7 @@ export default function DynamicProductsSection() {
       setLoading(true);
       try {
         const host = window.location.hostname;
-        const response = await fetch(`https://${host}/api/v1/products/`);
+        const response = await fetch(`http://${host}:3001/api/v1/products/`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

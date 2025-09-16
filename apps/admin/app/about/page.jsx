@@ -29,7 +29,7 @@ export default function AboutPage() {
   });
 
   const [authToken, setAuthToken] = useState(null);
-  const aboutApiUrl = 'https://api.pixelperfects.in/api/v1/ui/about-page';
+  const aboutApiUrl = 'http://localhost:3001/api/v1/ui/about-page';
 
   useEffect(() => {
     const stored =

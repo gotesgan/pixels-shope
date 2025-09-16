@@ -19,7 +19,7 @@ export default function AnalyticsPage() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const response = await fetch('https://api.pixelperfects.in/api/v1/analytics/bussines', {
+        const response = await fetch('http://localhost:3001/api/v1/analytics/bussines', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },

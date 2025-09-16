@@ -49,7 +49,7 @@ export default function Create() {
 
     try {
       const response = await fetch(
-        'https://api.pixelperfects.in/api/v1/user/register',
+        'http://localhost:3001/api/v1/user/register',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

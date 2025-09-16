@@ -118,7 +118,7 @@ export default function PoliciesPage() {
 
       try {
         const response = await fetch(
-          'https://api.pixelperfects.in/api/v1/ui/legal-documents',
+          'http://localhost:3001/api/v1/ui/legal-documents',
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -185,7 +185,7 @@ export default function PoliciesPage() {
     }
     for (const key of Object.keys(policies)) {
       try {
-       const data = await fetch('https://api.pixelperfects.in/api/v1/ui/legal-documents', {
+       const data = await fetch('http://localhost:3001/api/v1/ui/legal-documents', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

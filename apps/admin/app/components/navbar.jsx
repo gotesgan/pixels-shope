@@ -13,48 +13,42 @@ export default function Navbar({ toggleSidebar, sidebarOpen }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch store info with auth token
-  useEffect(() => {
-    const fetchStoreInfo = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const token = localStorage.getItem('token');
-  if (err.message === 'Unauthorized') {
-    localStorage.removeItem('token');
-    // Redirect to external login
-    window.location.href = "https://accounts.pixelperfects.in/";
-  }
+useEffect(() => {
+  const fetchStoreInfo = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const token = localStorage.getItem('token');
 
+      const res = await fetch('http://localhost:3001/api/v1/store/store-info', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        const res = await fetch('https://api.pixelperfects.in/api/v1/store/store-info', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          setStoreData(data.store);
-        } else {
-          throw new Error(res.status === 401 ? 'Unauthorized' : 'Failed to fetch store info');
-        }
-      } catch (err) {
-        console.error('Error fetching store info:', err);
-        setError(err.message || 'An error occurred');
-     if (err.message === 'Unauthorized') {
-    localStorage.removeItem('token');
-    // Redirect to external login
-    window.location.href = "https://accounts.pixelperfects.in/";
-  }
-      } finally {
-        setIsLoading(false);
+      if (res.ok) {
+        const data = await res.json();
+        setStoreData(data.store);
+      } else {
+        throw new Error(res.status === 401 ? 'Unauthorized' : 'Failed to fetch store info');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching store info:', error);
+      if (error.message === 'Unauthorized') {
+        localStorage.removeItem('token');
+        // Redirect to external login
+        window.location.href = "http://localhost:3000";
+      }
+      setError(error.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchStoreInfo();
-  }, [router]);
+  fetchStoreInfo();
+}, [router]);
 
   // Debounced search handler
   const handleSearch = useCallback(
@@ -74,7 +68,7 @@ export default function Navbar({ toggleSidebar, sidebarOpen }) {
 const handleLogout = () => {
   localStorage.removeItem('token');
   // Redirect to external login
-  window.location.href = "https://accounts.pixelperfects.in/";
+  window.location.href = "http://localhost:3000";
 };
 
   if (isLoading) {

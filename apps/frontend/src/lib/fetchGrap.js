@@ -1,7 +1,7 @@
 // utils/graphqlRequest.js
 export async function fetchGraphQL(host, query, variables = {}) {
   // Add protocol if missing
-  const baseURL = host.startsWith('http') ? host : `https://${host}`;
+  const baseURL = host.startsWith('http') ? host : `http://${host}:3001`;
 
   const response = await fetch(`${baseURL}/graphql`, {
     method: 'POST',

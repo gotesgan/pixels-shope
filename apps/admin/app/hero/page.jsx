@@ -29,7 +29,7 @@ export default function HeroPage() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://api.pixelperfects.in/api/v1/ui/create-hero-section',
+          'http://localhost:3001/api/v1/ui/create-hero-section',
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -73,7 +73,7 @@ export default function HeroPage() {
       alert('No token found. Please log in.');
       return;
     }
-    fetch(`https://api.pixelperfects.in/api/v1/ui/create-hero-section/${id}`, {
+    fetch(`http://localhost:3001/api/v1/ui/create-hero-section/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -116,7 +116,7 @@ export default function HeroPage() {
 
     try {
       const response = await fetch(
-        'https://api.pixelperfects.in/api/v1/ui/create-hero-section',
+        'http://localhost:3001/api/v1/ui/create-hero-section',
         {
           method: 'POST',
           headers: {

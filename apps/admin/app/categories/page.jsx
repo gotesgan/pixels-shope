@@ -65,7 +65,7 @@ export default function CategoriesPage() {
     setLoading(true);
     try {
       const res = await fetch(
-        'https://api.pixelperfects.in/api/v1/products/categorys',
+        'http://localhost:3001/api/v1/products/categorys',
         {
           headers: {
             Authorization: `Bearer ${AUTH_TOKEN}`,
@@ -95,7 +95,7 @@ export default function CategoriesPage() {
       };
 
       const res = await fetch(
-        'https://api.pixelperfects.in/api/v1/products/category',
+        'http://localhost:3001/api/v1/products/category',
         {
           method: 'POST',
           headers: {
@@ -126,7 +126,7 @@ export default function CategoriesPage() {
     if (!confirm('Are you sure you want to delete this category?')) return;
     try {
       const res = await fetch(
-        `https://api.pixelperfects.in/api/v1/products/category/${categoryId}`,
+        `http://localhost:3001/api/v1/products/category/${categoryId}`,
         {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },

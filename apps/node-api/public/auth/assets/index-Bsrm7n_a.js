@@ -14021,14 +14021,11 @@ function Kd() {
     N = async (S) => {
       S.preventDefault(), s(!0), r('');
       try {
-        const h = await fetch(
-          'https://api.pixelperfects.in/api/v1/user/login',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(d),
-          }
-        );
+        const h = await fetch('http://localhost:3001/api/v1/user/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(d),
+        });
         if (!h.ok) throw new Error('Login failed');
         const A = await h.json();
         if ((console.log('Login response data:', A), !A.token))
@@ -14199,24 +14196,21 @@ function ov() {
         return;
       }
       try {
-        const A = await fetch(
-          'https://api.pixelperfects.in/api/v1/user/register',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: y.name,
-              email: y.email,
-              phone: y.phone,
-              address: y.address,
-              city: y.city,
-              state: y.state,
-              country: y.country,
-              zipCode: y.zipCode,
-              password: y.password,
-            }),
-          }
-        );
+        const A = await fetch('http://localhost:3001/api/v1/user/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: y.name,
+            email: y.email,
+            phone: y.phone,
+            address: y.address,
+            city: y.city,
+            state: y.state,
+            country: y.country,
+            zipCode: y.zipCode,
+            password: y.password,
+          }),
+        });
         if (!A.ok) {
           const U = await A.json();
           throw new Error(U.message || 'Failed to create account');
@@ -14498,7 +14492,7 @@ function dv() {
           oe.append('colour', h.color),
           h.logo && oe.append('file', h.logo);
         const he = await fetch(
-          'https://api.pixelperfects.in/api/v1/user/create-store',
+          'http://localhost:3001/api/v1/user/create-store',
           {
             method: 'POST',
             headers: { Authorization: `Bearer ${fe}` },

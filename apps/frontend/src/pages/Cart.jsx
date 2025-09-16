@@ -65,7 +65,7 @@ export default function Cart() {
     try {
       const hostname = window.location.hostname;
       const response = await fetch(
-        `https://api.pixelperfects.in/api/v1/customer/Shipping`,
+        `https://${hostname}:3001/api/v1/customer/Shipping`,
         {
           method: 'GET',
           headers: {
@@ -153,7 +153,7 @@ export default function Cart() {
       const hostname = window.location.hostname;
 
       // Make the API call to create the Razorpay order
-      const response = await fetch(`https://api.pixelperfects.in/api/v1/pay/`, {
+      const response = await fetch(`https://localhost:3001/api/v1/pay/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ export default function Cart() {
         order_id: orderData.orderId,
         handler: async function (response) {
           // Verify payment at backend
-          const verifyRes = await fetch(`https://api.pixelperfects.in/api/v1/pay/verify`, {
+          const verifyRes = await fetch(`http://api.pixelperfects.in/api/v1/pay/verify`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

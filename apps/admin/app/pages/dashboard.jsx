@@ -39,7 +39,7 @@ export default function Dashboard() {
           throw new Error('No authentication token found');
         }
 
-        const response = await fetch('https://api.pixelperfects.in/api/v1/analytics/dashbaord', {
+        const response = await fetch('http://localhost:3001/api/v1/analytics/dashbaord', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

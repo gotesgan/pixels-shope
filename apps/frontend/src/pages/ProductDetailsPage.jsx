@@ -114,7 +114,7 @@ export default function ProductDetailsPage() {
         // Get hostname from window location
         const host = window.location.hostname;
         const response = await fetch(
-          `https://${host}/api/v1/products/${slug}`,
+          `http://${host}:3001/api/v1/products/${slug}`,
         );
 
         if (!response.ok) {
@@ -155,7 +155,7 @@ export default function ProductDetailsPage() {
         // Get hostname from window location
         const host = window.location.hostname;
         const response = await fetch(
-          `https://${host}/api/v1/products?limit=5&category=${slug.split('-')[0]}`,
+          `http://${host}:3001/api/v1/products?limit=5&category=${slug.split('-')[0]}`,
         );
 
         if (!response.ok) {

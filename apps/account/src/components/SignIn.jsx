@@ -24,7 +24,7 @@ export default function SignIn() {
     setError('');
 
     try {
-      const res = await fetch('https://api.pixelperfects.in/api/v1/user/login', {
+      const res = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ console.log('Login response data:', data);
         throw new Error('No token returned from server');
       }
 
-      window.location.href = `https://admin.pixelperfects.in?token=${data.token}`;
+      window.location.href = `http://localhost:3000?token=${data.token}`;
     } catch (err) {
       setError(err.message || 'Failed to sign in.');
     } finally {

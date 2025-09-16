@@ -15,7 +15,7 @@ export default function CustomersPage() {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await fetch('https://api.pixelperfects.in/api/v1/analytics/customer', {
+        const response = await fetch('http://localhost:3001/api/v1/analytics/customer', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },

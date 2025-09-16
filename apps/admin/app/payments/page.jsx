@@ -58,7 +58,7 @@ export default function PaymentsPage() {
   // Fetch Razorpay settings
   const fetchRazorpaySettings = async () => {
     try {
-      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/', {
+      const response = await fetch('http://localhost:3001/api/v1/razorpay/', {
         method: 'GET',
         headers: getHeaders(),
         redirect: 'follow',
@@ -83,7 +83,7 @@ export default function PaymentsPage() {
   // Fetch transactions
   const fetchTransactions = async () => {
     try {
-      const response = await fetch('https://api.pixelperfects.in/api/v1/pay/', {
+      const response = await fetch('http://localhost:3001/api/v1/pay/', {
         method: 'GET',
         headers: getHeaders(),
         redirect: 'follow',
@@ -129,7 +129,7 @@ export default function PaymentsPage() {
       urlencoded.append('keyId', paymentSettings.razorpay.clientId);
       urlencoded.append('keySecret', paymentSettings.razorpay.clientSecret);
 
-      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/', {
+      const response = await fetch('http://localhost:3001/api/v1/razorpay/', {
         method: paymentSettings.razorpay.id ? 'PUT' : 'POST',
         headers: getHeaders(),
         body: urlencoded,
@@ -155,7 +155,7 @@ export default function PaymentsPage() {
       urlencoded.append('keyId', paymentSettings.razorpay.clientId);
       urlencoded.append('keySecret', paymentSettings.razorpay.clientSecret);
 
-      const response = await fetch('https://api.pixelperfects.in/api/v1/razorpay/toggle-status', {
+      const response = await fetch('http://localhost:3001/api/v1/razorpay/toggle-status', {
         method: 'PATCH',
         headers: getHeaders(),
         body: urlencoded,

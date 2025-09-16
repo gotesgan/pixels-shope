@@ -18,7 +18,7 @@ const Navbar = () => {
       try {
         const hostname = window.location.hostname;
         const res = await fetch(
-          `https://${hostname}/api/v1/products/category`,
+          `http://${hostname}:3001/api/v1/products/category`,
         );
         const data = await res.json();
 

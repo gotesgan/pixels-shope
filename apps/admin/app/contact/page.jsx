@@ -118,7 +118,7 @@ export default function ContactPage() {
 
       // Option 1: Send as JSON (recommended)
       const response = await fetch(
-        'https://api.pixelperfects.in/api/v1/ui/contact-page',
+        'http://localhost:3001/api/v1/ui/contact-page',
         {
           method: 'POST',
           headers: {
