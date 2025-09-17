@@ -72,8 +72,8 @@ model Customer {
 
 model Razorpay {
   id        String   @id @default(cuid())
-  keyId     String
-  keySecret String
+  keyId     String?
+  keySecret String?
   isActive  Boolean
   store     Store    @relation(fields: [storeId], references: [id])
   storeId   String   @unique

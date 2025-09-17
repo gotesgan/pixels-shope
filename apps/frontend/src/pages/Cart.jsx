@@ -65,7 +65,7 @@ export default function Cart() {
     try {
       const hostname = window.location.hostname;
       const response = await fetch(
-        `https://${hostname}:3001/api/v1/customer/Shipping`,
+        `http://${hostname}:3001/api/v1/customer/Shipping`,
         {
           method: 'GET',
           headers: {
@@ -153,7 +153,7 @@ export default function Cart() {
       const hostname = window.location.hostname;
 
       // Make the API call to create the Razorpay order
-      const response = await fetch(`https://localhost:3001/api/v1/pay/`, {
+      const response = await fetch(`http://${hostname}/api/v1/pay/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

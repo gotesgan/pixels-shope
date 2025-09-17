@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Razorpay" ALTER COLUMN "keyId" DROP NOT NULL,
+ALTER COLUMN "keySecret" DROP NOT NULL;

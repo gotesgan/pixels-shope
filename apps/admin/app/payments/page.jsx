@@ -22,8 +22,8 @@ export default function PaymentsPage() {
   const [paymentSettings, setPaymentSettings] = useState({
     razorpay: {
       isActive: false,
-      clientId: '',
-      clientSecret: '',
+      clientId: 'test',
+      clientSecret: 'tes',
       clientVersion: 'v1',
       testMode: true,
     },
@@ -76,7 +76,7 @@ export default function PaymentsPage() {
       }
     } catch (error) {
       console.error('Error fetching Razorpay settings:', error);
-      setError('Failed to load Razorpay settings.');
+      // setError('Failed to load Razorpay settings.');
     }
   };
 
@@ -370,13 +370,13 @@ export default function PaymentsPage() {
                     onClick={toggleRazorpayStatus}
                     className="flex items-center space-x-2"
                   >
-                    {paymentSettings.razorpay.isActive ? (
+                    {paymentSettings?.razorpay.isActive ? (
                       <ToggleRight className="h-8 w-8 text-green-600" />
                     ) : (
                       <ToggleLeft className="h-8 w-8 text-gray-400" />
                     )}
                     <span className="text-sm font-medium">
-                      {paymentSettings.razorpay.isActive ? 'Active' : 'Inactive'}
+                      {paymentSettings?.razorpay.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </button>
                 </div>
@@ -388,12 +388,12 @@ export default function PaymentsPage() {
                     </label>
                     <input
                       type={showCredentials ? 'text' : 'password'}
-                      value={paymentSettings.razorpay.clientId}
+                      value={paymentSettings?.razorpay.clientId}
                       onChange={(e) =>
                         updateRazorpaySetting('clientId', e.target.value)
                       }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      disabled={!paymentSettings.razorpay.isActive}
+                      disabled={!paymentSettings?.razorpay.isActive}
                       placeholder="Enter Razorpay Key ID"
                     />
                   </div>
@@ -405,12 +405,12 @@ export default function PaymentsPage() {
                     <div className="relative">
                       <input
                         type={showCredentials ? 'text' : 'password'}
-                        value={paymentSettings.razorpay.clientSecret}
+                        value={paymentSettings?.razorpay.clientSecret}
                         onChange={(e) =>
                           updateRazorpaySetting('clientSecret', e.target.value)
                         }
                         className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        disabled={!paymentSettings.razorpay.isActive}
+                        disabled={!paymentSettings?.razorpay.isActive}
                         placeholder="Enter Razorpay Key Secret"
                       />
                       <button
@@ -430,12 +430,12 @@ export default function PaymentsPage() {
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      checked={paymentSettings.razorpay.testMode}
+                      checked={paymentSettings?.razorpay.testMode}
                       onChange={(e) =>
                         updateRazorpaySetting('testMode', e.target.checked)
                       }
                       className="rounded"
-                      disabled={!paymentSettings.razorpay.isActive}
+                      disabled={!paymentSettings?.razorpay.isActive}
                     />
                     <span className="text-sm text-gray-700">Test Mode</span>
                   </label>
@@ -461,7 +461,7 @@ export default function PaymentsPage() {
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      checked={paymentSettings.cod.isActive}
+                      checked={paymentSettings?.cod.isActive}
                       onChange={(e) =>
                         updateCodSetting('isActive', e.target.checked)
                       }
@@ -478,7 +478,7 @@ export default function PaymentsPage() {
                     </label>
                     <input
                       type="number"
-                      value={paymentSettings.cod.minOrderAmount}
+                      value={paymentSettings?.cod.minOrderAmount}
                       onChange={(e) =>
                         updateCodSetting(
                           'minOrderAmount',
@@ -486,7 +486,7 @@ export default function PaymentsPage() {
                         )
                       }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      disabled={!paymentSettings.cod.isActive}
+                      disabled={!paymentSettings?.cod.isActive}
                     />
                   </div>
 
@@ -496,7 +496,7 @@ export default function PaymentsPage() {
                     </label>
                     <input
                       type="number"
-                      value={paymentSettings.cod.maxOrderAmount}
+                      value={paymentSettings?.cod.maxOrderAmount}
                       onChange={(e) =>
                         updateCodSetting(
                           'maxOrderAmount',
